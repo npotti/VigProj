@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:vigilance="http://sbi.co.in/vigilance"
+            targetNamespace="http://sbi.co.in/vigilance"
+            xmlns:case="http://www.sbi.co.in/vigilance/case"
+            xmlns:complaint="http://www.sbi.co.in/vigilance/complaint"
+            xmlns:cbi="http://www.sbi.co.in/vigilance/cbi"
+            xmlns:cte="http://www.sbi.co.in/vigilance/cte"
+            xmlns:fraud="http://www.sbi.co.in/vigilance/fraud"
+            xmlns:misc="http://www.sbi.co.in/vigilance/misc"
+            xmlns:rfia="http://www.sbi.co.in/vigilance/rfia"
+            xmlns:rti="http://www.sbi.co.in/vigilance/rti"
+            xmlns:sae="http://www.sbi.co.in/vigilance/sae"
+            xmlns:smi="http://www.sbi.co.in/vigilance/smi"
+            xmlns:theft="http://www.sbi.co.in/vigilance/theft"
+            elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xsd:import namespace="http://www.sbi.co.in/vigilance/case"
+              schemaLocation="CaseRegistration.xsd"/>
+  <xsd:import namespace="http://www.sbi.co.in/vigilance/complaint"
+              schemaLocation="Complaint.xsd"/>
+  <xsd:import namespace="http://www.sbi.co.in/vigilance/cbi"
+              schemaLocation="CBI.xsd"/>
+  <xsd:import namespace="http://www.sbi.co.in/vigilance/cte"
+              schemaLocation="CTE.xsd"/>
+  <xsd:import namespace="http://www.sbi.co.in/vigilance/fraud"
+              schemaLocation="Fraud.xsd"/>
+  <xsd:import namespace="http://www.sbi.co.in/vigilance/misc"
+              schemaLocation="Miscellaneous.xsd"/>
+  <xsd:import namespace="http://www.sbi.co.in/vigilance/rfia"
+              schemaLocation="RFIA.xsd"/>
+  <xsd:import namespace="http://www.sbi.co.in/vigilance/rti"
+              schemaLocation="RTI.xsd"/>
+  <xsd:import namespace="http://www.sbi.co.in/vigilance/sae"
+              schemaLocation="SAE.xsd"/>
+  <xsd:import namespace="http://www.sbi.co.in/vigilance/smi"
+              schemaLocation="SMI.xsd"/>
+  <xsd:import namespace="http://www.sbi.co.in/vigilance/theft"
+              schemaLocation="Theft.xsd"/>
+  <xsd:element name="VigilanceProcess" type="vigilance:VigilanceProcessType"/>
+  <xsd:annotation>
+    <xsd:documentation>Complaint Details Required in a Vigilance Case for
+                       investigation</xsd:documentation>
+  </xsd:annotation>
+  <xsd:complexType name="VigilanceProcessType">
+    <xsd:sequence>
+      <xsd:element ref="case:CaseRegistration" minOccurs="0"/>
+      <xsd:element ref="complaint:Complaint" minOccurs="0"/>
+      <xsd:element ref="cbi:CentralBureauOfInvestigation" minOccurs="0"/>
+      <xsd:element ref="cte:ChiefTechnicalExaminerReport" minOccurs="0"/>
+      <xsd:element ref="fraud:Fraud" minOccurs="0"/>
+      <xsd:element ref="misc:Miscellaneous" minOccurs="0"/>
+      <xsd:element ref="rfia:RiskFoccusedInternalAudit" minOccurs="0"/>
+      <xsd:element ref="rti:RightToInformation" minOccurs="0"/>
+      <xsd:element ref="sae:StaffAccountability" minOccurs="0"/>
+      <xsd:element ref="smi:SuoMotuInvestigation" minOccurs="0"/>
+      <xsd:element ref="theft:AttemptedTheft" minOccurs="0"/>
+      <xsd:element name="ComplaintNumber" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="CaseNumber" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="Signed" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="TaskName" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="VigilanceAngle" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="attribute1" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="attribute2" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="attribute3" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="attribute4" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="attribute5" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="attribute6" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="attribute7" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="attribute8" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="attribute9" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="attribute10" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="attribute11" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="attribute12" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="attribute13" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="attribute14" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="attribute15" type="xsd:string" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

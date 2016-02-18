@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:cte="http://www.sbi.co.in/vigilance/cte"
+            targetNamespace="http://www.sbi.co.in/vigilance/cte"
+            elementFormDefault="qualified">
+    <xsd:element name="ChiefTechnicalExaminerReport">
+        <xsd:annotation>
+            <xsd:documentation>CTE report</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="OrderedBy" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="OrderedOn" type="xsd:date" minOccurs="0"/>
+                <xsd:element name="NameOfWork" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="EstimatedCost" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="TenderedCost" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="ContractAwaardedTo" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="CTEAllotedTo" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="DateOfCommencementOfWork" type="xsd:date" minOccurs="0"/>
+                <xsd:element name="TimeOfCompletion" type="xsd:date" minOccurs="0"/>
+                <xsd:element name="PresentPhysicalPosition" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="DisposalStatus" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="DateOfIRFCalled" type="xsd:date" minOccurs="0"/>
+                <xsd:element name="AdditionalInformation" type="xsd:string" minOccurs="0"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

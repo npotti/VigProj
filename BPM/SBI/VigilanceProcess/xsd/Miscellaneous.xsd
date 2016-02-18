@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:misc="http://www.sbi.co.in/vigilance/misc"
+            targetNamespace="http://www.sbi.co.in/vigilance/misc"
+            elementFormDefault="qualified">
+  <xsd:element name="Miscellaneous">
+    <xsd:annotation>
+      <xsd:documentation>Details in Vigilance Case</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="ReceivedFrom" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="LetterNumber" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="LetterDate" type="xsd:date" minOccurs="0"/>
+        <xsd:element name="CaseRelatingTo" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="Amount" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="Remarks" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="AdditionalInformation" type="xsd:string" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

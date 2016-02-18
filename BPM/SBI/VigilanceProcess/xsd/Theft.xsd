@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:theft="http://www.sbi.co.in/vigilance/theft"
+            targetNamespace="http://www.sbi.co.in/vigilance/theft"
+            elementFormDefault="qualified">
+  <xsd:element name="AttemptedTheft">
+    <xsd:annotation>
+      <xsd:documentation>Theft Details in Vigilance Case</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="ReceivedFrom" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="LetterNumber" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="LetterDate" type="xsd:date" minOccurs="0"/>
+        <xsd:element name="AmountInvolved" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="DateOfOccurence" type="xsd:date" minOccurs="0"/>
+        <xsd:element name="DateOfDetecion" type="xsd:date" minOccurs="0"/>
+        <xsd:element name="StaffInvolvement" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="AdditionalInformation" type="xsd:string" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

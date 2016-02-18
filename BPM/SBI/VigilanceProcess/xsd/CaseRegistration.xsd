@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:case="http://www.sbi.co.in/vigilance/case"
+            targetNamespace="http://www.sbi.co.in/vigilance/case"
+            elementFormDefault="qualified">
+  <xsd:element name="CaseRegistration">
+    <xsd:annotation>
+      <xsd:documentation>Elements required to register a complaint</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="SystemSerialNo" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="CCFileNumber" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="BranchCode" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="BranchName" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="Region" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="OfficeType" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="NetWork" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="Circle" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="SourceOfCase" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="CircleCode" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="NetWorkCode" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="AdditionalInformation" type="xsd:string" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

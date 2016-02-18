@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:cbi="http://www.sbi.co.in/vigilance/cbi"
+            targetNamespace="http://www.sbi.co.in/vigilance/cbi"
+            elementFormDefault="qualified">
+  <xsd:element name="CentralBureauOfInvestigation">
+    <xsd:annotation>
+      <xsd:documentation>CBI Details</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="NameOfCBIOffice" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="CBILetterReference" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="CBILetterDate" type="xsd:date" minOccurs="0"/>
+        <xsd:element name="DateOfReceipt" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="NumberAlloted" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="NameOfAccount" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="AccountSuggested" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="RDADetails" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="SFPDetails" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="AdditionalInformation" type="xsd:string" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>
