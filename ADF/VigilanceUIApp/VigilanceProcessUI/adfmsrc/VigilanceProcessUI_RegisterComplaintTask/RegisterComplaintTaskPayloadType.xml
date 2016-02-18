@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.64.93"
+          id="RegisterComplaintTaskPayloadType"
+          Package="VigilanceProcessUI_RegisterComplaintTask"
+          BeanClass="VigilanceProcessUI_RegisterComplaintTask.RegisterComplaintTaskPayloadType"
+          isJavaBased="false">
+  <AccessorAttribute id="VigilanceProcess" IsCollection="true"
+                     BeanClass="VigilanceProcessUI_RegisterComplaintTask.VigilanceProcessType"
+                     CollectionBeanClass="VigilanceProcessUI_RegisterComplaintTask.VigilanceProcessType_VigilanceProcess_Operations">
+    <Properties>
+      <Property Name="minOccurs" Value="1"/>
+      <Property Name="maxOccurs" Value="1"/>
+      <Property Name="LABEL" Value="Vigilance Process"/>
+      <Property Name="nillable" Value="false"/>
+      <Property Name="originalName" Value="VigilanceProcess"/>
+      <Property Name="targetNamespace" Value="http://sbi.co.in/vigilance"/>
+    </Properties>
+  </AccessorAttribute>
+</JavaBean>

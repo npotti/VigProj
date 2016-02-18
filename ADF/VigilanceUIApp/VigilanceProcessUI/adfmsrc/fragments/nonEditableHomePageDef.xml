@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.64.93" id="nonEditableHomePageDef"
+                Package="fragments">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="getTaskDetails.result"
+                    DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                    RangeSize="25"
+                    BeanClass="VigilanceProcessUI_RegisterComplaintTask.getTaskDetails"
+                    id="getTaskDetailsIterator"/>
+    <accessorIterator MasterBinding="getTaskDetailsIterator" Binds="task"
+                      RangeSize="25"
+                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.task"
+                      id="taskIterator"/>
+    <accessorIterator MasterBinding="taskIterator" Binds="payload"
+                      RangeSize="25"
+                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.RegisterComplaintTaskPayloadType"
+                      id="payloadIterator"/>
+    <accessorIterator MasterBinding="payloadIterator" Binds="VigilanceProcess"
+                      RangeSize="25"
+                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.VigilanceProcessType"
+                      id="VigilanceProcessIterator"/>
+    <accessorIterator MasterBinding="VigilanceProcessIterator"
+                      Binds="CaseRegistration" RangeSize="25"
+                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.CaseRegistration"
+                      id="CaseRegistrationIterator"/>
+    <accessorIterator MasterBinding="VigilanceProcessIterator" Binds="Complaint"
+                      RangeSize="25"
+                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.Complaint"
+                      id="ComplaintIterator"/>
+    <accessorIterator MasterBinding="VigilanceProcessIterator" Binds="Fraud"
+                      RangeSize="25"
+                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.Fraud"
+                      id="FraudIterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="getTaskDetails" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="getTaskDetails"
+                  IsViewObjectMethod="false"
+                  DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                  InstanceName="VigilanceProcessUI_RegisterComplaintTask"
+                  ReturnName="data.VigilanceProcessUI_RegisterComplaintTask.methodResults.getTaskDetails_VigilanceProcessUI_RegisterComplaintTask_getTaskDetails_result">
+      <NamedData NDName="bpmWorklistContext" NDType="java.lang.String"/>
+      <NamedData NDName="bpmWorklistTaskId" NDType="java.lang.String"/>
+      <NamedData NDName="bpmWorklistTaskVersion" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="CaseRegistrationIterator" id="SystemSerialNo">
+      <AttrNames>
+        <Item Value="SystemSerialNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CaseRegistrationIterator" id="CCFileNumber">
+      <AttrNames>
+        <Item Value="CCFileNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CaseRegistrationIterator" id="BranchCode">
+      <AttrNames>
+        <Item Value="BranchCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CaseRegistrationIterator" id="BranchName">
+      <AttrNames>
+        <Item Value="BranchName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CaseRegistrationIterator" id="Region">
+      <AttrNames>
+        <Item Value="Region"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CaseRegistrationIterator" id="OfficeType">
+      <AttrNames>
+        <Item Value="OfficeType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CaseRegistrationIterator" id="NetWork">
+      <AttrNames>
+        <Item Value="NetWork"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CaseRegistrationIterator" id="Circle">
+      <AttrNames>
+        <Item Value="Circle"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CaseRegistrationIterator" id="SourceOfCase">
+      <AttrNames>
+        <Item Value="SourceOfCase"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CaseRegistrationIterator"
+                     id="AdditionalInformation">
+      <AttrNames>
+        <Item Value="AdditionalInformation"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VigilanceProcessIterator" id="TaskName">
+      <AttrNames>
+        <Item Value="TaskName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VigilanceProcessIterator" id="Signed">
+      <AttrNames>
+        <Item Value="Signed"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintIterator" id="ReceivedFrom">
+      <AttrNames>
+        <Item Value="ReceivedFrom"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintIterator" id="ReceivedAt">
+      <AttrNames>
+        <Item Value="ReceivedAt"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintIterator" id="NameOfComplainant">
+      <AttrNames>
+        <Item Value="NameOfComplainant"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintIterator" id="DateOfComplainant">
+      <AttrNames>
+        <Item Value="DateOfComplainant"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintIterator" id="DateReceived">
+      <AttrNames>
+        <Item Value="DateReceived"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintIterator" id="ComplaintType">
+      <AttrNames>
+        <Item Value="ComplaintType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintIterator" id="ComplaintRelatingTo">
+      <AttrNames>
+        <Item Value="ComplaintRelatingTo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintIterator" id="ComplaintParticulars">
+      <AttrNames>
+        <Item Value="ComplaintParticulars"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintIterator"
+                     id="InvestionReportRequired">
+      <AttrNames>
+        <Item Value="InvestionReportRequired"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintIterator" id="DateOfReceiptOfAdvice">
+      <AttrNames>
+        <Item Value="DateOfReceiptOfAdvice"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintIterator" id="DisposalStatus">
+      <AttrNames>
+        <Item Value="DisposalStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintIterator" id="DateofIRFCalled">
+      <AttrNames>
+        <Item Value="DateofIRFCalled"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintIterator"
+                     id="AdditionalInformation1">
+      <AttrNames>
+        <Item Value="AdditionalInformation"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FraudIterator" id="RecivedFrom">
+      <AttrNames>
+        <Item Value="RecivedFrom"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FraudIterator" id="LetterNumber">
+      <AttrNames>
+        <Item Value="LetterNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FraudIterator" id="LetterDate">
+      <AttrNames>
+        <Item Value="LetterDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FraudIterator" id="FraudFolderNumber">
+      <AttrNames>
+        <Item Value="FraudFolderNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FraudIterator" id="FolderAmount">
+      <AttrNames>
+        <Item Value="FolderAmount"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FraudIterator" id="AmountClassification">
+      <AttrNames>
+        <Item Value="AmountClassification"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FraudIterator" id="FurtherClassification">
+      <AttrNames>
+        <Item Value="FurtherClassification"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FraudIterator" id="FraudRelatingTo">
+      <AttrNames>
+        <Item Value="FraudRelatingTo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FraudIterator" id="DateOfOccurence">
+      <AttrNames>
+        <Item Value="DateOfOccurence"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FraudIterator" id="DateOfDetection">
+      <AttrNames>
+        <Item Value="DateOfDetection"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FraudIterator" id="NameofUnit">
+      <AttrNames>
+        <Item Value="NameofUnit"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FraudIterator" id="StaffInvolved">
+      <AttrNames>
+        <Item Value="StaffInvolved"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FraudIterator" id="AdditionalInformation2">
+      <AttrNames>
+        <Item Value="AdditionalInformation"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

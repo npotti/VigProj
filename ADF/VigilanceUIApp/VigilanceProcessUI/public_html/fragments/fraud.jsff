@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core">
+  <c:set var="vigilanceprocessuiBundle"
+         value="#{adfBundle['vigilanceprocessui.VigilanceProcessUIBundle']}"/>
+  <af:showDetailHeader text="Fraud" disclosed="true" id="sdh3"
+                       styleClass="portlet-header" size="1"
+                       inlineStyle="padding-left:10px;padding-right:10px;">
+    <f:facet name="context"/>
+    <f:facet name="menuBar"/>
+    <f:facet name="toolbar"/>
+    <f:facet name="legend"/>
+    <f:facet name="info"/>
+    <af:spacer width="10" height="20" id="spacer3"/>
+    <af:panelFormLayout id="pfl3" styleClass="portlet-header">
+      <f:facet name="footer"/>
+      <af:selectOneChoice label="Received from" id="soc8"
+                          unselectedLabel="#{vigilanceprocessuiBundle.SELECT_ONE}">
+        <af:selectItem label="BOD" value="BOD" id="si55"/>
+        <af:selectItem label="MCG" value="MCG" id="si54"/>
+        <af:selectItem label="CAG" value="CAG" id="si51"/>
+        <af:selectItem label="IBG" value="IBG" id="si52"/>
+        <af:selectItem label="SAMG" value="SAMG" id="si56"/>
+        <af:selectItem label="Others" value="Others" id="si53"/>
+      </af:selectOneChoice>
+      <af:inputText label="Letter Number" id="it5"/>
+      <af:inputDate label="Letter date" id="id5"
+                    maxValue="#{pageFlowScope.sourceRedirectBean.maxDate}">
+        <af:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+      </af:inputDate>
+      <af:inputText label="Fraud Folder Number" id="it6"/>
+      <af:inputText label="Folder Amount" id="it7" autoSubmit="true"
+                    valueChangeListener="#{pageFlowScope.sourceRedirectBean.folderAmountVC}">
+        <af:convertNumber locale="en_IN" type="currency" currencyCode="INR"/>
+      </af:inputText>
+      <af:outputText value="#{pageFlowScope.sourceRedirectBean.folderAmountWords}"
+                     id="ot7" inlineStyle="font-weight:bold;"
+                     binding="#{pageFlowScope.sourceRedirectBean.folderWordsBinding}"
+                     partialTriggers="it7"
+                     visible="#{pageFlowScope.sourceRedirectBean.folderAmountVisible}"/>
+      <af:selectOneChoice label="Amount Classification" id="soc9"
+                          unselectedLabel="#{vigilanceprocessuiBundle.SELECT_ONE}">
+        <af:selectItem label="Below Rs.1 crore" value="Below Rs.1 crore"
+                       id="si57"/>
+        <af:selectItem label="Rs.1 crore &amp; above"
+                       value="Rs.1 crore &amp; above" id="si58"/>
+      </af:selectOneChoice>
+      <af:selectOneChoice label="Further Classification" id="soc10"
+                          unselectedLabel="#{vigilanceprocessuiBundle.SELECT_ONE}">
+        <af:selectItem label="Below Rs.50 crores" value="Below Rs.50 crores"
+                       id="si60"/>
+        <af:selectItem label="Rs.50 crores &amp; above"
+                       value="Rs.50 crores &amp; above" id="si59"/>
+      </af:selectOneChoice>
+      <af:selectOneChoice label="Fraud relating to" id="soc11"
+                          unselectedLabel="#{vigilanceprocessuiBundle.SELECT_ONE}">
+        <af:selectItem label="Deposit" value="Deposit" id="si62"/>
+        <af:selectItem label="Advances" value="Advances" id="si64"/>
+        <af:selectItem label="ATM" value="ATM" id="si66"/>
+        <af:selectItem label="FOREX" value="FOREX" id="si63"/>
+        <af:selectItem label="Cash" value="Cash" id="si65"/>
+        <af:selectItem label="Others" value="Others" id="si61"/>
+      </af:selectOneChoice>
+      <af:inputDate label="Date of occurence" id="id6"
+                    maxValue="#{pageFlowScope.sourceRedirectBean.maxDate}">
+        <af:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+      </af:inputDate>
+      <af:inputDate label="Date of detection" id="id7"
+                    maxValue="#{pageFlowScope.sourceRedirectBean.maxDate}">
+        <af:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+      </af:inputDate>
+      <af:inputText label="Name of Unit/Account" id="it8"/>
+      <af:selectOneRadio label="Staff involvement" id="sor1">
+        <af:selectItem label="Yes" value="Yes" id="si68"/>
+        <af:selectItem label="No" value="No" id="si67"/>
+      </af:selectOneRadio>
+    </af:panelFormLayout>
+    <af:spacer width="10" height="20" id="spacer4"/>
+  </af:showDetailHeader>
+</jsp:root>

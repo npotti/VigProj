@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application"
+             version="11.1.1.64.93" id="DataBindings" SeparateXMLFiles="false"
+             Package="vigilanceprocessui" ClientType="Generic">
+  <definitionFactories>
+    <factory nameSpace="http://xmlns.oracle.com/adf/controller/binding"
+             className="oracle.adf.controller.internal.binding.TaskFlowBindingDefFactoryImpl"/>
+    <dtfactory className="oracle.adf.controller.internal.dtrt.binding.BindingDTObjectFactory"/>
+  </definitionFactories>
+  <pageMap>
+    <page path="/ComplaintRegistration.jspx"
+          usageId="vigilanceprocessui_ComplaintRegistrationPageDef"/>
+    <page path="/fragments/home.jsff" usageId="vigilanceprocessui_homePageDef"/>
+    <page path="/fragments/complaint.jsff"
+          usageId="vigilanceprocessui_complaintPageDef"/>
+    <page path="/pages/dummy.jspx" usageId="vigilanceprocessui_dummyPageDef"/>
+    <page path="/fragments/nonEditableHome.jsff"
+          usageId="vigilanceprocessui_nonEditableHomePageDef"/>
+    <page path="/WEB-INF/taskflows/ComplaintTF.xml#ComplaintTF@checkTaskName"
+          usageId="vigilanceprocessui_ComplaintTF_ComplaintTF_checkTaskNamePageDef"/>
+  </pageMap>
+  <pageDefinitionUsages>
+    <page id="vigilanceprocessui_ComplaintRegistrationPageDef"
+          path="vigilanceprocessui.pageDefs.ComplaintRegistrationPageDef"/>
+    <page id="vigilanceprocessui_homePageDef" path="fragments.homePageDef"/>
+    <page id="vigilanceprocessui_complaintPageDef"
+          path="fragments.complaintPageDef"/>
+    <page id="vigilanceprocessui_dummyPageDef" path="pages.dummyPageDef"/>
+    <page id="vigilanceprocessui_nonEditableHomePageDef"
+          path="fragments.nonEditableHomePageDef"/>
+    <page id="vigilanceprocessui_ComplaintTF_ComplaintTF_checkTaskNamePageDef"
+          path="taskflows.ComplaintTF_ComplaintTF_checkTaskNamePageDef"/>
+  </pageDefinitionUsages>
+  <dataControlUsages>
+    <dc id="VigilanceProcessUI_RegisterComplaintTask"
+        path="vigilanceprocessui.VigilanceProcessUI_RegisterComplaintTask"/>
+    <BC4JDataControl id="VigilanceAMDataControl"
+                     Package="com.sbi.vigilance.app.model.am"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl"
+                     SupportsTransactions="true" SupportsFindMode="true"
+                     SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true"
+                     Configuration="VigilanceAMLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+  </dataControlUsages>
+</Application>

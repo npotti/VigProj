@@ -1,0 +1,1407 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.64.93" id="ComplaintRegistrationPageDef"
+                Package="vigilanceprocessui.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="getTaskDetails.result"
+                    DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                    RangeSize="25"
+                    BeanClass="VigilanceProcessUI_RegisterComplaintTask.getTaskDetails"
+                    id="getTaskDetailsIterator"/>
+    <accessorIterator MasterBinding="getTaskDetailsIterator" Binds="task"
+                      RangeSize="25"
+                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.task"
+                      id="taskIterator" StateValidation="false"/>
+    <accessorIterator MasterBinding="taskIterator" Binds="systemAttributes"
+                      RangeSize="25"
+                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.systemAttributesType"
+                      id="systemAttributesIterator"/>
+    <accessorIterator MasterBinding="systemAttributesIterator"
+                      Binds="systemActions" RangeSize="50"
+                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.actionType"
+                      id="systemActionsIterator" StateValidation="false"/>
+    <accessorIterator MasterBinding="systemAttributesIterator"
+                      Binds="customActions" RangeSize="25"
+                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.actionType"
+                      id="customActionsIterator"/>
+    <accessorIterator MasterBinding="systemAttributesIterator" Binds="fromUser"
+                      RangeSize="25"
+                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.identityType"
+                      id="fromUserIterator"/>
+    <accessorIterator MasterBinding="systemAttributesIterator" Binds="assignees"
+                      RangeSize="25"
+                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.identityType"
+                      id="assigneesIterator" StateValidation="false"/>
+    <accessorIterator MasterBinding="taskIterator" Binds="payload"
+                      RangeSize="25"
+                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.RegisterComplaintTaskPayloadType"
+                      id="payloadIterator"/>
+    <accessorIterator MasterBinding="payloadIterator" Binds="VigilanceProcess"
+                      RangeSize="25"
+                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.VigilanceProcessType"
+                      id="VigilanceProcessIterator"/>
+    <accessorIterator MasterBinding="VigilanceProcessIterator"
+                      Binds="CaseRegistration" RangeSize="25"
+                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.CaseRegistration"
+                      id="CaseRegistrationIterator"/>
+    <accessorIterator MasterBinding="VigilanceProcessIterator" Binds="Complaint"
+                      RangeSize="25"
+                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.Complaint"
+                      id="ComplaintIterator"/>
+    <accessorIterator MasterBinding="VigilanceProcessIterator"
+                      Binds="CentralBureauOfInvestigation" RangeSize="25"
+                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.CentralBureauOfInvestigation"
+                      id="CentralBureauOfInvestigationIterator"/>
+    <accessorIterator MasterBinding="VigilanceProcessIterator"
+                      Binds="ChiefTechnicalExaminerReport" RangeSize="25"
+                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.ChiefTechnicalExaminerReport"
+                      id="ChiefTechnicalExaminerReportIterator"/>
+    <accessorIterator MasterBinding="VigilanceProcessIterator" Binds="Fraud"
+                      RangeSize="25"
+                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.Fraud"
+                      id="FraudIterator"/>
+    <accessorIterator MasterBinding="VigilanceProcessIterator"
+                      Binds="Miscellaneous" RangeSize="25"
+                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.Miscellaneous"
+                      id="MiscellaneousIterator"/>
+    <accessorIterator MasterBinding="VigilanceProcessIterator"
+                      Binds="RiskFoccusedInternalAudit" RangeSize="25"
+                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.RiskFoccusedInternalAudit"
+                      id="RiskFoccusedInternalAuditIterator"/>
+    <accessorIterator MasterBinding="VigilanceProcessIterator"
+                      Binds="RightToInformation" RangeSize="25"
+                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.RightToInformation"
+                      id="RightToInformationIterator"/>
+    <accessorIterator MasterBinding="VigilanceProcessIterator"
+                      Binds="StaffAccountability" RangeSize="25"
+                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.StaffAccountability"
+                      id="StaffAccountabilityIterator"/>
+    <accessorIterator MasterBinding="VigilanceProcessIterator"
+                      Binds="SuoMotuInvestigation" RangeSize="25"
+                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.SuoMotuInvestigation"
+                      id="SuoMotuInvestigationIterator"/>
+    <accessorIterator MasterBinding="VigilanceProcessIterator"
+                      Binds="AttemptedTheft" RangeSize="25"
+                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.AttemptedTheft"
+                      id="AttemptedTheftIterator"/>
+    <accessorIterator MasterBinding="taskIterator" Binds="userComment"
+                      RangeSize="25"
+                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.commentType"
+                      id="userCommentIterator" StateValidation="false"/>
+    <accessorIterator MasterBinding="userCommentIterator" Binds="updatedBy"
+                      RangeSize="25"
+                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.identityType"
+                      id="updatedByIterator" StateValidation="false"/>
+    <accessorIterator MasterBinding="taskIterator" Binds="attachment"
+                      RangeSize="25"
+                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.attachmentType"
+                      id="attachmentIterator" StateValidation="false"/>
+    <accessorIterator MasterBinding="attachmentIterator" Binds="ucmMetadataItem"
+                      RangeSize="25"
+                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.ucmMetadataItemType"
+                      id="ucmMetadataItemIterator" StateValidation="false"/>
+    <taskFlow id="ComplaintTF1"
+              taskFlowId="/WEB-INF/taskflows/ComplaintTF.xml#ComplaintTF"
+              activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+    <iterator id="BrmastTransVOIterator" Binds="BrmastTransVO"
+              DataControl="VigilanceAMDataControl" RangeSize="25"/>
+    <iterator id="ComplaintTransVOIterator" Binds="ComplaintTransVO"
+              DataControl="VigilanceAMDataControl" RangeSize="25"/>
+  </executables>
+  <bindings>
+    <methodAction id="getTaskDetails" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="getTaskDetails"
+                  IsViewObjectMethod="false"
+                  DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                  InstanceName="VigilanceProcessUI_RegisterComplaintTask"
+                  ReturnName="data.VigilanceProcessUI_RegisterComplaintTask.methodResults.getTaskDetails_VigilanceProcessUI_RegisterComplaintTask_getTaskDetails_result">
+      <NamedData NDName="bpmWorklistContext" NDType="java.lang.String"/>
+      <NamedData NDName="bpmWorklistTaskId" NDType="java.lang.String"/>
+      <NamedData NDName="bpmWorklistTaskVersion" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="taskIterator" id="title">
+      <AttrNames>
+        <Item Value="title"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction IterBinding="taskIterator" id="UpdateAction"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="UpdateAction" IsViewObjectMethod="false"
+                  DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                  InstanceName="bindings.taskIterator.currentRow.dataProvider"
+                  IsLocalObjectReference="true">
+      <NamedData NDName="action" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction IterBinding="taskIterator" id="update"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="update" IsViewObjectMethod="false"
+                  DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                  InstanceName="bindings.taskIterator.currentRow.dataProvider"
+                  IsLocalObjectReference="true"/>
+    <navigationlist IterBinding="systemActionsIterator"
+                    ListOperMode="navigation" ListIter="systemActionsIterator"
+                    id="systemActions">
+      <AttrNames>
+        <Item Value="action"/>
+        <Item Value="displayName"/>
+      </AttrNames>
+    </navigationlist>
+    <attributeValues IterBinding="systemAttributesIterator"
+                     id="digitalSignatureRequired">
+      <AttrNames>
+        <Item Value="digitalSignatureRequired"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="systemAttributesIterator"
+                     id="passwordRequiredOnUpdate">
+      <AttrNames>
+        <Item Value="passwordRequiredOnUpdate"/>
+      </AttrNames>
+    </attributeValues>
+    <navigationlist IterBinding="customActionsIterator"
+                    ListOperMode="navigation" ListIter="customActionsIterator"
+                    id="customActions">
+      <AttrNames>
+        <Item Value="action"/>
+        <Item Value="displayName"/>
+      </AttrNames>
+    </navigationlist>
+    <methodAction IterBinding="taskIterator" id="Claim"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="Claim" IsViewObjectMethod="false"
+                  DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                  InstanceName="bindings.taskIterator.currentRow.dataProvider"
+                  IsLocalObjectReference="true"/>
+    <methodAction IterBinding="taskIterator" id="Acknowledge"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="Acknowledge" IsViewObjectMethod="false"
+                  DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                  InstanceName="bindings.taskIterator.currentRow.dataProvider"
+                  IsLocalObjectReference="true"/>
+    <methodAction IterBinding="taskIterator" id="Resume"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="Resume" IsViewObjectMethod="false"
+                  DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                  InstanceName="bindings.taskIterator.currentRow.dataProvider"
+                  IsLocalObjectReference="true"/>
+    <methodAction IterBinding="taskIterator" id="Withdraw"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="Withdraw" IsViewObjectMethod="false"
+                  DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                  InstanceName="bindings.taskIterator.currentRow.dataProvider"
+                  IsLocalObjectReference="true"/>
+    <methodAction IterBinding="taskIterator" id="SUBMIT"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="SUBMIT" IsViewObjectMethod="false"
+                  DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                  InstanceName="bindings.taskIterator.currentRow.dataProvider"
+                  IsLocalObjectReference="true"/>
+    <methodAction IterBinding="taskIterator" id="CANCEL"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="CANCEL" IsViewObjectMethod="false"
+                  DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                  InstanceName="bindings.taskIterator.currentRow.dataProvider"
+                  IsLocalObjectReference="true"/>
+    <attributeValues IterBinding="taskIterator" id="creator">
+      <AttrNames>
+        <Item Value="creator"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="taskIterator" id="ownerUser">
+      <AttrNames>
+        <Item Value="ownerUser"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="taskIterator" id="priority">
+      <AttrNames>
+        <Item Value="priority"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="taskIterator" id="dueDate">
+      <AttrNames>
+        <Item Value="dueDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="taskIterator" id="creatorDisplayName">
+      <AttrNames>
+        <Item Value="creatorDisplayName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="taskIterator" id="ownerUserDisplayName">
+      <AttrNames>
+        <Item Value="ownerUserDisplayName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="systemAttributesIterator" id="acquiredBy">
+      <AttrNames>
+        <Item Value="acquiredBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="systemAttributesIterator" id="assignedDate">
+      <AttrNames>
+        <Item Value="assignedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="systemAttributesIterator" id="createdDate">
+      <AttrNames>
+        <Item Value="createdDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="systemAttributesIterator" id="expirationDate">
+      <AttrNames>
+        <Item Value="expirationDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="systemAttributesIterator" id="outcome">
+      <AttrNames>
+        <Item Value="outcome"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="systemAttributesIterator" id="state">
+      <AttrNames>
+        <Item Value="state"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="systemAttributesIterator" id="taskNumber">
+      <AttrNames>
+        <Item Value="taskNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="systemAttributesIterator" id="updatedDate">
+      <AttrNames>
+        <Item Value="updatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="systemAttributesIterator"
+                     id="taskViewContext">
+      <AttrNames>
+        <Item Value="taskViewContext"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="systemAttributesIterator"
+                     id="actionDisplayName">
+      <AttrNames>
+        <Item Value="actionDisplayName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="systemAttributesIterator" id="componentType">
+      <AttrNames>
+        <Item Value="componentType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="systemAttributesIterator" id="activityId">
+      <AttrNames>
+        <Item Value="activityId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="fromUserIterator" id="id">
+      <AttrNames>
+        <Item Value="id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="fromUserIterator" id="displayName">
+      <AttrNames>
+        <Item Value="displayName"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="assigneesIterator" id="assignees">
+      <nodeDefinition DefName="VigilanceProcessUI_RegisterComplaintTask.identityType"
+                      Name="assignees0">
+        <AttrNames>
+          <Item Value="id"/>
+          <Item Value="displayName"/>
+          <Item Value="type"/>
+          <Item Value="systemVersionFlag"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="VigilanceProcessIterator"
+                     id="ComplaintNumber">
+      <AttrNames>
+        <Item Value="ComplaintNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VigilanceProcessIterator" id="CaseNumber">
+      <AttrNames>
+        <Item Value="CaseNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VigilanceProcessIterator" id="Signed">
+      <AttrNames>
+        <Item Value="Signed"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VigilanceProcessIterator" id="TaskName">
+      <AttrNames>
+        <Item Value="TaskName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VigilanceProcessIterator" id="VigilanceAngle">
+      <AttrNames>
+        <Item Value="VigilanceAngle"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VigilanceProcessIterator" id="attribute1">
+      <AttrNames>
+        <Item Value="attribute1"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VigilanceProcessIterator" id="attribute2">
+      <AttrNames>
+        <Item Value="attribute2"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VigilanceProcessIterator" id="attribute3">
+      <AttrNames>
+        <Item Value="attribute3"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VigilanceProcessIterator" id="attribute4">
+      <AttrNames>
+        <Item Value="attribute4"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VigilanceProcessIterator" id="attribute5">
+      <AttrNames>
+        <Item Value="attribute5"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VigilanceProcessIterator" id="attribute6">
+      <AttrNames>
+        <Item Value="attribute6"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VigilanceProcessIterator" id="attribute7">
+      <AttrNames>
+        <Item Value="attribute7"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VigilanceProcessIterator" id="attribute8">
+      <AttrNames>
+        <Item Value="attribute8"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VigilanceProcessIterator" id="attribute9">
+      <AttrNames>
+        <Item Value="attribute9"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VigilanceProcessIterator" id="attribute10">
+      <AttrNames>
+        <Item Value="attribute10"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VigilanceProcessIterator" id="attribute11">
+      <AttrNames>
+        <Item Value="attribute11"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VigilanceProcessIterator" id="attribute12">
+      <AttrNames>
+        <Item Value="attribute12"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VigilanceProcessIterator" id="attribute13">
+      <AttrNames>
+        <Item Value="attribute13"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VigilanceProcessIterator" id="attribute14">
+      <AttrNames>
+        <Item Value="attribute14"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VigilanceProcessIterator" id="attribute15">
+      <AttrNames>
+        <Item Value="attribute15"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CaseRegistrationIterator" id="SystemSerialNo">
+      <AttrNames>
+        <Item Value="SystemSerialNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CaseRegistrationIterator" id="CCFileNumber">
+      <AttrNames>
+        <Item Value="CCFileNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CaseRegistrationIterator" id="BranchCode">
+      <AttrNames>
+        <Item Value="BranchCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CaseRegistrationIterator" id="BranchName">
+      <AttrNames>
+        <Item Value="BranchName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CaseRegistrationIterator" id="Region">
+      <AttrNames>
+        <Item Value="Region"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CaseRegistrationIterator" id="OfficeType">
+      <AttrNames>
+        <Item Value="OfficeType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CaseRegistrationIterator" id="NetWork">
+      <AttrNames>
+        <Item Value="NetWork"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CaseRegistrationIterator" id="Circle">
+      <AttrNames>
+        <Item Value="Circle"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CaseRegistrationIterator" id="SourceOfCase">
+      <AttrNames>
+        <Item Value="SourceOfCase"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CaseRegistrationIterator" id="CircleCode">
+      <AttrNames>
+        <Item Value="CircleCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CaseRegistrationIterator" id="NetWorkCode">
+      <AttrNames>
+        <Item Value="NetWorkCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CaseRegistrationIterator"
+                     id="AdditionalInformation">
+      <AttrNames>
+        <Item Value="AdditionalInformation"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintIterator" id="ReceivedFrom">
+      <AttrNames>
+        <Item Value="ReceivedFrom"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintIterator" id="ReceivedAt">
+      <AttrNames>
+        <Item Value="ReceivedAt"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintIterator" id="NameOfComplainant">
+      <AttrNames>
+        <Item Value="NameOfComplainant"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintIterator" id="DateOfComplainant">
+      <AttrNames>
+        <Item Value="DateOfComplainant"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintIterator" id="DateReceived">
+      <AttrNames>
+        <Item Value="DateReceived"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintIterator" id="ComplaintType">
+      <AttrNames>
+        <Item Value="ComplaintType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintIterator" id="ComplaintRelatingTo">
+      <AttrNames>
+        <Item Value="ComplaintRelatingTo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintIterator" id="ComplaintParticulars">
+      <AttrNames>
+        <Item Value="ComplaintParticulars"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintIterator"
+                     id="InvestionReportRequired">
+      <AttrNames>
+        <Item Value="InvestionReportRequired"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintIterator" id="DateOfReceiptOfAdvice">
+      <AttrNames>
+        <Item Value="DateOfReceiptOfAdvice"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintIterator" id="DisposalStatus">
+      <AttrNames>
+        <Item Value="DisposalStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintIterator" id="DateofIRFCalled">
+      <AttrNames>
+        <Item Value="DateofIRFCalled"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintIterator"
+                     id="AdditionalInformation1">
+      <AttrNames>
+        <Item Value="AdditionalInformation"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CentralBureauOfInvestigationIterator"
+                     id="NameOfCBIOffice">
+      <AttrNames>
+        <Item Value="NameOfCBIOffice"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CentralBureauOfInvestigationIterator"
+                     id="CBILetterReference">
+      <AttrNames>
+        <Item Value="CBILetterReference"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CentralBureauOfInvestigationIterator"
+                     id="CBILetterDate">
+      <AttrNames>
+        <Item Value="CBILetterDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CentralBureauOfInvestigationIterator"
+                     id="DateOfReceipt">
+      <AttrNames>
+        <Item Value="DateOfReceipt"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CentralBureauOfInvestigationIterator"
+                     id="NumberAlloted">
+      <AttrNames>
+        <Item Value="NumberAlloted"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CentralBureauOfInvestigationIterator"
+                     id="NameOfAccount">
+      <AttrNames>
+        <Item Value="NameOfAccount"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CentralBureauOfInvestigationIterator"
+                     id="AccountSuggested">
+      <AttrNames>
+        <Item Value="AccountSuggested"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CentralBureauOfInvestigationIterator"
+                     id="RDADetails">
+      <AttrNames>
+        <Item Value="RDADetails"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CentralBureauOfInvestigationIterator"
+                     id="SFPDetails">
+      <AttrNames>
+        <Item Value="SFPDetails"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CentralBureauOfInvestigationIterator"
+                     id="AdditionalInformation2">
+      <AttrNames>
+        <Item Value="AdditionalInformation"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ChiefTechnicalExaminerReportIterator"
+                     id="OrderedBy">
+      <AttrNames>
+        <Item Value="OrderedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ChiefTechnicalExaminerReportIterator"
+                     id="OrderedOn">
+      <AttrNames>
+        <Item Value="OrderedOn"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ChiefTechnicalExaminerReportIterator"
+                     id="NameOfWork">
+      <AttrNames>
+        <Item Value="NameOfWork"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ChiefTechnicalExaminerReportIterator"
+                     id="EstimatedCost">
+      <AttrNames>
+        <Item Value="EstimatedCost"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ChiefTechnicalExaminerReportIterator"
+                     id="TenderedCost">
+      <AttrNames>
+        <Item Value="TenderedCost"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ChiefTechnicalExaminerReportIterator"
+                     id="ContractAwaardedTo">
+      <AttrNames>
+        <Item Value="ContractAwaardedTo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ChiefTechnicalExaminerReportIterator"
+                     id="CTEAllotedTo">
+      <AttrNames>
+        <Item Value="CTEAllotedTo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ChiefTechnicalExaminerReportIterator"
+                     id="DateOfCommencementOfWork">
+      <AttrNames>
+        <Item Value="DateOfCommencementOfWork"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ChiefTechnicalExaminerReportIterator"
+                     id="TimeOfCompletion">
+      <AttrNames>
+        <Item Value="TimeOfCompletion"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ChiefTechnicalExaminerReportIterator"
+                     id="PresentPhysicalPosition">
+      <AttrNames>
+        <Item Value="PresentPhysicalPosition"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ChiefTechnicalExaminerReportIterator"
+                     id="DisposalStatus1">
+      <AttrNames>
+        <Item Value="DisposalStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ChiefTechnicalExaminerReportIterator"
+                     id="DateOfIRFCalled">
+      <AttrNames>
+        <Item Value="DateOfIRFCalled"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ChiefTechnicalExaminerReportIterator"
+                     id="AdditionalInformation3">
+      <AttrNames>
+        <Item Value="AdditionalInformation"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FraudIterator" id="RecivedFrom">
+      <AttrNames>
+        <Item Value="RecivedFrom"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FraudIterator" id="LetterNumber">
+      <AttrNames>
+        <Item Value="LetterNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FraudIterator" id="LetterDate">
+      <AttrNames>
+        <Item Value="LetterDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FraudIterator" id="FraudFolderNumber">
+      <AttrNames>
+        <Item Value="FraudFolderNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FraudIterator" id="FolderAmount">
+      <AttrNames>
+        <Item Value="FolderAmount"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FraudIterator" id="AmountClassification">
+      <AttrNames>
+        <Item Value="AmountClassification"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FraudIterator" id="FurtherClassification">
+      <AttrNames>
+        <Item Value="FurtherClassification"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FraudIterator" id="FraudRelatingTo">
+      <AttrNames>
+        <Item Value="FraudRelatingTo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FraudIterator" id="DateOfOccurence">
+      <AttrNames>
+        <Item Value="DateOfOccurence"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FraudIterator" id="DateOfDetection">
+      <AttrNames>
+        <Item Value="DateOfDetection"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FraudIterator" id="NameofUnit">
+      <AttrNames>
+        <Item Value="NameofUnit"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FraudIterator" id="StaffInvolved">
+      <AttrNames>
+        <Item Value="StaffInvolved"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FraudIterator" id="AdditionalInformation4">
+      <AttrNames>
+        <Item Value="AdditionalInformation"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MiscellaneousIterator" id="ReceivedFrom1">
+      <AttrNames>
+        <Item Value="ReceivedFrom"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MiscellaneousIterator" id="LetterNumber1">
+      <AttrNames>
+        <Item Value="LetterNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MiscellaneousIterator" id="LetterDate1">
+      <AttrNames>
+        <Item Value="LetterDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MiscellaneousIterator" id="CaseRelatingTo">
+      <AttrNames>
+        <Item Value="CaseRelatingTo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MiscellaneousIterator" id="Amount">
+      <AttrNames>
+        <Item Value="Amount"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MiscellaneousIterator" id="Remarks">
+      <AttrNames>
+        <Item Value="Remarks"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MiscellaneousIterator"
+                     id="AdditionalInformation5">
+      <AttrNames>
+        <Item Value="AdditionalInformation"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="RiskFoccusedInternalAuditIterator"
+                     id="RecivedFrom1">
+      <AttrNames>
+        <Item Value="RecivedFrom"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="RiskFoccusedInternalAuditIterator"
+                     id="LetterNumber2">
+      <AttrNames>
+        <Item Value="LetterNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="RiskFoccusedInternalAuditIterator"
+                     id="LetterDate2">
+      <AttrNames>
+        <Item Value="LetterDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="RiskFoccusedInternalAuditIterator"
+                     id="NameOfAccount1">
+      <AttrNames>
+        <Item Value="NameOfAccount"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="RiskFoccusedInternalAuditIterator"
+                     id="RFIARelatingTo">
+      <AttrNames>
+        <Item Value="RFIARelatingTo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="RiskFoccusedInternalAuditIterator"
+                     id="AmountInvolved">
+      <AttrNames>
+        <Item Value="AmountInvolved"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="RiskFoccusedInternalAuditIterator"
+                     id="EstimatedLoss">
+      <AttrNames>
+        <Item Value="EstimatedLoss"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="RiskFoccusedInternalAuditIterator"
+                     id="DateOfRFIAReport">
+      <AttrNames>
+        <Item Value="DateOfRFIAReport"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="RiskFoccusedInternalAuditIterator"
+                     id="DisposalStatus2">
+      <AttrNames>
+        <Item Value="DisposalStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="RiskFoccusedInternalAuditIterator"
+                     id="DateOfIRFCalled1">
+      <AttrNames>
+        <Item Value="DateOfIRFCalled"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="RiskFoccusedInternalAuditIterator"
+                     id="AdditionalInformation6">
+      <AttrNames>
+        <Item Value="AdditionalInformation"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="RightToInformationIterator"
+                     id="NameOfApplicant">
+      <AttrNames>
+        <Item Value="NameOfApplicant"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="RightToInformationIterator"
+                     id="DateOfApplication">
+      <AttrNames>
+        <Item Value="DateOfApplication"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="RightToInformationIterator" id="DORbyCPIO">
+      <AttrNames>
+        <Item Value="DORbyCPIO"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="RightToInformationIterator"
+                     id="DORatVigilanceDept">
+      <AttrNames>
+        <Item Value="DORatVigilanceDept"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="RightToInformationIterator"
+                     id="ParticularsOfInformationSought">
+      <AttrNames>
+        <Item Value="ParticularsOfInformationSought"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="RightToInformationIterator"
+                     id="LastDateOfProvidingInformation">
+      <AttrNames>
+        <Item Value="LastDateOfProvidingInformation"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="RightToInformationIterator"
+                     id="DateInformationProvided">
+      <AttrNames>
+        <Item Value="DateInformationProvided"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="RightToInformationIterator"
+                     id="RejectionDate">
+      <AttrNames>
+        <Item Value="RejectionDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="RightToInformationIterator"
+                     id="AdditionalInformation7">
+      <AttrNames>
+        <Item Value="AdditionalInformation"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="StaffAccountabilityIterator"
+                     id="RecivedFrom2">
+      <AttrNames>
+        <Item Value="RecivedFrom"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="StaffAccountabilityIterator"
+                     id="LetterNumber3">
+      <AttrNames>
+        <Item Value="LetterNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="StaffAccountabilityIterator" id="LetterDate3">
+      <AttrNames>
+        <Item Value="LetterDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="StaffAccountabilityIterator"
+                     id="NameOfAccount2">
+      <AttrNames>
+        <Item Value="NameOfAccount"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="StaffAccountabilityIterator"
+                     id="AmountWiseClassification">
+      <AttrNames>
+        <Item Value="AmountWiseClassification"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="StaffAccountabilityIterator"
+                     id="AmountInvolved1">
+      <AttrNames>
+        <Item Value="AmountInvolved"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="StaffAccountabilityIterator"
+                     id="EstimatedLoss1">
+      <AttrNames>
+        <Item Value="EstimatedLoss"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="StaffAccountabilityIterator" id="DateOfNPA">
+      <AttrNames>
+        <Item Value="DateOfNPA"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="StaffAccountabilityIterator"
+                     id="MigratedToSMBOn">
+      <AttrNames>
+        <Item Value="MigratedToSMBOn"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="StaffAccountabilityIterator"
+                     id="InvestigationAssignedTo">
+      <AttrNames>
+        <Item Value="InvestigationAssignedTo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="StaffAccountabilityIterator"
+                     id="InvestigationAssignedOn">
+      <AttrNames>
+        <Item Value="InvestigationAssignedOn"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="StaffAccountabilityIterator"
+                     id="DateOfSAEReport">
+      <AttrNames>
+        <Item Value="DateOfSAEReport"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="StaffAccountabilityIterator"
+                     id="DisposalStatus3">
+      <AttrNames>
+        <Item Value="DisposalStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="StaffAccountabilityIterator"
+                     id="DateOfIRFCalled2">
+      <AttrNames>
+        <Item Value="DateOfIRFCalled"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="StaffAccountabilityIterator"
+                     id="AdditionalInformation8">
+      <AttrNames>
+        <Item Value="AdditionalInformation"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SuoMotuInvestigationIterator"
+                     id="LetterNumber4">
+      <AttrNames>
+        <Item Value="LetterNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SuoMotuInvestigationIterator"
+                     id="LetterDate4">
+      <AttrNames>
+        <Item Value="LetterDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SuoMotuInvestigationIterator"
+                     id="DateOfReport">
+      <AttrNames>
+        <Item Value="DateOfReport"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SuoMotuInvestigationIterator"
+                     id="AmountInvolved2">
+      <AttrNames>
+        <Item Value="AmountInvolved"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SuoMotuInvestigationIterator"
+                     id="EstimatedLoss2">
+      <AttrNames>
+        <Item Value="EstimatedLoss"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SuoMotuInvestigationIterator"
+                     id="NatureOfIrregularities">
+      <AttrNames>
+        <Item Value="NatureOfIrregularities"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SuoMotuInvestigationIterator"
+                     id="WhetherReferredToCC">
+      <AttrNames>
+        <Item Value="WhetherReferredToCC"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SuoMotuInvestigationIterator"
+                     id="ActionPropsed">
+      <AttrNames>
+        <Item Value="ActionPropsed"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SuoMotuInvestigationIterator"
+                     id="DateOfActionTaken">
+      <AttrNames>
+        <Item Value="DateOfActionTaken"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SuoMotuInvestigationIterator"
+                     id="AdditionalInformation9">
+      <AttrNames>
+        <Item Value="AdditionalInformation"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AttemptedTheftIterator" id="ReceivedFrom2">
+      <AttrNames>
+        <Item Value="ReceivedFrom"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AttemptedTheftIterator" id="LetterNumber5">
+      <AttrNames>
+        <Item Value="LetterNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AttemptedTheftIterator" id="LetterDate5">
+      <AttrNames>
+        <Item Value="LetterDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AttemptedTheftIterator" id="AmountInvolved3">
+      <AttrNames>
+        <Item Value="AmountInvolved"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AttemptedTheftIterator" id="DateOfOccurence1">
+      <AttrNames>
+        <Item Value="DateOfOccurence"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AttemptedTheftIterator" id="DateOfDetecion">
+      <AttrNames>
+        <Item Value="DateOfDetecion"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AttemptedTheftIterator" id="StaffInvolvement">
+      <AttrNames>
+        <Item Value="StaffInvolvement"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AttemptedTheftIterator"
+                     id="AdditionalInformation10">
+      <AttrNames>
+        <Item Value="AdditionalInformation"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="userCommentIterator" id="userComment">
+      <nodeDefinition DefName="VigilanceProcessUI_RegisterComplaintTask.commentType"
+                      Name="userComment0">
+        <AttrNames>
+          <Item Value="comment"/>
+          <Item Value="updatedDate"/>
+          <Item Value="displayNameLanguage"/>
+          <Item Value="action"/>
+          <Item Value="systemVersionFlag"/>
+          <Item Value="acl"/>
+          <Item Value="doesBelongToParent"/>
+          <Item Value="isSystemComment"/>
+          <Item Value="taskId"/>
+          <Item Value="commentScope"/>
+          <Item Value="id"/>
+          <Item Value="operation"/>
+        </AttrNames>
+        <Accessors>
+          <Item Value="updatedBy"/>
+        </Accessors>
+      </nodeDefinition>
+      <nodeDefinition DefName="VigilanceProcessUI_RegisterComplaintTask.identityType"
+                      Name="userComment1">
+        <AttrNames>
+          <Item Value="id"/>
+          <Item Value="displayName"/>
+          <Item Value="type"/>
+          <Item Value="systemVersionFlag"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="userCommentIterator" id="CreateInsert"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="userCommentIterator" id="Delete"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <attributeValues IterBinding="userCommentIterator" id="comment">
+      <AttrNames>
+        <Item Value="comment"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="userCommentIterator" id="commentScope">
+      <AttrNames>
+        <Item Value="commentScope"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="updatedByIterator" id="updatedBy">
+      <nodeDefinition DefName="VigilanceProcessUI_RegisterComplaintTask.identityType"
+                      Name="updatedBy0">
+        <AttrNames>
+          <Item Value="id"/>
+          <Item Value="displayName"/>
+          <Item Value="type"/>
+          <Item Value="systemVersionFlag"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="attachmentIterator" id="attachment">
+      <nodeDefinition DefName="VigilanceProcessUI_RegisterComplaintTask.attachmentType"
+                      Name="attachment0">
+        <AttrNames>
+          <Item Value="content"/>
+          <Item Value="mimeType"/>
+          <Item Value="name"/>
+          <Item Value="updatedBy"/>
+          <Item Value="URI"/>
+          <Item Value="systemVersionFlag"/>
+          <Item Value="taskId"/>
+          <Item Value="version"/>
+          <Item Value="acl"/>
+          <Item Value="doesBelongToParent"/>
+          <Item Value="updatedDate"/>
+          <Item Value="correlationId"/>
+          <Item Value="size"/>
+          <Item Value="description"/>
+          <Item Value="storageType"/>
+          <Item Value="ucmDocType"/>
+          <Item Value="securityGroup"/>
+          <Item Value="account"/>
+          <Item Value="revision"/>
+          <Item Value="releaseDate"/>
+          <Item Value="expirationDate"/>
+          <Item Value="title"/>
+          <Item Value="attachmentScope"/>
+          <Item Value="isContentEncoded"/>
+          <Item Value="updatedByDisplayName"/>
+          <Item Value="id"/>
+          <Item Value="operation"/>
+        </AttrNames>
+      </nodeDefinition>
+      <nodeDefinition DefName="VigilanceProcessUI_RegisterComplaintTask.ucmMetadataItemType"
+                      Name="attachment1">
+        <AttrNames>
+          <Item Value="name"/>
+          <Item Value="value"/>
+          <Item Value="type"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="attachmentIterator" id="CreateInsert1"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="attachmentIterator" id="Delete1"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <attributeValues IterBinding="attachmentIterator" id="content">
+      <AttrNames>
+        <Item Value="content"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="attachmentIterator" id="mimeType">
+      <AttrNames>
+        <Item Value="mimeType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="attachmentIterator" id="name">
+      <AttrNames>
+        <Item Value="name"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="attachmentIterator" id="updatedBy1">
+      <AttrNames>
+        <Item Value="updatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="attachmentIterator" id="URI">
+      <AttrNames>
+        <Item Value="URI"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="attachmentIterator" id="updatedDate1">
+      <AttrNames>
+        <Item Value="updatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="attachmentIterator" id="ucmDocType">
+      <AttrNames>
+        <Item Value="ucmDocType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="attachmentIterator" id="securityGroup">
+      <AttrNames>
+        <Item Value="securityGroup"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="attachmentIterator" id="account">
+      <AttrNames>
+        <Item Value="account"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="attachmentIterator" id="revision">
+      <AttrNames>
+        <Item Value="revision"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="attachmentIterator" id="releaseDate">
+      <AttrNames>
+        <Item Value="releaseDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="attachmentIterator" id="expirationDate1">
+      <AttrNames>
+        <Item Value="expirationDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="attachmentIterator" id="attachmentScope">
+      <AttrNames>
+        <Item Value="attachmentScope"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="ucmMetadataItemIterator" id="CreateInsert2"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="ucmMetadataItemIterator" id="Delete2"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <tree IterBinding="ucmMetadataItemIterator" id="ucmMetadataItem">
+      <nodeDefinition DefName="VigilanceProcessUI_RegisterComplaintTask.ucmMetadataItemType"
+                      Name="ucmMetadataItem0">
+        <AttrNames>
+          <Item Value="name"/>
+          <Item Value="value"/>
+          <Item Value="type"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="systemAttributesIterator"
+                     id="numberOfTimesModified">
+      <AttrNames>
+        <Item Value="numberOfTimesModified"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="systemAttributesIterator" id="version">
+      <AttrNames>
+        <Item Value="version"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="userCommentIterator" id="userComment1">
+      <nodeDefinition DefName="VigilanceProcessUI_RegisterComplaintTask.commentType"
+                      Name="userComment10">
+        <AttrNames>
+          <Item Value="comment"/>
+          <Item Value="updatedDate"/>
+          <Item Value="displayNameLanguage"/>
+          <Item Value="action"/>
+          <Item Value="systemVersionFlag"/>
+          <Item Value="acl"/>
+          <Item Value="doesBelongToParent"/>
+          <Item Value="isSystemComment"/>
+          <Item Value="taskId"/>
+          <Item Value="commentScope"/>
+          <Item Value="id"/>
+          <Item Value="operation"/>
+        </AttrNames>
+        <Accessors>
+          <Item Value="updatedBy"/>
+        </Accessors>
+      </nodeDefinition>
+      <nodeDefinition DefName="VigilanceProcessUI_RegisterComplaintTask.identityType"
+                      Name="userComment11">
+        <AttrNames>
+          <Item Value="id"/>
+          <Item Value="displayName"/>
+          <Item Value="type"/>
+          <Item Value="systemVersionFlag"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="updatedByIterator" id="updatedBy2">
+      <nodeDefinition DefName="VigilanceProcessUI_RegisterComplaintTask.identityType"
+                      Name="updatedBy20">
+        <AttrNames>
+          <Item Value="id"/>
+          <Item Value="displayName"/>
+          <Item Value="type"/>
+          <Item Value="systemVersionFlag"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="attachmentIterator" id="attachment1">
+      <nodeDefinition DefName="VigilanceProcessUI_RegisterComplaintTask.attachmentType"
+                      Name="attachment10">
+        <AttrNames>
+          <Item Value="content"/>
+          <Item Value="mimeType"/>
+          <Item Value="name"/>
+          <Item Value="updatedBy"/>
+          <Item Value="URI"/>
+          <Item Value="systemVersionFlag"/>
+          <Item Value="taskId"/>
+          <Item Value="version"/>
+          <Item Value="acl"/>
+          <Item Value="doesBelongToParent"/>
+          <Item Value="updatedDate"/>
+          <Item Value="correlationId"/>
+          <Item Value="size"/>
+          <Item Value="description"/>
+          <Item Value="storageType"/>
+          <Item Value="ucmDocType"/>
+          <Item Value="securityGroup"/>
+          <Item Value="account"/>
+          <Item Value="revision"/>
+          <Item Value="releaseDate"/>
+          <Item Value="expirationDate"/>
+          <Item Value="title"/>
+          <Item Value="attachmentScope"/>
+          <Item Value="isContentEncoded"/>
+          <Item Value="updatedByDisplayName"/>
+          <Item Value="id"/>
+          <Item Value="operation"/>
+        </AttrNames>
+      </nodeDefinition>
+      <nodeDefinition DefName="VigilanceProcessUI_RegisterComplaintTask.ucmMetadataItemType"
+                      Name="attachment11">
+        <AttrNames>
+          <Item Value="name"/>
+          <Item Value="value"/>
+          <Item Value="type"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="ucmMetadataItemIterator" id="ucmMetadataItem1">
+      <nodeDefinition DefName="VigilanceProcessUI_RegisterComplaintTask.ucmMetadataItemType"
+                      Name="ucmMetadataItem10">
+        <AttrNames>
+          <Item Value="name"/>
+          <Item Value="value"/>
+          <Item Value="type"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

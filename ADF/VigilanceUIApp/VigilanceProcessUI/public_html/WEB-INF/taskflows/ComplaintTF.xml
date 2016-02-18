@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="ComplaintTF">
+    <default-activity id="__1">checkTaskName</default-activity>
+    <managed-bean id="__5">
+      <managed-bean-name id="__2">caseRegBean</managed-bean-name>
+      <managed-bean-class id="__3">com.sbi.vigilance.app.view.beans.CaseRegBean</managed-bean-class>
+      <managed-bean-scope id="__4">pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="home">
+      <page>/fragments/home.jsff</page>
+    </view>
+    <view id="nonEditableHome">
+      <page>/fragments/nonEditableHome.jsff</page>
+    </view>
+    <method-call id="checkTaskName">
+      <method>#{pageFlowScope.caseRegBean.checkTaskName}</method>
+      <outcome id="__14">
+        <to-string/>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__6">
+      <from-activity-id id="__7">checkTaskName</from-activity-id>
+      <control-flow-case id="__9">
+        <from-outcome id="__10">dataentry</from-outcome>
+        <to-activity-id id="__8">home</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__11">
+        <from-outcome id="__13">other</from-outcome>
+        <to-activity-id id="__12">nonEditableHome</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

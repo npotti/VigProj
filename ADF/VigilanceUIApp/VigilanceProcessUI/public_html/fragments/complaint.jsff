@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core">
+  <c:set var="vigilanceprocessuiBundle"
+         value="#{adfBundle['vigilanceprocessui.VigilanceProcessUIBundle']}"/>
+  <af:showDetailHeader text="Complaint" disclosed="true" id="sdh2"
+                       size="1" styleClass="portlet-header"
+                       inlineStyle="padding-left:10px;padding-right:10px;">
+    <f:facet name="context"/>
+    <f:facet name="menuBar"/>
+    <f:facet name="toolbar"/>
+    <f:facet name="legend"/>
+    <f:facet name="info"/>
+    <af:spacer width="10" height="20" id="spacer1"/>
+    <af:panelFormLayout id="pfl2" labelWidth="150">
+      <f:facet name="footer"/>
+      <af:selectOneChoice label="Received from" id="soc2"
+                          unselectedLabel="#{vigilanceprocessuiBundle.SELECT_ONE}"
+                          value="#{bindings.ReceivedFrom.inputValue}"
+                          autoSubmit="true">
+        <af:selectItem label="Public" value="Public" id="si3"/>
+        <af:selectItem label="DFS" value="DFS" id="si8"/>
+        <af:selectItem label="CVC" value="CVC" id="si6"/>
+        <af:selectItem label="RBI" value="RBI" id="si4"/>
+        <af:selectItem label="PIDPI" value="PIDPI" id="si5"/>
+        <af:selectItem label="Whistle Blower" value="Whistle Blower" id="si7"/>
+        <af:selectItem label="VIP" value="VIP" id="si9"/>
+        <af:selectItem label="CBI" value="CBI" id="si11"/>
+        <af:selectItem label="Others" value="Others" id="si10"/>
+      </af:selectOneChoice>
+      <af:inputText label="Label 6" id="it9" simple="true"
+                    visible="#{bindings.ReceivedFrom.inputValue eq 'Others'}"
+                    partialTriggers="soc2"
+                    value="#{bindings.ReceivedFromOthers.inputValue}"/>
+      <af:selectOneChoice label="Received at" id="soc3"
+                          unselectedLabel="#{vigilanceprocessuiBundle.SELECT_ONE}"
+                          value="#{bindings.ReceivedAt.inputValue}">
+        <af:selectItem label="1" value="1" id="si13"/>
+        <af:selectItem label="2" value="2" id="si16"/>
+        <af:selectItem label="3" value="3" id="si21"/>
+        <af:selectItem label="4" value="4" id="si24"/>
+        <af:selectItem label="5" value="5" id="si14"/>
+        <af:selectItem label="6" value="6" id="si22"/>
+        <af:selectItem label="7" value="7" id="si27"/>
+        <af:selectItem label="8" value="8" id="si15"/>
+        <af:selectItem label="9" value="9" id="si30"/>
+        <af:selectItem label="10" value="10" id="si12"/>
+        <af:selectItem label="11" value="11" id="si18"/>
+        <af:selectItem label="12" value="12" id="si28"/>
+        <af:selectItem label="13" value="13" id="si26"/>
+        <af:selectItem label="14" value="14" id="si19"/>
+        <af:selectItem label="MCG - 21" value="21" id="si17"/>
+        <af:selectItem label="CAG - 31" value="31" id="si29"/>
+        <af:selectItem label="IBG - 41" value="41" id="si20"/>
+        <af:selectItem label="SAMG - 51" value="51" id="si25"/>
+        <af:selectItem label="Corporate Centre - 61" value="61" id="si23"/>
+      </af:selectOneChoice>
+      <af:inputText label="Name of complainant" id="it3"
+                    value="#{bindings.NameOfComplaint.inputValue}"/>
+      <af:inputDate label="Date of complaint" id="id1"
+                    maxValue="#{pageFlowScope.sourceRedirectBean.maxDate}"
+                    value="#{bindings.DateOfComplaint.inputValue}">
+        <af:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+      </af:inputDate>
+      <af:inputDate label="Date received" id="id2"
+                    maxValue="#{pageFlowScope.sourceRedirectBean.maxDate}"
+                    value="#{bindings.DateReceived.inputValue}">
+        <af:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+      </af:inputDate>
+      <af:selectOneChoice label="Complaint Type" id="soc4"
+                          value="#{bindings.ComplaintType.inputValue}">
+        <af:selectItem label="Anoynymous" value="Anoynymous" id="si33"/>
+        <af:selectItem label="Pseudonymous" value="Pseudonymous" id="si32"/>
+        <af:selectItem label="Others" value="Others" id="si31"/>
+      </af:selectOneChoice>
+      <af:selectOneChoice label="Complaint Relating to" id="soc5"
+                          unselectedLabel="#{vigilanceprocessuiBundle.SELECT_ONE}"
+                          value="#{bindings.ComplaintRelatingTo.inputValue}">
+        <af:selectItem label="Deposit" value="Deposit" id="si39"/>
+        <af:selectItem label="Advances" value="Advances" id="si38"/>
+        <af:selectItem label="ATM" value="ATM" id="si40"/>
+        <af:selectItem label="Other Alternate Channels"
+                       value="Other Alternate Channels" id="si41"/>
+        <af:selectItem label="Cash" value="Cash" id="si35"/>
+        <af:selectItem label="Remittance" value="Remittance" id="si43"/>
+        <af:selectItem label="Demand of Bribe" value="Demand of Bribe"
+                       id="si42"/>
+        <af:selectItem label="Misbehaviour" value="Misbehaviour" id="si34"/>
+        <af:selectItem label="Customer Service" value="Customer Service"
+                       id="si36"/>
+        <af:selectItem label="Others" value="Others" id="si37"/>
+      </af:selectOneChoice>
+      <af:inputText label="Label 7" id="it14" simple="true"
+                    visible="#{bindings.ComplaintRelatingTo.inputValue eq 'Others'}"
+                    value="#{bindings.ComplaintRelatingToOthers.inputValue}"/>
+      <af:inputText label="Complaint particulars" id="it4"
+                    value="#{bindings.ComplaintParticulars.inputValue}"/>
+      <af:selectOneChoice label="Factual/Investigation Report Required"
+                          id="soc6"
+                          unselectedLabel="#{vigilanceprocessuiBundle.SELECT_ONE}"
+                          value="#{bindings.InvestigationReportReqd.inputValue}">
+        <af:selectItem label="Yes" value="Yes" id="si44"/>
+        <af:selectItem label="No" value="No" id="si46"/>
+        <af:selectItem label="No Action" value="No Action" id="si45"/>
+        <af:selectItem label="DGM (CS)" value="DGM (CS)" id="si48"/>
+        <af:selectItem label="Necessary Action" value="Necessary Action"
+                       id="si47"/>
+      </af:selectOneChoice>
+      <af:inputDate label="Date of receipt of advice/Investigation Report"
+                    id="id3" maxValue="#{pageFlowScope.sourceRedirectBean.maxDate}"
+                    value="#{bindings.DateOfInvReport.inputValue}">
+        <af:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+      </af:inputDate>
+      <af:selectOneChoice label="Disposal Status" id="soc7"
+                          unselectedLabel="#{vigilanceprocessuiBundle.SELECT_ONE}"
+                          value="#{bindings.DisposalStatus.inputValue}">
+        <af:selectItem label="IRF Called" value="IRF Called" id="si49"/>
+        <af:selectItem label="Dealt With" value="Dealt With" id="si50"/>
+      </af:selectOneChoice>
+      <af:inputDate label="Date of IRF called/closure" id="id4"
+                    maxValue="#{pageFlowScope.sourceRedirectBean.maxDate}"
+                    value="#{bindings.DateOfIRF.inputValue}">
+        <af:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+      </af:inputDate>
+      <af:inputText label="Additional Information" id="it15"
+                    value="#{bindings.AdditionalInformation.inputValue}"
+                    rows="5" columns="50"/>
+    </af:panelFormLayout>
+    <af:spacer width="10" height="20" id="spacer2"/>
+  </af:showDetailHeader>
+</jsp:root>

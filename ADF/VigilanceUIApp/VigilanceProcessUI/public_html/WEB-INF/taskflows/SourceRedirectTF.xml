@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="SourceRedirectTF">
+    <default-activity id="__1">redirectToType</default-activity>
+    <managed-bean id="__2">
+      <managed-bean-name id="__3">sourceRedirectBean</managed-bean-name>
+      <managed-bean-class id="__5">com.sbi.vigilance.app.view.beans.SourceRedirectBean</managed-bean-class>
+      <managed-bean-scope id="__4">pageFlow</managed-bean-scope>
+    </managed-bean>
+    <method-call id="redirectToType">
+      <method>#{pageFlowScope.sourceRedirectBean.redirectToAppropriateForm}</method>
+      <outcome id="__6">
+        <to-string/>
+      </outcome>
+    </method-call>
+    <view id="complaint">
+      <page>/fragments/complaint.jsff</page>
+    </view>
+    <view id="fraud">
+      <page>/fragments/fraud.jsff</page>
+    </view>
+    <control-flow-rule id="__7">
+      <from-activity-id id="__8">redirectToType</from-activity-id>
+      <control-flow-case id="__10">
+        <from-outcome id="__11">Complaint</from-outcome>
+        <to-activity-id id="__9">complaint</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__12">
+        <from-outcome id="__14">Fraud</from-outcome>
+        <to-activity-id id="__13">fraud</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

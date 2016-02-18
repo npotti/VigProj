@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:pageTemplateDef var="attrs">
+    <af:xmlContent>
+      <component xmlns="http://xmlns.oracle.com/adf/faces/rich/component">
+        <display-name>VigilanceTemplate</display-name>
+        <facet>
+          <description>Facet for content</description>
+          <facet-name>content</facet-name>
+        </facet>
+        <attribute>
+          <attribute-name>contentWidth</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+          <default-value>960px</default-value>
+        </attribute>
+      </component>
+    </af:xmlContent>
+    <af:panelGroupLayout id="pt_pgl1" layout="scroll"
+                         inlineStyle='background-image:url("../images/pattern.png"); overflow:hidden;'>
+      <af:panelGroupLayout id="pt_pgl2" layout="scroll"
+                           inlineStyle="width:960px; margin: 0 auto; background-color: white;">
+        <af:spacer width="10" height="10" id="pt_s2"/>
+        <af:panelGroupLayout id="pt_pgl3" layout="horizontal">
+          <af:commandImageLink id="pt_cil1" icon="/images/sbi-logo-english.png"
+                               inlineStyle="padding-left:10px;margin-top:10px;width:235px; height:65px;"/>
+        </af:panelGroupLayout>
+        <af:spacer width="10" height="30" id="pt_s1"/>
+        <af:panelGroupLayout id="pt_pgl4" layout="scroll">
+          <af:facetRef facetName="content"/>
+        </af:panelGroupLayout>
+      </af:panelGroupLayout>
+    </af:panelGroupLayout>
+  </af:pageTemplateDef>
+</jsp:root>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.64.93" id="complaintPageDef"
+                Package="fragments">
+  <parameters/>
+  <executables>
+    <iterator Binds="ComplaintTransVO" RangeSize="25"
+              DataControl="VigilanceAMDataControl"
+              id="ComplaintTransVOIterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="ComplaintTransVOIterator" id="ReceivedFrom">
+      <AttrNames>
+        <Item Value="ReceivedFrom"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintTransVOIterator"
+                     id="ReceivedFromOthers">
+      <AttrNames>
+        <Item Value="ReceivedFromOthers"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintTransVOIterator" id="ReceivedAt">
+      <AttrNames>
+        <Item Value="ReceivedAt"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintTransVOIterator"
+                     id="NameOfComplaint">
+      <AttrNames>
+        <Item Value="NameOfComplaint"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintTransVOIterator"
+                     id="DateOfComplaint">
+      <AttrNames>
+        <Item Value="DateOfComplaint"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintTransVOIterator" id="DateReceived">
+      <AttrNames>
+        <Item Value="DateReceived"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintTransVOIterator" id="ComplaintType">
+      <AttrNames>
+        <Item Value="ComplaintType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintTransVOIterator"
+                     id="ComplaintRelatingTo">
+      <AttrNames>
+        <Item Value="ComplaintRelatingTo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintTransVOIterator"
+                     id="ComplaintRelatingToOthers">
+      <AttrNames>
+        <Item Value="ComplaintRelatingToOthers"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintTransVOIterator"
+                     id="ComplaintParticulars">
+      <AttrNames>
+        <Item Value="ComplaintParticulars"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintTransVOIterator"
+                     id="InvestigationReportReqd">
+      <AttrNames>
+        <Item Value="InvestigationReportReqd"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintTransVOIterator"
+                     id="DateOfInvReport">
+      <AttrNames>
+        <Item Value="DateOfInvReport"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintTransVOIterator" id="DisposalStatus">
+      <AttrNames>
+        <Item Value="DisposalStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintTransVOIterator" id="DateOfIRF">
+      <AttrNames>
+        <Item Value="DateOfIRF"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintTransVOIterator"
+                     id="AdditionalInformation">
+      <AttrNames>
+        <Item Value="AdditionalInformation"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

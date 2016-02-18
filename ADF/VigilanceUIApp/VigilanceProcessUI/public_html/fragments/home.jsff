@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core">
+  <c:set var="vigilanceprocessuiBundle"
+         value="#{adfBundle['vigilanceprocessui.VigilanceProcessUIBundle']}"/>
+  <af:panelGroupLayout id="pgl1" layout="scroll">
+    <af:panelGroupLayout id="panelGroupLayout1" layout="scroll">
+      <af:showDetailHeader text="Case Registration" id="sdh1" disclosed="true"
+                           size="1" styleClass="portlet-header"
+                           inlineStyle="padding-left:10px;padding-right:10px;">
+        <f:facet name="context"/>
+        <f:facet name="menuBar"/>
+        <f:facet name="toolbar"/>
+        <f:facet name="legend"/>
+        <f:facet name="info"/>
+        <af:spacer width="10" height="20" id="s1"/>
+        <af:panelFormLayout id="pfl1">
+          <f:facet name="footer"/>
+          <af:outputText value="#{bindings.TaskNameBPM.inputValue}" id="ot1"/>
+          <af:inputText label="System Serial No." id="it1" disabled="true"
+                        value="#{bindings.SysSerNumber.inputValue}"
+                        binding="#{pageFlowScope.caseRegBean.sysSerNoBinding}"/>
+          <af:inputText label="C. C. File Number" id="it2" disabled="true"
+                        value="#{bindings.CcFileNumber.inputValue}"/>
+          <af:inputListOfValues id="brcdId"
+                                popupTitle="Search and Select: #{bindings.Brcd.hints.label}"
+                                value="#{bindings.Brcd.inputValue}"
+                                label="Branch Code"
+                                model="#{bindings.Brcd.listOfValuesModel}"
+                                required="#{bindings.Brcd.hints.mandatory}"
+                                columns="#{bindings.Brcd.hints.displayWidth}"
+                                shortDesc="#{bindings.Brcd.hints.tooltip}"
+                                valueChangeListener="#{pageFlowScope.caseRegBean.branchVC}"
+                                autoSubmit="true">
+            <f:validator binding="#{bindings.Brcd.validator}"/>
+            <af:convertNumber groupingUsed="false"
+                              pattern="#{bindings.Brcd.format}"/>
+          </af:inputListOfValues>
+          <af:inputText value="#{bindings.Brname.inputValue}"
+                        label="Branch Name"
+                        required="#{bindings.Brname.hints.mandatory}"
+                        columns="#{bindings.Brname.hints.displayWidth}"
+                        maximumLength="#{bindings.Brname.hints.precision}"
+                        shortDesc="#{bindings.Brname.hints.tooltip}"
+                        partialTriggers="brcdId" id="it7" disabled="true">
+            <f:validator binding="#{bindings.Brname.validator}"/>
+          </af:inputText>
+          <af:inputText value="#{bindings.Region.inputValue}"
+                        label="Region"
+                        required="#{bindings.Region.hints.mandatory}"
+                        columns="#{bindings.Region.hints.displayWidth}"
+                        maximumLength="#{bindings.Region.hints.precision}"
+                        shortDesc="#{bindings.Region.hints.tooltip}"
+                        partialTriggers="brcdId" id="it5" disabled="true">
+            <f:validator binding="#{bindings.Region.validator}"/>
+            <af:convertNumber groupingUsed="false"
+                              pattern="#{bindings.Region.format}"/>
+          </af:inputText>
+          <af:inputText value="#{bindings.AoMcro.inputValue}"
+                        label="A.O. / MCRO"
+                        required="#{bindings.AoMcro.hints.mandatory}"
+                        columns="#{bindings.AoMcro.hints.displayWidth}"
+                        maximumLength="#{bindings.AoMcro.hints.precision}"
+                        shortDesc="#{bindings.AoMcro.hints.tooltip}"
+                        partialTriggers="brcdId" id="it4" disabled="true">
+            <f:validator binding="#{bindings.AoMcro.validator}"/>
+          </af:inputText>
+          <af:inputText value="#{bindings.NetWork.inputValue}"
+                        label="NetWork"
+                        required="#{bindings.NetWork.hints.mandatory}"
+                        columns="#{bindings.NetWork.hints.displayWidth}"
+                        maximumLength="#{bindings.NetWork.hints.precision}"
+                        shortDesc="#{bindings.NetWork.hints.tooltip}"
+                        partialTriggers="brcdId" id="it6" disabled="true">
+            <f:validator binding="#{bindings.NetWork.validator}"/>
+            <af:convertNumber groupingUsed="false"
+                              pattern="#{bindings.NetWork.format}"/>
+          </af:inputText>
+          <af:inputText value="#{bindings.Circle.inputValue}"
+                        label="Circle / Group"
+                        required="#{bindings.Circle.hints.mandatory}"
+                        columns="#{bindings.Circle.hints.displayWidth}"
+                        maximumLength="#{bindings.Circle.hints.precision}"
+                        shortDesc="#{bindings.Circle.hints.tooltip}"
+                        partialTriggers="brcdId" id="it3" disabled="true">
+            <f:validator binding="#{bindings.Circle.validator}"/>
+          </af:inputText>
+          <af:selectOneRadio label="Signed" id="sor2"
+                             value="#{bindings.Signed.inputValue}">
+            <af:selectItem label="Yes" value="Yes" id="si69"/>
+            <af:selectItem label="No" value="No" id="si70"/>
+          </af:selectOneRadio>
+          <af:selectOneChoice label="Source of case" id="soc1"
+                              unselectedLabel="#{vigilanceprocessuiBundle.SELECT_ONE}"
+                              autoSubmit="true"
+                              valueChangeListener="#{pageFlowScope.caseRegBean.sourceVC}"
+                              value="#{bindings.Source.inputValue}">
+            <af:selectItem label="Complaint" value="Complaint" id="si2"/>
+            <af:selectItem label="Fraud" value="Fraud" id="si1"/>
+            <af:selectItem label="Staff Accountability Examination" id="si71"
+                           value="SAE"/>
+            <af:selectItem label="RFIA" id="si72" value="RFIA"/>
+            <af:selectItem label="CTE" id="si73" value="CTE"/>
+            <af:selectItem label="Suo Moto Investigation" id="si74"
+                           value="SMI"/>
+            <af:selectItem label="RTI" id="si75" value="RTI"/>
+            <af:selectItem label="CBI" id="si76" value="CBI"/>
+            <af:selectItem label="Attempted Theft" id="si77" value="AT"/>
+            <af:selectItem label="Miscellaneous" id="si78" value="MISC"/>
+          </af:selectOneChoice>
+        </af:panelFormLayout>
+        <af:spacer width="10" height="20" id="s2"/>
+      </af:showDetailHeader>
+      <af:separator id="s3"/>
+      <af:region value="#{bindings.SourceRedirectTF1.regionModel}" id="r1"
+                 binding="#{pageFlowScope.caseRegBean.regionBinding}"
+                 visible="false"/>
+      <af:panelGroupLayout id="pgl2" layout="horizontal" halign="center">
+        <af:commandButton text="Submit" id="cb1"
+                          visible="#{bindings.Source.inputValue ne null}"
+                          partialTriggers="soc1"
+                          action="#{pageFlowScope.caseRegBean.submitComplaint}"/>
+        <af:commandButton text="Cancel" id="cb2" immediate="true"
+                          action="#{bindings.CANCEL.execute}"/>
+        <f:facet name="separator">
+          <af:spacer width="10" height="10" id="s6"/>
+        </f:facet>
+      </af:panelGroupLayout>
+      <af:spacer width="10" height="10" id="s4"/>
+    </af:panelGroupLayout>
+  </af:panelGroupLayout>
+</jsp:root>

@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE JboProject SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<JboProject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="VigilanceProcessModel"
+   Version="11.1.1.64.93"
+   SeparateXMLFiles="true"
+   PackageName="com.sbi.vigilance.app.model" >
+   <DesignTime>
+      <Attr Name="_jprName" Value="../../../../../../VigilanceProcessModel.jpr" />
+      <Attr Name="_appModuleNames0" Value="com.sbi.vigilance.app.model.am.VigilanceAM" />
+      <Attr Name="_NamedConnection" Value="hr" />
+      <Attr Name="_jbo.TypeMapEntries" Value="Java"/>
+   </DesignTime>
+   <Containee
+      Name="am"
+      ObjectType="JboPackage"
+      PackageName="com.sbi.vigilance.app.model.am" >
+      <DesignTime>
+         <Attr Name="_AM" Value="true" />
+      </DesignTime>
+   </Containee>
+   <Containee
+      Name="vo"
+      ObjectType="JboPackage"
+      PackageName="com.sbi.vigilance.app.model.vo" >
+      <DesignTime>
+         <Attr Name="_VO" Value="true" />
+      </DesignTime>
+   </Containee>
+</JboProject>

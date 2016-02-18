@@ -1,0 +1,2405 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:wf="http://xmlns.oracle.com/bpel/workflow/workflow-taglib.tld"
+          xmlns:wlc="http://xmlns.oracle.com/bpel/workflow/worklist">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document id="d1">
+    <af:messages id="m1"/>
+      <af:resource type="javascript" source="/jsLibs/taskDetails.js"/>
+      <af:resource type="javascript" source="/jsLibs/commonBPM.js"/>
+      <af:form id="f1" usesUpload="true">
+        <af:pageTemplate viewId="/templates/VigilanceTemplate.jspx" id="pt1">
+          <f:facet name="content">
+        <af:panelGroupLayout layout="vertical" inlineStyle="padding: 5px;"
+                             id="pgl13">
+          <af:panelHeader text="#{bindings.title.inputValue}" id="ph1">
+            <f:facet name="info"/>
+            <f:facet name="legend"/>
+            <f:facet name="menuBar"/>
+            <f:facet name="toolbar">
+              <af:toolbar visible="#{actionAvailable.toolbarAvailable}" id="t4">
+                <af:switcher id="customActionButtons"
+                             facetName="#{actionAvailable.isCustomActionButtons}">
+                  <f:facet name="true">
+                    <af:panelGroupLayout layout="horizontal" id="pgl32">
+                      <af:commandToolbarButton actionListener="#{invokeActionBean.setOperation}"
+                                               text="#{wf:getResourceValue('SUBMIT', 'bindings.customActions')}"
+                                               disabled="#{!bindings.SUBMIT.enabled}"
+                                               action="#{invokeActionBean.invokeOperation}"
+                                               partialSubmit="false"
+                                               visible="#{wf:isCustomActionAvailable('SUBMIT', 'bindings.customActions')}"
+                                               id="ctb1">
+                        <f:attribute name="DC_OPERATION_BINDING"
+                                     value="bindings.SUBMIT"/>
+                      </af:commandToolbarButton>
+                      <af:commandToolbarButton actionListener="#{invokeActionBean.setOperation}"
+                                               text="#{wf:getResourceValue('CANCEL', 'bindings.customActions')}"
+                                               disabled="#{!bindings.CANCEL.enabled}"
+                                               action="#{invokeActionBean.invokeOperation}"
+                                               partialSubmit="false"
+                                               visible="#{wf:isCustomActionAvailable('CANCEL', 'bindings.customActions')}"
+                                               id="ctb2">
+                        <f:attribute name="DC_OPERATION_BINDING"
+                                     value="bindings.CANCEL"/>
+                      </af:commandToolbarButton>
+                    </af:panelGroupLayout>
+                  </f:facet>
+                </af:switcher>
+                <af:commandToolbarButton actionListener="#{invokeActionBean.setOperation}"
+                                         text="#{resources.CLAIM}" id="Claim"
+                                         action="#{invokeActionBean.invokeOperation}"
+                                         partialSubmit="false"
+                                         visible="#{actionAvailable.claimAvailable}">
+                  <f:attribute name="DC_OPERATION_BINDING"
+                               value="bindings.Claim"/>
+                </af:commandToolbarButton>
+                <af:commandToolbarButton id="acknowledge"
+                                         actionListener="#{invokeActionBean.setOperation}"
+                                         text="#{resources.ACKNOWLEDGE}"
+                                         action="#{invokeActionBean.invokeOperation}"
+                                         partialSubmit="false"
+                                         visible="#{actionAvailable.isFyiTask}">
+                  <f:attribute name="DC_OPERATION_BINDING"
+                               value="bindings.Acknowledge"/>
+                </af:commandToolbarButton>
+                <af:commandToolbarButton id="resume"
+                                         actionListener="#{invokeActionBean.setOperation}"
+                                         text="#{resources.RESUME}"
+                                         action="#{invokeActionBean.invokeOperation}"
+                                         partialSubmit="false"
+                                         visible="#{actionAvailable.resumeAvailable}">
+                  <f:attribute name="DC_OPERATION_BINDING"
+                               value="bindings.Resume"/>
+                </af:commandToolbarButton>
+                <af:panelGroupLayout id="pgl11" layout="horizontal">
+                  <af:group rendered="#{!((empty actionAvailable.customActions) and (empty actionAvailable.redirectActions) and (empty actionAvailable.otherActions)) || bindings.update.enabled}"
+                            id="g1">
+                    <af:menuBar id="mb1">
+                      <af:menu id="acts" text="#{resources.TASK_ACTIONS}"
+                               visible="#{actionAvailable.actionsAvailable || bindings.update.enabled}">
+                        <af:group id="g2">
+                          <af:forEach var="childNode1"
+                                      items="#{actionAvailable.customActions}">
+                            <af:commandMenuItem textAndAccessKey="#{childNode1.displayName}"
+                                                actionListener="#{invokeActionBean.setAction}"
+                                                action="#{invokeActionBean.action}"
+                                                partialSubmit="false" id="cmi2">
+                              <f:attribute name="ACTION_MENU_ITEM"
+                                           value="#{childNode1.action}"/>
+                            </af:commandMenuItem>
+                          </af:forEach>
+                        </af:group>
+                        <af:group id="g3">
+                          <af:forEach var="childNode2"
+                                      items="#{actionAvailable.redirectActions}">
+                            <af:commandMenuItem textAndAccessKey="#{resources[childNode2]}"
+                                                actionListener="#{invokeActionBean.setAction}"
+                                                action="#{invokeActionBean.action}"
+                                                partialSubmit="true" id="cmi1">
+                              <f:attribute name="ACTION_MENU_ITEM"
+                                           value="#{childNode2}"/>
+                            </af:commandMenuItem>
+                          </af:forEach>
+                        </af:group>
+                        <af:group id="g4">
+                          <af:forEach var="childNode3"
+                                      items="#{actionAvailable.otherActions}">
+                            <af:commandMenuItem textAndAccessKey="#{resources[childNode3]}"
+                                                actionListener="#{invokeActionBean.setAction}"
+                                                action="#{invokeActionBean.action}"
+                                                partialSubmit="false" id="cmi4">
+                              <f:attribute name="ACTION_MENU_ITEM"
+                                           value="#{childNode3}"/>
+                            </af:commandMenuItem>
+                          </af:forEach>
+                        </af:group>
+                        <af:group id="g5">
+                          <af:commandMenuItem id="save"
+                                              textAndAccessKey="#{resources.SAVE}"
+                                              actionListener="#{invokeActionBean.setAction}"
+                                              action="#{invokeActionBean.action}"
+                                              partialSubmit="false"
+                                              rendered="#{actionAvailable.updateAvailable}">
+                            <f:attribute name="ACTION_MENU_ITEM"
+                                         value="bindings.update"/>
+                          </af:commandMenuItem>
+                        </af:group>
+                      </af:menu>
+                    </af:menuBar>
+                  </af:group>
+                </af:panelGroupLayout>
+                <af:spacer id="sp1112" width="10"/>
+                <af:commandImageLink shortDesc="#{resources.PREVIOUS_TASK}"
+                                     icon="/hw_images/previoustraversalarrow_ena.png"
+                                     id="cil11" action="fetchPreviousTask"
+                                     visible="#{param.enableNavigationButton != null}"/>
+                <af:spacer id="sp112" width="10"/>
+                <af:commandImageLink shortDesc="#{resources.NEXT_TASK}"
+                                     icon="/hw_images/nexttraversalarrow_ena.png"
+                                     id="cil12" action="fetchNextTask"
+                                     visible="#{param.enableNavigationButton != null}"/>
+                <af:spacer id="sp13" width="10"/>
+                <af:commandImageLink shortDesc="#{resources.SHORT_DESC_CLOSE}"
+                                     icon="/hw_images/close_ena.png"
+                                     id="cil1211" action="closeTaskFlow"
+                                     visible="#{param.enableNavigationButton != null}"/>
+              </af:toolbar>
+            </f:facet>
+            <f:facet name="context"/>
+            <af:panelGroupLayout layout="vertical" id="pgl8">
+              <f:facet name="separator">
+                <af:spacer width="15" height="15" id="s19"/>
+              </f:facet>
+              <af:showDetailHeader size="2" id="dtHead"
+                                   text="#{resources.DETAILS}"
+                                   shortDesc="#{resources.TASK_HEADER}"
+                                   icon="/hw_images/singleapprover_35x35.png"
+                                   disclosed="#{actionAvailable.discloseHeader}"
+                                   rendered="false">
+                <f:facet name="context">
+                  <af:commandImageLink icon="/hw_images/info.png" id="button"
+                                       clientComponent="true"
+                                       rendered="#{!empty bindings.activityId.inputValue}">
+                    <af:showPopupBehavior popupId="helpPopup" align="afterEnd"
+                                          alignId="button"/>
+                  </af:commandImageLink>
+                </f:facet>
+                <f:facet name="toolbar"/>
+                <!--trh:tableLayout id="detailTableLayout" width="98%">
+                        <trh:rowLayout>
+                            <trh:cellFormat width="50%" valign="top"-->
+                <af:panelFormLayout maxColumns="3" rows="4" id="pfl12">
+                  <af:switcher facetName="#{bindings.taskViewContext == 'FYI'}"
+                               id="s28">
+                    <f:facet name="false">
+                      <af:panelLabelAndMessage id="assignees"
+                                               label="#{resources.ASSIGNEES}">
+                        <af:iterator var="assignees"
+                                     value="#{bindings.assignees.collectionModel}"
+                                     id="i2">
+                          <af:switcher facetName="#{!empty assignees.displayName}"
+                                       id="s6">
+                            <f:facet name="true">
+                              <af:outputText value="#{assignees.displayName}"
+                                             id="ot21"/>
+                            </f:facet>
+                            <f:facet name="false">
+                              <af:outputText value="#{assignees.id}" id="ot23"/>
+                            </f:facet>
+                          </af:switcher>
+                          <af:spacer width="2" id="s15"/>
+                        </af:iterator>
+                      </af:panelLabelAndMessage>
+                    </f:facet>
+                  </af:switcher>
+                  <af:panelLabelAndMessage id="creator"
+                                           label="#{resources.CREATOR}">
+                    <af:outputText value="#{bindings.creatorDisplayName.inputValue}"
+                                   id="ot27"/>
+                  </af:panelLabelAndMessage>
+                  <af:panelLabelAndMessage id="createdDate"
+                                           label="#{resources.CREATE_DATE}">
+                    <af:outputText value="#{bindings.createdDate.inputValue}"
+                                   noWrap="true" id="ot20">
+                      <f:convertDateTime type="#{pageFlowScope.dt}"
+                                         timeZone="#{pageFlowScope.tz}"
+                                         dateStyle="#{pageFlowScope.df}"
+                                         timeStyle="#{pageFlowScope.tf}"
+                                         pattern="#{pageFlowScope.dateTimePattern}"/>
+                    </af:outputText>
+                  </af:panelLabelAndMessage>
+                  <af:panelLabelAndMessage id="updatedDate"
+                                           label="#{resources.UPDATE_DATE}">
+                    <af:outputText value="#{bindings.updatedDate.inputValue}"
+                                   noWrap="true" id="ot29">
+                      <f:convertDateTime type="#{pageFlowScope.dt}"
+                                         timeZone="#{pageFlowScope.tz}"
+                                         dateStyle="#{pageFlowScope.df}"
+                                         timeStyle="#{pageFlowScope.tf}"
+                                         pattern="#{pageFlowScope.dateTimePattern}"/>
+                    </af:outputText>
+                  </af:panelLabelAndMessage>
+                  <af:panelLabelAndMessage id="expirationDate"
+                                           label="#{resources.EXPIRATION_DATE}">
+                    <af:outputText value="#{bindings.expirationDate.inputValue}"
+                                   id="ot19">
+                      <f:convertDateTime type="#{pageFlowScope.dt}"
+                                         timeZone="#{pageFlowScope.tz}"
+                                         dateStyle="#{pageFlowScope.df}"
+                                         timeStyle="#{pageFlowScope.tf}"
+                                         pattern="#{pageFlowScope.dateTimePattern}"/>
+                    </af:outputText>
+                  </af:panelLabelAndMessage>
+                  <af:panelLabelAndMessage id="acquiredBy"
+                                           label="#{resources.ACQUIRED_BY}">
+                    <af:outputText value="#{bindings.acquiredBy.inputValue}"
+                                   id="ot16"/>
+                  </af:panelLabelAndMessage>
+                  <af:panelLabelAndMessage id="dueDate"
+                                           label="#{resources.DUE_DATE}"
+                                           rendered="#{!empty bindings.dueDate.inputValue}">
+                    <af:outputText value="#{bindings.dueDate.inputValue}"
+                                   noWrap="true" id="ot24">
+                      <f:convertDateTime type="#{pageFlowScope.dt}"
+                                         timeZone="#{pageFlowScope.tz}"
+                                         dateStyle="#{pageFlowScope.df}"
+                                         timeStyle="#{pageFlowScope.tf}"
+                                         pattern="#{pageFlowScope.dateTimePattern}"/>
+                    </af:outputText>
+                  </af:panelLabelAndMessage>
+                  <af:panelLabelAndMessage id="outcome"
+                                           label="#{resources.OUTCOME}"
+                                           rendered="#{!empty bindings.actionDisplayName.inputValue}">
+                    <af:outputText value="#{bindings.actionDisplayName.inputValue}"
+                                   id="ot7"/>
+                  </af:panelLabelAndMessage>
+                  <af:panelLabelAndMessage id="taskNumber"
+                                           label="#{resources.TASK_NUMBER}">
+                    <af:outputText value="#{bindings.taskNumber.inputValue}"
+                                   id="ot30"/>
+                  </af:panelLabelAndMessage>
+                  <af:inputText id="priority"
+                                value="#{bindings.priority.inputValue}"
+                                label="#{resources.PRIORITY}"
+                                required="#{bindings.priority.mandatory}"
+                                columns="3"
+                                validator="#{actionAvailable.validatePriorityValue}"/>
+                  <af:panelLabelAndMessage id="state"
+                                           label="#{resources.STATE}">
+                    <af:outputText value="#{resources[bindings.state.inputValue]}"
+                                   id="ot1"/>
+                  </af:panelLabelAndMessage>
+                </af:panelFormLayout>
+                <!--/trh:cellFormat>
+                            <trh:cellFormat>
+                                <af:spacer width="15" height="15"/>
+                            </trh:cellFormat>
+                            <trh:cellFormat width="50%" valign="top">
+                                <af:panelFormLayout>
+                                    <f:facet name="footer"/>
+                                </af:panelFormLayout>
+                            </trh:cellFormat>
+                        </trh:rowLayout>
+                    </trh:tableLayout-->
+              </af:showDetailHeader>
+                  <af:region value="#{bindings.ComplaintTF1.regionModel}"
+                             id="r1"/>
+                  <af:panelGroupLayout id="pgl34" layout="horizontal"
+                                       halign="center">
+                    <af:commandButton text="Submit" id="cb1"
+                                      action="#{registerBean.customSubmit}"/>
+                    <af:commandButton text="Cancel" id="cb2"/>
+                    <f:facet name="separator">
+                      <af:spacer width="10" height="10" id="s30"/>
+                    </f:facet>
+                  </af:panelGroupLayout>
+                  <af:showDetailHeader size="2" id="apCntHd"
+                                   text="#{resources.CONTENTS}"
+                                   disclosed="#{actionAvailable.discloseContents}"
+                                       rendered="false">
+                <af:panelGroupLayout id="plPnl76" layout="vertical"
+                                     shortDesc="#{resources.CONTENTS}"
+                                     rendered="false">
+                  <af:panelFormLayout id="pfl15">
+                    <af:inputText value="#{bindings.ComplaintNumber.inputValue}"
+                                  label="#{bindings.ComplaintNumber.hints.label}"
+                                  required="#{bindings.ComplaintNumber.hints.mandatory}"
+                                  columns="#{bindings.ComplaintNumber.hints.displayWidth}"
+                                  maximumLength="#{bindings.ComplaintNumber.hints.precision}"
+                                  shortDesc="#{bindings.ComplaintNumber.hints.tooltip}"
+                                  id="it37">
+                      <f:validator binding="#{bindings.ComplaintNumber.validator}"/>
+                    </af:inputText>
+                    <af:inputText value="#{bindings.CaseNumber.inputValue}"
+                                  label="#{bindings.CaseNumber.hints.label}"
+                                  required="#{bindings.CaseNumber.hints.mandatory}"
+                                  columns="#{bindings.CaseNumber.hints.displayWidth}"
+                                  maximumLength="#{bindings.CaseNumber.hints.precision}"
+                                  shortDesc="#{bindings.CaseNumber.hints.tooltip}"
+                                  id="it54">
+                      <f:validator binding="#{bindings.CaseNumber.validator}"/>
+                    </af:inputText>
+                    <af:inputText value="#{bindings.Signed.inputValue}"
+                                  label="#{bindings.Signed.hints.label}"
+                                  required="#{bindings.Signed.hints.mandatory}"
+                                  columns="#{bindings.Signed.hints.displayWidth}"
+                                  maximumLength="#{bindings.Signed.hints.precision}"
+                                  shortDesc="#{bindings.Signed.hints.tooltip}"
+                                  id="it24">
+                      <f:validator binding="#{bindings.Signed.validator}"/>
+                    </af:inputText>
+                    <af:inputText value="#{bindings.TaskName.inputValue}"
+                                  label="#{bindings.TaskName.hints.label}"
+                                  required="#{bindings.TaskName.hints.mandatory}"
+                                  columns="#{bindings.TaskName.hints.displayWidth}"
+                                  maximumLength="#{bindings.TaskName.hints.precision}"
+                                  shortDesc="#{bindings.TaskName.hints.tooltip}"
+                                  id="it31">
+                      <f:validator binding="#{bindings.TaskName.validator}"/>
+                    </af:inputText>
+                    <af:inputText value="#{bindings.VigilanceAngle.inputValue}"
+                                  label="#{bindings.VigilanceAngle.hints.label}"
+                                  required="#{bindings.VigilanceAngle.hints.mandatory}"
+                                  columns="#{bindings.VigilanceAngle.hints.displayWidth}"
+                                  maximumLength="#{bindings.VigilanceAngle.hints.precision}"
+                                  shortDesc="#{bindings.VigilanceAngle.hints.tooltip}"
+                                  id="it97">
+                      <f:validator binding="#{bindings.VigilanceAngle.validator}"/>
+                    </af:inputText>
+                    <af:inputText value="#{bindings.attribute1.inputValue}"
+                                  label="#{bindings.attribute1.hints.label}"
+                                  required="#{bindings.attribute1.hints.mandatory}"
+                                  columns="#{bindings.attribute1.hints.displayWidth}"
+                                  maximumLength="#{bindings.attribute1.hints.precision}"
+                                  shortDesc="#{bindings.attribute1.hints.tooltip}"
+                                  id="it108">
+                      <f:validator binding="#{bindings.attribute1.validator}"/>
+                    </af:inputText>
+                    <af:inputText value="#{bindings.attribute2.inputValue}"
+                                  label="#{bindings.attribute2.hints.label}"
+                                  required="#{bindings.attribute2.hints.mandatory}"
+                                  columns="#{bindings.attribute2.hints.displayWidth}"
+                                  maximumLength="#{bindings.attribute2.hints.precision}"
+                                  shortDesc="#{bindings.attribute2.hints.tooltip}"
+                                  id="it104">
+                      <f:validator binding="#{bindings.attribute2.validator}"/>
+                    </af:inputText>
+                    <af:inputText value="#{bindings.attribute3.inputValue}"
+                                  label="#{bindings.attribute3.hints.label}"
+                                  required="#{bindings.attribute3.hints.mandatory}"
+                                  columns="#{bindings.attribute3.hints.displayWidth}"
+                                  maximumLength="#{bindings.attribute3.hints.precision}"
+                                  shortDesc="#{bindings.attribute3.hints.tooltip}"
+                                  id="it96">
+                      <f:validator binding="#{bindings.attribute3.validator}"/>
+                    </af:inputText>
+                    <af:inputText value="#{bindings.attribute4.inputValue}"
+                                  label="#{bindings.attribute4.hints.label}"
+                                  required="#{bindings.attribute4.hints.mandatory}"
+                                  columns="#{bindings.attribute4.hints.displayWidth}"
+                                  maximumLength="#{bindings.attribute4.hints.precision}"
+                                  shortDesc="#{bindings.attribute4.hints.tooltip}"
+                                  id="it45">
+                      <f:validator binding="#{bindings.attribute4.validator}"/>
+                    </af:inputText>
+                    <af:inputText value="#{bindings.attribute5.inputValue}"
+                                  label="#{bindings.attribute5.hints.label}"
+                                  required="#{bindings.attribute5.hints.mandatory}"
+                                  columns="#{bindings.attribute5.hints.displayWidth}"
+                                  maximumLength="#{bindings.attribute5.hints.precision}"
+                                  shortDesc="#{bindings.attribute5.hints.tooltip}"
+                                  id="it23">
+                      <f:validator binding="#{bindings.attribute5.validator}"/>
+                    </af:inputText>
+                    <af:inputText value="#{bindings.attribute6.inputValue}"
+                                  label="#{bindings.attribute6.hints.label}"
+                                  required="#{bindings.attribute6.hints.mandatory}"
+                                  columns="#{bindings.attribute6.hints.displayWidth}"
+                                  maximumLength="#{bindings.attribute6.hints.precision}"
+                                  shortDesc="#{bindings.attribute6.hints.tooltip}"
+                                  id="it6">
+                      <f:validator binding="#{bindings.attribute6.validator}"/>
+                    </af:inputText>
+                    <af:inputText value="#{bindings.attribute7.inputValue}"
+                                  label="#{bindings.attribute7.hints.label}"
+                                  required="#{bindings.attribute7.hints.mandatory}"
+                                  columns="#{bindings.attribute7.hints.displayWidth}"
+                                  maximumLength="#{bindings.attribute7.hints.precision}"
+                                  shortDesc="#{bindings.attribute7.hints.tooltip}"
+                                  id="it11">
+                      <f:validator binding="#{bindings.attribute7.validator}"/>
+                    </af:inputText>
+                    <af:inputText value="#{bindings.attribute8.inputValue}"
+                                  label="#{bindings.attribute8.hints.label}"
+                                  required="#{bindings.attribute8.hints.mandatory}"
+                                  columns="#{bindings.attribute8.hints.displayWidth}"
+                                  maximumLength="#{bindings.attribute8.hints.precision}"
+                                  shortDesc="#{bindings.attribute8.hints.tooltip}"
+                                  id="it25">
+                      <f:validator binding="#{bindings.attribute8.validator}"/>
+                    </af:inputText>
+                    <af:inputText value="#{bindings.attribute9.inputValue}"
+                                  label="#{bindings.attribute9.hints.label}"
+                                  required="#{bindings.attribute9.hints.mandatory}"
+                                  columns="#{bindings.attribute9.hints.displayWidth}"
+                                  maximumLength="#{bindings.attribute9.hints.precision}"
+                                  shortDesc="#{bindings.attribute9.hints.tooltip}"
+                                  id="it66">
+                      <f:validator binding="#{bindings.attribute9.validator}"/>
+                    </af:inputText>
+                    <af:inputText value="#{bindings.attribute10.inputValue}"
+                                  label="#{bindings.attribute10.hints.label}"
+                                  required="#{bindings.attribute10.hints.mandatory}"
+                                  columns="#{bindings.attribute10.hints.displayWidth}"
+                                  maximumLength="#{bindings.attribute10.hints.precision}"
+                                  shortDesc="#{bindings.attribute10.hints.tooltip}"
+                                  id="it113">
+                      <f:validator binding="#{bindings.attribute10.validator}"/>
+                    </af:inputText>
+                    <af:inputText value="#{bindings.attribute11.inputValue}"
+                                  label="#{bindings.attribute11.hints.label}"
+                                  required="#{bindings.attribute11.hints.mandatory}"
+                                  columns="#{bindings.attribute11.hints.displayWidth}"
+                                  maximumLength="#{bindings.attribute11.hints.precision}"
+                                  shortDesc="#{bindings.attribute11.hints.tooltip}"
+                                  id="it47">
+                      <f:validator binding="#{bindings.attribute11.validator}"/>
+                    </af:inputText>
+                    <af:inputText value="#{bindings.attribute12.inputValue}"
+                                  label="#{bindings.attribute12.hints.label}"
+                                  required="#{bindings.attribute12.hints.mandatory}"
+                                  columns="#{bindings.attribute12.hints.displayWidth}"
+                                  maximumLength="#{bindings.attribute12.hints.precision}"
+                                  shortDesc="#{bindings.attribute12.hints.tooltip}"
+                                  id="it51">
+                      <f:validator binding="#{bindings.attribute12.validator}"/>
+                    </af:inputText>
+                    <af:inputText value="#{bindings.attribute13.inputValue}"
+                                  label="#{bindings.attribute13.hints.label}"
+                                  required="#{bindings.attribute13.hints.mandatory}"
+                                  columns="#{bindings.attribute13.hints.displayWidth}"
+                                  maximumLength="#{bindings.attribute13.hints.precision}"
+                                  shortDesc="#{bindings.attribute13.hints.tooltip}"
+                                  id="it63">
+                      <f:validator binding="#{bindings.attribute13.validator}"/>
+                    </af:inputText>
+                    <af:inputText value="#{bindings.attribute14.inputValue}"
+                                  label="#{bindings.attribute14.hints.label}"
+                                  required="#{bindings.attribute14.hints.mandatory}"
+                                  columns="#{bindings.attribute14.hints.displayWidth}"
+                                  maximumLength="#{bindings.attribute14.hints.precision}"
+                                  shortDesc="#{bindings.attribute14.hints.tooltip}"
+                                  id="it103">
+                      <f:validator binding="#{bindings.attribute14.validator}"/>
+                    </af:inputText>
+                    <af:inputText value="#{bindings.attribute15.inputValue}"
+                                  label="#{bindings.attribute15.hints.label}"
+                                  required="#{bindings.attribute15.hints.mandatory}"
+                                  columns="#{bindings.attribute15.hints.displayWidth}"
+                                  maximumLength="#{bindings.attribute15.hints.precision}"
+                                  shortDesc="#{bindings.attribute15.hints.tooltip}"
+                                  id="it18">
+                      <f:validator binding="#{bindings.attribute15.validator}"/>
+                    </af:inputText>
+                  </af:panelFormLayout>
+                  <af:panelGroupLayout layout="vertical"
+                                       shortDesc="#{resources.CONTENTS}"
+                                       id="pgl18">
+                    <af:outputText value="Vigilance Process  -  Case Registration"
+                                   inlineStyle="font-family:Tahoma, Verdana, Helvetica, sans-serif;font-size:11px;font-weight:bold;display:inline;margin:0px;white-space:nowrap;color:#3E403D"
+                                   id="ot31"/>
+                    <af:panelFormLayout id="pfl5">
+                      <af:inputText value="#{bindings.SystemSerialNo.inputValue}"
+                                    label="#{bindings.SystemSerialNo.hints.label}"
+                                    required="#{bindings.SystemSerialNo.hints.mandatory}"
+                                    columns="#{bindings.SystemSerialNo.hints.displayWidth}"
+                                    maximumLength="#{bindings.SystemSerialNo.hints.precision}"
+                                    shortDesc="#{bindings.SystemSerialNo.hints.tooltip}"
+                                    id="it107">
+                        <f:validator binding="#{bindings.SystemSerialNo.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.CCFileNumber.inputValue}"
+                                    label="#{bindings.CCFileNumber.hints.label}"
+                                    required="#{bindings.CCFileNumber.hints.mandatory}"
+                                    columns="#{bindings.CCFileNumber.hints.displayWidth}"
+                                    maximumLength="#{bindings.CCFileNumber.hints.precision}"
+                                    shortDesc="#{bindings.CCFileNumber.hints.tooltip}"
+                                    id="it85">
+                        <f:validator binding="#{bindings.CCFileNumber.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.BranchCode.inputValue}"
+                                    label="#{bindings.BranchCode.hints.label}"
+                                    required="#{bindings.BranchCode.hints.mandatory}"
+                                    columns="#{bindings.BranchCode.hints.displayWidth}"
+                                    maximumLength="#{bindings.BranchCode.hints.precision}"
+                                    shortDesc="#{bindings.BranchCode.hints.tooltip}"
+                                    id="it57">
+                        <f:validator binding="#{bindings.BranchCode.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.BranchName.inputValue}"
+                                    label="#{bindings.BranchName.hints.label}"
+                                    required="#{bindings.BranchName.hints.mandatory}"
+                                    columns="#{bindings.BranchName.hints.displayWidth}"
+                                    maximumLength="#{bindings.BranchName.hints.precision}"
+                                    shortDesc="#{bindings.BranchName.hints.tooltip}"
+                                    id="it1">
+                        <f:validator binding="#{bindings.BranchName.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.Region.inputValue}"
+                                    label="#{bindings.Region.hints.label}"
+                                    required="#{bindings.Region.hints.mandatory}"
+                                    columns="#{bindings.Region.hints.displayWidth}"
+                                    maximumLength="#{bindings.Region.hints.precision}"
+                                    shortDesc="#{bindings.Region.hints.tooltip}"
+                                    id="it106">
+                        <f:validator binding="#{bindings.Region.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.OfficeType.inputValue}"
+                                    label="#{bindings.OfficeType.hints.label}"
+                                    required="#{bindings.OfficeType.hints.mandatory}"
+                                    columns="#{bindings.OfficeType.hints.displayWidth}"
+                                    maximumLength="#{bindings.OfficeType.hints.precision}"
+                                    shortDesc="#{bindings.OfficeType.hints.tooltip}"
+                                    id="it3">
+                        <f:validator binding="#{bindings.OfficeType.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.NetWork.inputValue}"
+                                    label="#{bindings.NetWork.hints.label}"
+                                    required="#{bindings.NetWork.hints.mandatory}"
+                                    columns="#{bindings.NetWork.hints.displayWidth}"
+                                    maximumLength="#{bindings.NetWork.hints.precision}"
+                                    shortDesc="#{bindings.NetWork.hints.tooltip}"
+                                    id="it86">
+                        <f:validator binding="#{bindings.NetWork.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.Circle.inputValue}"
+                                    label="#{bindings.Circle.hints.label}"
+                                    required="#{bindings.Circle.hints.mandatory}"
+                                    columns="#{bindings.Circle.hints.displayWidth}"
+                                    maximumLength="#{bindings.Circle.hints.precision}"
+                                    shortDesc="#{bindings.Circle.hints.tooltip}"
+                                    id="it10">
+                        <f:validator binding="#{bindings.Circle.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.SourceOfCase.inputValue}"
+                                    label="#{bindings.SourceOfCase.hints.label}"
+                                    required="#{bindings.SourceOfCase.hints.mandatory}"
+                                    columns="#{bindings.SourceOfCase.hints.displayWidth}"
+                                    maximumLength="#{bindings.SourceOfCase.hints.precision}"
+                                    shortDesc="#{bindings.SourceOfCase.hints.tooltip}"
+                                    id="it88">
+                        <f:validator binding="#{bindings.SourceOfCase.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.CircleCode.inputValue}"
+                                    label="#{bindings.CircleCode.hints.label}"
+                                    required="#{bindings.CircleCode.hints.mandatory}"
+                                    columns="#{bindings.CircleCode.hints.displayWidth}"
+                                    maximumLength="#{bindings.CircleCode.hints.precision}"
+                                    shortDesc="#{bindings.CircleCode.hints.tooltip}"
+                                    id="it114">
+                        <f:validator binding="#{bindings.CircleCode.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.NetWorkCode.inputValue}"
+                                    label="#{bindings.NetWorkCode.hints.label}"
+                                    required="#{bindings.NetWorkCode.hints.mandatory}"
+                                    columns="#{bindings.NetWorkCode.hints.displayWidth}"
+                                    maximumLength="#{bindings.NetWorkCode.hints.precision}"
+                                    shortDesc="#{bindings.NetWorkCode.hints.tooltip}"
+                                    id="it74">
+                        <f:validator binding="#{bindings.NetWorkCode.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.AdditionalInformation.inputValue}"
+                                    label="#{bindings.AdditionalInformation.hints.label}"
+                                    required="#{bindings.AdditionalInformation.hints.mandatory}"
+                                    columns="#{bindings.AdditionalInformation.hints.displayWidth}"
+                                    maximumLength="#{bindings.AdditionalInformation.hints.precision}"
+                                    shortDesc="#{bindings.AdditionalInformation.hints.tooltip}"
+                                    id="it73">
+                        <f:validator binding="#{bindings.AdditionalInformation.validator}"/>
+                      </af:inputText>
+                    </af:panelFormLayout>
+                  </af:panelGroupLayout>
+                  <af:panelGroupLayout layout="vertical"
+                                       shortDesc="#{resources.CONTENTS}"
+                                       id="pgl17">
+                    <af:outputText value="Vigilance Process  -  Complaint"
+                                   inlineStyle="font-family:Tahoma, Verdana, Helvetica, sans-serif;font-size:11px;font-weight:bold;display:inline;margin:0px;white-space:nowrap;color:#3E403D"
+                                   id="ot26"/>
+                    <af:panelFormLayout id="pfl17">
+                      <af:inputText value="#{bindings.ReceivedFrom.inputValue}"
+                                    label="#{bindings.ReceivedFrom.hints.label}"
+                                    required="#{bindings.ReceivedFrom.hints.mandatory}"
+                                    columns="#{bindings.ReceivedFrom.hints.displayWidth}"
+                                    maximumLength="#{bindings.ReceivedFrom.hints.precision}"
+                                    shortDesc="#{bindings.ReceivedFrom.hints.tooltip}"
+                                    id="it87">
+                        <f:validator binding="#{bindings.ReceivedFrom.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.ReceivedAt.inputValue}"
+                                    label="#{bindings.ReceivedAt.hints.label}"
+                                    required="#{bindings.ReceivedAt.hints.mandatory}"
+                                    columns="#{bindings.ReceivedAt.hints.displayWidth}"
+                                    maximumLength="#{bindings.ReceivedAt.hints.precision}"
+                                    shortDesc="#{bindings.ReceivedAt.hints.tooltip}"
+                                    id="it19">
+                        <f:validator binding="#{bindings.ReceivedAt.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.NameOfComplainant.inputValue}"
+                                    label="#{bindings.NameOfComplainant.hints.label}"
+                                    required="#{bindings.NameOfComplainant.hints.mandatory}"
+                                    columns="#{bindings.NameOfComplainant.hints.displayWidth}"
+                                    maximumLength="#{bindings.NameOfComplainant.hints.precision}"
+                                    shortDesc="#{bindings.NameOfComplainant.hints.tooltip}"
+                                    id="it94">
+                        <f:validator binding="#{bindings.NameOfComplainant.validator}"/>
+                      </af:inputText>
+                      <af:inputDate value="#{bindings.DateOfComplainant.inputValue}"
+                                    label="#{bindings.DateOfComplainant.hints.label}"
+                                    required="#{bindings.DateOfComplainant.hints.mandatory}"
+                                    shortDesc="#{bindings.DateOfComplainant.hints.tooltip}"
+                                    id="id17">
+                        <f:validator binding="#{bindings.DateOfComplainant.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.DateOfComplainant.format}"/>
+                      </af:inputDate>
+                      <af:inputDate value="#{bindings.DateReceived.inputValue}"
+                                    label="#{bindings.DateReceived.hints.label}"
+                                    required="#{bindings.DateReceived.hints.mandatory}"
+                                    shortDesc="#{bindings.DateReceived.hints.tooltip}"
+                                    id="id11">
+                        <f:validator binding="#{bindings.DateReceived.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.DateReceived.format}"/>
+                      </af:inputDate>
+                      <af:inputText value="#{bindings.ComplaintType.inputValue}"
+                                    label="#{bindings.ComplaintType.hints.label}"
+                                    required="#{bindings.ComplaintType.hints.mandatory}"
+                                    columns="#{bindings.ComplaintType.hints.displayWidth}"
+                                    maximumLength="#{bindings.ComplaintType.hints.precision}"
+                                    shortDesc="#{bindings.ComplaintType.hints.tooltip}"
+                                    id="it78">
+                        <f:validator binding="#{bindings.ComplaintType.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.ComplaintRelatingTo.inputValue}"
+                                    label="#{bindings.ComplaintRelatingTo.hints.label}"
+                                    required="#{bindings.ComplaintRelatingTo.hints.mandatory}"
+                                    columns="#{bindings.ComplaintRelatingTo.hints.displayWidth}"
+                                    maximumLength="#{bindings.ComplaintRelatingTo.hints.precision}"
+                                    shortDesc="#{bindings.ComplaintRelatingTo.hints.tooltip}"
+                                    id="it84">
+                        <f:validator binding="#{bindings.ComplaintRelatingTo.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.ComplaintParticulars.inputValue}"
+                                    label="#{bindings.ComplaintParticulars.hints.label}"
+                                    required="#{bindings.ComplaintParticulars.hints.mandatory}"
+                                    columns="#{bindings.ComplaintParticulars.hints.displayWidth}"
+                                    maximumLength="#{bindings.ComplaintParticulars.hints.precision}"
+                                    shortDesc="#{bindings.ComplaintParticulars.hints.tooltip}"
+                                    id="it29">
+                        <f:validator binding="#{bindings.ComplaintParticulars.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.InvestionReportRequired.inputValue}"
+                                    label="#{bindings.InvestionReportRequired.hints.label}"
+                                    required="#{bindings.InvestionReportRequired.hints.mandatory}"
+                                    columns="#{bindings.InvestionReportRequired.hints.displayWidth}"
+                                    maximumLength="#{bindings.InvestionReportRequired.hints.precision}"
+                                    shortDesc="#{bindings.InvestionReportRequired.hints.tooltip}"
+                                    id="it20">
+                        <f:validator binding="#{bindings.InvestionReportRequired.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.DateOfReceiptOfAdvice.inputValue}"
+                                    label="#{bindings.DateOfReceiptOfAdvice.hints.label}"
+                                    required="#{bindings.DateOfReceiptOfAdvice.hints.mandatory}"
+                                    columns="#{bindings.DateOfReceiptOfAdvice.hints.displayWidth}"
+                                    maximumLength="#{bindings.DateOfReceiptOfAdvice.hints.precision}"
+                                    shortDesc="#{bindings.DateOfReceiptOfAdvice.hints.tooltip}"
+                                    id="it22">
+                        <f:validator binding="#{bindings.DateOfReceiptOfAdvice.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.DisposalStatus.inputValue}"
+                                    label="#{bindings.DisposalStatus.hints.label}"
+                                    required="#{bindings.DisposalStatus.hints.mandatory}"
+                                    columns="#{bindings.DisposalStatus.hints.displayWidth}"
+                                    maximumLength="#{bindings.DisposalStatus.hints.precision}"
+                                    shortDesc="#{bindings.DisposalStatus.hints.tooltip}"
+                                    id="it8">
+                        <f:validator binding="#{bindings.DisposalStatus.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.DateofIRFCalled.inputValue}"
+                                    label="#{bindings.DateofIRFCalled.hints.label}"
+                                    required="#{bindings.DateofIRFCalled.hints.mandatory}"
+                                    columns="#{bindings.DateofIRFCalled.hints.displayWidth}"
+                                    maximumLength="#{bindings.DateofIRFCalled.hints.precision}"
+                                    shortDesc="#{bindings.DateofIRFCalled.hints.tooltip}"
+                                    id="it112">
+                        <f:validator binding="#{bindings.DateofIRFCalled.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.AdditionalInformation1.inputValue}"
+                                    label="#{bindings.AdditionalInformation1.hints.label}"
+                                    required="#{bindings.AdditionalInformation1.hints.mandatory}"
+                                    columns="#{bindings.AdditionalInformation1.hints.displayWidth}"
+                                    maximumLength="#{bindings.AdditionalInformation1.hints.precision}"
+                                    shortDesc="#{bindings.AdditionalInformation1.hints.tooltip}"
+                                    id="it79">
+                        <f:validator binding="#{bindings.AdditionalInformation1.validator}"/>
+                      </af:inputText>
+                    </af:panelFormLayout>
+                  </af:panelGroupLayout>
+                  <af:panelGroupLayout layout="vertical"
+                                       shortDesc="#{resources.CONTENTS}"
+                                       id="pgl23">
+                    <af:outputText value="Vigilance Process  -  Central Bureau Of Investigation"
+                                   inlineStyle="font-family:Tahoma, Verdana, Helvetica, sans-serif;font-size:11px;font-weight:bold;display:inline;margin:0px;white-space:nowrap;color:#3E403D"
+                                   id="ot32"/>
+                    <af:panelFormLayout id="pfl10">
+                      <af:inputText value="#{bindings.NameOfCBIOffice.inputValue}"
+                                    label="#{bindings.NameOfCBIOffice.hints.label}"
+                                    required="#{bindings.NameOfCBIOffice.hints.mandatory}"
+                                    columns="#{bindings.NameOfCBIOffice.hints.displayWidth}"
+                                    maximumLength="#{bindings.NameOfCBIOffice.hints.precision}"
+                                    shortDesc="#{bindings.NameOfCBIOffice.hints.tooltip}"
+                                    id="it111">
+                        <f:validator binding="#{bindings.NameOfCBIOffice.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.CBILetterReference.inputValue}"
+                                    label="#{bindings.CBILetterReference.hints.label}"
+                                    required="#{bindings.CBILetterReference.hints.mandatory}"
+                                    columns="#{bindings.CBILetterReference.hints.displayWidth}"
+                                    maximumLength="#{bindings.CBILetterReference.hints.precision}"
+                                    shortDesc="#{bindings.CBILetterReference.hints.tooltip}"
+                                    id="it27">
+                        <f:validator binding="#{bindings.CBILetterReference.validator}"/>
+                      </af:inputText>
+                      <af:inputDate value="#{bindings.CBILetterDate.inputValue}"
+                                    label="#{bindings.CBILetterDate.hints.label}"
+                                    required="#{bindings.CBILetterDate.hints.mandatory}"
+                                    shortDesc="#{bindings.CBILetterDate.hints.tooltip}"
+                                    id="id20">
+                        <f:validator binding="#{bindings.CBILetterDate.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.CBILetterDate.format}"/>
+                      </af:inputDate>
+                      <af:inputText value="#{bindings.DateOfReceipt.inputValue}"
+                                    label="#{bindings.DateOfReceipt.hints.label}"
+                                    required="#{bindings.DateOfReceipt.hints.mandatory}"
+                                    columns="#{bindings.DateOfReceipt.hints.displayWidth}"
+                                    maximumLength="#{bindings.DateOfReceipt.hints.precision}"
+                                    shortDesc="#{bindings.DateOfReceipt.hints.tooltip}"
+                                    id="it46">
+                        <f:validator binding="#{bindings.DateOfReceipt.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.NumberAlloted.inputValue}"
+                                    label="#{bindings.NumberAlloted.hints.label}"
+                                    required="#{bindings.NumberAlloted.hints.mandatory}"
+                                    columns="#{bindings.NumberAlloted.hints.displayWidth}"
+                                    maximumLength="#{bindings.NumberAlloted.hints.precision}"
+                                    shortDesc="#{bindings.NumberAlloted.hints.tooltip}"
+                                    id="it33">
+                        <f:validator binding="#{bindings.NumberAlloted.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.NameOfAccount.inputValue}"
+                                    label="#{bindings.NameOfAccount.hints.label}"
+                                    required="#{bindings.NameOfAccount.hints.mandatory}"
+                                    columns="#{bindings.NameOfAccount.hints.displayWidth}"
+                                    maximumLength="#{bindings.NameOfAccount.hints.precision}"
+                                    shortDesc="#{bindings.NameOfAccount.hints.tooltip}"
+                                    id="it12">
+                        <f:validator binding="#{bindings.NameOfAccount.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.AccountSuggested.inputValue}"
+                                    label="#{bindings.AccountSuggested.hints.label}"
+                                    required="#{bindings.AccountSuggested.hints.mandatory}"
+                                    columns="#{bindings.AccountSuggested.hints.displayWidth}"
+                                    maximumLength="#{bindings.AccountSuggested.hints.precision}"
+                                    shortDesc="#{bindings.AccountSuggested.hints.tooltip}"
+                                    id="it7">
+                        <f:validator binding="#{bindings.AccountSuggested.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.RDADetails.inputValue}"
+                                    label="#{bindings.RDADetails.hints.label}"
+                                    required="#{bindings.RDADetails.hints.mandatory}"
+                                    columns="#{bindings.RDADetails.hints.displayWidth}"
+                                    maximumLength="#{bindings.RDADetails.hints.precision}"
+                                    shortDesc="#{bindings.RDADetails.hints.tooltip}"
+                                    id="it21">
+                        <f:validator binding="#{bindings.RDADetails.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.SFPDetails.inputValue}"
+                                    label="#{bindings.SFPDetails.hints.label}"
+                                    required="#{bindings.SFPDetails.hints.mandatory}"
+                                    columns="#{bindings.SFPDetails.hints.displayWidth}"
+                                    maximumLength="#{bindings.SFPDetails.hints.precision}"
+                                    shortDesc="#{bindings.SFPDetails.hints.tooltip}"
+                                    id="it2">
+                        <f:validator binding="#{bindings.SFPDetails.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.AdditionalInformation2.inputValue}"
+                                    label="#{bindings.AdditionalInformation2.hints.label}"
+                                    required="#{bindings.AdditionalInformation2.hints.mandatory}"
+                                    columns="#{bindings.AdditionalInformation2.hints.displayWidth}"
+                                    maximumLength="#{bindings.AdditionalInformation2.hints.precision}"
+                                    shortDesc="#{bindings.AdditionalInformation2.hints.tooltip}"
+                                    id="it60">
+                        <f:validator binding="#{bindings.AdditionalInformation2.validator}"/>
+                      </af:inputText>
+                    </af:panelFormLayout>
+                  </af:panelGroupLayout>
+                  <af:panelGroupLayout layout="vertical"
+                                       shortDesc="#{resources.CONTENTS}"
+                                       id="pgl24">
+                    <af:outputText value="Vigilance Process  -  Chief Technical Examiner Report"
+                                   inlineStyle="font-family:Tahoma, Verdana, Helvetica, sans-serif;font-size:11px;font-weight:bold;display:inline;margin:0px;white-space:nowrap;color:#3E403D"
+                                   id="ot13"/>
+                    <af:panelFormLayout id="pfl18">
+                      <af:inputText value="#{bindings.OrderedBy.inputValue}"
+                                    label="#{bindings.OrderedBy.hints.label}"
+                                    required="#{bindings.OrderedBy.hints.mandatory}"
+                                    columns="#{bindings.OrderedBy.hints.displayWidth}"
+                                    maximumLength="#{bindings.OrderedBy.hints.precision}"
+                                    shortDesc="#{bindings.OrderedBy.hints.tooltip}"
+                                    id="it59">
+                        <f:validator binding="#{bindings.OrderedBy.validator}"/>
+                      </af:inputText>
+                      <af:inputDate value="#{bindings.OrderedOn.inputValue}"
+                                    label="#{bindings.OrderedOn.hints.label}"
+                                    required="#{bindings.OrderedOn.hints.mandatory}"
+                                    shortDesc="#{bindings.OrderedOn.hints.tooltip}"
+                                    id="id13">
+                        <f:validator binding="#{bindings.OrderedOn.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.OrderedOn.format}"/>
+                      </af:inputDate>
+                      <af:inputText value="#{bindings.NameOfWork.inputValue}"
+                                    label="#{bindings.NameOfWork.hints.label}"
+                                    required="#{bindings.NameOfWork.hints.mandatory}"
+                                    columns="#{bindings.NameOfWork.hints.displayWidth}"
+                                    maximumLength="#{bindings.NameOfWork.hints.precision}"
+                                    shortDesc="#{bindings.NameOfWork.hints.tooltip}"
+                                    id="it92">
+                        <f:validator binding="#{bindings.NameOfWork.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.EstimatedCost.inputValue}"
+                                    label="#{bindings.EstimatedCost.hints.label}"
+                                    required="#{bindings.EstimatedCost.hints.mandatory}"
+                                    columns="#{bindings.EstimatedCost.hints.displayWidth}"
+                                    maximumLength="#{bindings.EstimatedCost.hints.precision}"
+                                    shortDesc="#{bindings.EstimatedCost.hints.tooltip}"
+                                    id="it49">
+                        <f:validator binding="#{bindings.EstimatedCost.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.TenderedCost.inputValue}"
+                                    label="#{bindings.TenderedCost.hints.label}"
+                                    required="#{bindings.TenderedCost.hints.mandatory}"
+                                    columns="#{bindings.TenderedCost.hints.displayWidth}"
+                                    maximumLength="#{bindings.TenderedCost.hints.precision}"
+                                    shortDesc="#{bindings.TenderedCost.hints.tooltip}"
+                                    id="it105">
+                        <f:validator binding="#{bindings.TenderedCost.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.ContractAwaardedTo.inputValue}"
+                                    label="#{bindings.ContractAwaardedTo.hints.label}"
+                                    required="#{bindings.ContractAwaardedTo.hints.mandatory}"
+                                    columns="#{bindings.ContractAwaardedTo.hints.displayWidth}"
+                                    maximumLength="#{bindings.ContractAwaardedTo.hints.precision}"
+                                    shortDesc="#{bindings.ContractAwaardedTo.hints.tooltip}"
+                                    id="it40">
+                        <f:validator binding="#{bindings.ContractAwaardedTo.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.CTEAllotedTo.inputValue}"
+                                    label="#{bindings.CTEAllotedTo.hints.label}"
+                                    required="#{bindings.CTEAllotedTo.hints.mandatory}"
+                                    columns="#{bindings.CTEAllotedTo.hints.displayWidth}"
+                                    maximumLength="#{bindings.CTEAllotedTo.hints.precision}"
+                                    shortDesc="#{bindings.CTEAllotedTo.hints.tooltip}"
+                                    id="it91">
+                        <f:validator binding="#{bindings.CTEAllotedTo.validator}"/>
+                      </af:inputText>
+                      <af:inputDate value="#{bindings.DateOfCommencementOfWork.inputValue}"
+                                    label="#{bindings.DateOfCommencementOfWork.hints.label}"
+                                    required="#{bindings.DateOfCommencementOfWork.hints.mandatory}"
+                                    shortDesc="#{bindings.DateOfCommencementOfWork.hints.tooltip}"
+                                    id="id6">
+                        <f:validator binding="#{bindings.DateOfCommencementOfWork.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.DateOfCommencementOfWork.format}"/>
+                      </af:inputDate>
+                      <af:inputDate value="#{bindings.TimeOfCompletion.inputValue}"
+                                    label="#{bindings.TimeOfCompletion.hints.label}"
+                                    required="#{bindings.TimeOfCompletion.hints.mandatory}"
+                                    shortDesc="#{bindings.TimeOfCompletion.hints.tooltip}"
+                                    id="id26">
+                        <f:validator binding="#{bindings.TimeOfCompletion.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.TimeOfCompletion.format}"/>
+                      </af:inputDate>
+                      <af:inputText value="#{bindings.PresentPhysicalPosition.inputValue}"
+                                    label="#{bindings.PresentPhysicalPosition.hints.label}"
+                                    required="#{bindings.PresentPhysicalPosition.hints.mandatory}"
+                                    columns="#{bindings.PresentPhysicalPosition.hints.displayWidth}"
+                                    maximumLength="#{bindings.PresentPhysicalPosition.hints.precision}"
+                                    shortDesc="#{bindings.PresentPhysicalPosition.hints.tooltip}"
+                                    id="it64">
+                        <f:validator binding="#{bindings.PresentPhysicalPosition.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.DisposalStatus1.inputValue}"
+                                    label="#{bindings.DisposalStatus1.hints.label}"
+                                    required="#{bindings.DisposalStatus1.hints.mandatory}"
+                                    columns="#{bindings.DisposalStatus1.hints.displayWidth}"
+                                    maximumLength="#{bindings.DisposalStatus1.hints.precision}"
+                                    shortDesc="#{bindings.DisposalStatus1.hints.tooltip}"
+                                    id="it75">
+                        <f:validator binding="#{bindings.DisposalStatus1.validator}"/>
+                      </af:inputText>
+                      <af:inputDate value="#{bindings.DateOfIRFCalled.inputValue}"
+                                    label="#{bindings.DateOfIRFCalled.hints.label}"
+                                    required="#{bindings.DateOfIRFCalled.hints.mandatory}"
+                                    shortDesc="#{bindings.DateOfIRFCalled.hints.tooltip}"
+                                    id="id9">
+                        <f:validator binding="#{bindings.DateOfIRFCalled.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.DateOfIRFCalled.format}"/>
+                      </af:inputDate>
+                      <af:inputText value="#{bindings.AdditionalInformation3.inputValue}"
+                                    label="#{bindings.AdditionalInformation3.hints.label}"
+                                    required="#{bindings.AdditionalInformation3.hints.mandatory}"
+                                    columns="#{bindings.AdditionalInformation3.hints.displayWidth}"
+                                    maximumLength="#{bindings.AdditionalInformation3.hints.precision}"
+                                    shortDesc="#{bindings.AdditionalInformation3.hints.tooltip}"
+                                    id="it13">
+                        <f:validator binding="#{bindings.AdditionalInformation3.validator}"/>
+                      </af:inputText>
+                    </af:panelFormLayout>
+                  </af:panelGroupLayout>
+                  <af:panelGroupLayout layout="vertical"
+                                       shortDesc="#{resources.CONTENTS}"
+                                       id="pgl14">
+                    <af:outputText value="Vigilance Process  -  Fraud"
+                                   inlineStyle="font-family:Tahoma, Verdana, Helvetica, sans-serif;font-size:11px;font-weight:bold;display:inline;margin:0px;white-space:nowrap;color:#3E403D"
+                                   id="ot5"/>
+                    <af:panelFormLayout id="pfl19">
+                      <af:inputText value="#{bindings.RecivedFrom.inputValue}"
+                                    label="#{bindings.RecivedFrom.hints.label}"
+                                    required="#{bindings.RecivedFrom.hints.mandatory}"
+                                    columns="#{bindings.RecivedFrom.hints.displayWidth}"
+                                    maximumLength="#{bindings.RecivedFrom.hints.precision}"
+                                    shortDesc="#{bindings.RecivedFrom.hints.tooltip}"
+                                    id="it41">
+                        <f:validator binding="#{bindings.RecivedFrom.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.LetterNumber.inputValue}"
+                                    label="#{bindings.LetterNumber.hints.label}"
+                                    required="#{bindings.LetterNumber.hints.mandatory}"
+                                    columns="#{bindings.LetterNumber.hints.displayWidth}"
+                                    maximumLength="#{bindings.LetterNumber.hints.precision}"
+                                    shortDesc="#{bindings.LetterNumber.hints.tooltip}"
+                                    id="it90">
+                        <f:validator binding="#{bindings.LetterNumber.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.LetterDate.inputValue}"
+                                    label="#{bindings.LetterDate.hints.label}"
+                                    required="#{bindings.LetterDate.hints.mandatory}"
+                                    columns="#{bindings.LetterDate.hints.displayWidth}"
+                                    maximumLength="#{bindings.LetterDate.hints.precision}"
+                                    shortDesc="#{bindings.LetterDate.hints.tooltip}"
+                                    id="it4">
+                        <f:validator binding="#{bindings.LetterDate.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.FraudFolderNumber.inputValue}"
+                                    label="#{bindings.FraudFolderNumber.hints.label}"
+                                    required="#{bindings.FraudFolderNumber.hints.mandatory}"
+                                    columns="#{bindings.FraudFolderNumber.hints.displayWidth}"
+                                    maximumLength="#{bindings.FraudFolderNumber.hints.precision}"
+                                    shortDesc="#{bindings.FraudFolderNumber.hints.tooltip}"
+                                    id="it67">
+                        <f:validator binding="#{bindings.FraudFolderNumber.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.FolderAmount.inputValue}"
+                                    label="#{bindings.FolderAmount.hints.label}"
+                                    required="#{bindings.FolderAmount.hints.mandatory}"
+                                    columns="#{bindings.FolderAmount.hints.displayWidth}"
+                                    maximumLength="#{bindings.FolderAmount.hints.precision}"
+                                    shortDesc="#{bindings.FolderAmount.hints.tooltip}"
+                                    id="it65">
+                        <f:validator binding="#{bindings.FolderAmount.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.AmountClassification.inputValue}"
+                                    label="#{bindings.AmountClassification.hints.label}"
+                                    required="#{bindings.AmountClassification.hints.mandatory}"
+                                    columns="#{bindings.AmountClassification.hints.displayWidth}"
+                                    maximumLength="#{bindings.AmountClassification.hints.precision}"
+                                    shortDesc="#{bindings.AmountClassification.hints.tooltip}"
+                                    id="it76">
+                        <f:validator binding="#{bindings.AmountClassification.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.FurtherClassification.inputValue}"
+                                    label="#{bindings.FurtherClassification.hints.label}"
+                                    required="#{bindings.FurtherClassification.hints.mandatory}"
+                                    columns="#{bindings.FurtherClassification.hints.displayWidth}"
+                                    maximumLength="#{bindings.FurtherClassification.hints.precision}"
+                                    shortDesc="#{bindings.FurtherClassification.hints.tooltip}"
+                                    id="it58">
+                        <f:validator binding="#{bindings.FurtherClassification.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.FraudRelatingTo.inputValue}"
+                                    label="#{bindings.FraudRelatingTo.hints.label}"
+                                    required="#{bindings.FraudRelatingTo.hints.mandatory}"
+                                    columns="#{bindings.FraudRelatingTo.hints.displayWidth}"
+                                    maximumLength="#{bindings.FraudRelatingTo.hints.precision}"
+                                    shortDesc="#{bindings.FraudRelatingTo.hints.tooltip}"
+                                    id="it34">
+                        <f:validator binding="#{bindings.FraudRelatingTo.validator}"/>
+                      </af:inputText>
+                      <af:inputDate value="#{bindings.DateOfOccurence.inputValue}"
+                                    label="#{bindings.DateOfOccurence.hints.label}"
+                                    required="#{bindings.DateOfOccurence.hints.mandatory}"
+                                    shortDesc="#{bindings.DateOfOccurence.hints.tooltip}"
+                                    id="id3">
+                        <f:validator binding="#{bindings.DateOfOccurence.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.DateOfOccurence.format}"/>
+                      </af:inputDate>
+                      <af:inputDate value="#{bindings.DateOfDetection.inputValue}"
+                                    label="#{bindings.DateOfDetection.hints.label}"
+                                    required="#{bindings.DateOfDetection.hints.mandatory}"
+                                    shortDesc="#{bindings.DateOfDetection.hints.tooltip}"
+                                    id="id24">
+                        <f:validator binding="#{bindings.DateOfDetection.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.DateOfDetection.format}"/>
+                      </af:inputDate>
+                      <af:inputDate value="#{bindings.NameofUnit.inputValue}"
+                                    label="#{bindings.NameofUnit.hints.label}"
+                                    required="#{bindings.NameofUnit.hints.mandatory}"
+                                    shortDesc="#{bindings.NameofUnit.hints.tooltip}"
+                                    id="id15">
+                        <f:validator binding="#{bindings.NameofUnit.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.NameofUnit.format}"/>
+                      </af:inputDate>
+                      <af:inputText value="#{bindings.StaffInvolved.inputValue}"
+                                    label="#{bindings.StaffInvolved.hints.label}"
+                                    required="#{bindings.StaffInvolved.hints.mandatory}"
+                                    columns="#{bindings.StaffInvolved.hints.displayWidth}"
+                                    maximumLength="#{bindings.StaffInvolved.hints.precision}"
+                                    shortDesc="#{bindings.StaffInvolved.hints.tooltip}"
+                                    id="it110">
+                        <f:validator binding="#{bindings.StaffInvolved.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.AdditionalInformation4.inputValue}"
+                                    label="#{bindings.AdditionalInformation4.hints.label}"
+                                    required="#{bindings.AdditionalInformation4.hints.mandatory}"
+                                    columns="#{bindings.AdditionalInformation4.hints.displayWidth}"
+                                    maximumLength="#{bindings.AdditionalInformation4.hints.precision}"
+                                    shortDesc="#{bindings.AdditionalInformation4.hints.tooltip}"
+                                    id="it36">
+                        <f:validator binding="#{bindings.AdditionalInformation4.validator}"/>
+                      </af:inputText>
+                    </af:panelFormLayout>
+                  </af:panelGroupLayout>
+                  <af:panelGroupLayout layout="vertical"
+                                       shortDesc="#{resources.CONTENTS}"
+                                       id="pgl25">
+                    <af:outputText value="Vigilance Process  -  Miscellaneous"
+                                   inlineStyle="font-family:Tahoma, Verdana, Helvetica, sans-serif;font-size:11px;font-weight:bold;display:inline;margin:0px;white-space:nowrap;color:#3E403D"
+                                   id="ot14"/>
+                    <af:panelFormLayout id="pfl11">
+                      <af:inputText value="#{bindings.ReceivedFrom1.inputValue}"
+                                    label="#{bindings.ReceivedFrom1.hints.label}"
+                                    required="#{bindings.ReceivedFrom1.hints.mandatory}"
+                                    columns="#{bindings.ReceivedFrom1.hints.displayWidth}"
+                                    maximumLength="#{bindings.ReceivedFrom1.hints.precision}"
+                                    shortDesc="#{bindings.ReceivedFrom1.hints.tooltip}"
+                                    id="it62">
+                        <f:validator binding="#{bindings.ReceivedFrom1.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.LetterNumber1.inputValue}"
+                                    label="#{bindings.LetterNumber1.hints.label}"
+                                    required="#{bindings.LetterNumber1.hints.mandatory}"
+                                    columns="#{bindings.LetterNumber1.hints.displayWidth}"
+                                    maximumLength="#{bindings.LetterNumber1.hints.precision}"
+                                    shortDesc="#{bindings.LetterNumber1.hints.tooltip}"
+                                    id="it5">
+                        <f:validator binding="#{bindings.LetterNumber1.validator}"/>
+                      </af:inputText>
+                      <af:inputDate value="#{bindings.LetterDate1.inputValue}"
+                                    label="#{bindings.LetterDate1.hints.label}"
+                                    required="#{bindings.LetterDate1.hints.mandatory}"
+                                    shortDesc="#{bindings.LetterDate1.hints.tooltip}"
+                                    id="id31">
+                        <f:validator binding="#{bindings.LetterDate1.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.LetterDate1.format}"/>
+                      </af:inputDate>
+                      <af:inputText value="#{bindings.CaseRelatingTo.inputValue}"
+                                    label="#{bindings.CaseRelatingTo.hints.label}"
+                                    required="#{bindings.CaseRelatingTo.hints.mandatory}"
+                                    columns="#{bindings.CaseRelatingTo.hints.displayWidth}"
+                                    maximumLength="#{bindings.CaseRelatingTo.hints.precision}"
+                                    shortDesc="#{bindings.CaseRelatingTo.hints.tooltip}"
+                                    id="it56">
+                        <f:validator binding="#{bindings.CaseRelatingTo.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.Amount.inputValue}"
+                                    label="#{bindings.Amount.hints.label}"
+                                    required="#{bindings.Amount.hints.mandatory}"
+                                    columns="#{bindings.Amount.hints.displayWidth}"
+                                    maximumLength="#{bindings.Amount.hints.precision}"
+                                    shortDesc="#{bindings.Amount.hints.tooltip}"
+                                    id="it42">
+                        <f:validator binding="#{bindings.Amount.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.Remarks.inputValue}"
+                                    label="#{bindings.Remarks.hints.label}"
+                                    required="#{bindings.Remarks.hints.mandatory}"
+                                    columns="#{bindings.Remarks.hints.displayWidth}"
+                                    maximumLength="#{bindings.Remarks.hints.precision}"
+                                    shortDesc="#{bindings.Remarks.hints.tooltip}"
+                                    id="it30">
+                        <f:validator binding="#{bindings.Remarks.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.AdditionalInformation5.inputValue}"
+                                    label="#{bindings.AdditionalInformation5.hints.label}"
+                                    required="#{bindings.AdditionalInformation5.hints.mandatory}"
+                                    columns="#{bindings.AdditionalInformation5.hints.displayWidth}"
+                                    maximumLength="#{bindings.AdditionalInformation5.hints.precision}"
+                                    shortDesc="#{bindings.AdditionalInformation5.hints.tooltip}"
+                                    id="it32">
+                        <f:validator binding="#{bindings.AdditionalInformation5.validator}"/>
+                      </af:inputText>
+                    </af:panelFormLayout>
+                  </af:panelGroupLayout>
+                  <af:panelGroupLayout layout="vertical"
+                                       shortDesc="#{resources.CONTENTS}"
+                                       id="pgl4">
+                    <af:outputText value="Vigilance Process  -  Risk Foccused Internal Audit"
+                                   inlineStyle="font-family:Tahoma, Verdana, Helvetica, sans-serif;font-size:11px;font-weight:bold;display:inline;margin:0px;white-space:nowrap;color:#3E403D"
+                                   id="ot12"/>
+                    <af:panelFormLayout id="pfl8">
+                      <af:inputText value="#{bindings.RecivedFrom1.inputValue}"
+                                    label="#{bindings.RecivedFrom1.hints.label}"
+                                    required="#{bindings.RecivedFrom1.hints.mandatory}"
+                                    columns="#{bindings.RecivedFrom1.hints.displayWidth}"
+                                    maximumLength="#{bindings.RecivedFrom1.hints.precision}"
+                                    shortDesc="#{bindings.RecivedFrom1.hints.tooltip}"
+                                    id="it53">
+                        <f:validator binding="#{bindings.RecivedFrom1.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.LetterNumber2.inputValue}"
+                                    label="#{bindings.LetterNumber2.hints.label}"
+                                    required="#{bindings.LetterNumber2.hints.mandatory}"
+                                    columns="#{bindings.LetterNumber2.hints.displayWidth}"
+                                    maximumLength="#{bindings.LetterNumber2.hints.precision}"
+                                    shortDesc="#{bindings.LetterNumber2.hints.tooltip}"
+                                    id="it95">
+                        <f:validator binding="#{bindings.LetterNumber2.validator}"/>
+                      </af:inputText>
+                      <af:inputDate value="#{bindings.LetterDate2.inputValue}"
+                                    label="#{bindings.LetterDate2.hints.label}"
+                                    required="#{bindings.LetterDate2.hints.mandatory}"
+                                    shortDesc="#{bindings.LetterDate2.hints.tooltip}"
+                                    id="id21">
+                        <f:validator binding="#{bindings.LetterDate2.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.LetterDate2.format}"/>
+                      </af:inputDate>
+                      <af:inputText value="#{bindings.NameOfAccount1.inputValue}"
+                                    label="#{bindings.NameOfAccount1.hints.label}"
+                                    required="#{bindings.NameOfAccount1.hints.mandatory}"
+                                    columns="#{bindings.NameOfAccount1.hints.displayWidth}"
+                                    maximumLength="#{bindings.NameOfAccount1.hints.precision}"
+                                    shortDesc="#{bindings.NameOfAccount1.hints.tooltip}"
+                                    id="it44">
+                        <f:validator binding="#{bindings.NameOfAccount1.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.RFIARelatingTo.inputValue}"
+                                    label="#{bindings.RFIARelatingTo.hints.label}"
+                                    required="#{bindings.RFIARelatingTo.hints.mandatory}"
+                                    columns="#{bindings.RFIARelatingTo.hints.displayWidth}"
+                                    maximumLength="#{bindings.RFIARelatingTo.hints.precision}"
+                                    shortDesc="#{bindings.RFIARelatingTo.hints.tooltip}"
+                                    id="it98">
+                        <f:validator binding="#{bindings.RFIARelatingTo.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.AmountInvolved.inputValue}"
+                                    label="#{bindings.AmountInvolved.hints.label}"
+                                    required="#{bindings.AmountInvolved.hints.mandatory}"
+                                    columns="#{bindings.AmountInvolved.hints.displayWidth}"
+                                    maximumLength="#{bindings.AmountInvolved.hints.precision}"
+                                    shortDesc="#{bindings.AmountInvolved.hints.tooltip}"
+                                    id="it102">
+                        <f:validator binding="#{bindings.AmountInvolved.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.EstimatedLoss.inputValue}"
+                                    label="#{bindings.EstimatedLoss.hints.label}"
+                                    required="#{bindings.EstimatedLoss.hints.mandatory}"
+                                    columns="#{bindings.EstimatedLoss.hints.displayWidth}"
+                                    maximumLength="#{bindings.EstimatedLoss.hints.precision}"
+                                    shortDesc="#{bindings.EstimatedLoss.hints.tooltip}"
+                                    id="it77">
+                        <f:validator binding="#{bindings.EstimatedLoss.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.DateOfRFIAReport.inputValue}"
+                                    label="#{bindings.DateOfRFIAReport.hints.label}"
+                                    required="#{bindings.DateOfRFIAReport.hints.mandatory}"
+                                    columns="#{bindings.DateOfRFIAReport.hints.displayWidth}"
+                                    maximumLength="#{bindings.DateOfRFIAReport.hints.precision}"
+                                    shortDesc="#{bindings.DateOfRFIAReport.hints.tooltip}"
+                                    id="it83">
+                        <f:validator binding="#{bindings.DateOfRFIAReport.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.DisposalStatus2.inputValue}"
+                                    label="#{bindings.DisposalStatus2.hints.label}"
+                                    required="#{bindings.DisposalStatus2.hints.mandatory}"
+                                    columns="#{bindings.DisposalStatus2.hints.displayWidth}"
+                                    maximumLength="#{bindings.DisposalStatus2.hints.precision}"
+                                    shortDesc="#{bindings.DisposalStatus2.hints.tooltip}"
+                                    id="it99">
+                        <f:validator binding="#{bindings.DisposalStatus2.validator}"/>
+                      </af:inputText>
+                      <af:inputDate value="#{bindings.DateOfIRFCalled1.inputValue}"
+                                    label="#{bindings.DateOfIRFCalled1.hints.label}"
+                                    required="#{bindings.DateOfIRFCalled1.hints.mandatory}"
+                                    shortDesc="#{bindings.DateOfIRFCalled1.hints.tooltip}"
+                                    id="id10">
+                        <f:validator binding="#{bindings.DateOfIRFCalled1.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.DateOfIRFCalled1.format}"/>
+                      </af:inputDate>
+                      <af:inputText value="#{bindings.AdditionalInformation6.inputValue}"
+                                    label="#{bindings.AdditionalInformation6.hints.label}"
+                                    required="#{bindings.AdditionalInformation6.hints.mandatory}"
+                                    columns="#{bindings.AdditionalInformation6.hints.displayWidth}"
+                                    maximumLength="#{bindings.AdditionalInformation6.hints.precision}"
+                                    shortDesc="#{bindings.AdditionalInformation6.hints.tooltip}"
+                                    id="it100">
+                        <f:validator binding="#{bindings.AdditionalInformation6.validator}"/>
+                      </af:inputText>
+                    </af:panelFormLayout>
+                  </af:panelGroupLayout>
+                  <af:panelGroupLayout layout="vertical"
+                                       shortDesc="#{resources.CONTENTS}"
+                                       id="pgl10">
+                    <af:outputText value="Vigilance Process  -  Right To Information"
+                                   inlineStyle="font-family:Tahoma, Verdana, Helvetica, sans-serif;font-size:11px;font-weight:bold;display:inline;margin:0px;white-space:nowrap;color:#3E403D"
+                                   id="ot25"/>
+                    <af:panelFormLayout id="pfl13">
+                      <af:inputText value="#{bindings.NameOfApplicant.inputValue}"
+                                    label="#{bindings.NameOfApplicant.hints.label}"
+                                    required="#{bindings.NameOfApplicant.hints.mandatory}"
+                                    columns="#{bindings.NameOfApplicant.hints.displayWidth}"
+                                    maximumLength="#{bindings.NameOfApplicant.hints.precision}"
+                                    shortDesc="#{bindings.NameOfApplicant.hints.tooltip}"
+                                    id="it81">
+                        <f:validator binding="#{bindings.NameOfApplicant.validator}"/>
+                      </af:inputText>
+                      <af:inputDate value="#{bindings.DateOfApplication.inputValue}"
+                                    label="#{bindings.DateOfApplication.hints.label}"
+                                    required="#{bindings.DateOfApplication.hints.mandatory}"
+                                    shortDesc="#{bindings.DateOfApplication.hints.tooltip}"
+                                    id="id25">
+                        <f:validator binding="#{bindings.DateOfApplication.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.DateOfApplication.format}"/>
+                      </af:inputDate>
+                      <af:inputDate value="#{bindings.DORbyCPIO.inputValue}"
+                                    label="#{bindings.DORbyCPIO.hints.label}"
+                                    required="#{bindings.DORbyCPIO.hints.mandatory}"
+                                    shortDesc="#{bindings.DORbyCPIO.hints.tooltip}"
+                                    id="id4">
+                        <f:validator binding="#{bindings.DORbyCPIO.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.DORbyCPIO.format}"/>
+                      </af:inputDate>
+                      <af:inputDate value="#{bindings.DORatVigilanceDept.inputValue}"
+                                    label="#{bindings.DORatVigilanceDept.hints.label}"
+                                    required="#{bindings.DORatVigilanceDept.hints.mandatory}"
+                                    shortDesc="#{bindings.DORatVigilanceDept.hints.tooltip}"
+                                    id="id22">
+                        <f:validator binding="#{bindings.DORatVigilanceDept.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.DORatVigilanceDept.format}"/>
+                      </af:inputDate>
+                      <af:inputText value="#{bindings.ParticularsOfInformationSought.inputValue}"
+                                    label="#{bindings.ParticularsOfInformationSought.hints.label}"
+                                    required="#{bindings.ParticularsOfInformationSought.hints.mandatory}"
+                                    columns="#{bindings.ParticularsOfInformationSought.hints.displayWidth}"
+                                    maximumLength="#{bindings.ParticularsOfInformationSought.hints.precision}"
+                                    shortDesc="#{bindings.ParticularsOfInformationSought.hints.tooltip}"
+                                    id="it101">
+                        <f:validator binding="#{bindings.ParticularsOfInformationSought.validator}"/>
+                      </af:inputText>
+                      <af:inputDate value="#{bindings.LastDateOfProvidingInformation.inputValue}"
+                                    label="#{bindings.LastDateOfProvidingInformation.hints.label}"
+                                    required="#{bindings.LastDateOfProvidingInformation.hints.mandatory}"
+                                    shortDesc="#{bindings.LastDateOfProvidingInformation.hints.tooltip}"
+                                    id="id23">
+                        <f:validator binding="#{bindings.LastDateOfProvidingInformation.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.LastDateOfProvidingInformation.format}"/>
+                      </af:inputDate>
+                      <af:inputDate value="#{bindings.DateInformationProvided.inputValue}"
+                                    label="#{bindings.DateInformationProvided.hints.label}"
+                                    required="#{bindings.DateInformationProvided.hints.mandatory}"
+                                    shortDesc="#{bindings.DateInformationProvided.hints.tooltip}"
+                                    id="id19">
+                        <f:validator binding="#{bindings.DateInformationProvided.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.DateInformationProvided.format}"/>
+                      </af:inputDate>
+                      <af:inputDate value="#{bindings.RejectionDate.inputValue}"
+                                    label="#{bindings.RejectionDate.hints.label}"
+                                    required="#{bindings.RejectionDate.hints.mandatory}"
+                                    shortDesc="#{bindings.RejectionDate.hints.tooltip}"
+                                    id="id27">
+                        <f:validator binding="#{bindings.RejectionDate.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.RejectionDate.format}"/>
+                      </af:inputDate>
+                      <af:inputText value="#{bindings.AdditionalInformation7.inputValue}"
+                                    label="#{bindings.AdditionalInformation7.hints.label}"
+                                    required="#{bindings.AdditionalInformation7.hints.mandatory}"
+                                    columns="#{bindings.AdditionalInformation7.hints.displayWidth}"
+                                    maximumLength="#{bindings.AdditionalInformation7.hints.precision}"
+                                    shortDesc="#{bindings.AdditionalInformation7.hints.tooltip}"
+                                    id="it82">
+                        <f:validator binding="#{bindings.AdditionalInformation7.validator}"/>
+                      </af:inputText>
+                    </af:panelFormLayout>
+                  </af:panelGroupLayout>
+                  <af:panelGroupLayout layout="vertical"
+                                       shortDesc="#{resources.CONTENTS}"
+                                       id="pgl27">
+                    <af:outputText value="Vigilance Process  -  Staff Accountability"
+                                   inlineStyle="font-family:Tahoma, Verdana, Helvetica, sans-serif;font-size:11px;font-weight:bold;display:inline;margin:0px;white-space:nowrap;color:#3E403D"
+                                   id="ot17"/>
+                    <af:panelFormLayout id="pfl21">
+                      <af:inputText value="#{bindings.RecivedFrom2.inputValue}"
+                                    label="#{bindings.RecivedFrom2.hints.label}"
+                                    required="#{bindings.RecivedFrom2.hints.mandatory}"
+                                    columns="#{bindings.RecivedFrom2.hints.displayWidth}"
+                                    maximumLength="#{bindings.RecivedFrom2.hints.precision}"
+                                    shortDesc="#{bindings.RecivedFrom2.hints.tooltip}"
+                                    id="it43">
+                        <f:validator binding="#{bindings.RecivedFrom2.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.LetterNumber3.inputValue}"
+                                    label="#{bindings.LetterNumber3.hints.label}"
+                                    required="#{bindings.LetterNumber3.hints.mandatory}"
+                                    columns="#{bindings.LetterNumber3.hints.displayWidth}"
+                                    maximumLength="#{bindings.LetterNumber3.hints.precision}"
+                                    shortDesc="#{bindings.LetterNumber3.hints.tooltip}"
+                                    id="it89">
+                        <f:validator binding="#{bindings.LetterNumber3.validator}"/>
+                      </af:inputText>
+                      <af:inputDate value="#{bindings.LetterDate3.inputValue}"
+                                    label="#{bindings.LetterDate3.hints.label}"
+                                    required="#{bindings.LetterDate3.hints.mandatory}"
+                                    shortDesc="#{bindings.LetterDate3.hints.tooltip}"
+                                    id="id28">
+                        <f:validator binding="#{bindings.LetterDate3.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.LetterDate3.format}"/>
+                      </af:inputDate>
+                      <af:inputText value="#{bindings.NameOfAccount2.inputValue}"
+                                    label="#{bindings.NameOfAccount2.hints.label}"
+                                    required="#{bindings.NameOfAccount2.hints.mandatory}"
+                                    columns="#{bindings.NameOfAccount2.hints.displayWidth}"
+                                    maximumLength="#{bindings.NameOfAccount2.hints.precision}"
+                                    shortDesc="#{bindings.NameOfAccount2.hints.tooltip}"
+                                    id="it14">
+                        <f:validator binding="#{bindings.NameOfAccount2.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.AmountWiseClassification.inputValue}"
+                                    label="#{bindings.AmountWiseClassification.hints.label}"
+                                    required="#{bindings.AmountWiseClassification.hints.mandatory}"
+                                    columns="#{bindings.AmountWiseClassification.hints.displayWidth}"
+                                    maximumLength="#{bindings.AmountWiseClassification.hints.precision}"
+                                    shortDesc="#{bindings.AmountWiseClassification.hints.tooltip}"
+                                    id="it61">
+                        <f:validator binding="#{bindings.AmountWiseClassification.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.AmountInvolved1.inputValue}"
+                                    label="#{bindings.AmountInvolved1.hints.label}"
+                                    required="#{bindings.AmountInvolved1.hints.mandatory}"
+                                    columns="#{bindings.AmountInvolved1.hints.displayWidth}"
+                                    maximumLength="#{bindings.AmountInvolved1.hints.precision}"
+                                    shortDesc="#{bindings.AmountInvolved1.hints.tooltip}"
+                                    id="it52">
+                        <f:validator binding="#{bindings.AmountInvolved1.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.EstimatedLoss1.inputValue}"
+                                    label="#{bindings.EstimatedLoss1.hints.label}"
+                                    required="#{bindings.EstimatedLoss1.hints.mandatory}"
+                                    columns="#{bindings.EstimatedLoss1.hints.displayWidth}"
+                                    maximumLength="#{bindings.EstimatedLoss1.hints.precision}"
+                                    shortDesc="#{bindings.EstimatedLoss1.hints.tooltip}"
+                                    id="it9">
+                        <f:validator binding="#{bindings.EstimatedLoss1.validator}"/>
+                      </af:inputText>
+                      <af:inputDate value="#{bindings.DateOfNPA.inputValue}"
+                                    label="#{bindings.DateOfNPA.hints.label}"
+                                    required="#{bindings.DateOfNPA.hints.mandatory}"
+                                    shortDesc="#{bindings.DateOfNPA.hints.tooltip}"
+                                    id="id16">
+                        <f:validator binding="#{bindings.DateOfNPA.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.DateOfNPA.format}"/>
+                      </af:inputDate>
+                      <af:inputText value="#{bindings.MigratedToSMBOn.inputValue}"
+                                    label="#{bindings.MigratedToSMBOn.hints.label}"
+                                    required="#{bindings.MigratedToSMBOn.hints.mandatory}"
+                                    columns="#{bindings.MigratedToSMBOn.hints.displayWidth}"
+                                    maximumLength="#{bindings.MigratedToSMBOn.hints.precision}"
+                                    shortDesc="#{bindings.MigratedToSMBOn.hints.tooltip}"
+                                    id="it16">
+                        <f:validator binding="#{bindings.MigratedToSMBOn.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.InvestigationAssignedTo.inputValue}"
+                                    label="#{bindings.InvestigationAssignedTo.hints.label}"
+                                    required="#{bindings.InvestigationAssignedTo.hints.mandatory}"
+                                    columns="#{bindings.InvestigationAssignedTo.hints.displayWidth}"
+                                    maximumLength="#{bindings.InvestigationAssignedTo.hints.precision}"
+                                    shortDesc="#{bindings.InvestigationAssignedTo.hints.tooltip}"
+                                    id="it93">
+                        <f:validator binding="#{bindings.InvestigationAssignedTo.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.InvestigationAssignedOn.inputValue}"
+                                    label="#{bindings.InvestigationAssignedOn.hints.label}"
+                                    required="#{bindings.InvestigationAssignedOn.hints.mandatory}"
+                                    columns="#{bindings.InvestigationAssignedOn.hints.displayWidth}"
+                                    maximumLength="#{bindings.InvestigationAssignedOn.hints.precision}"
+                                    shortDesc="#{bindings.InvestigationAssignedOn.hints.tooltip}"
+                                    id="it38">
+                        <f:validator binding="#{bindings.InvestigationAssignedOn.validator}"/>
+                      </af:inputText>
+                      <af:inputDate value="#{bindings.DateOfSAEReport.inputValue}"
+                                    label="#{bindings.DateOfSAEReport.hints.label}"
+                                    required="#{bindings.DateOfSAEReport.hints.mandatory}"
+                                    shortDesc="#{bindings.DateOfSAEReport.hints.tooltip}"
+                                    id="id18">
+                        <f:validator binding="#{bindings.DateOfSAEReport.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.DateOfSAEReport.format}"/>
+                      </af:inputDate>
+                      <af:inputText value="#{bindings.DisposalStatus3.inputValue}"
+                                    label="#{bindings.DisposalStatus3.hints.label}"
+                                    required="#{bindings.DisposalStatus3.hints.mandatory}"
+                                    columns="#{bindings.DisposalStatus3.hints.displayWidth}"
+                                    maximumLength="#{bindings.DisposalStatus3.hints.precision}"
+                                    shortDesc="#{bindings.DisposalStatus3.hints.tooltip}"
+                                    id="it109">
+                        <f:validator binding="#{bindings.DisposalStatus3.validator}"/>
+                      </af:inputText>
+                      <af:inputDate value="#{bindings.DateOfIRFCalled2.inputValue}"
+                                    label="#{bindings.DateOfIRFCalled2.hints.label}"
+                                    required="#{bindings.DateOfIRFCalled2.hints.mandatory}"
+                                    shortDesc="#{bindings.DateOfIRFCalled2.hints.tooltip}"
+                                    id="id2">
+                        <f:validator binding="#{bindings.DateOfIRFCalled2.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.DateOfIRFCalled2.format}"/>
+                      </af:inputDate>
+                      <af:inputText value="#{bindings.AdditionalInformation8.inputValue}"
+                                    label="#{bindings.AdditionalInformation8.hints.label}"
+                                    required="#{bindings.AdditionalInformation8.hints.mandatory}"
+                                    columns="#{bindings.AdditionalInformation8.hints.displayWidth}"
+                                    maximumLength="#{bindings.AdditionalInformation8.hints.precision}"
+                                    shortDesc="#{bindings.AdditionalInformation8.hints.tooltip}"
+                                    id="it35">
+                        <f:validator binding="#{bindings.AdditionalInformation8.validator}"/>
+                      </af:inputText>
+                    </af:panelFormLayout>
+                  </af:panelGroupLayout>
+                  <af:panelGroupLayout layout="vertical"
+                                       shortDesc="#{resources.CONTENTS}"
+                                       id="pgl29">
+                    <af:outputText value="Vigilance Process  -  Suo Motu Investigation"
+                                   inlineStyle="font-family:Tahoma, Verdana, Helvetica, sans-serif;font-size:11px;font-weight:bold;display:inline;margin:0px;white-space:nowrap;color:#3E403D"
+                                   id="ot15"/>
+                    <af:panelFormLayout id="pfl9">
+                      <af:inputText value="#{bindings.LetterNumber4.inputValue}"
+                                    label="#{bindings.LetterNumber4.hints.label}"
+                                    required="#{bindings.LetterNumber4.hints.mandatory}"
+                                    columns="#{bindings.LetterNumber4.hints.displayWidth}"
+                                    maximumLength="#{bindings.LetterNumber4.hints.precision}"
+                                    shortDesc="#{bindings.LetterNumber4.hints.tooltip}"
+                                    id="it39">
+                        <f:validator binding="#{bindings.LetterNumber4.validator}"/>
+                      </af:inputText>
+                      <af:inputDate value="#{bindings.LetterDate4.inputValue}"
+                                    label="#{bindings.LetterDate4.hints.label}"
+                                    required="#{bindings.LetterDate4.hints.mandatory}"
+                                    shortDesc="#{bindings.LetterDate4.hints.tooltip}"
+                                    id="id33">
+                        <f:validator binding="#{bindings.LetterDate4.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.LetterDate4.format}"/>
+                      </af:inputDate>
+                      <af:inputDate value="#{bindings.DateOfReport.inputValue}"
+                                    label="#{bindings.DateOfReport.hints.label}"
+                                    required="#{bindings.DateOfReport.hints.mandatory}"
+                                    shortDesc="#{bindings.DateOfReport.hints.tooltip}"
+                                    id="id30">
+                        <f:validator binding="#{bindings.DateOfReport.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.DateOfReport.format}"/>
+                      </af:inputDate>
+                      <af:inputText value="#{bindings.AmountInvolved2.inputValue}"
+                                    label="#{bindings.AmountInvolved2.hints.label}"
+                                    required="#{bindings.AmountInvolved2.hints.mandatory}"
+                                    columns="#{bindings.AmountInvolved2.hints.displayWidth}"
+                                    maximumLength="#{bindings.AmountInvolved2.hints.precision}"
+                                    shortDesc="#{bindings.AmountInvolved2.hints.tooltip}"
+                                    id="it17">
+                        <f:validator binding="#{bindings.AmountInvolved2.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.EstimatedLoss2.inputValue}"
+                                    label="#{bindings.EstimatedLoss2.hints.label}"
+                                    required="#{bindings.EstimatedLoss2.hints.mandatory}"
+                                    columns="#{bindings.EstimatedLoss2.hints.displayWidth}"
+                                    maximumLength="#{bindings.EstimatedLoss2.hints.precision}"
+                                    shortDesc="#{bindings.EstimatedLoss2.hints.tooltip}"
+                                    id="it55">
+                        <f:validator binding="#{bindings.EstimatedLoss2.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.NatureOfIrregularities.inputValue}"
+                                    label="#{bindings.NatureOfIrregularities.hints.label}"
+                                    required="#{bindings.NatureOfIrregularities.hints.mandatory}"
+                                    columns="#{bindings.NatureOfIrregularities.hints.displayWidth}"
+                                    maximumLength="#{bindings.NatureOfIrregularities.hints.precision}"
+                                    shortDesc="#{bindings.NatureOfIrregularities.hints.tooltip}"
+                                    id="it68">
+                        <f:validator binding="#{bindings.NatureOfIrregularities.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.WhetherReferredToCC.inputValue}"
+                                    label="#{bindings.WhetherReferredToCC.hints.label}"
+                                    required="#{bindings.WhetherReferredToCC.hints.mandatory}"
+                                    columns="#{bindings.WhetherReferredToCC.hints.displayWidth}"
+                                    maximumLength="#{bindings.WhetherReferredToCC.hints.precision}"
+                                    shortDesc="#{bindings.WhetherReferredToCC.hints.tooltip}"
+                                    id="it48">
+                        <f:validator binding="#{bindings.WhetherReferredToCC.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.ActionPropsed.inputValue}"
+                                    label="#{bindings.ActionPropsed.hints.label}"
+                                    required="#{bindings.ActionPropsed.hints.mandatory}"
+                                    columns="#{bindings.ActionPropsed.hints.displayWidth}"
+                                    maximumLength="#{bindings.ActionPropsed.hints.precision}"
+                                    shortDesc="#{bindings.ActionPropsed.hints.tooltip}"
+                                    id="it28">
+                        <f:validator binding="#{bindings.ActionPropsed.validator}"/>
+                      </af:inputText>
+                      <af:inputDate value="#{bindings.DateOfActionTaken.inputValue}"
+                                    label="#{bindings.DateOfActionTaken.hints.label}"
+                                    required="#{bindings.DateOfActionTaken.hints.mandatory}"
+                                    shortDesc="#{bindings.DateOfActionTaken.hints.tooltip}"
+                                    id="id5">
+                        <f:validator binding="#{bindings.DateOfActionTaken.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.DateOfActionTaken.format}"/>
+                      </af:inputDate>
+                      <af:inputText value="#{bindings.AdditionalInformation9.inputValue}"
+                                    label="#{bindings.AdditionalInformation9.hints.label}"
+                                    required="#{bindings.AdditionalInformation9.hints.mandatory}"
+                                    columns="#{bindings.AdditionalInformation9.hints.displayWidth}"
+                                    maximumLength="#{bindings.AdditionalInformation9.hints.precision}"
+                                    shortDesc="#{bindings.AdditionalInformation9.hints.tooltip}"
+                                    id="it72">
+                        <f:validator binding="#{bindings.AdditionalInformation9.validator}"/>
+                      </af:inputText>
+                    </af:panelFormLayout>
+                  </af:panelGroupLayout>
+                  <af:panelGroupLayout layout="vertical"
+                                       shortDesc="#{resources.CONTENTS}"
+                                       id="pgl19">
+                    <af:outputText value="Vigilance Process  -  Attempted Theft"
+                                   inlineStyle="font-family:Tahoma, Verdana, Helvetica, sans-serif;font-size:11px;font-weight:bold;display:inline;margin:0px;white-space:nowrap;color:#3E403D"
+                                   id="ot9"/>
+                    <af:panelFormLayout id="pfl14">
+                      <af:inputText value="#{bindings.ReceivedFrom2.inputValue}"
+                                    label="#{bindings.ReceivedFrom2.hints.label}"
+                                    required="#{bindings.ReceivedFrom2.hints.mandatory}"
+                                    columns="#{bindings.ReceivedFrom2.hints.displayWidth}"
+                                    maximumLength="#{bindings.ReceivedFrom2.hints.precision}"
+                                    shortDesc="#{bindings.ReceivedFrom2.hints.tooltip}"
+                                    id="it50">
+                        <f:validator binding="#{bindings.ReceivedFrom2.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.LetterNumber5.inputValue}"
+                                    label="#{bindings.LetterNumber5.hints.label}"
+                                    required="#{bindings.LetterNumber5.hints.mandatory}"
+                                    columns="#{bindings.LetterNumber5.hints.displayWidth}"
+                                    maximumLength="#{bindings.LetterNumber5.hints.precision}"
+                                    shortDesc="#{bindings.LetterNumber5.hints.tooltip}"
+                                    id="it71">
+                        <f:validator binding="#{bindings.LetterNumber5.validator}"/>
+                      </af:inputText>
+                      <af:inputDate value="#{bindings.LetterDate5.inputValue}"
+                                    label="#{bindings.LetterDate5.hints.label}"
+                                    required="#{bindings.LetterDate5.hints.mandatory}"
+                                    shortDesc="#{bindings.LetterDate5.hints.tooltip}"
+                                    id="id32">
+                        <f:validator binding="#{bindings.LetterDate5.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.LetterDate5.format}"/>
+                      </af:inputDate>
+                      <af:inputText value="#{bindings.AmountInvolved3.inputValue}"
+                                    label="#{bindings.AmountInvolved3.hints.label}"
+                                    required="#{bindings.AmountInvolved3.hints.mandatory}"
+                                    columns="#{bindings.AmountInvolved3.hints.displayWidth}"
+                                    maximumLength="#{bindings.AmountInvolved3.hints.precision}"
+                                    shortDesc="#{bindings.AmountInvolved3.hints.tooltip}"
+                                    id="it69">
+                        <f:validator binding="#{bindings.AmountInvolved3.validator}"/>
+                      </af:inputText>
+                      <af:inputDate value="#{bindings.DateOfOccurence1.inputValue}"
+                                    label="#{bindings.DateOfOccurence1.hints.label}"
+                                    required="#{bindings.DateOfOccurence1.hints.mandatory}"
+                                    shortDesc="#{bindings.DateOfOccurence1.hints.tooltip}"
+                                    id="id8">
+                        <f:validator binding="#{bindings.DateOfOccurence1.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.DateOfOccurence1.format}"/>
+                      </af:inputDate>
+                      <af:inputDate value="#{bindings.DateOfDetecion.inputValue}"
+                                    label="#{bindings.DateOfDetecion.hints.label}"
+                                    required="#{bindings.DateOfDetecion.hints.mandatory}"
+                                    shortDesc="#{bindings.DateOfDetecion.hints.tooltip}"
+                                    id="id29">
+                        <f:validator binding="#{bindings.DateOfDetecion.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.DateOfDetecion.format}"/>
+                      </af:inputDate>
+                      <af:inputText value="#{bindings.StaffInvolvement.inputValue}"
+                                    label="#{bindings.StaffInvolvement.hints.label}"
+                                    required="#{bindings.StaffInvolvement.hints.mandatory}"
+                                    columns="#{bindings.StaffInvolvement.hints.displayWidth}"
+                                    maximumLength="#{bindings.StaffInvolvement.hints.precision}"
+                                    shortDesc="#{bindings.StaffInvolvement.hints.tooltip}"
+                                    id="it26">
+                        <f:validator binding="#{bindings.StaffInvolvement.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.AdditionalInformation10.inputValue}"
+                                    label="#{bindings.AdditionalInformation10.hints.label}"
+                                    required="#{bindings.AdditionalInformation10.hints.mandatory}"
+                                    columns="#{bindings.AdditionalInformation10.hints.displayWidth}"
+                                    maximumLength="#{bindings.AdditionalInformation10.hints.precision}"
+                                    shortDesc="#{bindings.AdditionalInformation10.hints.tooltip}"
+                                    id="it15">
+                        <f:validator binding="#{bindings.AdditionalInformation10.validator}"/>
+                      </af:inputText>
+                    </af:panelFormLayout>
+                  </af:panelGroupLayout>
+                </af:panelGroupLayout>
+              </af:showDetailHeader>
+              <af:switcher facetName="#{actionAvailable.showHistory}" id="s11">
+                <f:facet name="true">
+                  <af:showDetailHeader size="2" id="histHd"
+                                       text="#{resources.HISTORY}"
+                                       disclosureListener="#{pageFlowScope.aleComponentBean.toggle}"
+                                       disclosed="false" rendered="false">
+                    <f:facet name="info"/>
+                    <f:facet name="legend"/>
+                    <f:facet name="menuBar"/>
+                    <f:facet name="toolbar"/>
+                    <f:facet name="context"/>
+                    <af:panelGroupLayout layout="vertical"
+                                         binding="#{pageFlowScope.aleComponentBean.historyPanel}"
+                                         id="historyPanel">
+                      <wlc:taskHistory initParam="#{pageFlowScope.aleComponentBean.comp}"
+                                       showTabularView="true"
+                                       showGraphicalView="true" id="taskHst"/>
+                    </af:panelGroupLayout>
+                  </af:showDetailHeader>
+                </f:facet>
+              </af:switcher>
+              <af:switcher facetName="#{pageFlowScope.ADFHumanTaskBean.hasSubTasks}"
+                           id="sw7" binding="#{invokeActionBean.subTaskPanel}">
+                <f:facet name="true">
+                  <af:showDetailHeader size="2" id="decompHd"
+                                       text="#{resources.SUB_TASKS}"
+                                       disclosed="false" rendered="false">
+                    <af:panelGroupLayout layout="vertical" id="pgl20">
+                      <wlc:taskDecompose initParam="#{pageFlowScope.ADFHumanTaskBean.subTaskComp}"
+                                         id="th1"/>
+                    </af:panelGroupLayout>
+                  </af:showDetailHeader>
+                </f:facet>
+              </af:switcher>
+              <trh:tableLayout id="cmAtTbL" width="98%">
+                <trh:rowLayout id="rl1">
+                  <trh:cellFormat width="47%" valign="top" id="cf3">
+                    <af:showDetailHeader size="2" text="#{resources.COMMENTS}"
+                                         disclosed="#{actionAvailable.discloseCommentsAttach}"
+                                         contentStyle="padding: 5px;"
+                                         partialTriggers="cmtDlg" id="sdh1">
+                      <f:facet name="info"/>
+                      <f:facet name="legend"/>
+                      <f:facet name="menuBar"/>
+                      <f:facet name="toolbar">
+                        <af:toolbar visible="#{actionAvailable.isCommentUpdatable}"
+                                    id="t2">
+                          <af:commandImageLink partialSubmit="true"
+                                               actionListener="#{bindings.CreateInsert.execute}"
+                                               action="#{popupBean.showCommentDialog}"
+                                               shortDesc="#{resources.CREATE}"
+                                               hoverIcon="/hw_images/new_ovr.png"
+                                               visible="#{actionAvailable.isCommentUpdatable}"
+                                               icon="/hw_images/new_ena.png"
+                                               disabledIcon="/hw_images/new_dis.png"
+                                               depressedIcon="/hw_images/new_dwn.png"
+                                               id="cil1" immediate="true"/>
+                        </af:toolbar>
+                      </f:facet>
+                      <f:facet name="context"/>
+                      <af:switcher facetName="#{actionAvailable.inNotificationClient}"
+                                   id="s23">
+                        <f:facet name="false">
+                          <af:table verticalGridVisible="false"
+                                    horizontalGridVisible="false"
+                                    value="#{bindings.userComment.children}"
+                                    var="row"
+                                    rows="#{bindings.userComment.rangeSize}"
+                                    first="#{bindings.userComment.rangeStart}"
+                                    emptyText="#{bindings.userComment.viewable ? resources.NO_ROWS_YET : resources.ACCESS_DENIED}"
+                                    selectedRowKeys="#{bindings.userComment.collectionModel.selectedRow}"
+                                    selectionListener="#{bindings.userComment.collectionModel.makeCurrent}"
+                                    rowSelection="none" immediate="true"
+                                    contentDelivery="immediate"
+                                    inlineStyle="border-width:1px;height:10em;width:95%;"
+                                    columnStretching="last"
+                                    summary="resources.COMMENTS_FOR_WORKLIST_TASK"
+                                    partialTriggers="::cmtOK" id="t3">
+                            <af:column noWrap="false" separateRows="true"
+                                       headerText="#{null}"
+                                       rowHeader="unstyled" id="c2">
+                              <af:panelGroupLayout layout="horizontal"
+                                                   id="pgl16">
+                                <af:outputText value="#{row.updatedDate}"
+                                               truncateAt="9999"
+                                               inlineStyle="font-weight:bold"
+                                               id="ot22">
+                                  <f:convertDateTime type="#{pageFlowScope.dt}"
+                                                     timeZone="#{pageFlowScope.tz}"
+                                                     dateStyle="#{pageFlowScope.df}"
+                                                     timeStyle="#{pageFlowScope.tf}"
+                                                     pattern="#{pageFlowScope.dateTimePattern}"/>
+                                </af:outputText>
+                                <af:spacer width="12" id="s16"/>
+                                <af:outputText value="#{row.updatedBy.displayName}"
+                                               truncateAt="9999"
+                                               inlineStyle="font-weight:bold"
+                                               id="ot3"/>
+                              </af:panelGroupLayout>
+                              <af:outputText value="#{row.comment}"
+                                             truncateAt="9999" id="ot4"/>
+                            </af:column>
+                          </af:table>
+                        </f:facet>
+                        <f:facet name="true">
+                          <af:table verticalGridVisible="false"
+                                    horizontalGridVisible="false"
+                                    value="#{bindings.userComment.children}"
+                                    var="row"
+                                    rows="#{bindings.userComment.rangeSize}"
+                                    first="#{bindings.userComment.rangeStart}"
+                                    selectedRowKeys="#{bindings.userComment.collectionModel.selectedRow}"
+                                    selectionListener="#{bindings.userComment.collectionModel.makeCurrent}"
+                                    rowSelection="none" immediate="true"
+                                    contentDelivery="immediate"
+                                    inlineStyle="border-width:1px;height:10em;width:95%;"
+                                    columnStretching="last"
+                                    summary="resources.COMMENTS_FOR_WORKLIST_TASK"
+                                    partialTriggers="::cmtOK" id="t5">
+                            <af:column noWrap="false" separateRows="true"
+                                       headerText="#{null}"
+                                       rowHeader="unstyled" id="c3">
+                              <af:panelGroupLayout layout="horizontal"
+                                                   id="pgl26">
+                                <af:outputText value="#{row.updatedDate}"
+                                               truncateAt="9999"
+                                               inlineStyle="font-weight:bold"
+                                               id="ot2">
+                                  <f:convertDateTime type="#{pageFlowScope.dt}"
+                                                     timeZone="#{pageFlowScope.tz}"
+                                                     dateStyle="#{pageFlowScope.df}"
+                                                     timeStyle="#{pageFlowScope.tf}"
+                                                     pattern="#{pageFlowScope.dateTimePattern}"/>
+                                </af:outputText>
+                                <af:spacer width="12" id="s1"/>
+                                <af:outputText value="#{row.updatedBy.displayName}"
+                                               truncateAt="9999"
+                                               inlineStyle="font-weight:bold"
+                                               id="ot18"/>
+                              </af:panelGroupLayout>
+                              <af:outputText value="#{row.comment}"
+                                             truncateAt="9999" id="ot28"/>
+                            </af:column>
+                          </af:table>
+                        </f:facet>
+                      </af:switcher>
+                    </af:showDetailHeader>
+                  </trh:cellFormat>
+                  <trh:cellFormat id="cf1">
+                    <af:spacer width="15" height="15" id="s2"/>
+                  </trh:cellFormat>
+                  <trh:cellFormat width="47%" valign="top" id="cf2">
+                    <af:showDetailHeader size="2" id="attHd"
+                                         text="#{resources.ATTACHMENTS}"
+                                         disclosed="#{actionAvailable.discloseCommentsAttach}"
+                                         contentStyle="padding: 5px;"
+                                         rendered="false">
+                      <f:facet name="info"/>
+                      <f:facet name="legend"/>
+                      <f:facet name="menuBar"/>
+                      <f:facet name="toolbar">
+                        <af:toolbar visible="#{actionAvailable.isAttachmentUpdatable and pageFlowScope.ADFHumanTaskBean.isDocStoreAvailable}"
+                                    partialTriggers="addAtOK delAtOK" id="t1">
+                          <af:commandImageLink id="addAtBt" partialSubmit="true"
+                                               actionListener="#{bindings.CreateInsert1.execute}"
+                                               action="#{popupBean.showAttachmentDialog}"
+                                               shortDesc="#{resources.ADD}"
+                                               icon="/hw_images/add_ena.png"
+                                               visible="#{actionAvailable.isAttachmentUpdatable}"
+                                               disabledIcon="/hw_images/add_dis.png"
+                                               depressedIcon="/hw_images/add_dwn.png"
+                                               hoverIcon="/hw_images/add_ovr.png"
+                                               immediate="true"/>
+                          <f:facet name="separator">
+                            <af:spacer width="3" id="s5"/>
+                          </f:facet>
+                          <af:commandImageLink id="delAtBt" partialSubmit="true"
+                                               action="#{popupBean.showAttachmentDeleteDialog}"
+                                               disabled="#{!pageFlowScope.ADFHumanTaskBean.attachDeleteEnabled or pageFlowScope.ADFHumanTaskBean.isCaseTask}"
+                                               visible="#{actionAvailable.isAttachmentUpdatable}"
+                                               icon="/hw_images/delete_ena.png"
+                                               shortDesc="#{resources.DELETE}"
+                                               disabledIcon="/hw_images/delete_dis.png"
+                                               hoverIcon="/hw_images/delete_ovr.png"
+                                               inlineStyle="margin-left:3px"
+                                               depressedIcon="/hw_images/delete_dwn.png"
+                                               immediate="true"/>
+                        </af:toolbar>
+                      </f:facet>
+                      <f:facet name="context"/>
+                      <af:switcher facetName="#{actionAvailable.inNotificationClient}"
+                                   id="s17">
+                        <f:facet name="false">
+                          <af:table verticalGridVisible="false"
+                                    horizontalGridVisible="false"
+                                    value="#{bindings.attachment.collectionModel}"
+                                    var="row"
+                                    rows="#{bindings.attachment.rangeSize}"
+                                    first="#{bindings.attachment.rangeStart}"
+                                    emptyText="#{bindings.attachment.viewable ? resources.NO_ROWS_YET : resources.ACCESS_DENIED}"
+                                    selectedRowKeys="#{bindings.attachment.collectionModel.selectedRow}"
+                                    selectionListener="#{bindings.attachment.collectionModel.makeCurrent}"
+                                    inlineStyle="width:95%; height:10em; border-width:1px;"
+                                    id="attTb1"
+                                    partialTriggers="::addAtOK ::delAtOK"
+                                    columnStretching="last"
+                                    summary="#{resources.ATTACHMENTS_FOR_WORKLIST_TASK}"
+                                    contentDelivery="immediate"
+                                    rowSelection="single"
+                                    visible="#{pageFlowScope.ADFHumanTaskBean.isDocStoreAvailable}">
+                            <af:column noWrap="false"
+                                       headerText="#{resources.NAME}"
+                                       rowHeader="unstyled" id="c1">
+                              <af:panelGroupLayout id="pgl15">
+                                <af:switcher facetName="#{row.attachmentScope eq 'BPM'}"
+                                             id="s26">
+                                  <f:facet name="true">
+                                    <af:switcher facetName="#{row.updatedBy eq pageFlowScope.ADFHumanTaskBean.user}"
+                                                 id="s7">
+                                      <f:facet name="false">
+                                        <af:goImageLink text="#{row.name}"
+                                                        destination="#{pageFlowScope.readAttachmentBean.URL}"
+                                                        icon="/hw_images/bpm_icon_16x16.png"
+                                                        shortDesc="#{resources.CANNOT_DEL_ATTACH}"
+                                                        targetFrame="_blank"
+                                                        id="gil3"/>
+                                      </f:facet>
+                                      <f:facet name="true">
+                                        <af:goImageLink text="#{row.name}"
+                                                        destination="#{pageFlowScope.readAttachmentBean.URL}"
+                                                        icon="/hw_images/bpm_icon_16x16.png"
+                                                        targetFrame="_blank"
+                                                        id="gilx1"/>
+                                      </f:facet>
+                                    </af:switcher>
+                                  </f:facet>
+                                  <f:facet name="false">
+                                    <af:goImageLink text="#{row.name}"
+                                                    destination="#{pageFlowScope.readAttachmentBean.URL}"
+                                                    icon="/hw_images/humantask_ena.png"
+                                                    targetFrame="_blank"
+                                                    id="gil2"/>
+                                  </f:facet>
+                                </af:switcher>
+                              </af:panelGroupLayout>
+                            </af:column>
+                            <af:column noWrap="false"
+                                       headerText="#{resources.UPDATED_BY}"
+                                       rowHeader="unstyled" id="uTypeu1">
+                              <af:panelGroupLayout id="uPgTypeu1">
+                                <af:switcher facetName="#{!empty row.updatedByDisplayName}"
+                                             id="s21">
+                                  <f:facet name="true">
+                                    <af:outputText value="#{row.updatedByDisplayName}"
+                                                   id="uFieldu11"/>
+                                  </f:facet>
+                                  <f:facet name="false">
+                                    <af:outputText value="#{row.updatedBy}"
+                                                   id="uFieldu12"/>
+                                  </f:facet>
+                                </af:switcher>
+                              </af:panelGroupLayout>
+                            </af:column>
+                            <af:column noWrap="false"
+                                       headerText="#{resources.DATE_UPDATED}"
+                                       rowHeader="unstyled" id="udTypeu1">
+                              <af:panelGroupLayout id="udPgTypeu1">
+                                <af:outputText value="#{row.updatedDate}"
+                                               id="udFieldu1"/>
+                              </af:panelGroupLayout>
+                            </af:column>
+                          </af:table>
+                        </f:facet>
+                        <f:facet name="true">
+                          <af:table verticalGridVisible="false"
+                                    horizontalGridVisible="false"
+                                    value="#{bindings.attachment.collectionModel}"
+                                    var="row"
+                                    rows="#{bindings.attachment.rangeSize}"
+                                    first="#{bindings.attachment.rangeStart}"
+                                    selectedRowKeys="#{bindings.attachment.collectionModel.selectedRow}"
+                                    selectionListener="#{bindings.attachment.collectionModel.makeCurrent}"
+                                    inlineStyle="width:95%; height:10em; border-width:1px;"
+                                    id="attTb2"
+                                    partialTriggers="::addAtOK ::delAtOK"
+                                    columnStretching="last"
+                                    summary="#{resources.ATTACHMENTS_FOR_WORKLIST_TASK}"
+                                    contentDelivery="immediate"
+                                    rowSelection="single"
+                                    visible="#{pageFlowScope.ADFHumanTaskBean.isDocStoreAvailable}">
+                            <af:column noWrap="false"
+                                       headerText="#{resources.NAME}"
+                                       rowHeader="unstyled" id="c4">
+                              <af:panelGroupLayout id="pgl6">
+                                <af:switcher facetName="#{row.attachmentScope eq 'BPM'}"
+                                             id="s8">
+                                  <f:facet name="true">
+                                    <af:switcher facetName="#{row.updatedBy eq pageFlowScope.ADFHumanTaskBean.user}"
+                                                 id="s25">
+                                      <f:facet name="false">
+                                        <af:goImageLink text="#{row.name}"
+                                                        destination="#{pageFlowScope.readAttachmentBean.URL}"
+                                                        icon="/hw_images/bpm_icon_16x16.png"
+                                                        shortDesc="#{resources.CANNOT_DEL_ATTACH}"
+                                                        targetFrame="_blank"
+                                                        id="gil1"/>
+                                      </f:facet>
+                                      <f:facet name="true">
+                                        <af:goImageLink text="#{row.name}"
+                                                        destination="#{pageFlowScope.readAttachmentBean.URL}"
+                                                        icon="/hw_images/bpm_icon_16x16.png"
+                                                        targetFrame="_blank"
+                                                        id="gilx2"/>
+                                      </f:facet>
+                                    </af:switcher>
+                                  </f:facet>
+                                  <f:facet name="false">
+                                    <af:goImageLink text="#{row.name}"
+                                                    destination="#{pageFlowScope.readAttachmentBean.URL}"
+                                                    icon="/hw_images/humantask_ena.png"
+                                                    targetFrame="_blank"
+                                                    id="gil4"/>
+                                  </f:facet>
+                                </af:switcher>
+                              </af:panelGroupLayout>
+                            </af:column>
+                            <af:column noWrap="false"
+                                       headerText="#{resources.UPDATED_BY}"
+                                       rowHeader="unstyled" id="uTypeu2">
+                              <af:panelGroupLayout id="uPgTypeu2">
+                                <af:switcher facetName="#{!empty row.updatedByDisplayName}"
+                                             id="s20">
+                                  <f:facet name="true">
+                                    <af:outputText value="#{row.updatedByDisplayName}"
+                                                   id="uFieldu21"/>
+                                  </f:facet>
+                                  <f:facet name="false">
+                                    <af:outputText value="#{row.updatedBy}"
+                                                   id="uFieldu22"/>
+                                  </f:facet>
+                                </af:switcher>
+                              </af:panelGroupLayout>
+                            </af:column>
+                            <af:column noWrap="false"
+                                       headerText="#{resources.DATE_UPDATED}"
+                                       rowHeader="unstyled" id="udTypeu2">
+                              <af:panelGroupLayout id="udPgTypeu2">
+                                <af:outputText value="#{row.updatedDate}"
+                                               id="udFieldu2"/>
+                              </af:panelGroupLayout>
+                            </af:column>
+                          </af:table>
+                        </f:facet>
+                      </af:switcher>
+                      <af:panelBox text="#{resources.ERR_MSG}" id="pb41"
+                                   visible="#{!pageFlowScope.ADFHumanTaskBean.isDocStoreAvailable}">
+                        <af:panelFormLayout id="pfl20">
+                          <af:outputText value="#{resources.DOC_STORE_NA}"
+                                         id="of1"/>
+                        </af:panelFormLayout>
+                      </af:panelBox>
+                    </af:showDetailHeader>
+                  </trh:cellFormat>
+                </trh:rowLayout>
+              </trh:tableLayout>
+              <af:popup id="popupAddCommentDialog"
+                        contentDelivery="lazyUncached"
+                        popupCanceledListener="#{invokeActionBean.commentsPopupCanceled}"
+                        attributeChangeListener="#{bindings.CreateInsert.execute}"
+                        childCreation="deferred">
+                <af:dialog title="#{resources.CREATE_COMMENT}" type="none"
+                           modal="true" id="cmtDlg">
+                  <f:facet name="buttonBar">
+                    <af:panelGroupLayout id="pgl28">
+                      <af:commandButton textAndAccessKey="#{resources.OK_AK}"
+                                        id="cmtOK"
+                                        action="#{popupBean.hideCommentDialog}"
+                                        partialSubmit="true"/>
+                      <af:commandButton textAndAccessKey="#{resources.CANCEL_AK}"
+                                        actionListener="#{bindings.Delete.execute}"
+                                        immediate="true" partialSubmit="true"
+                                        id="cmtCan"
+                                        action="#{popupBean.hideCommentDialog}"/>
+                    </af:panelGroupLayout>
+                  </f:facet>
+                  <af:panelGroupLayout id="pgl33">
+                    <af:panelFormLayout id="pfl2">
+                      <f:facet name="footer"/>
+                      <af:inputText id="cmtBox" rows="3" columns="80"
+                                    value="#{bindings.comment.inputValue}"
+                                    label="#{resources.COMMENT}" required="true"
+                                    maximumLength="2000"/>
+                      <af:selectOneRadio value="#{bindings.commentScope.inputValue}"
+                                         label="#{resources.UPLOAD_TO_PROCESS}"
+                                         id="uploadToProcComment"
+                                         visible="#{pageFlowScope.ADFHumanTaskBean.taskBelongsToProcess and !pageFlowScope.ADFHumanTaskBean.isCaseTask}"
+                                         layout="vertical">
+                        <af:selectItem label="#{resources.TASK}" value="TASK"
+                                       id="si11"/>
+                        <af:selectItem label="#{resources.BPM}" value="BPM"
+                                       id="si21"/>
+                      </af:selectOneRadio>
+                    </af:panelFormLayout>
+                  </af:panelGroupLayout>
+                </af:dialog>
+              </af:popup>
+              <af:popup id="popupAddAttachmentDialog"
+                        contentDelivery="lazyUncached"
+                        popupCanceledListener="#{invokeActionBean.attachmentsPopupCanceled}"
+                        childCreation="deferred">
+                <af:dialog title="#{resources.ADD_ATTACHMENT}" type="none"
+                           id="d2">
+                  <f:facet name="buttonBar">
+                    <af:panelGroupLayout id="pgl5">
+                      <af:commandButton id="addAtOK"
+                                        action="#{addAttachmentBean.attachmentOK}"
+                                        textAndAccessKey="#{resources.OK_AK}"
+                                        partialSubmit="true"/>
+                      <af:commandButton id="attCan"
+                                        textAndAccessKey="#{resources.CANCEL_AK}"
+                                        actionListener="#{bindings.Delete1.execute}"
+                                        action="#{addAttachmentBean.clear}"
+                                        immediate="true" partialSubmit="true"/>
+                    </af:panelGroupLayout>
+                  </f:facet>
+                  <af:panelGroupLayout id="pgl31">
+                    <f:facet name="separator">
+                      <af:spacer width="15" height="15" id="s12"/>
+                    </f:facet>
+                    <af:panelFormLayout id="pfl7">
+                      <af:selectOneRadio value="#{bindings.attachmentScope.inputValue}"
+                                         label="#{resources.UPLOAD_TO_PROCESS}"
+                                         id="uploadToProcAttach"
+                                         visible="#{pageFlowScope.ADFHumanTaskBean.taskBelongsToProcess and !pageFlowScope.ADFHumanTaskBean.isCaseTask}"
+                                         layout="vertical">
+                        <af:selectItem label="#{resources.TASK}" value="TASK"
+                                       id="si14"/>
+                        <af:selectItem label="#{resources.BPM}" value="BPM"
+                                       id="si25"/>
+                      </af:selectOneRadio>
+                      <af:spacer width="10" height="10" id="s10"/>
+                      <af:selectOneRadio label="#{resources.ATTACH_TYPE}"
+                                         value="#{pageFlowScope.readAttachmentBean.selectedAttachmentType}"
+                                         valueChangeListener="#{pageFlowScope.readAttachmentBean.toggle}"
+                                         autoSubmit="true" id="edAttTy"
+                                         immediate="true" required="true"
+                                         layout="vertical">
+                        <af:selectItem label="#{resources.URL}" value="url"
+                                       id="si3"/>
+                        <af:selectItem label="#{resources.DESKTOP_FILE}"
+                                       value="file"
+                                       rendered="#{!pageFlowScope.ADFHumanTaskBean.isUsingUCM}"
+                                       id="si2"/>
+                        <af:selectItem label="#{resources.UCM_UPLOAD}"
+                                       value="file"
+                                       rendered="#{pageFlowScope.ADFHumanTaskBean.isUsingUCM}"
+                                       id="si1"/>
+                        <af:selectItem label="#{resources.ASSOCIATE_UCM_DOCUMENT}"
+                                       value="ucm"
+                                       rendered="#{pageFlowScope.ADFHumanTaskBean.isUsingUCM}"
+                                       id="si5"/>
+                      </af:selectOneRadio>
+                    </af:panelFormLayout>
+                    <af:panelGroupLayout layout="vertical"
+                                         partialTriggers="edAttTy" id="pgl3">
+                      <af:inputText id="attName" label="#{resources.NAME}"
+                                    value="#{bindings.name.inputValue}"
+                                    required="#{pageFlowScope.readAttachmentBean.selectedAttachmentType == 'url'}"
+                                    partialTriggers="edAttTy"
+                                    maximumLength="128"/>
+                      <af:switcher facetName="#{pageFlowScope.readAttachmentBean.selectedAttachmentType}"
+                                   id="s27">
+                        <f:facet name="url">
+                          <af:panelFormLayout id="pfl16">
+                            <af:inputText id="attHref" label="#{resources.URL}"
+                                          value="#{bindings.URI.inputValue}"
+                                          required="#{pageFlowScope.readAttachmentBean.selectedAttachmentType == 'url'}"
+                                          partialTriggers="edAttTy"
+                                          maximumLength="256"/>
+                          </af:panelFormLayout>
+                        </f:facet>
+                        <f:facet name="file">
+                          <af:panelGroupLayout layout="vertical" id="pgl2">
+                            <af:panelFormLayout id="pfl6">
+                              <af:inputFile label="#{resources.FILE_NAME}"
+                                            value="#{addAttachmentBean.file}"
+                                            id="attFile" required="true"
+                                            partialTriggers="edAttTy"/>
+                              <af:inputText label="#{resources.DESCRIPTION}"
+                                            value="#{pageFlowScope.ADFHumanTaskBean.docComments}"
+                                            visible="#{pageFlowScope.ADFHumanTaskBean.docCommentsShow}"
+                                            readOnly="#{!pageFlowScope.ADFHumanTaskBean.docCommentsEdit}"
+                                            rows="4" id="it80"/>
+                            </af:panelFormLayout>
+                            <af:spacer height="10" width="10" id="s13"/>
+                            <af:switcher facetName="#{pageFlowScope.ADFHumanTaskBean.isUsingUCM}"
+                                         id="s18">
+                              <f:facet name="true">
+                                <af:panelFormLayout id="pfl3">
+                                  <af:inputText id="attDir"
+                                                label="#{resources.FOLDER_NAME}"
+                                                value="#{pageFlowScope.ADFHumanTaskBean.folder}"
+                                                visible="#{pageFlowScope.ADFHumanTaskBean.folderShow}"
+                                                partialTriggers="edAttTy"
+                                                readOnly="#{!pageFlowScope.ADFHumanTaskBean.folderEdit}"
+                                                maximumLength="256">
+                                    <af:autoSuggestBehavior suggestedItems="#{pageFlowScope.ADFHumanTaskBean.onFolderSuggest}"/>
+                                  </af:inputText>
+                                  <af:selectOneChoice value="#{pageFlowScope.ADFHumanTaskBean.docType}"
+                                                      label="#{resources.DOCUMENT_TYPE}"
+                                                      visible="#{pageFlowScope.ADFHumanTaskBean.docTypeShow}"
+                                                      partialTriggers="edAttTy"
+                                                      readOnly="#{!pageFlowScope.ADFHumanTaskBean.docTypeEdit}"
+                                                      required="true" id="soc1">
+                                    <f:selectItems value="#{pageFlowScope.ADFHumanTaskBean.documentTypeList}"
+                                                   id="si4"/>
+                                  </af:selectOneChoice>
+                                  <af:selectOneChoice value="#{pageFlowScope.ADFHumanTaskBean.account}"
+                                                      label="#{resources.ACCOUNT}"
+                                                      visible="#{pageFlowScope.ADFHumanTaskBean.accountShow}"
+                                                      partialTriggers="edAttTy"
+                                                      readOnly="#{!pageFlowScope.ADFHumanTaskBean.accountEdit}"
+                                                      rendered="#{!empty pageFlowScope.ADFHumanTaskBean.accountList}"
+                                                      id="soc2">
+                                    <f:selectItems value="#{pageFlowScope.ADFHumanTaskBean.accountList}"
+                                                   id="si7"/>
+                                  </af:selectOneChoice>
+                                  <af:inputText value="#{pageFlowScope.ADFHumanTaskBean.revision}"
+                                                label="#{resources.REVISION}"
+                                                visible="#{pageFlowScope.ADFHumanTaskBean.revisionShow}"
+                                                partialTriggers="edAttTy"
+                                                readOnly="#{!pageFlowScope.ADFHumanTaskBean.revisionEdit}"
+                                                id="it70"/>
+                                  <af:switcher facetName="#{!empty pageFlowScope.dateTimePattern}"
+                                               id="s29">
+                                    <f:facet name="true">
+                                      <af:inputDate value="#{pageFlowScope.ADFHumanTaskBean.releaseDate}"
+                                                    label="#{resources.RELEASE_DATE}"
+                                                    visible="#{pageFlowScope.ADFHumanTaskBean.releaseDateShow}"
+                                                    partialTriggers="edAttTy"
+                                                    readOnly="#{!pageFlowScope.ADFHumanTaskBean.releaseDateEdit}"
+                                                    id="id12">
+                                        <f:convertDateTime type="#{pageFlowScope.dt}"
+                                                           timeZone="#{pageFlowScope.tz}"
+                                                           dateStyle="#{pageFlowScope.df}"
+                                                           pattern="#{pageFlowScope.dateTimePattern}"
+                                                           timeStyle="#{pageFlowScope.tf}"/>
+                                      </af:inputDate>
+                                    </f:facet>
+                                    <f:facet name="false">
+                                      <af:inputDate value="#{pageFlowScope.ADFHumanTaskBean.releaseDate}"
+                                                    label="#{resources.RELEASE_DATE}"
+                                                    visible="#{pageFlowScope.ADFHumanTaskBean.releaseDateShow}"
+                                                    partialTriggers="edAttTy"
+                                                    readOnly="#{!pageFlowScope.ADFHumanTaskBean.releaseDateEdit}"
+                                                    id="id7">
+                                        <f:convertDateTime type="#{pageFlowScope.dt}"
+                                                           timeZone="#{pageFlowScope.tz}"
+                                                           dateStyle="#{pageFlowScope.df}"
+                                                           timeStyle="#{pageFlowScope.tf}"/>
+                                      </af:inputDate>
+                                    </f:facet>
+                                  </af:switcher>
+                                  <af:switcher facetName="#{!empty pageFlowScope.dateTimePattern}"
+                                               id="s3">
+                                    <f:facet name="true">
+                                      <af:inputDate value="#{pageFlowScope.ADFHumanTaskBean.expirationDate}"
+                                                    label="#{resources.EXPIRATION_DATE}"
+                                                    readOnly="#{!pageFlowScope.ADFHumanTaskBean.releaseDateEdit}"
+                                                    visible="#{pageFlowScope.ADFHumanTaskBean.expirationDateShow}"
+                                                    partialTriggers="edAttTy"
+                                                    id="id1">
+                                        <f:convertDateTime type="#{pageFlowScope.dt}"
+                                                           timeZone="#{pageFlowScope.tz}"
+                                                           dateStyle="#{pageFlowScope.df}"
+                                                           pattern="#{pageFlowScope.dateTimePattern}"
+                                                           timeStyle="#{pageFlowScope.tf}"/>
+                                      </af:inputDate>
+                                    </f:facet>
+                                    <f:facet name="false">
+                                      <af:inputDate value="#{pageFlowScope.ADFHumanTaskBean.expirationDate}"
+                                                    label="#{resources.EXPIRATION_DATE}"
+                                                    readOnly="#{!pageFlowScope.ADFHumanTaskBean.releaseDateEdit}"
+                                                    visible="#{pageFlowScope.ADFHumanTaskBean.expirationDateShow}"
+                                                    partialTriggers="edAttTy"
+                                                    id="id14">
+                                        <f:convertDateTime type="#{pageFlowScope.dt}"
+                                                           timeZone="#{pageFlowScope.tz}"
+                                                           dateStyle="#{pageFlowScope.df}"
+                                                           timeStyle="#{pageFlowScope.tf}"/>
+                                      </af:inputDate>
+                                    </f:facet>
+                                  </af:switcher>
+                                  <af:selectOneChoice value="#{pageFlowScope.ADFHumanTaskBean.securityGroup}"
+                                                      label="#{resources.SECURITY_GROUP}"
+                                                      visible="#{pageFlowScope.ADFHumanTaskBean.secGroupShow}"
+                                                      required="true"
+                                                      readOnly="#{!pageFlowScope.ADFHumanTaskBean.secGroupEdit}"
+                                                      partialTriggers="edAttTy"
+                                                      id="soc3">
+                                    <f:selectItems value="#{pageFlowScope.ADFHumanTaskBean.securityGroupList}"
+                                                   id="si6"/>
+                                  </af:selectOneChoice>
+                                </af:panelFormLayout>
+                              </f:facet>
+                            </af:switcher>
+                          </af:panelGroupLayout>
+                        </f:facet>
+                        <f:facet name="ucm">
+                          <af:panelGroupLayout layout="vertical" id="pgl9">
+                            <af:inputListOfValues label="#{resources.DOCUMENT_ID}"
+                                                  id="idInputComboboxLOVWithTable"
+                                                  value="#{pageFlowScope.readAttachmentBean.ucmDocId}"
+                                                  autoSubmit="true"
+                                                  popupTitle="#{resources.SRCH_SLCT_DOC_ID}"
+                                                  searchDesc="#{resources.SRCH_SLCT_DOC_ID}"
+                                                  partialTriggers="edAttTy"
+                                                  model="#{pageFlowScope.ADFHumanTaskBean.listOfValuesModel}"
+                                                  columns="60"
+                                                  required="#{pageFlowScope.readAttachmentBean.selectedAttachmentType == 'ucm'}"
+                                                  rendered="#{pageFlowScope.ADFHumanTaskBean.isUsingUCM}"
+                                                  visible="#{pageFlowScope.readAttachmentBean.selectedAttachmentType == 'ucm'}"/>
+                          </af:panelGroupLayout>
+                        </f:facet>
+                      </af:switcher>
+                    </af:panelGroupLayout>
+                  </af:panelGroupLayout>
+                </af:dialog>
+              </af:popup>
+              <af:popup id="popupDeleteAttachmentDialog"
+                        contentDelivery="lazyUncached" childCreation="deferred">
+                <af:dialog title="#{resources.DELETE_ATTACHMENT}" type="none"
+                           modal="true" closeIconVisible="false" id="attDelDlg">
+                  <f:facet name="buttonBar">
+                    <af:panelGroupLayout id="pgl7">
+                      <af:commandButton textAndAccessKey="#{resources.OK_AK}"
+                                        actionListener="#{bindings.Delete1.execute}"
+                                        immediate="true" partialSubmit="true"
+                                        id="delAtOK"
+                                        action="#{popupBean.hideAttachmentDeleteDialog}"/>
+                      <af:commandButton textAndAccessKey="#{resources.CANCEL_AK}"
+                                        id="delAtCan"
+                                        action="#{popupBean.hideAttachmentDeleteDialog}"
+                                        partialSubmit="true"/>
+                    </af:panelGroupLayout>
+                  </f:facet>
+                  <af:panelGroupLayout id="pgl1">
+                    <af:panelFormLayout id="pfl4">
+                      <af:outputText id="delAttTxt"
+                                     value="#{resources.DELETE_ATTACHMENT_MSG}"/>
+                    </af:panelFormLayout>
+                  </af:panelGroupLayout>
+                </af:dialog>
+              </af:popup>
+              <af:popup id="reassignPopup" contentDelivery="lazyUncached"
+                        childCreation="deferred">
+                <af:dialog id="reAsDg"
+                           dialogListener="#{invokeActionBean.reassignAction}"
+                           cancelTextAndAccessKey="#{resources.CANCEL_AK}"
+                           affirmativeTextAndAccessKey="#{resources.OK_AK}"
+                           title="#{resources.REASSIGNPAGE}">
+                  <wlc:identityBrowser identityBrowserView="#{pageFlowScope.identityBrowserView}"
+                                       workflowContext="#{pageFlowScope.taskFlowReassignBean.workflowContext}"
+                                       id="reAsIdB" mode="REASSIGN"
+                                       showActionButtons="false"
+                                       selectedTaskIds="#{pageFlowScope.taskFlowReassignBean.selectedTaskIds}"/>
+                </af:dialog>
+              </af:popup>
+              <af:popup id="requestInfoPopup" contentDelivery="lazyUncached"
+                        childCreation="deferred">
+                <af:dialog title="#{resources.INFOREQUESTEDPAGE}"
+                           cancelTextAndAccessKey="#{resources.CANCEL_AK}"
+                           affirmativeTextAndAccessKey="#{resources.OK_AK}"
+                           dialogListener="#{invokeActionBean.requestInfoAction}"
+                           id="reqIfD">
+                  <wlc:requestInfoDialog workflowContext="#{pageFlowScope.taskFlowReassignBean.workflowContext}"
+                                         id="rqIDgC"
+                                         selectedTaskId="#{pageFlowScope.taskFlowReassignBean.selectedTaskIds[0]}"/>
+                </af:dialog>
+              </af:popup>
+              <af:popup id="routePopup" contentDelivery="lazyUncached"
+                        childCreation="deferred">
+                <af:dialog title="#{resources.ROUTEPAGE}"
+                           cancelTextAndAccessKey="#{resources.CANCEL_AK}"
+                           affirmativeTextAndAccessKey="#{resources.OK_AK}"
+                           dialogListener="#{invokeActionBean.routeTaskAction}"
+                           id="rteDg">
+                  <wlc:identityBrowser identityBrowserView="#{pageFlowScope.identityBrowserView}"
+                                       workflowContext="#{pageFlowScope.taskFlowReassignBean.workflowContext}"
+                                       id="rteIdB" mode="ROUTE"
+                                       selectedTaskIds="#{pageFlowScope.taskFlowReassignBean.selectedTaskIds}"
+                                       showActionButtons="false"/>
+                </af:dialog>
+              </af:popup>
+              <af:popup id="decomposePopup" contentDelivery="lazyUncached"
+                        childCreation="deferred">
+                <af:dialog title="#{pageFlowScope.ADFHumanTaskBean.decomposeDialogTitle}"
+                           cancelTextAndAccessKey="#{resources.CANCEL_AK}"
+                           affirmativeTextAndAccessKey="#{resources.OK_AK}"
+                           dialogListener="#{invokeActionBean.decomposeTaskAction}"
+                           id="dcmpDg">
+                  <wlc:identityBrowser identityBrowserView="#{pageFlowScope.identityBrowserView}"
+                                       workflowContext="#{pageFlowScope.ADFHumanTaskBean.workflowContext}"
+                                       id="dcmpIdB" mode="DECOMPOSE"
+                                       selectedTaskObject="#{pageFlowScope.ADFHumanTaskBean.task}"
+                                       showActionButtons="false"/>
+                </af:dialog>
+              </af:popup>
+              <af:popup id="popupEnterPasswordDialog"
+                        contentDelivery="lazyUncached" childCreation="deferred">
+                <af:dialog title="#{resources.ENTER_PASSWORD}"
+                           dialogListener="#{invokeActionBean.validatePassword}"
+                           type="okCancel" modal="true"
+                           cancelTextAndAccessKey="#{resources.CANCEL_AK}"
+                           affirmativeTextAndAccessKey="#{resources.OK_AK}"
+                           closeIconVisible="false" id="pwdDlg">
+                  <af:panelGroupLayout id="pgl30">
+                    <af:panelFormLayout id="pfl1">
+                      <af:inputText id="pwdBox" rows="1" columns="50"
+                                    value="#{invokeActionBean.password}"
+                                    label="#{resources.PASSWORD}" secret="true"
+                                    required="true"/>
+                    </af:panelFormLayout>
+                  </af:panelGroupLayout>
+                </af:dialog>
+              </af:popup>
+              <af:popup id="helpPopup" childCreation="deferred">
+                <af:switcher facetName="#{pageFlowScope.taskDocumentationBean.isTaskDoc}"
+                             id="s4">
+                  <f:facet name="true">
+                    <af:panelGroupLayout layout="vertical" id="pgl12">
+                      <af:goImageLink text="#{resources.OPEN_IN_WINDOW}"
+                                      destination="#{pageFlowScope.taskDocumentationBean.docURL}"
+                                      targetFrame="help" id="help"
+                                      rendered="#{!empty bindings.activityId.inputValue}"/>
+                      <af:outputFormatted value="#{pageFlowScope.taskDocumentationBean.taskDoc}"
+                                          id="of2"/>
+                    </af:panelGroupLayout>
+                  </f:facet>
+                  <f:facet name="false">
+                    <af:outputText value="#{resources.TASK_DOC_NOT_AVAILABLE}"
+                                   id="ot8"/>
+                  </f:facet>
+                </af:switcher>
+              </af:popup>
+            </af:panelGroupLayout>
+          </af:panelHeader>
+        </af:panelGroupLayout>
+        </f:facet>
+      </af:pageTemplate>
+      </af:form>
+    </af:document>
+  </f:view>
+</jsp:root>

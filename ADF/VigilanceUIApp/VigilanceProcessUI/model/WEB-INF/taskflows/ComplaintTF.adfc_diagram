@@ -1,0 +1,76 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <View
+      id="View2">
+      <property
+         name="activityId">home</property>
+      <property
+         name="page">/fragments/home.jsff</property>
+      <property
+         name="start">false</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>home&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">269.59766</property>
+      <property
+         name="pageFragment">true</property>
+      <property
+         name="x">411.0</property>
+   </View>
+   <View
+      id="View3">
+      <property
+         name="activityId">nonEditableHome</property>
+      <property
+         name="page">/fragments/nonEditableHome.jsff</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>nonEditableHome&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">420.79883</property>
+      <property
+         name="pageFragment">true</property>
+      <property
+         name="x">450.69824</property>
+   </View>
+   <MethodCall
+      id="MethodCall4">
+      <property
+         name="activityId">checkTaskName</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>checkTaskName&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">370.5459</property>
+      <property
+         name="x">183.0</property>
+   </MethodCall>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase5"
+      from="MethodCall4"
+      to="View2">
+      <property
+         name="fromOutcome">dataentry</property>
+      <property
+         name="sdm:polyPoints">R46,224.0,366.6953,370.0,269.24707,L50</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase6"
+      from="MethodCall4"
+      to="View3">
+      <property
+         name="fromOutcome">other</property>
+      <property
+         name="sdm:polyPoints">R54,224.0,373.6953,409.69824,420.44824,L50</property>
+   </ControlFlowCase>
+</SDM>

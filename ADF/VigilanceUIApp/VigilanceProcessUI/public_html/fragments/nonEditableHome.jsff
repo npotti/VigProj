@@ -1,0 +1,219 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelGroupLayout id="pgl1" layout="scroll">
+    <af:showDetailHeader text="Case Registration" disclosed="true" id="sdh1"
+                         size="1" styleClass="portlet-header">
+      <f:facet name="context"/>
+      <f:facet name="menuBar"/>
+      <f:facet name="toolbar"/>
+      <f:facet name="legend"/>
+      <f:facet name="info"/>
+      <af:panelFormLayout id="pfl1">
+        <af:panelLabelAndMessage label="#{bindings.SystemSerialNo.hints.label}"
+                                 id="plam7">
+          <af:outputText value="#{bindings.SystemSerialNo.inputValue}"
+                         id="ot4"/>
+        </af:panelLabelAndMessage>
+        <af:panelLabelAndMessage label="#{bindings.CCFileNumber.hints.label}"
+                                 id="plam5">
+          <af:inputText value="#{bindings.CCFileNumber.inputValue}" id="ot8"
+                        label="Label 1" simple="true"
+                        readOnly="#{bindings.TaskName.inputValue ne 'Verify Complaint'}"/>
+        </af:panelLabelAndMessage>
+        <af:panelLabelAndMessage label="#{bindings.BranchCode.hints.label}"
+                                 id="plam3">
+          <af:outputText value="#{bindings.BranchCode.inputValue}" id="ot1"/>
+        </af:panelLabelAndMessage>
+        <af:panelLabelAndMessage label="#{bindings.BranchName.hints.label}"
+                                 id="plam8">
+          <af:outputText value="#{bindings.BranchName.inputValue}" id="ot3"/>
+        </af:panelLabelAndMessage>
+        <af:panelLabelAndMessage label="#{bindings.Region.hints.label}"
+                                 id="plam10">
+          <af:outputText value="#{bindings.Region.inputValue}" id="ot5"/>
+        </af:panelLabelAndMessage>
+        <af:panelLabelAndMessage label="#{bindings.OfficeType.hints.label}"
+                                 id="plam1">
+          <af:outputText value="#{bindings.OfficeType.inputValue}" id="ot9"/>
+        </af:panelLabelAndMessage>
+        <af:panelLabelAndMessage label="#{bindings.NetWork.hints.label}"
+                                 id="plam2">
+          <af:outputText value="#{bindings.NetWork.inputValue}" id="ot7"/>
+        </af:panelLabelAndMessage>
+        <af:panelLabelAndMessage label="#{bindings.Circle.hints.label}"
+                                 id="plam4">
+          <af:outputText value="#{bindings.Circle.inputValue}" id="ot2"/>
+        </af:panelLabelAndMessage>
+        <af:panelLabelAndMessage label="Signed" id="plam11">
+          <af:outputText value="#{bindings.Signed.inputValue}" id="ot11"/>
+        </af:panelLabelAndMessage>
+        <af:panelLabelAndMessage label="#{bindings.SourceOfCase.hints.label}"
+                                 id="plam6">
+          <af:outputText value="#{bindings.SourceOfCase.inputValue}" id="ot6"/>
+        </af:panelLabelAndMessage>
+        <af:panelLabelAndMessage label="#{bindings.AdditionalInformation.hints.label}"
+                                 id="plam9" visible="false">
+          <af:outputText value="#{bindings.AdditionalInformation.inputValue}"
+                         id="ot10"/>
+        </af:panelLabelAndMessage>
+      </af:panelFormLayout>
+    </af:showDetailHeader>
+    <af:separator id="s1"/>
+    <af:showDetailHeader text="Complaint" disclosed="true" id="sdh2"
+                         size="1" styleClass="portlet-header"
+                         rendered="#{bindings.SourceOfCase.inputValue eq 'Complaint'}">
+      <f:facet name="context"/>
+      <f:facet name="menuBar"/>
+      <f:facet name="toolbar"/>
+      <f:facet name="legend"/>
+      <f:facet name="info"/>
+      <af:panelFormLayout id="pfl2">
+        <af:panelLabelAndMessage label="#{bindings.ReceivedFrom.hints.label}"
+                                 id="plam12">
+          <af:outputText value="#{bindings.ReceivedFrom.inputValue}" id="ot24"/>
+        </af:panelLabelAndMessage>
+        <af:panelLabelAndMessage label="#{bindings.ReceivedAt.hints.label}"
+                                 id="plam19">
+          <af:outputText value="#{bindings.ReceivedAt.inputValue}" id="ot13"/>
+        </af:panelLabelAndMessage>
+        <af:panelLabelAndMessage label="#{bindings.NameOfComplainant.hints.label}"
+                                 id="plam13">
+          <af:outputText value="#{bindings.NameOfComplainant.inputValue}"
+                         id="ot21"/>
+        </af:panelLabelAndMessage>
+        <af:panelLabelAndMessage label="#{bindings.DateOfComplainant.hints.label}"
+                                 id="plam24">
+          <af:outputText value="#{bindings.DateOfComplainant.inputValue}"
+                         id="ot18">
+            <af:convertDateTime pattern="#{bindings.DateOfComplainant.format}"/>
+          </af:outputText>
+        </af:panelLabelAndMessage>
+        <af:panelLabelAndMessage label="#{bindings.DateReceived.hints.label}"
+                                 id="plam22">
+          <af:outputText value="#{bindings.DateReceived.inputValue}" id="ot17">
+            <af:convertDateTime pattern="#{bindings.DateReceived.format}"/>
+          </af:outputText>
+        </af:panelLabelAndMessage>
+        <af:panelLabelAndMessage label="#{bindings.ComplaintType.hints.label}"
+                                 id="plam15">
+          <af:outputText value="#{bindings.ComplaintType.inputValue}"
+                         id="ot12"/>
+        </af:panelLabelAndMessage>
+        <af:panelLabelAndMessage label="#{bindings.ComplaintRelatingTo.hints.label}"
+                                 id="plam18">
+          <af:outputText value="#{bindings.ComplaintRelatingTo.inputValue}"
+                         id="ot14"/>
+        </af:panelLabelAndMessage>
+        <af:panelLabelAndMessage label="#{bindings.ComplaintParticulars.hints.label}"
+                                 id="plam21">
+          <af:outputText value="#{bindings.ComplaintParticulars.inputValue}"
+                         id="ot15"/>
+        </af:panelLabelAndMessage>
+        <af:panelLabelAndMessage label="#{bindings.InvestionReportRequired.hints.label}"
+                                 id="plam14">
+          <af:outputText value="#{bindings.InvestionReportRequired.inputValue}"
+                         id="ot19"/>
+        </af:panelLabelAndMessage>
+        <af:panelLabelAndMessage label="#{bindings.DateOfReceiptOfAdvice.hints.label}"
+                                 id="plam20">
+          <af:outputText value="#{bindings.DateOfReceiptOfAdvice.inputValue}"
+                         id="ot23"/>
+        </af:panelLabelAndMessage>
+        <af:panelLabelAndMessage label="#{bindings.DisposalStatus.hints.label}"
+                                 id="plam23">
+          <af:outputText value="#{bindings.DisposalStatus.inputValue}"
+                         id="ot22"/>
+        </af:panelLabelAndMessage>
+        <af:panelLabelAndMessage label="#{bindings.DateofIRFCalled.hints.label}"
+                                 id="plam16">
+          <af:outputText value="#{bindings.DateofIRFCalled.inputValue}"
+                         id="ot20"/>
+        </af:panelLabelAndMessage>
+        <af:panelLabelAndMessage label="#{bindings.AdditionalInformation1.hints.label}"
+                                 id="plam17">
+          <af:outputText value="#{bindings.AdditionalInformation1.inputValue}"
+                         id="ot16"/>
+        </af:panelLabelAndMessage>
+      </af:panelFormLayout>
+    </af:showDetailHeader>
+    <af:showDetailHeader text="Fraud" disclosed="true" id="sdh3" size="1"
+                         styleClass="portlet-header"
+                         rendered="#{bindings.SourceOfCase.inputValue eq 'Fraud'}">
+      <f:facet name="context"/>
+      <f:facet name="menuBar"/>
+      <f:facet name="toolbar"/>
+      <f:facet name="legend"/>
+      <f:facet name="info"/>
+      <af:panelFormLayout id="pfl3">
+        <af:panelLabelAndMessage label="#{bindings.RecivedFrom.hints.label}"
+                                 id="plam26">
+          <af:outputText value="#{bindings.RecivedFrom.inputValue}" id="ot29"/>
+        </af:panelLabelAndMessage>
+        <af:panelLabelAndMessage label="#{bindings.LetterNumber.hints.label}"
+                                 id="plam33">
+          <af:outputText value="#{bindings.LetterNumber.inputValue}" id="ot37"/>
+        </af:panelLabelAndMessage>
+        <af:panelLabelAndMessage label="#{bindings.LetterDate.hints.label}"
+                                 id="plam34">
+          <af:outputText value="#{bindings.LetterDate.inputValue}" id="ot36"/>
+        </af:panelLabelAndMessage>
+        <af:panelLabelAndMessage label="#{bindings.FraudFolderNumber.hints.label}"
+                                 id="plam31">
+          <af:outputText value="#{bindings.FraudFolderNumber.inputValue}"
+                         id="ot27"/>
+        </af:panelLabelAndMessage>
+        <af:panelLabelAndMessage label="#{bindings.FolderAmount.hints.label}"
+                                 id="plam29">
+          <af:outputText value="#{bindings.FolderAmount.inputValue}" id="ot26"/>
+        </af:panelLabelAndMessage>
+        <af:panelLabelAndMessage label="#{bindings.AmountClassification.hints.label}"
+                                 id="plam36">
+          <af:outputText value="#{bindings.AmountClassification.inputValue}"
+                         id="ot32"/>
+        </af:panelLabelAndMessage>
+        <af:panelLabelAndMessage label="#{bindings.FurtherClassification.hints.label}"
+                                 id="plam28">
+          <af:outputText value="#{bindings.FurtherClassification.inputValue}"
+                         id="ot33"/>
+        </af:panelLabelAndMessage>
+        <af:panelLabelAndMessage label="#{bindings.FraudRelatingTo.hints.label}"
+                                 id="plam37">
+          <af:outputText value="#{bindings.FraudRelatingTo.inputValue}"
+                         id="ot25"/>
+        </af:panelLabelAndMessage>
+        <af:panelLabelAndMessage label="#{bindings.DateOfOccurence.hints.label}"
+                                 id="plam30">
+          <af:outputText value="#{bindings.DateOfOccurence.inputValue}"
+                         id="ot30">
+            <af:convertDateTime pattern="#{bindings.DateOfOccurence.format}"/>
+          </af:outputText>
+        </af:panelLabelAndMessage>
+        <af:panelLabelAndMessage label="#{bindings.DateOfDetection.hints.label}"
+                                 id="plam35">
+          <af:outputText value="#{bindings.DateOfDetection.inputValue}"
+                         id="ot28">
+            <af:convertDateTime pattern="#{bindings.DateOfDetection.format}"/>
+          </af:outputText>
+        </af:panelLabelAndMessage>
+        <af:panelLabelAndMessage label="#{bindings.NameofUnit.hints.label}"
+                                 id="plam25">
+          <af:outputText value="#{bindings.NameofUnit.inputValue}" id="ot34">
+            <af:convertDateTime pattern="#{bindings.NameofUnit.format}"/>
+          </af:outputText>
+        </af:panelLabelAndMessage>
+        <af:panelLabelAndMessage label="#{bindings.StaffInvolved.hints.label}"
+                                 id="plam32">
+          <af:outputText value="#{bindings.StaffInvolved.inputValue}"
+                         id="ot31"/>
+        </af:panelLabelAndMessage>
+        <af:panelLabelAndMessage label="#{bindings.AdditionalInformation2.hints.label}"
+                                 id="plam27">
+          <af:outputText value="#{bindings.AdditionalInformation2.inputValue}"
+                         id="ot35"/>
+        </af:panelLabelAndMessage>
+      </af:panelFormLayout>
+    </af:showDetailHeader>
+  </af:panelGroupLayout>
+</jsp:root>

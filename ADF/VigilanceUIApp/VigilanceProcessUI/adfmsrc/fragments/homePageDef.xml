@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.64.93" id="homePageDef" Package="fragments">
+  <parameters/>
+  <executables>
+    <iterator Binds="BrmastTransVO" RangeSize="25"
+              DataControl="VigilanceAMDataControl" id="BrmastTransVOIterator"/>
+    <taskFlow id="SourceRedirectTF1"
+              taskFlowId="/WEB-INF/taskflows/SourceRedirectTF.xml#SourceRedirectTF"
+              activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+    <methodIterator Binds="getTaskDetails.result"
+                    DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                    RangeSize="25"
+                    BeanClass="VigilanceProcessUI_RegisterComplaintTask.getTaskDetails"
+                    id="getTaskDetailsIterator"/>
+    <accessorIterator MasterBinding="getTaskDetailsIterator" Binds="task"
+                      RangeSize="25"
+                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.task"
+                      id="taskIterator"/>
+    <accessorIterator MasterBinding="taskIterator" Binds="payload"
+                      RangeSize="25"
+                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.RegisterComplaintTaskPayloadType"
+                      id="payloadIterator"/>
+    <accessorIterator MasterBinding="payloadIterator" Binds="VigilanceProcess"
+                      RangeSize="25"
+                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.VigilanceProcessType"
+                      id="VigilanceProcessIterator"/>
+    <accessorIterator id="CaseRegistrationIterator"
+                      MasterBinding="VigilanceProcessIterator"
+                      Binds="CaseRegistration" RangeSize="25"
+                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.CaseRegistration"/>
+    <iterator id="ComplaintTransVOIterator" Binds="ComplaintTransVO"
+              DataControl="VigilanceAMDataControl" RangeSize="25"/>
+    <accessorIterator id="ComplaintIterator"
+                      MasterBinding="VigilanceProcessIterator" Binds="Complaint"
+                      RangeSize="25"
+                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.Complaint"/>
+  </executables>
+  <bindings>
+    <listOfValues StaticList="false" IterBinding="BrmastTransVOIterator"
+                  Uses="LOV_Brcd" id="Brcd"/>
+    <attributeValues IterBinding="BrmastTransVOIterator" id="Brname">
+      <AttrNames>
+        <Item Value="Brname"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="BrmastTransVOIterator" id="Region">
+      <AttrNames>
+        <Item Value="Region"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="BrmastTransVOIterator" id="AoMcro">
+      <AttrNames>
+        <Item Value="AoMcro"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="BrmastTransVOIterator" id="NetWork">
+      <AttrNames>
+        <Item Value="NetWork"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="BrmastTransVOIterator" id="Circle">
+      <AttrNames>
+        <Item Value="Circle"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="getTaskDetails" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="getTaskDetails"
+                  IsViewObjectMethod="false"
+                  DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                  InstanceName="VigilanceProcessUI_RegisterComplaintTask"
+                  ReturnName="data.VigilanceProcessUI_RegisterComplaintTask.methodResults.getTaskDetails_VigilanceProcessUI_RegisterComplaintTask_getTaskDetails_result">
+      <NamedData NDName="bpmWorklistContext" NDType="java.lang.String"/>
+      <NamedData NDName="bpmWorklistTaskId" NDType="java.lang.String"/>
+      <NamedData NDName="bpmWorklistTaskVersion" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="CaseRegistrationIterator"
+                     id="SystemSerialNoBPM">
+      <AttrNames>
+        <Item Value="SystemSerialNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CaseRegistrationIterator" id="BranchCodeBPM">
+      <AttrNames>
+        <Item Value="BranchCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CaseRegistrationIterator" id="BranchNameBPM">
+      <AttrNames>
+        <Item Value="BranchName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CaseRegistrationIterator" id="RegionBPM">
+      <AttrNames>
+        <Item Value="Region"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CaseRegistrationIterator" id="OfficeTypeBPM">
+      <AttrNames>
+        <Item Value="OfficeType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CaseRegistrationIterator" id="NetWorkBPM">
+      <AttrNames>
+        <Item Value="NetWork"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CaseRegistrationIterator" id="CircleBPM">
+      <AttrNames>
+        <Item Value="Circle"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CaseRegistrationIterator" id="CircleCodeBPM">
+      <AttrNames>
+        <Item Value="CircleCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CaseRegistrationIterator" id="NetWorkCodeBPM">
+      <AttrNames>
+        <Item Value="NetWorkCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VigilanceProcessIterator" id="SignedBPM">
+      <AttrNames>
+        <Item Value="Signed"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VigilanceProcessIterator" id="TaskNameBPM">
+      <AttrNames>
+        <Item Value="TaskName"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction IterBinding="taskIterator" id="CANCEL"
+                  InstanceName="bindings.taskIterator.currentRow.dataProvider"
+                  DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="CANCEL" IsViewObjectMethod="false"
+                  IsLocalObjectReference="true"/>
+    <methodAction IterBinding="taskIterator" id="SUBMIT"
+                  InstanceName="bindings.taskIterator.currentRow.dataProvider"
+                  DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="SUBMIT" IsViewObjectMethod="false"
+                  IsLocalObjectReference="true"/>
+    <attributeValues IterBinding="CaseRegistrationIterator"
+                     id="SourceOfCaseBPM">
+      <AttrNames>
+        <Item Value="SourceOfCase"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CaseRegistrationIterator"
+                     id="CCFileNumberBPM">
+      <AttrNames>
+        <Item Value="CCFileNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintIterator" id="ReceivedFromBPM">
+      <AttrNames>
+        <Item Value="ReceivedFrom"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="BrmastTransVOIterator" id="Signed">
+      <AttrNames>
+        <Item Value="Signed"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="BrmastTransVOIterator" id="Source">
+      <AttrNames>
+        <Item Value="Source"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="BrmastTransVOIterator" id="CcFileNumber">
+      <AttrNames>
+        <Item Value="CcFileNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="BrmastTransVOIterator" id="SysSerNumber">
+      <AttrNames>
+        <Item Value="SysSerNumber"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>
