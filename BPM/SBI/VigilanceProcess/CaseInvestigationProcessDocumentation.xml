@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?oracleBPM version="11.1.1.7.0.0.8" fileRevision="20120217"?>
+<processDocumentation xmlns="http://xmlns.oracle.com/bpm/taskMetadataService/processDocumentation">
+    <component name="CaseInvestigationProcess">
+        <topicDocumentations>
+            <topicDocumentation name="CaseInvestigationProcess">
+                <descriptions>
+                    <description locale="en">CaseInvestigationProcess</description>
+                </descriptions>
+            </topicDocumentation>
+            <topicDocumentation name="ACT15410791746854">
+                <labels>
+                    <label locale="en">Start Detailed Investigation</label>
+                </labels>
+                <descriptions>
+                    <description locale="en"></description>
+                </descriptions>
+            </topicDocumentation>
+            <topicDocumentation name="EVT15410781216097">
+                <labels>
+                    <label locale="en">Start</label>
+                </labels>
+                <descriptions>
+                    <description locale="en"></description>
+                </descriptions>
+            </topicDocumentation>
+            <topicDocumentation name="EVT15410781216131">
+                <labels>
+                    <label locale="en">End</label>
+                </labels>
+                <descriptions>
+                    <description locale="en"></description>
+                </descriptions>
+            </topicDocumentation>
+            <topicDocumentation name="sf125"/>
+            <topicDocumentation name="sf127"/>
+        </topicDocumentations>
+    </component>
+</processDocumentation>
