@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.64.93"
+          id="CentralBureauOfInvestigation"
+          Package="VigilanceUI_RegisterComplaintTask"
+          BeanClass="VigilanceUI_RegisterComplaintTask.CentralBureauOfInvestigation"
+          isJavaBased="false">
+  <Attribute Name="NameOfCBIOffice" Type="java.lang.String">
+    <Properties>
+      <CustomProperties>
+        <Property Name="nextSiblingNamespace"
+                  Value="http://www.sbi.co.in/vigilance/cbi"/>
+        <Property Name="nextSibling" Value="CBILetterReference"/>
+        <Property Name="minOccurs" Value="0"/>
+        <Property Name="maxOccurs" Value="1"/>
+        <Property Name="LABEL" Value="Name Of CBI Office"/>
+        <Property Name="LeafElement_hint" Value="LeafElement_no_attribute"/>
+        <Property Name="nillable" Value="false"/>
+        <Property Name="originalName" Value="NameOfCBIOffice"/>
+        <Property Name="targetNamespace"
+                  Value="http://www.sbi.co.in/vigilance/cbi"/>
+        <Property Name="type" Value="java.lang.String"/>
+      </CustomProperties>
+    </Properties>
+  </Attribute>
+  <Attribute Name="CBILetterReference" Type="java.lang.String">
+    <Properties>
+      <CustomProperties>
+        <Property Name="nextSiblingNamespace"
+                  Value="http://www.sbi.co.in/vigilance/cbi"/>
+        <Property Name="nextSibling" Value="CBILetterDate"/>
+        <Property Name="minOccurs" Value="0"/>
+        <Property Name="maxOccurs" Value="1"/>
+        <Property Name="LABEL" Value="CBI Letter Reference"/>
+        <Property Name="LeafElement_hint" Value="LeafElement_no_attribute"/>
+        <Property Name="nillable" Value="false"/>
+        <Property Name="originalName" Value="CBILetterReference"/>
+        <Property Name="targetNamespace"
+                  Value="http://www.sbi.co.in/vigilance/cbi"/>
+        <Property Name="type" Value="java.lang.String"/>
+      </CustomProperties>
+    </Properties>
+  </Attribute>
+  <Attribute Name="CBILetterDate" Type="java.sql.Timestamp">
+    <Properties>
+      <CustomProperties>
+        <Property Name="nextSiblingNamespace"
+                  Value="http://www.sbi.co.in/vigilance/cbi"/>
+        <Property Name="nextSibling" Value="DateOfReceipt"/>
+        <Property Name="minOccurs" Value="0"/>
+        <Property Name="maxOccurs" Value="1"/>
+        <Property Name="LABEL" Value="CBI Letter Date"/>
+        <Property Name="LeafElement_hint" Value="LeafElement_no_attribute"/>
+        <Property Name="nillable" Value="false"/>
+        <Property Name="originalName" Value="CBILetterDate"/>
+        <Property Name="targetNamespace"
+                  Value="http://www.sbi.co.in/vigilance/cbi"/>
+        <Property Name="type" Value="date"/>
+      </CustomProperties>
+    </Properties>
+  </Attribute>
+  <Attribute Name="DateOfReceipt" Type="java.lang.String">
+    <Properties>
+      <CustomProperties>
+        <Property Name="nextSiblingNamespace"
+                  Value="http://www.sbi.co.in/vigilance/cbi"/>
+        <Property Name="nextSibling" Value="NumberAlloted"/>
+        <Property Name="minOccurs" Value="0"/>
+        <Property Name="maxOccurs" Value="1"/>
+        <Property Name="LABEL" Value="Date Of Receipt"/>
+        <Property Name="LeafElement_hint" Value="LeafElement_no_attribute"/>
+        <Property Name="nillable" Value="false"/>
+        <Property Name="originalName" Value="DateOfReceipt"/>
+        <Property Name="targetNamespace"
+                  Value="http://www.sbi.co.in/vigilance/cbi"/>
+        <Property Name="type" Value="java.lang.String"/>
+      </CustomProperties>
+    </Properties>
+  </Attribute>
+  <Attribute Name="NumberAlloted" Type="java.lang.String">
+    <Properties>
+      <CustomProperties>
+        <Property Name="nextSiblingNamespace"
+                  Value="http://www.sbi.co.in/vigilance/cbi"/>
+        <Property Name="nextSibling" Value="NameOfAccount"/>
+        <Property Name="minOccurs" Value="0"/>
+        <Property Name="maxOccurs" Value="1"/>
+        <Property Name="LABEL" Value="Number Alloted"/>
+        <Property Name="LeafElement_hint" Value="LeafElement_no_attribute"/>
+        <Property Name="nillable" Value="false"/>
+        <Property Name="originalName" Value="NumberAlloted"/>
+        <Property Name="targetNamespace"
+                  Value="http://www.sbi.co.in/vigilance/cbi"/>
+        <Property Name="type" Value="java.lang.String"/>
+      </CustomProperties>
+    </Properties>
+  </Attribute>
+  <Attribute Name="NameOfAccount" Type="java.lang.String">
+    <Properties>
+      <CustomProperties>
+        <Property Name="nextSiblingNamespace"
+                  Value="http://www.sbi.co.in/vigilance/cbi"/>
+        <Property Name="nextSibling" Value="AccountSuggested"/>
+        <Property Name="minOccurs" Value="0"/>
+        <Property Name="maxOccurs" Value="1"/>
+        <Property Name="LABEL" Value="Name Of Account"/>
+        <Property Name="LeafElement_hint" Value="LeafElement_no_attribute"/>
+        <Property Name="nillable" Value="false"/>
+        <Property Name="originalName" Value="NameOfAccount"/>
+        <Property Name="targetNamespace"
+                  Value="http://www.sbi.co.in/vigilance/cbi"/>
+        <Property Name="type" Value="java.lang.String"/>
+      </CustomProperties>
+    </Properties>
+  </Attribute>
+  <Attribute Name="AccountSuggested" Type="java.lang.String">
+    <Properties>
+      <CustomProperties>
+        <Property Name="nextSiblingNamespace"
+                  Value="http://www.sbi.co.in/vigilance/cbi"/>
+        <Property Name="nextSibling" Value="RDADetails"/>
+        <Property Name="minOccurs" Value="0"/>
+        <Property Name="maxOccurs" Value="1"/>
+        <Property Name="LABEL" Value="Account Suggested"/>
+        <Property Name="LeafElement_hint" Value="LeafElement_no_attribute"/>
+        <Property Name="nillable" Value="false"/>
+        <Property Name="originalName" Value="AccountSuggested"/>
+        <Property Name="targetNamespace"
+                  Value="http://www.sbi.co.in/vigilance/cbi"/>
+        <Property Name="type" Value="java.lang.String"/>
+      </CustomProperties>
+    </Properties>
+  </Attribute>
+  <Attribute Name="RDADetails" Type="java.lang.String">
+    <Properties>
+      <CustomProperties>
+        <Property Name="nextSiblingNamespace"
+                  Value="http://www.sbi.co.in/vigilance/cbi"/>
+        <Property Name="nextSibling" Value="SFPDetails"/>
+        <Property Name="minOccurs" Value="0"/>
+        <Property Name="maxOccurs" Value="1"/>
+        <Property Name="LABEL" Value="RDA Details"/>
+        <Property Name="LeafElement_hint" Value="LeafElement_no_attribute"/>
+        <Property Name="nillable" Value="false"/>
+        <Property Name="originalName" Value="RDADetails"/>
+        <Property Name="targetNamespace"
+                  Value="http://www.sbi.co.in/vigilance/cbi"/>
+        <Property Name="type" Value="java.lang.String"/>
+      </CustomProperties>
+    </Properties>
+  </Attribute>
+  <Attribute Name="SFPDetails" Type="java.lang.String">
+    <Properties>
+      <CustomProperties>
+        <Property Name="nextSiblingNamespace"
+                  Value="http://www.sbi.co.in/vigilance/cbi"/>
+        <Property Name="nextSibling" Value="AdditionalInformation"/>
+        <Property Name="minOccurs" Value="0"/>
+        <Property Name="maxOccurs" Value="1"/>
+        <Property Name="LABEL" Value="SFP Details"/>
+        <Property Name="LeafElement_hint" Value="LeafElement_no_attribute"/>
+        <Property Name="nillable" Value="false"/>
+        <Property Name="originalName" Value="SFPDetails"/>
+        <Property Name="targetNamespace"
+                  Value="http://www.sbi.co.in/vigilance/cbi"/>
+        <Property Name="type" Value="java.lang.String"/>
+      </CustomProperties>
+    </Properties>
+  </Attribute>
+  <Attribute Name="AdditionalInformation" Type="java.lang.String">
+    <Properties>
+      <CustomProperties>
+        <Property Name="minOccurs" Value="0"/>
+        <Property Name="maxOccurs" Value="1"/>
+        <Property Name="LABEL" Value="Additional Information"/>
+        <Property Name="LeafElement_hint" Value="LeafElement_no_attribute"/>
+        <Property Name="nillable" Value="false"/>
+        <Property Name="originalName" Value="AdditionalInformation"/>
+        <Property Name="targetNamespace"
+                  Value="http://www.sbi.co.in/vigilance/cbi"/>
+        <Property Name="type" Value="java.lang.String"/>
+      </CustomProperties>
+    </Properties>
+  </Attribute>
+</JavaBean>

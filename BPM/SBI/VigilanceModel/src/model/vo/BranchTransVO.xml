@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="BranchTransVO"
+  Version="11.1.1.64.93"
+  InheritPersonalization="true"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="model.vo.BranchTransVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewAccessor
+    Name="BrmastVA"
+    ViewObjectName="model.vo.BrmastVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="SourceVA"
+    ViewObjectName="model.vo.SourceVVO"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_Brcode"
+    ListVOName="BrmastVA"
+    ListRangeSize="10"
+    NullValueFlag="none"
+    NullValueId="LOV_Brcode_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Brcode"/>
+    </AttrArray>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="Brname"/>
+      <Item Value="Circle"/>
+      <Item Value="NetWork"/>
+      <Item Value="Region"/>
+      <Item Value="AoMcro"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Brcd"/>
+      <Item Value="Brname"/>
+      <Item Value="CircleNm"/>
+      <Item Value="NtworkCd"/>
+      <Item Value="RgnCd"/>
+      <Item Value="OfftypNm"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Source"
+    ListVOName="SourceVA"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Source"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="SourceCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="SourceName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <SQLQuery>
+    <![CDATA[select '' brcode from dual]]>
+  </SQLQuery>
+  <ViewAttribute
+    Name="Brcode"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="VARCHAR2"
+    AliasName="BRCODE"
+    Expression="BRCODE"
+    SQLType="CHAR"
+    LOVName="LOV_Brcode">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+        <DISPLAYWIDTH
+          Value="10"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Brname"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="Region"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="AoMcro"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="NetWork"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="Circle"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="Signed"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="Source"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_Source">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CcFileNumber"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="SysSerNumber"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="Brcode"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="model.VigilanceModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

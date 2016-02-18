@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.64.93"
+          id="RightToInformation" Package="VigilanceUI_RegisterComplaintTask"
+          BeanClass="VigilanceUI_RegisterComplaintTask.RightToInformation"
+          isJavaBased="false">
+  <Attribute Name="NameOfApplicant" Type="java.lang.String">
+    <Properties>
+      <CustomProperties>
+        <Property Name="nextSiblingNamespace"
+                  Value="http://www.sbi.co.in/vigilance/rti"/>
+        <Property Name="nextSibling" Value="DateOfApplication"/>
+        <Property Name="minOccurs" Value="0"/>
+        <Property Name="maxOccurs" Value="1"/>
+        <Property Name="LABEL" Value="Name Of Applicant"/>
+        <Property Name="LeafElement_hint" Value="LeafElement_no_attribute"/>
+        <Property Name="nillable" Value="false"/>
+        <Property Name="originalName" Value="NameOfApplicant"/>
+        <Property Name="targetNamespace"
+                  Value="http://www.sbi.co.in/vigilance/rti"/>
+        <Property Name="type" Value="java.lang.String"/>
+      </CustomProperties>
+    </Properties>
+  </Attribute>
+  <Attribute Name="DateOfApplication" Type="java.sql.Timestamp">
+    <Properties>
+      <CustomProperties>
+        <Property Name="nextSiblingNamespace"
+                  Value="http://www.sbi.co.in/vigilance/rti"/>
+        <Property Name="nextSibling" Value="DORbyCPIO"/>
+        <Property Name="minOccurs" Value="0"/>
+        <Property Name="maxOccurs" Value="1"/>
+        <Property Name="LABEL" Value="Date Of Application"/>
+        <Property Name="LeafElement_hint" Value="LeafElement_no_attribute"/>
+        <Property Name="nillable" Value="false"/>
+        <Property Name="originalName" Value="DateOfApplication"/>
+        <Property Name="targetNamespace"
+                  Value="http://www.sbi.co.in/vigilance/rti"/>
+        <Property Name="type" Value="date"/>
+      </CustomProperties>
+    </Properties>
+  </Attribute>
+  <Attribute Name="DORbyCPIO" Type="java.sql.Timestamp">
+    <Properties>
+      <CustomProperties>
+        <Property Name="nextSiblingNamespace"
+                  Value="http://www.sbi.co.in/vigilance/rti"/>
+        <Property Name="nextSibling" Value="DORatVigilanceDept"/>
+        <Property Name="minOccurs" Value="0"/>
+        <Property Name="maxOccurs" Value="1"/>
+        <Property Name="LABEL" Value="DO Rby CPIO"/>
+        <Property Name="LeafElement_hint" Value="LeafElement_no_attribute"/>
+        <Property Name="nillable" Value="false"/>
+        <Property Name="originalName" Value="DORbyCPIO"/>
+        <Property Name="targetNamespace"
+                  Value="http://www.sbi.co.in/vigilance/rti"/>
+        <Property Name="type" Value="date"/>
+      </CustomProperties>
+    </Properties>
+  </Attribute>
+  <Attribute Name="DORatVigilanceDept" Type="java.sql.Timestamp">
+    <Properties>
+      <CustomProperties>
+        <Property Name="nextSiblingNamespace"
+                  Value="http://www.sbi.co.in/vigilance/rti"/>
+        <Property Name="nextSibling" Value="ParticularsOfInformationSought"/>
+        <Property Name="minOccurs" Value="0"/>
+        <Property Name="maxOccurs" Value="1"/>
+        <Property Name="LABEL" Value="DO Rat Vigilance Dept"/>
+        <Property Name="LeafElement_hint" Value="LeafElement_no_attribute"/>
+        <Property Name="nillable" Value="false"/>
+        <Property Name="originalName" Value="DORatVigilanceDept"/>
+        <Property Name="targetNamespace"
+                  Value="http://www.sbi.co.in/vigilance/rti"/>
+        <Property Name="type" Value="date"/>
+      </CustomProperties>
+    </Properties>
+  </Attribute>
+  <Attribute Name="ParticularsOfInformationSought" Type="java.lang.String">
+    <Properties>
+      <CustomProperties>
+        <Property Name="nextSiblingNamespace"
+                  Value="http://www.sbi.co.in/vigilance/rti"/>
+        <Property Name="nextSibling" Value="LastDateOfProvidingInformation"/>
+        <Property Name="minOccurs" Value="0"/>
+        <Property Name="maxOccurs" Value="1"/>
+        <Property Name="LABEL" Value="Particulars Of Information Sought"/>
+        <Property Name="LeafElement_hint" Value="LeafElement_no_attribute"/>
+        <Property Name="nillable" Value="false"/>
+        <Property Name="originalName" Value="ParticularsOfInformationSought"/>
+        <Property Name="targetNamespace"
+                  Value="http://www.sbi.co.in/vigilance/rti"/>
+        <Property Name="type" Value="java.lang.String"/>
+      </CustomProperties>
+    </Properties>
+  </Attribute>
+  <Attribute Name="LastDateOfProvidingInformation" Type="java.sql.Timestamp">
+    <Properties>
+      <CustomProperties>
+        <Property Name="nextSiblingNamespace"
+                  Value="http://www.sbi.co.in/vigilance/rti"/>
+        <Property Name="nextSibling" Value="DateInformationProvided"/>
+        <Property Name="minOccurs" Value="0"/>
+        <Property Name="maxOccurs" Value="1"/>
+        <Property Name="LABEL" Value="Last Date Of Providing Information"/>
+        <Property Name="LeafElement_hint" Value="LeafElement_no_attribute"/>
+        <Property Name="nillable" Value="false"/>
+        <Property Name="originalName" Value="LastDateOfProvidingInformation"/>
+        <Property Name="targetNamespace"
+                  Value="http://www.sbi.co.in/vigilance/rti"/>
+        <Property Name="type" Value="date"/>
+      </CustomProperties>
+    </Properties>
+  </Attribute>
+  <Attribute Name="DateInformationProvided" Type="java.sql.Timestamp">
+    <Properties>
+      <CustomProperties>
+        <Property Name="nextSiblingNamespace"
+                  Value="http://www.sbi.co.in/vigilance/rti"/>
+        <Property Name="nextSibling" Value="RejectionDate"/>
+        <Property Name="minOccurs" Value="0"/>
+        <Property Name="maxOccurs" Value="1"/>
+        <Property Name="LABEL" Value="Date Information Provided"/>
+        <Property Name="LeafElement_hint" Value="LeafElement_no_attribute"/>
+        <Property Name="nillable" Value="false"/>
+        <Property Name="originalName" Value="DateInformationProvided"/>
+        <Property Name="targetNamespace"
+                  Value="http://www.sbi.co.in/vigilance/rti"/>
+        <Property Name="type" Value="date"/>
+      </CustomProperties>
+    </Properties>
+  </Attribute>
+  <Attribute Name="RejectionDate" Type="java.sql.Timestamp">
+    <Properties>
+      <CustomProperties>
+        <Property Name="nextSiblingNamespace"
+                  Value="http://www.sbi.co.in/vigilance/rti"/>
+        <Property Name="nextSibling" Value="AdditionalInformation"/>
+        <Property Name="minOccurs" Value="0"/>
+        <Property Name="maxOccurs" Value="1"/>
+        <Property Name="LABEL" Value="Rejection Date"/>
+        <Property Name="LeafElement_hint" Value="LeafElement_no_attribute"/>
+        <Property Name="nillable" Value="false"/>
+        <Property Name="originalName" Value="RejectionDate"/>
+        <Property Name="targetNamespace"
+                  Value="http://www.sbi.co.in/vigilance/rti"/>
+        <Property Name="type" Value="date"/>
+      </CustomProperties>
+    </Properties>
+  </Attribute>
+  <Attribute Name="AdditionalInformation" Type="java.lang.String">
+    <Properties>
+      <CustomProperties>
+        <Property Name="minOccurs" Value="0"/>
+        <Property Name="maxOccurs" Value="1"/>
+        <Property Name="LABEL" Value="Additional Information"/>
+        <Property Name="LeafElement_hint" Value="LeafElement_no_attribute"/>
+        <Property Name="nillable" Value="false"/>
+        <Property Name="originalName" Value="AdditionalInformation"/>
+        <Property Name="targetNamespace"
+                  Value="http://www.sbi.co.in/vigilance/rti"/>
+        <Property Name="type" Value="java.lang.String"/>
+      </CustomProperties>
+    </Properties>
+  </Attribute>
+</JavaBean>

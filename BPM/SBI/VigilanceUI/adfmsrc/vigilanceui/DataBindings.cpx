@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application"
+             version="11.1.1.64.93" id="DataBindings" SeparateXMLFiles="false"
+             Package="vigilanceui" ClientType="Generic">
+  <pageMap>
+    <page path="/taskDetails1.jspx" usageId="vigilanceui_taskDetails1PageDef"/>
+  </pageMap>
+  <pageDefinitionUsages>
+    <page id="vigilanceui_taskDetails1PageDef"
+          path="vigilanceui.pageDefs.taskDetails1PageDef"/>
+  </pageDefinitionUsages>
+  <dataControlUsages>
+    <dc id="VigilanceUI_RegisterComplaintTask"
+        path="vigilanceui.VigilanceUI_RegisterComplaintTask"/>
+    <BC4JDataControl id="VigilanceAMDataControl" Package="model.am"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl"
+                     SupportsTransactions="true" SupportsFindMode="true"
+                     SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true"
+                     Configuration="VigilanceAMLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+  </dataControlUsages>
+</Application>
