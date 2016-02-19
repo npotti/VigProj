@@ -16,4 +16,37 @@
   <ViewUsage
     Name="BranchTransVO"
     ViewObjectName="model.vo.BranchTransVO"/>
+  <ViewUsage
+    Name="AttemptedTheftDetailsVO"
+    ViewObjectName="model.vo.updateable.AttemptedTheftDetailsVO"/>
+  <ViewUsage
+    Name="CaseRegistrationVO"
+    ViewObjectName="model.vo.updateable.CaseRegistrationVO"/>
+  <ViewUsage
+    Name="CbiDetailsVO"
+    ViewObjectName="model.vo.updateable.CbiDetailsVO"/>
+  <ViewUsage
+    Name="ComplaintDetailsVO"
+    ViewObjectName="model.vo.updateable.ComplaintDetailsVO"/>
+  <ViewUsage
+    Name="CteDetailsVO"
+    ViewObjectName="model.vo.updateable.CteDetailsVO"/>
+  <ViewUsage
+    Name="FraudDetailsVO"
+    ViewObjectName="model.vo.updateable.FraudDetailsVO"/>
+  <ViewUsage
+    Name="MiscDetailsVO"
+    ViewObjectName="model.vo.updateable.MiscDetailsVO"/>
+  <ViewUsage
+    Name="RiskFocussedDetailsVO"
+    ViewObjectName="model.vo.updateable.RiskFocussedDetailsVO"/>
+  <ViewUsage
+    Name="RtiDetailsVO"
+    ViewObjectName="model.vo.updateable.RtiDetailsVO"/>
+  <ViewUsage
+    Name="SmiDetailsVO"
+    ViewObjectName="model.vo.updateable.SmiDetailsVO"/>
+  <ViewUsage
+    Name="StaffAccountabilityDetailsVO"
+    ViewObjectName="model.vo.updateable.StaffAccountabilityDetailsVO"/>
 </AppModule>

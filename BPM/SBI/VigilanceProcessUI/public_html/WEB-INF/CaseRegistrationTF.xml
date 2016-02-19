@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="CaseRegistrationTF">
+    <default-activity id="__1">checkIfExistingTask</default-activity>
+    <managed-bean id="__2">
+      <managed-bean-name id="__4">caseRegBean</managed-bean-name>
+      <managed-bean-class id="__3">beans.CaseRegBean</managed-bean-class>
+      <managed-bean-scope id="__5">pageFlow</managed-bean-scope>
+    </managed-bean>
+    <method-call id="checkIfExistingTask">
+      <method>#{pageFlowScope.caseRegBean.checkIfExistingTask}</method>
+      <outcome id="__11">
+        <fixed-outcome>default</fixed-outcome>
+      </outcome>
+    </method-call>
+    <view id="caseRegistration">
+      <page>/fragments/caseRegistration.jsff</page>
+    </view>
+    <control-flow-rule id="__6">
+      <from-activity-id id="__7">checkIfExistingTask</from-activity-id>
+      <control-flow-case id="__8">
+        <from-outcome id="__10">default</from-outcome>
+        <to-activity-id id="__9">caseRegistration</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

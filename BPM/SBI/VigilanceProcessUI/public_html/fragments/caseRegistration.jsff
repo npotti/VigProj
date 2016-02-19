@@ -1,0 +1,229 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelGroupLayout id="pgl1" layout="vertical">
+    <af:showDetailHeader text="Case Registration" disclosed="true" id="sdh1"
+                         size="1">
+      <f:facet name="context"/>
+      <f:facet name="menuBar"/>
+      <f:facet name="toolbar"/>
+      <f:facet name="legend"/>
+      <f:facet name="info"/>
+      <af:panelFormLayout id="pfl1">
+        <af:inputText value="#{bindings.Systemsernum.inputValue}"
+                      label="System Serial Number"
+                      required="#{bindings.Systemsernum.hints.mandatory}"
+                      columns="#{bindings.Systemsernum.hints.displayWidth}"
+                      maximumLength="#{bindings.Systemsernum.hints.precision}"
+                      shortDesc="#{bindings.Systemsernum.hints.tooltip}"
+                      id="it7" readOnly="#{pageFlowScope.readOnly}"
+                      binding="#{pageFlowScope.caseRegBean.sysSerNoBinding}">
+          <f:validator binding="#{bindings.Systemsernum.validator}"/>
+        </af:inputText>
+        <af:inputText value="#{bindings.Ccfilenumber.inputValue}"
+                      label="CC File Number"
+                      required="#{bindings.Ccfilenumber.hints.mandatory}"
+                      columns="#{bindings.Ccfilenumber.hints.displayWidth}"
+                      maximumLength="#{bindings.Ccfilenumber.hints.precision}"
+                      shortDesc="#{bindings.Ccfilenumber.hints.tooltip}"
+                      id="it4"
+                      disabled="#{bindings.TaskName.inputValue ne 'Verify Complaint'}">
+          <f:validator binding="#{bindings.Ccfilenumber.validator}"/>
+        </af:inputText>
+        <af:inputListOfValues id="branchcodeId"
+                              popupTitle="Search and Select: #{bindings.Branchcode.hints.label}"
+                              value="#{bindings.Branchcode.inputValue}"
+                              label="Branch Code"
+                              model="#{bindings.Branchcode.listOfValuesModel}"
+                              required="#{bindings.Branchcode.hints.mandatory}"
+                              columns="#{bindings.Branchcode.hints.displayWidth}"
+                              shortDesc="#{bindings.Branchcode.hints.tooltip}"
+                              readOnly="#{pageFlowScope.readOnly}"
+                              autoSubmit="true"
+                              valueChangeListener="#{pageFlowScope.caseRegBean.branchCodeVC}">
+          <f:validator binding="#{bindings.Branchcode.validator}"/>
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.Branchcode.format}"/>
+        </af:inputListOfValues>
+        <af:inputText value="#{bindings.Branchname.inputValue}"
+                      label="Branch Name"
+                      required="#{bindings.Branchname.hints.mandatory}"
+                      columns="#{bindings.Branchname.hints.displayWidth}"
+                      maximumLength="#{bindings.Branchname.hints.precision}"
+                      shortDesc="#{bindings.Branchname.hints.tooltip}"
+                      partialTriggers="branchcodeId" id="it6" disabled="true">
+          <f:validator binding="#{bindings.Branchname.validator}"/>
+        </af:inputText>
+        <af:inputText value="#{bindings.Regioncd.inputValue}"
+                      label="Region Code"
+                      required="#{bindings.Regioncd.hints.mandatory}"
+                      columns="#{bindings.Regioncd.hints.displayWidth}"
+                      maximumLength="#{bindings.Regioncd.hints.precision}"
+                      shortDesc="#{bindings.Regioncd.hints.tooltip}"
+                      partialTriggers="branchcodeId" id="it8" disabled="true">
+          <f:validator binding="#{bindings.Regioncd.validator}"/>
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.Regioncd.format}"/>
+        </af:inputText>
+        <af:inputText value="#{bindings.Aomcro.inputValue}" label="A.O. / MCRO"
+                      required="#{bindings.Aomcro.hints.mandatory}"
+                      columns="#{bindings.Aomcro.hints.displayWidth}"
+                      maximumLength="#{bindings.Aomcro.hints.precision}"
+                      shortDesc="#{bindings.Aomcro.hints.tooltip}"
+                      partialTriggers="branchcodeId" id="it2" disabled="true">
+          <f:validator binding="#{bindings.Aomcro.validator}"/>
+        </af:inputText>
+        <af:inputText value="#{bindings.Networkcd.inputValue}" label="NetWork"
+                      required="#{bindings.Networkcd.hints.mandatory}"
+                      columns="#{bindings.Networkcd.hints.displayWidth}"
+                      maximumLength="#{bindings.Networkcd.hints.precision}"
+                      shortDesc="#{bindings.Networkcd.hints.tooltip}"
+                      partialTriggers="branchcodeId" id="it3" disabled="true">
+          <f:validator binding="#{bindings.Networkcd.validator}"/>
+          <af:convertNumber groupingUsed="false"
+                            pattern="#{bindings.Networkcd.format}"/>
+        </af:inputText>
+        <af:inputText value="#{bindings.Circlenm.inputValue}" label="Circle"
+                      required="#{bindings.Circlenm.hints.mandatory}"
+                      columns="#{bindings.Circlenm.hints.displayWidth}"
+                      maximumLength="#{bindings.Circlenm.hints.precision}"
+                      shortDesc="#{bindings.Circlenm.hints.tooltip}"
+                      partialTriggers="branchcodeId" id="it5" disabled="true">
+          <f:validator binding="#{bindings.Circlenm.validator}"/>
+        </af:inputText>
+        <af:selectOneChoice value="#{bindings.Sourceofcase.inputValue}"
+                            label="Source Of Case"
+                            required="#{bindings.Sourceofcase.hints.mandatory}"
+                            shortDesc="#{bindings.Sourceofcase.hints.tooltip}"
+                            id="soc1" readOnly="#{pageFlowScope.readOnly}"
+                            autoSubmit="true"
+                            valueChangeListener="#{pageFlowScope.caseRegBean.sourceVC}">
+          <f:selectItems value="#{bindings.Sourceofcase.items}" id="si1"/>
+        </af:selectOneChoice>
+        <af:selectOneRadio label="Signed" id="sor1"
+                           value="#{bindings.Signed.inputValue}"
+                           readOnly="#{pageFlowScope.readOnly}">
+          <af:selectItem label="Yes" value="YES" id="si3"/>
+          <af:selectItem label="No" value="NO" id="si2"/>
+        </af:selectOneRadio>
+      </af:panelFormLayout>
+    </af:showDetailHeader>
+    <af:showDetailHeader text="Complaint" disclosed="true" id="sdh2"
+                         size="1"
+                         binding="#{pageFlowScope.caseRegBean.complaintHdrBinding}"
+                         visible="#{bindings.Sourceofcase.inputValue eq 1}">
+      <f:facet name="context"/>
+      <f:facet name="menuBar"/>
+      <f:facet name="toolbar"/>
+      <f:facet name="legend"/>
+      <f:facet name="info"/>
+      <af:panelFormLayout id="pfl2">
+        <af:inputText value="#{bindings.ReceivedFrom.inputValue}"
+                      label="#{bindings.ReceivedFrom.hints.label}"
+                      required="#{bindings.ReceivedFrom.hints.mandatory}"
+                      columns="#{bindings.ReceivedFrom.hints.displayWidth}"
+                      maximumLength="#{bindings.ReceivedFrom.hints.precision}"
+                      shortDesc="#{bindings.ReceivedFrom.hints.tooltip}"
+                      id="it15" readOnly="#{pageFlowScope.readOnly}">
+          <f:validator binding="#{bindings.ReceivedFrom.validator}"/>
+        </af:inputText>
+        <af:inputText value="#{bindings.ReceivedAt.inputValue}"
+                      label="#{bindings.ReceivedAt.hints.label}"
+                      required="#{bindings.ReceivedAt.hints.mandatory}"
+                      columns="#{bindings.ReceivedAt.hints.displayWidth}"
+                      maximumLength="#{bindings.ReceivedAt.hints.precision}"
+                      shortDesc="#{bindings.ReceivedAt.hints.tooltip}" id="it1"
+                      readOnly="#{pageFlowScope.readOnly}">
+          <f:validator binding="#{bindings.ReceivedAt.validator}"/>
+        </af:inputText>
+        <af:inputText value="#{bindings.NameOfComplaint.inputValue}"
+                      label="#{bindings.NameOfComplaint.hints.label}"
+                      required="#{bindings.NameOfComplaint.hints.mandatory}"
+                      columns="#{bindings.NameOfComplaint.hints.displayWidth}"
+                      maximumLength="#{bindings.NameOfComplaint.hints.precision}"
+                      shortDesc="#{bindings.NameOfComplaint.hints.tooltip}"
+                      id="it12" readOnly="#{pageFlowScope.readOnly}">
+          <f:validator binding="#{bindings.NameOfComplaint.validator}"/>
+        </af:inputText>
+        <af:inputDate value="#{bindings.DateOfComplaint.inputValue}"
+                      label="#{bindings.DateOfComplaint.hints.label}"
+                      required="#{bindings.DateOfComplaint.hints.mandatory}"
+                      shortDesc="#{bindings.DateOfComplaint.hints.tooltip}"
+                      id="id2" readOnly="#{pageFlowScope.readOnly}">
+          <f:validator binding="#{bindings.DateOfComplaint.validator}"/>
+          <af:convertDateTime pattern="#{bindings.DateOfComplaint.format}"/>
+        </af:inputDate>
+        <af:inputDate value="#{bindings.DateReceived.inputValue}"
+                      label="#{bindings.DateReceived.hints.label}"
+                      required="#{bindings.DateReceived.hints.mandatory}"
+                      shortDesc="#{bindings.DateReceived.hints.tooltip}"
+                      id="id3" readOnly="#{pageFlowScope.readOnly}">
+          <f:validator binding="#{bindings.DateReceived.validator}"/>
+          <af:convertDateTime pattern="#{bindings.DateReceived.format}"/>
+        </af:inputDate>
+        <af:inputText value="#{bindings.ComplaintType.inputValue}"
+                      label="#{bindings.ComplaintType.hints.label}"
+                      required="#{bindings.ComplaintType.hints.mandatory}"
+                      columns="#{bindings.ComplaintType.hints.displayWidth}"
+                      maximumLength="#{bindings.ComplaintType.hints.precision}"
+                      shortDesc="#{bindings.ComplaintType.hints.tooltip}"
+                      id="it13" readOnly="#{pageFlowScope.readOnly}">
+          <f:validator binding="#{bindings.ComplaintType.validator}"/>
+        </af:inputText>
+        <af:inputText value="#{bindings.ComplaintRelatingTo.inputValue}"
+                      label="#{bindings.ComplaintRelatingTo.hints.label}"
+                      required="#{bindings.ComplaintRelatingTo.hints.mandatory}"
+                      columns="#{bindings.ComplaintRelatingTo.hints.displayWidth}"
+                      maximumLength="#{bindings.ComplaintRelatingTo.hints.precision}"
+                      shortDesc="#{bindings.ComplaintRelatingTo.hints.tooltip}"
+                      id="it11" readOnly="#{pageFlowScope.readOnly}">
+          <f:validator binding="#{bindings.ComplaintRelatingTo.validator}"/>
+        </af:inputText>
+        <af:inputText value="#{bindings.ComplaintParticulars.inputValue}"
+                      label="#{bindings.ComplaintParticulars.hints.label}"
+                      required="#{bindings.ComplaintParticulars.hints.mandatory}"
+                      columns="#{bindings.ComplaintParticulars.hints.displayWidth}"
+                      maximumLength="#{bindings.ComplaintParticulars.hints.precision}"
+                      shortDesc="#{bindings.ComplaintParticulars.hints.tooltip}"
+                      id="it10" readOnly="#{pageFlowScope.readOnly}">
+          <f:validator binding="#{bindings.ComplaintParticulars.validator}"/>
+        </af:inputText>
+        <af:inputText value="#{bindings.InvestigationReportReqd.inputValue}"
+                      label="#{bindings.InvestigationReportReqd.hints.label}"
+                      required="#{bindings.InvestigationReportReqd.hints.mandatory}"
+                      columns="#{bindings.InvestigationReportReqd.hints.displayWidth}"
+                      maximumLength="#{bindings.InvestigationReportReqd.hints.precision}"
+                      shortDesc="#{bindings.InvestigationReportReqd.hints.tooltip}"
+                      id="it14" readOnly="#{pageFlowScope.readOnly}">
+          <f:validator binding="#{bindings.InvestigationReportReqd.validator}"/>
+        </af:inputText>
+        <af:inputDate value="#{bindings.DateOfReceipt.inputValue}"
+                      label="#{bindings.DateOfReceipt.hints.label}"
+                      required="#{bindings.DateOfReceipt.hints.mandatory}"
+                      shortDesc="#{bindings.DateOfReceipt.hints.tooltip}"
+                      id="id1" readOnly="#{pageFlowScope.readOnly}">
+          <f:validator binding="#{bindings.DateOfReceipt.validator}"/>
+          <af:convertDateTime pattern="#{bindings.DateOfReceipt.format}"/>
+        </af:inputDate>
+        <af:inputText value="#{bindings.DisposalStatus.inputValue}"
+                      label="#{bindings.DisposalStatus.hints.label}"
+                      required="#{bindings.DisposalStatus.hints.mandatory}"
+                      columns="#{bindings.DisposalStatus.hints.displayWidth}"
+                      maximumLength="#{bindings.DisposalStatus.hints.precision}"
+                      shortDesc="#{bindings.DisposalStatus.hints.tooltip}"
+                      id="it9" readOnly="#{pageFlowScope.readOnly}">
+          <f:validator binding="#{bindings.DisposalStatus.validator}"/>
+        </af:inputText>
+        <af:inputDate value="#{bindings.DateOfIrfCalled.inputValue}"
+                      label="#{bindings.DateOfIrfCalled.hints.label}"
+                      required="#{bindings.DateOfIrfCalled.hints.mandatory}"
+                      shortDesc="#{bindings.DateOfIrfCalled.hints.tooltip}"
+                      id="id4" readOnly="#{pageFlowScope.readOnly}">
+          <f:validator binding="#{bindings.DateOfIrfCalled.validator}"/>
+          <af:convertDateTime pattern="#{bindings.DateOfIrfCalled.format}"/>
+        </af:inputDate>
+      </af:panelFormLayout>
+    </af:showDetailHeader>
+  </af:panelGroupLayout>
+</jsp:root>

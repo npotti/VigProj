@@ -4,6 +4,10 @@
                xmlns="http://xmlns.oracle.com/sca/1.0"
                xmlns:xs="http://www.w3.org/2001/XMLSchema"
                xmlns:ui="http://xmlns.oracle.com/soa/designer/">
+  <reference name="CaseInvestigationProcess.reference"
+             ui:wsdlLocation="CaseInvestigationProcess.wsdl">
+    <interface.wsdl interface="http://xmlns.oracle.com/bpmn/bpmnProcess/CaseInvestigationProcess#wsdl.interface(CaseInvestigationProcessPortType)"/>
+  </reference>
   <reference name="HumanTasks.RegisterComplaintTask.reference"
              ui:wsdlLocation="oramds:/soa/shared/workflow/TaskServiceInterface.wsdl">
     <interface.wsdl interface="http://xmlns.oracle.com/bpel/workflow/taskService#wsdl.interface(TaskService)"
@@ -14,13 +18,9 @@
     <interface.wsdl interface="http://xmlns.oracle.com/bpel/workflow/taskService#wsdl.interface(TaskService)"
                     callbackInterface="http://xmlns.oracle.com/bpel/workflow/taskService#wsdl.interface(TaskServiceCallback)"/>
   </reference>
-  <reference name="HumanTasks.LHOInvestigationTask.reference"
+  <reference name="HumanTasks.PreliminaryInvestigationTask.reference"
              ui:wsdlLocation="oramds:/soa/shared/workflow/TaskServiceInterface.wsdl">
     <interface.wsdl interface="http://xmlns.oracle.com/bpel/workflow/taskService#wsdl.interface(TaskService)"
                     callbackInterface="http://xmlns.oracle.com/bpel/workflow/taskService#wsdl.interface(TaskServiceCallback)"/>
-  </reference>
-  <reference name="CaseInvestigationProcess.reference"
-             ui:wsdlLocation="CaseInvestigationProcess.wsdl">
-    <interface.wsdl interface="http://xmlns.oracle.com/bpmn/bpmnProcess/CaseInvestigationProcess#wsdl.interface(CaseInvestigationProcessPortType)"/>
   </reference>
 </componentType>

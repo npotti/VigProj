@@ -4,32 +4,32 @@
     <ns1:updateExistingObjects>false</ns1:updateExistingObjects>
     <ns1:organizationalUnits/>
     <ns1:applicationRoles>
-        <ns1:applicationRole isProcessRole="false" id="VigilanceProcess.ProcessOwner">
+        <ns1:applicationRole id="VigilanceProcess.ProcessOwner" isProcessRole="false">
             <ns5:name>VigilanceProcess.Process Owner</ns5:name>
             <ns1:member type="USER">
                 <ns1:name>weblogic</ns1:name>
             </ns1:member>
-            <ns1:processRole name="Process Owner" id="ProcessOwner"/>
+            <ns1:processRole id="ProcessOwner" name="Process Owner"/>
         </ns1:applicationRole>
-        <ns1:applicationRole isProcessRole="false" id="Role">
+        <ns1:applicationRole id="Role" isProcessRole="false">
             <ns5:name>Role</ns5:name>
-            <ns1:processRole name="Role" id="Role"/>
+            <ns1:processRole id="Role" name="Role"/>
         </ns1:applicationRole>
-        <ns1:applicationRole isProcessRole="true" id="VigilanceProcess.DataEntryOperator">
+        <ns1:applicationRole id="VigilanceProcess.DataEntryOperator" isProcessRole="true">
             <ns5:name>VigilanceProcess.DataEntryOperator</ns5:name>
             <ns1:member type="USER">
                 <ns1:name>dataentryofficer</ns1:name>
             </ns1:member>
-            <ns1:processRole name="DataEntryOperator" id="DataEntryOperator"/>
+            <ns1:processRole id="DataEntryOperator" name="DataEntryOperator"/>
         </ns1:applicationRole>
-        <ns1:applicationRole isProcessRole="true" id="VigilanceProcess.ComplaintOfficer">
+        <ns1:applicationRole id="VigilanceProcess.ComplaintOfficer" isProcessRole="true">
             <ns5:name>VigilanceProcess.ComplaintOfficer</ns5:name>
             <ns1:member type="USER">
                 <ns1:name>complaintofficer</ns1:name>
             </ns1:member>
-            <ns1:processRole name="ComplaintOfficer" id="ComplaintOfficer"/>
+            <ns1:processRole id="ComplaintOfficer" name="ComplaintOfficer"/>
         </ns1:applicationRole>
-        <ns1:applicationRole isProcessRole="true" id="VigilanceProcess.LHO_Vigilance_Department">
+        <ns1:applicationRole id="VigilanceProcess.LHO_Vigilance_Department" isProcessRole="true">
             <ns5:name>VigilanceProcess.LHO_Vigilance_Department</ns5:name>
             <ns1:member type="USER">
                 <ns1:name>lhodeskofficer</ns1:name>
@@ -37,11 +37,25 @@
             <ns1:member type="USER">
                 <ns1:name>lhodgm</ns1:name>
             </ns1:member>
-            <ns1:processRole name="LHO_Vigilance_Department" id="LHO_Vigilance_Department"/>
+            <ns1:processRole id="LHO_Vigilance_Department" name="LHO_Vigilance_Department"/>
         </ns1:applicationRole>
-        <ns1:applicationRole isProcessRole="true" id="VigilanceProcess.CC_Vigilance_Department">
+        <ns1:applicationRole id="VigilanceProcess.CC_Vigilance_Department" isProcessRole="true">
             <ns5:name>VigilanceProcess.CC_Vigilance_Department</ns5:name>
-            <ns1:processRole name="CC_Vigilance_Department" id="CC_Vigilance_Department"/>
+            <ns1:processRole id="CC_Vigilance_Department" name="CC_Vigilance_Department"/>
+        </ns1:applicationRole>
+        <ns1:applicationRole id="VigilanceProcess.TestRole" isProcessRole="false">
+            <ns5:name>VigilanceProcess.TestRole</ns5:name>
+            <ns1:member type="USER">
+                <ns1:name>weblogic</ns1:name>
+            </ns1:member>
+            <ns1:processRole id="TestRole" name="TestRole"/>
+        </ns1:applicationRole>
+        <ns1:applicationRole id="VigilanceProcess.Chandan" isProcessRole="true">
+            <ns5:name>VigilanceProcess.Chandan</ns5:name>
+            <ns1:member type="USER">
+                <ns1:name>weblogic</ns1:name>
+            </ns1:member>
+            <ns1:processRole id="Chandan" name="Chandan"/>
         </ns1:applicationRole>
     </ns1:applicationRoles>
     <ns1:applicationRoleOrgUnitCalendarAssociations/>

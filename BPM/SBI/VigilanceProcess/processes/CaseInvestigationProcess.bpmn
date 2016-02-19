@@ -75,9 +75,8 @@
                         <ns5:StringFeature value="USE_PROCESS_PERMISSION" name="sealType"/>
                         <ns5:StringFeature value="REUSE_PAYLOAD" name="reinitiatorPolicy"/>
                         <ns5:StringFeature value="SIMPLE" name="humanTaskType"/>
-                        <ns5:StringFeature value="" name="reinitiateSource"/>
                     </ns5:FeatureSet>
-                    <ns5:HumanTask humanTaskReference="HumanTasks.DetailedInvestigationTask"/>
+                    <ns5:HumanTask humanTaskReference="HumanTasks.VerifyComplaintTask"/>
                     <ns5:LogHandlers/>
                 </ns5:OracleExtensions>
             </extensionElements>
@@ -103,6 +102,13 @@
                         </ns5:OracleExtensions>
                     </extensionElements>
                 </dataOutput>
+                <dataOutput name="vigilanceProcess" id="vigilanceProcess">
+                    <extensionElements>
+                        <ns5:OracleExtensions>
+                            <ns5:TypeRef namespace="http://sbi.co.in/vigilance" element="VigilanceProcess" isArray="false"/>
+                        </ns5:OracleExtensions>
+                    </extensionElements>
+                </dataOutput>
                 <dataOutput name="execData" id="execData">
                     <extensionElements>
                         <ns5:OracleExtensions>
@@ -116,6 +122,7 @@
                 </inputSet>
                 <outputSet id="ACT15410791746854_uniqueOutputSet">
                     <dataOutputRefs>outcome</dataOutputRefs>
+                    <dataOutputRefs>vigilanceProcess</dataOutputRefs>
                     <dataOutputRefs>execData</dataOutputRefs>
                 </outputSet>
             </ioSpecification>
@@ -147,34 +154,6 @@
                     </to>
                 </assignment>
             </dataInputAssociation>
-            <dataOutputAssociation>
-                <extensionElements>
-                    <ns5:OracleExtensions/>
-                </extensionElements>
-                <sourceRef>outcome</sourceRef>
-                <targetRef>taskOutcome</targetRef>
-                <assignment>
-                    <extensionElements>
-                        <ns5:OracleExtensions>
-                            <ns5:DataAssignment operation="copy"/>
-                        </ns5:OracleExtensions>
-                    </extensionElements>
-                    <from xsi:type="tFormalExpression" language="http://www.w3.org/1999/XPath" ns7:bpmn="http://www.omg.org/bpmn20" xmlns:ns7="http://xmlns.oracle.com/bpm/XPathNamespace">bpmn:getDataOutput('outcome')
-                        <extensionElements>
-                            <ns5:OracleExtensions>
-                                <ns5:Expression mode="simple"/>
-                            </ns5:OracleExtensions>
-                        </extensionElements>
-                    </from>
-                    <to xsi:type="tFormalExpression" language="http://www.w3.org/1999/XPath" ns7:bpmn="http://www.omg.org/bpmn20" xmlns:ns7="http://xmlns.oracle.com/bpm/XPathNamespace">bpmn:getDataObject('taskOutcome')
-                        <extensionElements>
-                            <ns5:OracleExtensions>
-                                <ns5:Expression mode="simple"/>
-                            </ns5:OracleExtensions>
-                        </extensionElements>
-                    </to>
-                </assignment>
-            </dataOutputAssociation>
             <resourceRole name="CC_Vigilance_Department" id="lane0"/>
         </userTask>
         <startEvent isInterrupting="false" name="Start" id="EVT15410781216097">

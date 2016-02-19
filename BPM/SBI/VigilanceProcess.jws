@@ -15,10 +15,112 @@
    <list n="listOfChildren">
       <hash><url n="URL" path="VigilanceModel/VigilanceModel.jpr"/></hash>
       <hash><url n="URL" path="VigilanceProcess/VigilanceProcess.jpr"/></hash>
-      <hash><url n="URL" path="VigilanceUI/VigilanceUI.jpr"/></hash>
+      <hash><url n="URL" path="VigilanceProcessUI/VigilanceProcessUI.jpr"/></hash>
    </list>
    <hash n="oracle.jdeveloper.deploy.dt.DeploymentProfiles">
       <hash n="profileDefinitions">
+         <hash n="BPMUI">
+            <hash n="archiveOptions">
+               <value n="hasManifest" v="false"/>
+            </hash>
+            <hash n="dependencies">
+               <list n="dependencyList">
+                  <hash>
+                     <value n="adapterClass" v="oracle.jdevimpl.deploy.common.DefaultProfileDependable"/>
+                     <url n="ownerURL" path="BPMUI/BPMUI.jpr"/>
+                     <value n="profileName" v="BPMUI"/>
+                  </hash>
+               </list>
+            </hash>
+            <url n="earURL" path="deploy/BPMUI.ear"/>
+            <value n="enterpriseAppName" v="BPMUI"/>
+            <hash n="fileGroups">
+               <list n="groups">
+                  <hash>
+                     <list n="contributors">
+                        <hash>
+                           <value n="type" v="9"/>
+                        </hash>
+                     </list>
+                     <value n="displayName" v="Application Descriptors"/>
+                     <hash n="filters">
+                        <list n="rules"/>
+                     </hash>
+                     <value n="internalName" v="ear-metainf"/>
+                     <value n="type" v="1"/>
+                  </hash>
+                  <hash>
+                     <value n="displayName" v="Application Libraries"/>
+                     <hash n="filters">
+                        <list n="rules">
+                           <hash>
+                              <value n="pattern" v="**"/>
+                           </hash>
+                        </list>
+                     </hash>
+                     <value n="internalName" v="libraries"/>
+                     <value n="targetWithinJar" v="lib"/>
+                     <value n="type" v="3"/>
+                  </hash>
+               </list>
+            </hash>
+            <hash n="libraryDependencies">
+               <value n="IncludeLibrariesFromOtherContainers" v="true"/>
+            </hash>
+            <value n="profileClass" v="oracle.jdeveloper.deploy.ear.EarProfile"/>
+            <value n="profileName" v="BPMUI"/>
+         </hash>
+         <hash n="Project1">
+            <hash n="archiveOptions">
+               <value n="hasManifest" v="false"/>
+            </hash>
+            <hash n="dependencies">
+               <list n="dependencyList">
+                  <hash>
+                     <value n="adapterClass" v="oracle.jdevimpl.deploy.common.DefaultProfileDependable"/>
+                     <url n="ownerURL" path="Project1/Project1.jpr"/>
+                     <value n="profileName" v="Project1"/>
+                  </hash>
+               </list>
+            </hash>
+            <url n="earURL" path="deploy/Project1.ear"/>
+            <value n="enterpriseAppName" v="Project1"/>
+            <hash n="fileGroups">
+               <list n="groups">
+                  <hash>
+                     <list n="contributors">
+                        <hash>
+                           <value n="type" v="9"/>
+                        </hash>
+                     </list>
+                     <value n="displayName" v="Application Descriptors"/>
+                     <hash n="filters">
+                        <list n="rules"/>
+                     </hash>
+                     <value n="internalName" v="ear-metainf"/>
+                     <value n="type" v="1"/>
+                  </hash>
+                  <hash>
+                     <value n="displayName" v="Application Libraries"/>
+                     <hash n="filters">
+                        <list n="rules">
+                           <hash>
+                              <value n="pattern" v="**"/>
+                           </hash>
+                        </list>
+                     </hash>
+                     <value n="internalName" v="libraries"/>
+                     <value n="targetWithinJar" v="lib"/>
+                     <value n="type" v="3"/>
+                  </hash>
+               </list>
+            </hash>
+            <hash n="libraryDependencies">
+               <value n="IncludeLibrariesFromOtherContainers" v="true"/>
+            </hash>
+            <value n="profileClass" v="oracle.jdeveloper.deploy.ear.EarProfile"/>
+            <value n="profileName" v="Project1"/>
+         </hash>
          <hash n="Project2">
             <hash n="archiveOptions">
                <value n="hasManifest" v="false"/>
@@ -70,6 +172,159 @@
             <value n="profileClass" v="oracle.jdeveloper.deploy.ear.EarProfile"/>
             <value n="profileName" v="Project2"/>
          </hash>
+         <hash n="SecondUI">
+            <hash n="archiveOptions">
+               <value n="hasManifest" v="false"/>
+            </hash>
+            <hash n="dependencies">
+               <list n="dependencyList">
+                  <hash>
+                     <value n="adapterClass" v="oracle.jdevimpl.deploy.common.DefaultProfileDependable"/>
+                     <url n="ownerURL" path="SecondUI/SecondUI.jpr"/>
+                     <value n="profileName" v="SecondUI"/>
+                  </hash>
+               </list>
+            </hash>
+            <url n="earURL" path="deploy/SecondUI.ear"/>
+            <value n="enterpriseAppName" v="SecondUI"/>
+            <hash n="fileGroups">
+               <list n="groups">
+                  <hash>
+                     <list n="contributors">
+                        <hash>
+                           <value n="type" v="9"/>
+                        </hash>
+                     </list>
+                     <value n="displayName" v="Application Descriptors"/>
+                     <hash n="filters">
+                        <list n="rules"/>
+                     </hash>
+                     <value n="internalName" v="ear-metainf"/>
+                     <value n="type" v="1"/>
+                  </hash>
+                  <hash>
+                     <value n="displayName" v="Application Libraries"/>
+                     <hash n="filters">
+                        <list n="rules">
+                           <hash>
+                              <value n="pattern" v="**"/>
+                           </hash>
+                        </list>
+                     </hash>
+                     <value n="internalName" v="libraries"/>
+                     <value n="targetWithinJar" v="lib"/>
+                     <value n="type" v="3"/>
+                  </hash>
+               </list>
+            </hash>
+            <hash n="libraryDependencies">
+               <value n="IncludeLibrariesFromOtherContainers" v="true"/>
+            </hash>
+            <value n="profileClass" v="oracle.jdeveloper.deploy.ear.EarProfile"/>
+            <value n="profileName" v="SecondUI"/>
+         </hash>
+         <hash n="TestBPMUI">
+            <hash n="archiveOptions">
+               <value n="hasManifest" v="false"/>
+            </hash>
+            <hash n="dependencies">
+               <list n="dependencyList">
+                  <hash>
+                     <value n="adapterClass" v="oracle.jdevimpl.deploy.common.DefaultProfileDependable"/>
+                     <url n="ownerURL" path="TestBPMUI/TestBPMUI.jpr"/>
+                     <value n="profileName" v="TestBPMUI"/>
+                  </hash>
+               </list>
+            </hash>
+            <url n="earURL" path="deploy/TestBPMUI.ear"/>
+            <value n="enterpriseAppName" v="TestBPMUI"/>
+            <hash n="fileGroups">
+               <list n="groups">
+                  <hash>
+                     <list n="contributors">
+                        <hash>
+                           <value n="type" v="9"/>
+                        </hash>
+                     </list>
+                     <value n="displayName" v="Application Descriptors"/>
+                     <hash n="filters">
+                        <list n="rules"/>
+                     </hash>
+                     <value n="internalName" v="ear-metainf"/>
+                     <value n="type" v="1"/>
+                  </hash>
+                  <hash>
+                     <value n="displayName" v="Application Libraries"/>
+                     <hash n="filters">
+                        <list n="rules">
+                           <hash>
+                              <value n="pattern" v="**"/>
+                           </hash>
+                        </list>
+                     </hash>
+                     <value n="internalName" v="libraries"/>
+                     <value n="targetWithinJar" v="lib"/>
+                     <value n="type" v="3"/>
+                  </hash>
+               </list>
+            </hash>
+            <hash n="libraryDependencies">
+               <value n="IncludeLibrariesFromOtherContainers" v="true"/>
+            </hash>
+            <value n="profileClass" v="oracle.jdeveloper.deploy.ear.EarProfile"/>
+            <value n="profileName" v="TestBPMUI"/>
+         </hash>
+         <hash n="TestUI">
+            <hash n="archiveOptions">
+               <value n="hasManifest" v="false"/>
+            </hash>
+            <hash n="dependencies">
+               <list n="dependencyList">
+                  <hash>
+                     <value n="adapterClass" v="oracle.jdevimpl.deploy.common.DefaultProfileDependable"/>
+                     <url n="ownerURL" path="TestUI/TestUI.jpr"/>
+                     <value n="profileName" v="TestUI"/>
+                  </hash>
+               </list>
+            </hash>
+            <url n="earURL" path="deploy/TestUI.ear"/>
+            <value n="enterpriseAppName" v="TestUI"/>
+            <hash n="fileGroups">
+               <list n="groups">
+                  <hash>
+                     <list n="contributors">
+                        <hash>
+                           <value n="type" v="9"/>
+                        </hash>
+                     </list>
+                     <value n="displayName" v="Application Descriptors"/>
+                     <hash n="filters">
+                        <list n="rules"/>
+                     </hash>
+                     <value n="internalName" v="ear-metainf"/>
+                     <value n="type" v="1"/>
+                  </hash>
+                  <hash>
+                     <value n="displayName" v="Application Libraries"/>
+                     <hash n="filters">
+                        <list n="rules">
+                           <hash>
+                              <value n="pattern" v="**"/>
+                           </hash>
+                        </list>
+                     </hash>
+                     <value n="internalName" v="libraries"/>
+                     <value n="targetWithinJar" v="lib"/>
+                     <value n="type" v="3"/>
+                  </hash>
+               </list>
+            </hash>
+            <hash n="libraryDependencies">
+               <value n="IncludeLibrariesFromOtherContainers" v="true"/>
+            </hash>
+            <value n="profileClass" v="oracle.jdeveloper.deploy.ear.EarProfile"/>
+            <value n="profileName" v="TestUI"/>
+         </hash>
          <hash n="VigilanceProcess_rev_c1v3.0default">
             <hash n="archiveOptions">
                <value n="hasManifest" v="false"/>
@@ -120,6 +375,108 @@
             </hash>
             <value n="profileClass" v="oracle.jdeveloper.deploy.ear.EarProfile"/>
             <value n="profileName" v="VigilanceProcess_rev_c1v3.0default"/>
+         </hash>
+         <hash n="VigilanceProcess_rev_c1v7.0sbi">
+            <hash n="archiveOptions">
+               <value n="hasManifest" v="false"/>
+            </hash>
+            <hash n="dependencies">
+               <list n="dependencyList">
+                  <hash>
+                     <value n="adapterClass" v="oracle.jdevimpl.deploy.common.DefaultProfileDependable"/>
+                     <url n="ownerURL" path="VigilanceProcessUI/VigilanceProcessUI.jpr"/>
+                     <value n="profileName" v="VigilanceProcessUI_rev7.0sbi"/>
+                  </hash>
+               </list>
+            </hash>
+            <url n="earURL" path="deploy/VigilanceProcess_rev_c1v7.0sbi.ear"/>
+            <value n="enterpriseAppName" v="VigilanceProcess_rev_c1v7.0sbi"/>
+            <hash n="fileGroups">
+               <list n="groups">
+                  <hash>
+                     <list n="contributors">
+                        <hash>
+                           <value n="type" v="9"/>
+                        </hash>
+                     </list>
+                     <value n="displayName" v="Application Descriptors"/>
+                     <hash n="filters">
+                        <list n="rules"/>
+                     </hash>
+                     <value n="internalName" v="ear-metainf"/>
+                     <value n="type" v="1"/>
+                  </hash>
+                  <hash>
+                     <value n="displayName" v="Application Libraries"/>
+                     <hash n="filters">
+                        <list n="rules">
+                           <hash>
+                              <value n="pattern" v="**"/>
+                           </hash>
+                        </list>
+                     </hash>
+                     <value n="internalName" v="libraries"/>
+                     <value n="targetWithinJar" v="lib"/>
+                     <value n="type" v="3"/>
+                  </hash>
+               </list>
+            </hash>
+            <hash n="libraryDependencies">
+               <value n="IncludeLibrariesFromOtherContainers" v="true"/>
+            </hash>
+            <value n="profileClass" v="oracle.jdeveloper.deploy.ear.EarProfile"/>
+            <value n="profileName" v="VigilanceProcess_rev_c1v7.0sbi"/>
+         </hash>
+         <hash n="VigilanceProcessUI">
+            <hash n="archiveOptions">
+               <value n="hasManifest" v="false"/>
+            </hash>
+            <hash n="dependencies">
+               <list n="dependencyList">
+                  <hash>
+                     <value n="adapterClass" v="oracle.jdevimpl.deploy.common.DefaultProfileDependable"/>
+                     <url n="ownerURL" path="VigilanceProcessUI/VigilanceProcessUI.jpr"/>
+                     <value n="profileName" v="VigilanceProcessUI"/>
+                  </hash>
+               </list>
+            </hash>
+            <url n="earURL" path="deploy/VigilanceProcessUI.ear"/>
+            <value n="enterpriseAppName" v="VigilanceProcessUI"/>
+            <hash n="fileGroups">
+               <list n="groups">
+                  <hash>
+                     <list n="contributors">
+                        <hash>
+                           <value n="type" v="9"/>
+                        </hash>
+                     </list>
+                     <value n="displayName" v="Application Descriptors"/>
+                     <hash n="filters">
+                        <list n="rules"/>
+                     </hash>
+                     <value n="internalName" v="ear-metainf"/>
+                     <value n="type" v="1"/>
+                  </hash>
+                  <hash>
+                     <value n="displayName" v="Application Libraries"/>
+                     <hash n="filters">
+                        <list n="rules">
+                           <hash>
+                              <value n="pattern" v="**"/>
+                           </hash>
+                        </list>
+                     </hash>
+                     <value n="internalName" v="libraries"/>
+                     <value n="targetWithinJar" v="lib"/>
+                     <value n="type" v="3"/>
+                  </hash>
+               </list>
+            </hash>
+            <hash n="libraryDependencies">
+               <value n="IncludeLibrariesFromOtherContainers" v="true"/>
+            </hash>
+            <value n="profileClass" v="oracle.jdeveloper.deploy.ear.EarProfile"/>
+            <value n="profileName" v="VigilanceProcessUI"/>
          </hash>
          <hash n="VigilanceSBIUI">
             <hash n="archiveOptions">
@@ -333,6 +690,13 @@
          <string v="VigilUI"/>
          <string v="VigilanceSBIUI"/>
          <string v="VigilanceProcess_rev_c1v3.0default"/>
+         <string v="SecondUI"/>
+         <string v="Project1"/>
+         <string v="TestUI"/>
+         <string v="TestBPMUI"/>
+         <string v="BPMUI"/>
+         <string v="VigilanceProcessUI"/>
+         <string v="VigilanceProcess_rev_c1v7.0sbi"/>
       </list>
    </hash>
 </jws:workspace>

@@ -1,7 +1,16 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<taskDefinition targetNamespace="http://xmlns.oracle.com/SBI/VigilanceProcess/VerifyComplaintTask" xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20" xmlns:ora="http://schemas.oracle.com/xpath/extension" xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc" xmlns:task="http://xmlns.oracle.com/bpel/workflow/task" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://xmlns.oracle.com/bpel/workflow/taskDefinition" xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions">
+<taskDefinition targetNamespace="http://xmlns.oracle.com/SBI/VigilanceProcess/VerifyComplaintTask" xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20" xmlns:ora="http://schemas.oracle.com/xpath/extension" xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc" xmlns:task="http://xmlns.oracle.com/bpel/workflow/task" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://xmlns.oracle.com/bpel/workflow/taskDefinition" xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+                xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+                xmlns:ns0="http://xmlns.oracle.com/bpel/workflow/common"
+                xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+                xmlns:evidence="http://xmlns.oracle.com/bpel/workflow/TaskEvidenceService"
+                xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+                xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+                xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+                xmlns:ns1="http://sbi.co.in/vigilance">
    <name>VerifyComplaintTask</name>
    <id>${domain_id}_${process_id}_${process_revision}_VerifyComplaintTask</id>
+   <title type="XPATH"><value>string('Comlaint Received')</value></title>
    <priority>3</priority>
    <process processId="" processVersion=""/>
    <routingSlip xmlns="http://xmlns.oracle.com/bpel/workflow/routingSlip">
@@ -14,7 +23,7 @@
       <participants isAdhocRoutingSupported="false">
          <stage name="Stage1">
             <participant name="default.DefaultPerformer">
-               <resource identityType="application_role" type="XPATH">bpm:getPerformer()</resource>
+               <resource type="STATIC" identityType="user">complaintofficer</resource>
             </participant>
          </stage>
       </participants>
@@ -31,12 +40,14 @@
    <workflowConfiguration features="ucm" xmlns:ns0="http://sbi.co.in/vigilance" xmlns="http://xmlns.oracle.com/bpel/workflow/configuration">
       <outcomes>
          <outcome>APPROVE</outcome>
-         <outcome>DELETE</outcome>
+         <outcome>REJECT</outcome>
+         <outcome>SUBMIT</outcome>
+         <outcome>CANCEL</outcome>
       </outcomes>
       <payload xmlSchemaDefinition="xsd/VerifyComplaintTaskPayload.xsd"
                externalSchema="false">
-         <messageAttribute name="VigilanceProcess" attributeType="COMPLEX_TYPE"
-                           type="ns0:VigilanceProcessType" updatable="false"
+         <messageAttribute name="VigilanceProcess" attributeType="ELEMENT"
+                           type="ns0:VigilanceProcess" updatable="true"
                            external="false"/>
       </payload>
       <bpelEventListener>false</bpelEventListener>

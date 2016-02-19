@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.64.93"
+                id="CaseRegistrationTF_CaseRegistrationTF_checkIfExistingTaskPageDef"
+                Package="vigilanceprocessui.pageDefs" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="getTaskDetails.result"
+                    DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                    RangeSize="25"
+                    BeanClass="VigilanceProcessUI_RegisterComplaintTask.getTaskDetails"
+                    id="getTaskDetailsIterator"/>
+    <accessorIterator MasterBinding="getTaskDetailsIterator" Binds="task"
+                      RangeSize="25"
+                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.task"
+                      id="taskIterator"/>
+    <accessorIterator MasterBinding="taskIterator" Binds="payload"
+                      RangeSize="25"
+                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.RegisterComplaintTaskPayloadType"
+                      id="payloadIterator"/>
+    <accessorIterator id="VigilanceProcessIterator"
+                      MasterBinding="payloadIterator" Binds="VigilanceProcess"
+                      RangeSize="25"
+                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.VigilanceProcessType"/>
+    <iterator id="CaseRegistrationVOIterator" Binds="CaseRegistrationVO"
+              DataControl="VigilanceAMDataControl" RangeSize="25"/>
+    <iterator id="ComplaintDetailsVOIterator" Binds="ComplaintDetailsVO"
+              DataControl="VigilanceAMDataControl" RangeSize="25"/>
+  </executables>
+  <bindings>
+    <methodAction id="getTaskDetails" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="getTaskDetails"
+                  IsViewObjectMethod="false"
+                  DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                  InstanceName="VigilanceProcessUI_RegisterComplaintTask"
+                  ReturnName="data.VigilanceProcessUI_RegisterComplaintTask.methodResults.getTaskDetails_VigilanceProcessUI_RegisterComplaintTask_getTaskDetails_result">
+      <NamedData NDName="bpmWorklistContext" NDType="java.lang.String"/>
+      <NamedData NDName="bpmWorklistTaskId" NDType="java.lang.String"/>
+      <NamedData NDName="bpmWorklistTaskVersion" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="VigilanceProcessIterator"
+                     id="ComplaintNumber">
+      <AttrNames>
+        <Item Value="ComplaintNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="CaseRegistrationVOIterator"
+            id="setCurrentRowWithKeyValue"
+            InstanceName="VigilanceAMDataControl.CaseRegistrationVO"
+            DataControl="VigilanceAMDataControl" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKeyValue">
+      <NamedData NDName="rowKey" NDType="java.lang.String"/>
+    </action>
+    <action IterBinding="ComplaintDetailsVOIterator"
+            id="setComplaintRow"
+            InstanceName="VigilanceAMDataControl.ComplaintDetailsVO"
+            DataControl="VigilanceAMDataControl" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKeyValue">
+      <NamedData NDName="rowKey" NDType="java.lang.String"/>
+    </action>
+  </bindings>
+</pageDefinition>

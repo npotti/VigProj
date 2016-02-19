@@ -14,6 +14,6 @@
     </types>
     <portType name="VigilanceProcessBOPortType"/>
     <binding name="VigilanceProcessBOPortTypeBinding" type="tns:VigilanceProcessBOPortType">
-        <bpmo:binding type="oj:VigilanceProcessType"/>
+        <bpmo:binding element="oj:VigilanceProcess"/>
     </binding>
 </definitions>

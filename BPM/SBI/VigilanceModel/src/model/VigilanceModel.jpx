@@ -21,6 +21,22 @@
     </DesignTime>
   </Containee>
   <Containee
+    Name="eo"
+    PackageName="model.eo"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_EO" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="updateable"
+    PackageName="model.vo.updateable"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_VO" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
     Name="vo"
     PackageName="model.vo"
     ObjectType="JboPackage">

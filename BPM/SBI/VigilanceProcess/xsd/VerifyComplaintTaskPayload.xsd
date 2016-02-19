@@ -3,7 +3,7 @@
    <import namespace="http://sbi.co.in/vigilance" schemaLocation="VigilanceProcess.xsd"/>
    <complexType name="VerifyComplaintTaskPayloadType">
       <sequence>
-         <element name="VigilanceProcess" type="ns0:VigilanceProcessType"/>
+         <element ref="ns0:VigilanceProcess"/>
       </sequence>
    </complexType>
 </schema>

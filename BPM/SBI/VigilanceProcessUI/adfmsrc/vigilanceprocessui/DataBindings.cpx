@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application"
+             version="11.1.1.64.93" id="DataBindings" SeparateXMLFiles="false"
+             Package="vigilanceprocessui" ClientType="Generic">
+  <definitionFactories>
+    <factory nameSpace="http://xmlns.oracle.com/adf/controller/binding"
+             className="oracle.adf.controller.internal.binding.TaskFlowBindingDefFactoryImpl"/>
+    <dtfactory className="oracle.adf.controller.internal.dtrt.binding.BindingDTObjectFactory"/>
+  </definitionFactories>
+  <pageMap>
+    <page path="/taskDetails1.jspx"
+          usageId="vigilanceprocessui_taskDetails1PageDef"/>
+    <page path="/WEB-INF/CaseRegistrationTF.xml#CaseRegistrationTF@checkIfExistingTask"
+          usageId="vigilanceprocessui_CaseRegistrationTF_CaseRegistrationTF_checkIfExistingTaskPageDef"/>
+    <page path="/fragments/caseRegistration.jsff"
+          usageId="vigilanceprocessui_caseRegistrationPageDef"/>
+  </pageMap>
+  <pageDefinitionUsages>
+    <page id="vigilanceprocessui_taskDetails1PageDef"
+          path="vigilanceprocessui.pageDefs.taskDetails1PageDef"/>
+    <page id="vigilanceprocessui_CaseRegistrationTF_CaseRegistrationTF_checkIfExistingTaskPageDef"
+          path="vigilanceprocessui.pageDefs.CaseRegistrationTF_CaseRegistrationTF_checkIfExistingTaskPageDef"/>
+    <page id="vigilanceprocessui_caseRegistrationPageDef"
+          path="fragments.caseRegistrationPageDef"/>
+  </pageDefinitionUsages>
+  <dataControlUsages>
+    <dc id="VigilanceProcessUI_RegisterComplaintTask"
+        path="vigilanceprocessui.VigilanceProcessUI_RegisterComplaintTask"/>
+    <BC4JDataControl id="VigilanceAMDataControl" Package="model.am"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl"
+                     SupportsTransactions="true" SupportsFindMode="true"
+                     SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true"
+                     Configuration="VigilanceAMLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+  </dataControlUsages>
+</Application>

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.64.93" id="caseRegistrationPageDef"
+                Package="fragments">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="CaseRegistrationVO" RangeSize="25"
+              DataControl="VigilanceAMDataControl"
+              id="CaseRegistrationVOIterator"/>
+    <methodIterator Binds="getTaskDetails.result"
+                    DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                    RangeSize="25"
+                    BeanClass="VigilanceProcessUI_RegisterComplaintTask.getTaskDetails"
+                    id="getTaskDetailsIterator"/>
+    <accessorIterator MasterBinding="getTaskDetailsIterator" Binds="task"
+                      RangeSize="25"
+                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.task"
+                      id="taskIterator"/>
+    <accessorIterator MasterBinding="taskIterator" Binds="payload"
+                      RangeSize="25"
+                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.RegisterComplaintTaskPayloadType"
+                      id="payloadIterator"/>
+    <accessorIterator id="VigilanceProcessIterator"
+                      MasterBinding="payloadIterator" Binds="VigilanceProcess"
+                      RangeSize="25"
+                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.VigilanceProcessType"/>
+    <iterator Binds="ComplaintDetailsVO" RangeSize="25"
+              DataControl="VigilanceAMDataControl"
+              id="ComplaintDetailsVOIterator"/>
+  </executables>
+  <bindings>
+    <listOfValues StaticList="false" IterBinding="CaseRegistrationVOIterator"
+                  Uses="LOV_Branchcode" id="Branchcode"/>
+    <attributeValues IterBinding="CaseRegistrationVOIterator" id="Systemsernum">
+      <AttrNames>
+        <Item Value="Systemsernum"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CaseRegistrationVOIterator" id="Ccfilenumber">
+      <AttrNames>
+        <Item Value="Ccfilenumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CaseRegistrationVOIterator" id="Branchname">
+      <AttrNames>
+        <Item Value="Branchname"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CaseRegistrationVOIterator" id="Regioncd">
+      <AttrNames>
+        <Item Value="Regioncd"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CaseRegistrationVOIterator" id="Aomcro">
+      <AttrNames>
+        <Item Value="Aomcro"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CaseRegistrationVOIterator" id="Networkcd">
+      <AttrNames>
+        <Item Value="Networkcd"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CaseRegistrationVOIterator" id="Circlenm">
+      <AttrNames>
+        <Item Value="Circlenm"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="CaseRegistrationVOIterator" StaticList="false"
+          Uses="LOV_Sourceofcase" id="Sourceofcase" DTSupportsMRU="false"/>
+    <attributeValues IterBinding="CaseRegistrationVOIterator" id="Signed">
+      <AttrNames>
+        <Item Value="Signed"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="getTaskDetails" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="getTaskDetails"
+                  IsViewObjectMethod="false"
+                  DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                  InstanceName="VigilanceProcessUI_RegisterComplaintTask"
+                  ReturnName="data.VigilanceProcessUI_RegisterComplaintTask.methodResults.getTaskDetails_VigilanceProcessUI_RegisterComplaintTask_getTaskDetails_result">
+      <NamedData NDName="bpmWorklistContext" NDType="java.lang.String"/>
+      <NamedData NDName="bpmWorklistTaskId" NDType="java.lang.String"/>
+      <NamedData NDName="bpmWorklistTaskVersion" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="VigilanceProcessIterator" id="TaskName">
+      <AttrNames>
+        <Item Value="TaskName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CaseRegistrationVOIterator" id="Circlecd">
+      <AttrNames>
+        <Item Value="Circlecd"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintDetailsVOIterator" id="ReceivedFrom">
+      <AttrNames>
+        <Item Value="ReceivedFrom"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintDetailsVOIterator" id="ReceivedAt">
+      <AttrNames>
+        <Item Value="ReceivedAt"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintDetailsVOIterator"
+                     id="NameOfComplaint">
+      <AttrNames>
+        <Item Value="NameOfComplaint"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintDetailsVOIterator"
+                     id="DateOfComplaint">
+      <AttrNames>
+        <Item Value="DateOfComplaint"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintDetailsVOIterator" id="DateReceived">
+      <AttrNames>
+        <Item Value="DateReceived"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintDetailsVOIterator"
+                     id="ComplaintType">
+      <AttrNames>
+        <Item Value="ComplaintType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintDetailsVOIterator"
+                     id="ComplaintRelatingTo">
+      <AttrNames>
+        <Item Value="ComplaintRelatingTo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintDetailsVOIterator"
+                     id="ComplaintParticulars">
+      <AttrNames>
+        <Item Value="ComplaintParticulars"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintDetailsVOIterator"
+                     id="InvestigationReportReqd">
+      <AttrNames>
+        <Item Value="InvestigationReportReqd"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintDetailsVOIterator"
+                     id="DateOfReceipt">
+      <AttrNames>
+        <Item Value="DateOfReceipt"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintDetailsVOIterator"
+                     id="DisposalStatus">
+      <AttrNames>
+        <Item Value="DisposalStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintDetailsVOIterator"
+                     id="DateOfIrfCalled">
+      <AttrNames>
+        <Item Value="DateOfIrfCalled"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>
