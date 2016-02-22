@@ -75,8 +75,15 @@
                         <ns5:StringFeature value="USE_PROCESS_PERMISSION" name="sealType"/>
                         <ns5:StringFeature value="REUSE_PAYLOAD" name="reinitiatorPolicy"/>
                         <ns5:StringFeature value="SIMPLE" name="humanTaskType"/>
+                        <ns5:AttributeExpression attributeName="subjectExpressionFeature" language="http://www.w3.org/1999/XPath" ns7:ns="http://sbi.co.in/vigilance" ns7:bpmn="http://www.omg.org/bpmn20" xmlns:ns7="http://xmlns.oracle.com/bpm/XPathNamespace">concat("Case Number#",bpmn:getDataObject('VigilanceProcessPO')/ns:CaseNumber," registered")
+                            <extensionElements>
+                                <ns5:OracleExtensions>
+                                    <ns5:Expression mode="xpath"/>
+                                </ns5:OracleExtensions>
+                            </extensionElements>
+                        </ns5:AttributeExpression>
                     </ns5:FeatureSet>
-                    <ns5:HumanTask humanTaskReference="HumanTasks.VerifyComplaintTask"/>
+                    <ns5:HumanTask humanTaskReference="HumanTasks.DetailedInvestigationTask"/>
                     <ns5:LogHandlers/>
                 </ns5:OracleExtensions>
             </extensionElements>
@@ -153,7 +160,84 @@
                         </extensionElements>
                     </to>
                 </assignment>
+                <assignment>
+                    <extensionElements>
+                        <ns5:OracleExtensions>
+                            <ns5:DataAssignment operation="copy"/>
+                        </ns5:OracleExtensions>
+                    </extensionElements>
+                    <from xsi:type="tFormalExpression" language="http://www.w3.org/1999/XPath">'Start Detailed Investigation'
+                        <extensionElements>
+                            <ns5:OracleExtensions>
+                                <ns5:Expression mode="simple"/>
+                            </ns5:OracleExtensions>
+                        </extensionElements>
+                    </from>
+                    <to xsi:type="tFormalExpression" language="http://www.w3.org/1999/XPath" ns7:ns="http://sbi.co.in/vigilance" ns7:bpmn="http://www.omg.org/bpmn20" xmlns:ns7="http://xmlns.oracle.com/bpm/XPathNamespace">bpmn:getDataInput('vigilanceProcess')/ns:TaskName
+                        <extensionElements>
+                            <ns5:OracleExtensions>
+                                <ns5:Expression mode="simple"/>
+                            </ns5:OracleExtensions>
+                        </extensionElements>
+                    </to>
+                </assignment>
             </dataInputAssociation>
+            <dataOutputAssociation>
+                <extensionElements>
+                    <ns5:OracleExtensions/>
+                </extensionElements>
+                <sourceRef>vigilanceProcess</sourceRef>
+                <targetRef>VigilanceProcessPO</targetRef>
+                <assignment>
+                    <extensionElements>
+                        <ns5:OracleExtensions>
+                            <ns5:DataAssignment operation="copy"/>
+                        </ns5:OracleExtensions>
+                    </extensionElements>
+                    <from xsi:type="tFormalExpression" language="http://www.w3.org/1999/XPath" ns7:bpmn="http://www.omg.org/bpmn20" xmlns:ns7="http://xmlns.oracle.com/bpm/XPathNamespace">bpmn:getDataOutput('vigilanceProcess')
+                        <extensionElements>
+                            <ns5:OracleExtensions>
+                                <ns5:Expression mode="simple"/>
+                            </ns5:OracleExtensions>
+                        </extensionElements>
+                    </from>
+                    <to xsi:type="tFormalExpression" language="http://www.w3.org/1999/XPath" ns7:bpmn="http://www.omg.org/bpmn20" xmlns:ns7="http://xmlns.oracle.com/bpm/XPathNamespace">bpmn:getDataObject('VigilanceProcessPO')
+                        <extensionElements>
+                            <ns5:OracleExtensions>
+                                <ns5:Expression mode="simple"/>
+                            </ns5:OracleExtensions>
+                        </extensionElements>
+                    </to>
+                </assignment>
+            </dataOutputAssociation>
+            <dataOutputAssociation>
+                <extensionElements>
+                    <ns5:OracleExtensions/>
+                </extensionElements>
+                <sourceRef>outcome</sourceRef>
+                <targetRef>taskOutcome</targetRef>
+                <assignment>
+                    <extensionElements>
+                        <ns5:OracleExtensions>
+                            <ns5:DataAssignment operation="copy"/>
+                        </ns5:OracleExtensions>
+                    </extensionElements>
+                    <from xsi:type="tFormalExpression" language="http://www.w3.org/1999/XPath" ns7:bpmn="http://www.omg.org/bpmn20" xmlns:ns7="http://xmlns.oracle.com/bpm/XPathNamespace">bpmn:getDataOutput('outcome')
+                        <extensionElements>
+                            <ns5:OracleExtensions>
+                                <ns5:Expression mode="simple"/>
+                            </ns5:OracleExtensions>
+                        </extensionElements>
+                    </from>
+                    <to xsi:type="tFormalExpression" language="http://www.w3.org/1999/XPath" ns7:bpmn="http://www.omg.org/bpmn20" xmlns:ns7="http://xmlns.oracle.com/bpm/XPathNamespace">bpmn:getDataObject('taskOutcome')
+                        <extensionElements>
+                            <ns5:OracleExtensions>
+                                <ns5:Expression mode="simple"/>
+                            </ns5:OracleExtensions>
+                        </extensionElements>
+                    </to>
+                </assignment>
+            </dataOutputAssociation>
             <resourceRole name="CC_Vigilance_Department" id="lane0"/>
         </userTask>
         <startEvent isInterrupting="false" name="Start" id="EVT15410781216097">
@@ -184,6 +268,34 @@
                     </ns5:OracleExtensions>
                 </extensionElements>
             </dataOutput>
+            <dataOutputAssociation>
+                <extensionElements>
+                    <ns5:OracleExtensions/>
+                </extensionElements>
+                <sourceRef>VigilanceProcessPO</sourceRef>
+                <targetRef>VigilanceProcessPO</targetRef>
+                <assignment>
+                    <extensionElements>
+                        <ns5:OracleExtensions>
+                            <ns5:DataAssignment operation="copy"/>
+                        </ns5:OracleExtensions>
+                    </extensionElements>
+                    <from xsi:type="tFormalExpression" language="http://www.w3.org/1999/XPath" ns7:bpmn="http://www.omg.org/bpmn20" xmlns:ns7="http://xmlns.oracle.com/bpm/XPathNamespace">bpmn:getDataOutput('VigilanceProcessPO')
+                        <extensionElements>
+                            <ns5:OracleExtensions>
+                                <ns5:Expression mode="simple"/>
+                            </ns5:OracleExtensions>
+                        </extensionElements>
+                    </from>
+                    <to xsi:type="tFormalExpression" language="http://www.w3.org/1999/XPath" ns7:bpmn="http://www.omg.org/bpmn20" xmlns:ns7="http://xmlns.oracle.com/bpm/XPathNamespace">bpmn:getDataObject('VigilanceProcessPO')
+                        <extensionElements>
+                            <ns5:OracleExtensions>
+                                <ns5:Expression mode="simple"/>
+                            </ns5:OracleExtensions>
+                        </extensionElements>
+                    </to>
+                </assignment>
+            </dataOutputAssociation>
             <outputSet id="EVT15410781216097_uniqueOutputSet">
                 <dataOutputRefs>VigilanceProcessPO</dataOutputRefs>
             </outputSet>

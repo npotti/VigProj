@@ -10,7 +10,7 @@
     <property name="bpm.generated.service.reference" type="xs:string"
               many="false">CaseInvestigationProcess.service</property>
   </service>
-  <reference name="HumanTasks.VerifyComplaintTask.reference"
+  <reference name="HumanTasks.DetailedInvestigationTask.reference"
              ui:wsdlLocation="oramds:/soa/shared/workflow/TaskServiceInterface.wsdl">
     <interface.wsdl interface="http://xmlns.oracle.com/bpel/workflow/taskService#wsdl.interface(TaskService)"
                     callbackInterface="http://xmlns.oracle.com/bpel/workflow/taskService#wsdl.interface(TaskServiceCallback)"/>

@@ -41,21 +41,17 @@
         </ns1:applicationRole>
         <ns1:applicationRole id="VigilanceProcess.CC_Vigilance_Department" isProcessRole="true">
             <ns5:name>VigilanceProcess.CC_Vigilance_Department</ns5:name>
+            <ns1:member type="USER">
+                <ns1:name>ccdeskofficer</ns1:name>
+            </ns1:member>
             <ns1:processRole id="CC_Vigilance_Department" name="CC_Vigilance_Department"/>
         </ns1:applicationRole>
-        <ns1:applicationRole id="VigilanceProcess.TestRole" isProcessRole="false">
-            <ns5:name>VigilanceProcess.TestRole</ns5:name>
+        <ns1:applicationRole id="VigilanceProcess.LHO_DGM_Role" isProcessRole="false">
+            <ns5:name>VigilanceProcess.LHO_Vigilance_DGM_Role</ns5:name>
             <ns1:member type="USER">
-                <ns1:name>weblogic</ns1:name>
+                <ns1:name>lhodgm</ns1:name>
             </ns1:member>
-            <ns1:processRole id="TestRole" name="TestRole"/>
-        </ns1:applicationRole>
-        <ns1:applicationRole id="VigilanceProcess.Chandan" isProcessRole="true">
-            <ns5:name>VigilanceProcess.Chandan</ns5:name>
-            <ns1:member type="USER">
-                <ns1:name>weblogic</ns1:name>
-            </ns1:member>
-            <ns1:processRole id="Chandan" name="Chandan"/>
+            <ns1:processRole id="LHO_DGM_Role" name="LHO_Vigilance_DGM_Role"/>
         </ns1:applicationRole>
     </ns1:applicationRoles>
     <ns1:applicationRoleOrgUnitCalendarAssociations/>

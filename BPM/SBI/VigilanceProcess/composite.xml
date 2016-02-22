@@ -39,6 +39,12 @@
   <component name="PreliminaryInvestigationTask">
     <implementation.workflow src="PreliminaryInvestigationTask.task"/>
   </component>
+  <component name="LHODGMReviewTask">
+    <implementation.workflow src="LHODGMReviewTask.task"/>
+  </component>
+  <component name="DetailedInvestigationTask">
+    <implementation.workflow src="DetailedInvestigationTask.task"/>
+  </component>
   <wire>
     <source.uri>ComplaintRegistrationProcess/CaseInvestigationProcess.reference</source.uri>
     <target.uri>CaseInvestigationProcess/CaseInvestigationProcess.service</target.uri>
@@ -56,11 +62,15 @@
     <target.uri>PreliminaryInvestigationTask/TaskService</target.uri>
   </wire>
   <wire>
-    <source.uri>CaseInvestigationProcess.service</source.uri>
-    <target.uri>CaseInvestigationProcess/CaseInvestigationProcess.service</target.uri>
+    <source.uri>ComplaintRegistrationProcess/HumanTasks.LHODGMReviewTask.reference</source.uri>
+    <target.uri>LHODGMReviewTask/TaskService</target.uri>
   </wire>
   <wire>
-    <source.uri>CaseInvestigationProcess/HumanTasks.VerifyComplaintTask.reference</source.uri>
-    <target.uri>VerifyComplaintTask/TaskService</target.uri>
+    <source.uri>CaseInvestigationProcess/HumanTasks.DetailedInvestigationTask.reference</source.uri>
+    <target.uri>DetailedInvestigationTask/TaskService</target.uri>
+  </wire>
+  <wire>
+    <source.uri>CaseInvestigationProcess.service</source.uri>
+    <target.uri>CaseInvestigationProcess/CaseInvestigationProcess.service</target.uri>
   </wire>
 </composite>
