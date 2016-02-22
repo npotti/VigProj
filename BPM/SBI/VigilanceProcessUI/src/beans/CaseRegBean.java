@@ -33,6 +33,7 @@ public class CaseRegBean {
     private RichInputText sysSerNoBinding;
     private RichShowDetailHeader complaintHdrBinding;
     private RichShowDetailHeader fraudHdrBinding;
+    private RichShowDetailHeader saeHdrBinding;
 
     public CaseRegBean() {
     }
@@ -62,6 +63,12 @@ public class CaseRegBean {
             else if(source != null && "Fraud".equalsIgnoreCase(source)){
                 method =
                     bindings.getOperationBinding("setFraudRow");
+                method.getParamsMap().put("rowKey", sysSerNo);
+                method.execute();
+            }
+            else if(source != null && "SAE".equalsIgnoreCase(source)){
+                method =
+                    bindings.getOperationBinding("setSAERow");
                 method.getParamsMap().put("rowKey", sysSerNo);
                 method.execute();
             }
@@ -135,6 +142,7 @@ public class CaseRegBean {
     public void sourceVC(ValueChangeEvent valueChangeEvent) {
         if(valueChangeEvent.getNewValue() != null && valueChangeEvent.getNewValue() != valueChangeEvent.getOldValue()) {
             if((Integer)valueChangeEvent.getNewValue() == 1){
+                closeAllHeaders();
                 ViewObject complaintVO = ADFUtil.findIterator("ComplaintDetailsVOIterator").getViewObject();
                 Row complaintRow = complaintVO.createRow();
                 complaintRow.setAttribute("Systemsernum", ADFUtil.evaluateEL("#{bindings.Systemsernum.inputValue}"));
@@ -144,6 +152,7 @@ public class CaseRegBean {
                 AdfFacesContext.getCurrentInstance().addPartialTarget(complaintHdrBinding);
             }
             else if((Integer)valueChangeEvent.getNewValue() == 2){
+                closeAllHeaders();
                 ViewObject fraudVO = ADFUtil.findIterator("FraudDetailsVOIterator").getViewObject();
                 Row fraudRow = fraudVO.createRow();
                 fraudRow.setAttribute("Systemsernum", ADFUtil.evaluateEL("#{bindings.Systemsernum.inputValue}"));
@@ -151,6 +160,16 @@ public class CaseRegBean {
                 fraudVO.setCurrentRow(fraudRow);
                 fraudHdrBinding.setVisible(Boolean.TRUE);
                 AdfFacesContext.getCurrentInstance().addPartialTarget(fraudHdrBinding);
+            }
+            else if((Integer)valueChangeEvent.getNewValue() == 3){
+                closeAllHeaders();
+                ViewObject saeVO = ADFUtil.findIterator("StaffAccountabilityDetailsVOIterator").getViewObject();
+                Row saeRow = saeVO.createRow();
+                saeRow.setAttribute("Systemsernum", ADFUtil.evaluateEL("#{bindings.Systemsernum.inputValue}"));
+                saeVO.insertRow(saeRow);
+                saeVO.setCurrentRow(saeRow);
+                saeHdrBinding.setVisible(Boolean.TRUE);
+                AdfFacesContext.getCurrentInstance().addPartialTarget(saeHdrBinding);
             }
         }
     }
@@ -161,5 +180,37 @@ public class CaseRegBean {
 
     public RichShowDetailHeader getFraudHdrBinding() {
         return fraudHdrBinding;
+    }
+
+    public void setSaeHdrBinding(RichShowDetailHeader saeHdrBinding) {
+        this.saeHdrBinding = saeHdrBinding;
+    }
+
+    public RichShowDetailHeader getSaeHdrBinding() {
+        return saeHdrBinding;
+    }
+    
+    private void closeAllHeaders(){
+        ViewObject complaintVO = ADFUtil.findIterator("ComplaintDetailsVOIterator").getViewObject();
+        Row row = complaintVO.getCurrentRow();
+        if(row != null)
+        row.refresh(Row.REFRESH_UNDO_CHANGES | Row.REFRESH_WITH_DB_FORGET_CHANGES);
+        row.refresh(Row.REFRESH_REMOVE_NEW_ROWS);
+        ViewObject fraudVO = ADFUtil.findIterator("FraudDetailsVOIterator").getViewObject();
+        row = fraudVO.getCurrentRow();
+        if(row != null)
+        row.refresh(Row.REFRESH_UNDO_CHANGES | Row.REFRESH_WITH_DB_FORGET_CHANGES);
+        row.refresh(Row.REFRESH_REMOVE_NEW_ROWS);
+        ViewObject saeVO = ADFUtil.findIterator("StaffAccountabilityDetailsVOIterator").getViewObject();
+        row = saeVO.getCurrentRow();
+        if(row != null)
+        row.refresh(Row.REFRESH_UNDO_CHANGES | Row.REFRESH_WITH_DB_FORGET_CHANGES);
+        row.refresh(Row.REFRESH_REMOVE_NEW_ROWS);
+        complaintHdrBinding.setVisible(Boolean.FALSE);
+        fraudHdrBinding.setVisible(Boolean.FALSE);
+        saeHdrBinding.setVisible(Boolean.FALSE);
+        AdfFacesContext.getCurrentInstance().addPartialTarget(complaintHdrBinding);
+        AdfFacesContext.getCurrentInstance().addPartialTarget(fraudHdrBinding);
+        AdfFacesContext.getCurrentInstance().addPartialTarget(saeHdrBinding);
     }
 }

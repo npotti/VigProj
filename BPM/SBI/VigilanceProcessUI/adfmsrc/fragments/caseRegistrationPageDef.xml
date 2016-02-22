@@ -33,6 +33,9 @@
               id="ComplaintDetailsVOIterator"/>
     <iterator Binds="FraudDetailsVO" RangeSize="25"
               DataControl="VigilanceAMDataControl" id="FraudDetailsVOIterator"/>
+    <iterator Binds="StaffAccountabilityDetailsVO" RangeSize="25"
+              DataControl="VigilanceAMDataControl"
+              id="StaffAccountabilityDetailsVOIterator"/>
   </executables>
   <bindings>
     <listOfValues StaticList="false" IterBinding="CaseRegistrationVOIterator"
@@ -240,6 +243,96 @@
                      id="Systemsernum2">
       <AttrNames>
         <Item Value="Systemsernum"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="StaffAccountabilityDetailsVOIterator"
+                     id="Systemsernum3">
+      <AttrNames>
+        <Item Value="Systemsernum"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="StaffAccountabilityDetailsVOIterator"
+                     id="ReceivedFrom2">
+      <AttrNames>
+        <Item Value="ReceivedFrom"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="StaffAccountabilityDetailsVOIterator"
+                     id="LetterNumber1">
+      <AttrNames>
+        <Item Value="LetterNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="StaffAccountabilityDetailsVOIterator"
+                     id="LetterDate1">
+      <AttrNames>
+        <Item Value="LetterDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="StaffAccountabilityDetailsVOIterator"
+                     id="NameOfAccount">
+      <AttrNames>
+        <Item Value="NameOfAccount"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="StaffAccountabilityDetailsVOIterator"
+                     id="AmountWiseCalculation">
+      <AttrNames>
+        <Item Value="AmountWiseCalculation"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="StaffAccountabilityDetailsVOIterator"
+                     id="AmountInvolved">
+      <AttrNames>
+        <Item Value="AmountInvolved"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="StaffAccountabilityDetailsVOIterator"
+                     id="EstimatedLoss">
+      <AttrNames>
+        <Item Value="EstimatedLoss"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="StaffAccountabilityDetailsVOIterator"
+                     id="DateOfNpa">
+      <AttrNames>
+        <Item Value="DateOfNpa"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="StaffAccountabilityDetailsVOIterator"
+                     id="MigrateToSambOn">
+      <AttrNames>
+        <Item Value="MigrateToSambOn"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="StaffAccountabilityDetailsVOIterator"
+                     id="InvestigationAssignedTo">
+      <AttrNames>
+        <Item Value="InvestigationAssignedTo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="StaffAccountabilityDetailsVOIterator"
+                     id="InvestigationAssignedOn">
+      <AttrNames>
+        <Item Value="InvestigationAssignedOn"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="StaffAccountabilityDetailsVOIterator"
+                     id="DateOfSaeReport">
+      <AttrNames>
+        <Item Value="DateOfSaeReport"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="StaffAccountabilityDetailsVOIterator"
+                     id="DisposalStatus1">
+      <AttrNames>
+        <Item Value="DisposalStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="StaffAccountabilityDetailsVOIterator"
+                     id="DateOfIrfCalled1">
+      <AttrNames>
+        <Item Value="DateOfIrfCalled"/>
       </AttrNames>
     </attributeValues>
   </bindings>

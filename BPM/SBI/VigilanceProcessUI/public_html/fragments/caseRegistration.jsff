@@ -13,12 +13,12 @@
       <af:panelFormLayout id="pfl1">
         <af:inputText value="#{bindings.Systemsernum.inputValue}"
                       label="System Serial Number"
-                      required="#{bindings.Systemsernum.hints.mandatory}"
                       columns="#{bindings.Systemsernum.hints.displayWidth}"
                       maximumLength="#{bindings.Systemsernum.hints.precision}"
                       shortDesc="#{bindings.Systemsernum.hints.tooltip}"
                       id="it7" readOnly="#{pageFlowScope.readOnly}"
-                      binding="#{pageFlowScope.caseRegBean.sysSerNoBinding}">
+                      binding="#{pageFlowScope.caseRegBean.sysSerNoBinding}"
+                      disabled="true">
           <f:validator binding="#{bindings.Systemsernum.validator}"/>
         </af:inputText>
         <af:inputText value="#{bindings.Ccfilenumber.inputValue}"
@@ -36,12 +36,12 @@
                               value="#{bindings.Branchcode.inputValue}"
                               label="Branch Code"
                               model="#{bindings.Branchcode.listOfValuesModel}"
-                              required="#{bindings.Branchcode.hints.mandatory}"
                               columns="#{bindings.Branchcode.hints.displayWidth}"
                               shortDesc="#{bindings.Branchcode.hints.tooltip}"
                               readOnly="#{pageFlowScope.readOnly}"
                               autoSubmit="true"
-                              valueChangeListener="#{pageFlowScope.caseRegBean.branchCodeVC}">
+                              valueChangeListener="#{pageFlowScope.caseRegBean.branchCodeVC}"
+                              required="true">
           <f:validator binding="#{bindings.Branchcode.validator}"/>
           <af:convertNumber groupingUsed="false"
                             pattern="#{bindings.Branchcode.format}"/>
@@ -133,15 +133,29 @@
           <af:selectItem label="CBI" value="CBI" id="si5"/>
           <af:selectItem label="Others" value="Others" id="si12"/>
         </af:selectOneChoice>
-        <af:inputText value="#{bindings.ReceivedAt.inputValue}"
-                      label="Received At"
-                      required="#{bindings.ReceivedAt.hints.mandatory}"
-                      columns="#{bindings.ReceivedAt.hints.displayWidth}"
-                      maximumLength="#{bindings.ReceivedAt.hints.precision}"
-                      shortDesc="#{bindings.ReceivedAt.hints.tooltip}" id="it1"
-                      readOnly="#{pageFlowScope.readOnly}">
-          <f:validator binding="#{bindings.ReceivedAt.validator}"/>
-        </af:inputText>
+        <af:selectOneChoice label="Received At" id="soc14"
+                            value="#{bindings.ReceivedAt.inputValue}"
+                            readOnly="#{pageFlowScope.readOnly}">
+          <af:selectItem label="Bengal" value="01" id="si72"/>
+          <af:selectItem label="Mumbai" value="02" id="si62"/>
+          <af:selectItem label="Chennai" value="03" id="si63"/>
+          <af:selectItem label="Delhi" value="04" id="si76"/>
+          <af:selectItem label="Lucknow" value="05" id="si74"/>
+          <af:selectItem label="Ahmedabad" value="06" id="si67"/>
+          <af:selectItem label="Hyderabad" value="07" id="si75"/>
+          <af:selectItem label="Bhopal" value="08" id="si71"/>
+          <af:selectItem label="Patna" value="09" id="si69"/>
+          <af:selectItem label="Chandigarh" value="10" id="si68"/>
+          <af:selectItem label="Bhubaneswar" value="11" id="si59"/>
+          <af:selectItem label="North-East" value="12" id="si65"/>
+          <af:selectItem label="Bangalore" value="13" id="si64"/>
+          <af:selectItem label="Kerala" value="15" id="si78"/>
+          <af:selectItem label="MCG" value="21" id="si61"/>
+          <af:selectItem label="CAG" value="31" id="si58"/>
+          <af:selectItem label="IBG" value="41" id="si66"/>
+          <af:selectItem label="SAMG" value="51" id="si70"/>
+          <af:selectItem label="Corporate Centre" value="61" id="si77"/>
+        </af:selectOneChoice>
         <af:inputText value="#{bindings.NameOfComplaint.inputValue}"
                       label="Name of complaint"
                       required="#{bindings.NameOfComplaint.hints.mandatory}"
@@ -157,7 +171,7 @@
                       shortDesc="#{bindings.DateOfComplaint.hints.tooltip}"
                       id="id2" readOnly="#{pageFlowScope.readOnly}">
           <f:validator binding="#{bindings.DateOfComplaint.validator}"/>
-          <af:convertDateTime pattern="#{bindings.DateOfComplaint.format}"/>
+          <af:convertDateTime pattern="dd/MM/yyyy"/>
         </af:inputDate>
         <af:inputDate value="#{bindings.DateReceived.inputValue}"
                       label="Date Received"
@@ -165,7 +179,7 @@
                       shortDesc="#{bindings.DateReceived.hints.tooltip}"
                       id="id3" readOnly="#{pageFlowScope.readOnly}">
           <f:validator binding="#{bindings.DateReceived.validator}"/>
-          <af:convertDateTime pattern="#{bindings.DateReceived.format}"/>
+          <af:convertDateTime pattern="dd/MM/yyyy"/>
         </af:inputDate>
         <af:inputText value="#{bindings.ComplaintType.inputValue}"
                       label="Complaint Type"
@@ -219,7 +233,7 @@
                       shortDesc="#{bindings.DateOfReceipt.hints.tooltip}"
                       id="id1" readOnly="#{pageFlowScope.readOnly}">
           <f:validator binding="#{bindings.DateOfReceipt.validator}"/>
-          <af:convertDateTime pattern="#{bindings.DateOfReceipt.format}"/>
+          <af:convertDateTime pattern="dd/MM/yyyy"/>
         </af:inputDate>
         <af:selectOneChoice label="Disposal Status" id="soc5"
                             value="#{bindings.DisposalStatus.inputValue}"
@@ -233,7 +247,7 @@
                       shortDesc="#{bindings.DateOfIrfCalled.hints.tooltip}"
                       id="id4" readOnly="#{pageFlowScope.readOnly}">
           <f:validator binding="#{bindings.DateOfIrfCalled.validator}"/>
-          <af:convertDateTime pattern="#{bindings.DateOfIrfCalled.format}"/>
+          <af:convertDateTime pattern="dd/MM/yyyy"/>
         </af:inputDate>
       </af:panelFormLayout>
     </af:showDetailHeader>
@@ -281,7 +295,7 @@
                       shortDesc="#{bindings.LetterDate.hints.tooltip}" id="id6"
                       readOnly="#{pageFlowScope.readOnly}">
           <f:validator binding="#{bindings.LetterDate.validator}"/>
-          <af:convertDateTime pattern="#{bindings.LetterDate.format}"/>
+          <af:convertDateTime pattern="dd/MM/yyyy"/>
         </af:inputDate>
         <af:inputText value="#{bindings.FraudFolderNumber.inputValue}"
                       label="Fraud Folder Number"
@@ -333,7 +347,7 @@
                       shortDesc="#{bindings.DateOfOccurence.hints.tooltip}"
                       id="id5" readOnly="#{pageFlowScope.readOnly}">
           <f:validator binding="#{bindings.DateOfOccurence.validator}"/>
-          <af:convertDateTime pattern="#{bindings.DateOfOccurence.format}"/>
+          <af:convertDateTime pattern="dd/MM/yyyy"/>
         </af:inputDate>
         <af:inputDate value="#{bindings.DateOfDetection.inputValue}"
                       label="Date of detection"
@@ -341,7 +355,7 @@
                       shortDesc="#{bindings.DateOfDetection.hints.tooltip}"
                       id="id7" readOnly="#{pageFlowScope.readOnly}">
           <f:validator binding="#{bindings.DateOfDetection.validator}"/>
-          <af:convertDateTime pattern="#{bindings.DateOfDetection.format}"/>
+          <af:convertDateTime pattern="dd/MM/yyyy"/>
         </af:inputDate>
         <af:inputText value="#{bindings.NameOfUnit.inputValue}"
                       label="Name of Unit/Account"
@@ -358,6 +372,145 @@
           <af:selectItem label="Yes" value="Yes" id="si46"/>
           <af:selectItem label="No" value="No" id="si47"/>
         </af:selectOneChoice>
+      </af:panelFormLayout>
+    </af:showDetailHeader>
+    <af:showDetailHeader text="Staff Accountability Examination" disclosed="true" id="sdh4"
+                         size="1"
+                         visible="#{bindings.Sourceofcase.inputValue eq 3}"
+                         binding="#{pageFlowScope.caseRegBean.saeHdrBinding}">
+      <f:facet name="context"/>
+      <f:facet name="menuBar"/>
+      <f:facet name="toolbar"/>
+      <f:facet name="legend"/>
+      <f:facet name="info"/>
+      <af:panelFormLayout id="pfl4">
+        <af:inputText value="#{bindings.Systemsernum3.inputValue}"
+                      label="#{bindings.Systemsernum3.hints.label}"
+                      required="#{bindings.Systemsernum3.hints.mandatory}"
+                      columns="#{bindings.Systemsernum3.hints.displayWidth}"
+                      maximumLength="#{bindings.Systemsernum3.hints.precision}"
+                      shortDesc="#{bindings.Systemsernum3.hints.tooltip}"
+                      id="it25" rendered="false">
+          <f:validator binding="#{bindings.Systemsernum3.validator}"/>
+        </af:inputText>
+        <af:selectOneChoice label="Received From" id="soc11"
+                            value="#{bindings.ReceivedFrom2.inputValue}"
+                            readOnly="#{pageFlowScope.readOnly}">
+          <af:selectItem label="NBG" value="NBG" id="si50"/>
+          <af:selectItem label="MCG" value="MCG" id="si53"/>
+          <af:selectItem label="CAG" value="CAG" id="si52"/>
+          <af:selectItem label="IBG" value="IBG" id="si48"/>
+          <af:selectItem label="SAMG" value="SAMG" id="si49"/>
+          <af:selectItem label="CC Establishment" value="CC Establishment"
+                         id="si51"/>
+        </af:selectOneChoice>
+        <af:inputText value="#{bindings.LetterNumber1.inputValue}"
+                      label="Letter Number"
+                      required="#{bindings.LetterNumber1.hints.mandatory}"
+                      columns="#{bindings.LetterNumber1.hints.displayWidth}"
+                      maximumLength="#{bindings.LetterNumber1.hints.precision}"
+                      shortDesc="#{bindings.LetterNumber1.hints.tooltip}"
+                      id="it19" readOnly="#{pageFlowScope.readOnly}">
+          <f:validator binding="#{bindings.LetterNumber1.validator}"/>
+        </af:inputText>
+        <af:inputDate value="#{bindings.LetterDate1.inputValue}"
+                      label="Letter Date"
+                      required="#{bindings.LetterDate1.hints.mandatory}"
+                      shortDesc="#{bindings.LetterDate1.hints.tooltip}"
+                      id="id8" readOnly="#{pageFlowScope.readOnly}">
+          <f:validator binding="#{bindings.LetterDate1.validator}"/>
+          <af:convertDateTime pattern="dd/MM/yyyy"/>
+        </af:inputDate>
+        <af:inputText value="#{bindings.NameOfAccount.inputValue}"
+                      label="Name of Account"
+                      required="#{bindings.NameOfAccount.hints.mandatory}"
+                      columns="#{bindings.NameOfAccount.hints.displayWidth}"
+                      maximumLength="#{bindings.NameOfAccount.hints.precision}"
+                      shortDesc="#{bindings.NameOfAccount.hints.tooltip}"
+                      id="it21" readOnly="#{pageFlowScope.readOnly}">
+          <f:validator binding="#{bindings.NameOfAccount.validator}"/>
+        </af:inputText>
+        <af:selectOneChoice label="Amount-wise classification" id="soc12"
+                            value="#{bindings.AmountWiseCalculation.inputValue}"
+                            readOnly="#{pageFlowScope.readOnly}">
+          <af:selectItem label="Below Rs.25 Crores" value="Below Rs.25 Crores"
+                         id="si54"/>
+          <af:selectItem label="Rs. 25 Crores &amp; above"
+                         value="Rs. 25 Crores &amp; above" id="si55"/>
+        </af:selectOneChoice>
+        <af:inputText value="#{bindings.AmountInvolved.inputValue}"
+                      label="Amount Involved"
+                      required="#{bindings.AmountInvolved.hints.mandatory}"
+                      columns="#{bindings.AmountInvolved.hints.displayWidth}"
+                      maximumLength="#{bindings.AmountInvolved.hints.precision}"
+                      shortDesc="#{bindings.AmountInvolved.hints.tooltip}"
+                      id="it23" readOnly="#{pageFlowScope.readOnly}">
+          <f:validator binding="#{bindings.AmountInvolved.validator}"/>
+        </af:inputText>
+        <af:inputText value="#{bindings.EstimatedLoss.inputValue}"
+                      label="Estimated Loss"
+                      required="#{bindings.EstimatedLoss.hints.mandatory}"
+                      columns="#{bindings.EstimatedLoss.hints.displayWidth}"
+                      maximumLength="#{bindings.EstimatedLoss.hints.precision}"
+                      shortDesc="#{bindings.EstimatedLoss.hints.tooltip}"
+                      id="it24" readOnly="#{pageFlowScope.readOnly}">
+          <f:validator binding="#{bindings.EstimatedLoss.validator}"/>
+        </af:inputText>
+        <af:inputDate value="#{bindings.DateOfNpa.inputValue}"
+                      label="Date of NPA"
+                      required="#{bindings.DateOfNpa.hints.mandatory}"
+                      shortDesc="#{bindings.DateOfNpa.hints.tooltip}" id="id11"
+                      readOnly="#{pageFlowScope.readOnly}">
+          <f:validator binding="#{bindings.DateOfNpa.validator}"/>
+          <af:convertDateTime pattern="dd/MM/yyyy"/>
+        </af:inputDate>
+        <af:inputDate value="#{bindings.MigrateToSambOn.inputValue}"
+                      label="Migrated to SAMB on"
+                      required="#{bindings.MigrateToSambOn.hints.mandatory}"
+                      shortDesc="#{bindings.MigrateToSambOn.hints.tooltip}"
+                      id="id13" readOnly="#{pageFlowScope.readOnly}">
+          <f:validator binding="#{bindings.MigrateToSambOn.validator}"/>
+          <af:convertDateTime pattern="dd/MM/yyyy"/>
+        </af:inputDate>
+        <af:inputText value="#{bindings.InvestigationAssignedTo.inputValue}"
+                      label="Invesigation assigned to"
+                      required="#{bindings.InvestigationAssignedTo.hints.mandatory}"
+                      columns="#{bindings.InvestigationAssignedTo.hints.displayWidth}"
+                      maximumLength="#{bindings.InvestigationAssignedTo.hints.precision}"
+                      shortDesc="#{bindings.InvestigationAssignedTo.hints.tooltip}"
+                      id="it9" readOnly="#{pageFlowScope.readOnly}">
+          <f:validator binding="#{bindings.InvestigationAssignedTo.validator}"/>
+        </af:inputText>
+        <af:inputDate value="#{bindings.InvestigationAssignedOn.inputValue}"
+                      label="Investigation assigned on"
+                      required="#{bindings.InvestigationAssignedOn.hints.mandatory}"
+                      shortDesc="#{bindings.InvestigationAssignedOn.hints.tooltip}"
+                      id="id9" readOnly="#{pageFlowScope.readOnly}">
+          <f:validator binding="#{bindings.InvestigationAssignedOn.validator}"/>
+          <af:convertDateTime pattern="dd/MM/yyyy"/>
+        </af:inputDate>
+        <af:inputDate value="#{bindings.DateOfSaeReport.inputValue}"
+                      label="Date of S.A.E report"
+                      required="#{bindings.DateOfSaeReport.hints.mandatory}"
+                      shortDesc="#{bindings.DateOfSaeReport.hints.tooltip}"
+                      id="id12" readOnly="#{pageFlowScope.readOnly}">
+          <f:validator binding="#{bindings.DateOfSaeReport.validator}"/>
+          <af:convertDateTime pattern="dd/MM/yyyy"/>
+        </af:inputDate>
+        <af:selectOneChoice label="Disposal Status" id="soc13"
+                            value="#{bindings.DisposalStatus1.inputValue}"
+                            readOnly="#{pageFlowScope.readOnly}">
+          <af:selectItem label="IRF Called" value="IRF Called" id="si57"/>
+          <af:selectItem label="Dealt with" value="Dealt with" id="si56"/>
+        </af:selectOneChoice>
+        <af:inputDate value="#{bindings.DateOfIrfCalled1.inputValue}"
+                      label="Date of IRF called/Dealt with"
+                      required="#{bindings.DateOfIrfCalled1.hints.mandatory}"
+                      shortDesc="#{bindings.DateOfIrfCalled1.hints.tooltip}"
+                      id="id10" readOnly="#{pageFlowScope.readOnly}">
+          <f:validator binding="#{bindings.DateOfIrfCalled1.validator}"/>
+          <af:convertDateTime pattern="dd/MM/yyyy"/>
+        </af:inputDate>
       </af:panelFormLayout>
     </af:showDetailHeader>
   </af:panelGroupLayout>
