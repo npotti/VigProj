@@ -30,6 +30,8 @@
               DataControl="VigilanceAMDataControl" RangeSize="25"/>
     <iterator id="ComplaintDetailsVOIterator" Binds="ComplaintDetailsVO"
               DataControl="VigilanceAMDataControl" RangeSize="25"/>
+    <iterator id="FraudDetailsVOIterator" Binds="FraudDetailsVO"
+              DataControl="VigilanceAMDataControl" RangeSize="25"/>
   </executables>
   <bindings>
     <methodAction id="getTaskDetails" RequiresUpdateModel="true"
@@ -58,6 +60,12 @@
     <action IterBinding="ComplaintDetailsVOIterator"
             id="setComplaintRow"
             InstanceName="VigilanceAMDataControl.ComplaintDetailsVO"
+            DataControl="VigilanceAMDataControl" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKeyValue">
+      <NamedData NDName="rowKey" NDType="java.lang.String"/>
+    </action>
+    <action IterBinding="FraudDetailsVOIterator" id="setFraudRow"
+            InstanceName="VigilanceAMDataControl.FraudDetailsVO"
             DataControl="VigilanceAMDataControl" RequiresUpdateModel="false"
             Action="setCurrentRowWithKeyValue">
       <NamedData NDName="rowKey" NDType="java.lang.String"/>

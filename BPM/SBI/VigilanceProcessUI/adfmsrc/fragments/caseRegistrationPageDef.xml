@@ -31,6 +31,8 @@
     <iterator Binds="ComplaintDetailsVO" RangeSize="25"
               DataControl="VigilanceAMDataControl"
               id="ComplaintDetailsVOIterator"/>
+    <iterator Binds="FraudDetailsVO" RangeSize="25"
+              DataControl="VigilanceAMDataControl" id="FraudDetailsVOIterator"/>
   </executables>
   <bindings>
     <listOfValues StaticList="false" IterBinding="CaseRegistrationVOIterator"
@@ -164,6 +166,80 @@
                      id="DateOfIrfCalled">
       <AttrNames>
         <Item Value="DateOfIrfCalled"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FraudDetailsVOIterator" id="Systemsernum1">
+      <AttrNames>
+        <Item Value="Systemsernum"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FraudDetailsVOIterator" id="ReceivedFrom1">
+      <AttrNames>
+        <Item Value="ReceivedFrom"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FraudDetailsVOIterator" id="LetterNumber">
+      <AttrNames>
+        <Item Value="LetterNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FraudDetailsVOIterator" id="LetterDate">
+      <AttrNames>
+        <Item Value="LetterDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FraudDetailsVOIterator"
+                     id="FraudFolderNumber">
+      <AttrNames>
+        <Item Value="FraudFolderNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FraudDetailsVOIterator" id="FolderAmount">
+      <AttrNames>
+        <Item Value="FolderAmount"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FraudDetailsVOIterator"
+                     id="AmountClassification">
+      <AttrNames>
+        <Item Value="AmountClassification"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FraudDetailsVOIterator"
+                     id="FurtherClassification">
+      <AttrNames>
+        <Item Value="FurtherClassification"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FraudDetailsVOIterator" id="FraudRelatingTo">
+      <AttrNames>
+        <Item Value="FraudRelatingTo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FraudDetailsVOIterator" id="DateOfOccurence">
+      <AttrNames>
+        <Item Value="DateOfOccurence"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FraudDetailsVOIterator" id="DateOfDetection">
+      <AttrNames>
+        <Item Value="DateOfDetection"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FraudDetailsVOIterator" id="NameOfUnit">
+      <AttrNames>
+        <Item Value="NameOfUnit"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FraudDetailsVOIterator" id="StaffInvolvement">
+      <AttrNames>
+        <Item Value="StaffInvolvement"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ComplaintDetailsVOIterator"
+                     id="Systemsernum2">
+      <AttrNames>
+        <Item Value="Systemsernum"/>
       </AttrNames>
     </attributeValues>
   </bindings>

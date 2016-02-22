@@ -32,6 +32,7 @@ import util.ADFUtil;
 public class CaseRegBean {
     private RichInputText sysSerNoBinding;
     private RichShowDetailHeader complaintHdrBinding;
+    private RichShowDetailHeader fraudHdrBinding;
 
     public CaseRegBean() {
     }
@@ -57,6 +58,12 @@ public class CaseRegBean {
                 method.getParamsMap().put("rowKey", sysSerNo);
                 method.execute();
                 
+            }
+            else if(source != null && "Fraud".equalsIgnoreCase(source)){
+                method =
+                    bindings.getOperationBinding("setFraudRow");
+                method.getParamsMap().put("rowKey", sysSerNo);
+                method.execute();
             }
             
             ADFUtil.setEL("#{pageFlowScope.readOnly}", Boolean.TRUE);
@@ -136,6 +143,23 @@ public class CaseRegBean {
                 complaintHdrBinding.setVisible(Boolean.TRUE);
                 AdfFacesContext.getCurrentInstance().addPartialTarget(complaintHdrBinding);
             }
+            else if((Integer)valueChangeEvent.getNewValue() == 2){
+                ViewObject fraudVO = ADFUtil.findIterator("FraudDetailsVOIterator").getViewObject();
+                Row fraudRow = fraudVO.createRow();
+                fraudRow.setAttribute("Systemsernum", ADFUtil.evaluateEL("#{bindings.Systemsernum.inputValue}"));
+                fraudVO.insertRow(fraudRow);
+                fraudVO.setCurrentRow(fraudRow);
+                fraudHdrBinding.setVisible(Boolean.TRUE);
+                AdfFacesContext.getCurrentInstance().addPartialTarget(fraudHdrBinding);
+            }
         }
+    }
+
+    public void setFraudHdrBinding(RichShowDetailHeader fraudHdrBinding) {
+        this.fraudHdrBinding = fraudHdrBinding;
+    }
+
+    public RichShowDetailHeader getFraudHdrBinding() {
+        return fraudHdrBinding;
     }
 }
