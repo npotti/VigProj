@@ -35,6 +35,8 @@
     <iterator id="StaffAccountabilityDetailsVOIterator"
               Binds="StaffAccountabilityDetailsVO"
               DataControl="VigilanceAMDataControl" RangeSize="25"/>
+    <iterator id="RiskFocussedDetailsVOIterator" Binds="RiskFocussedDetailsVO"
+              DataControl="VigilanceAMDataControl" RangeSize="25"/>
   </executables>
   <bindings>
     <methodAction id="getTaskDetails" RequiresUpdateModel="true"
@@ -76,6 +78,13 @@
     <action IterBinding="StaffAccountabilityDetailsVOIterator"
             id="setSAERow"
             InstanceName="VigilanceAMDataControl.StaffAccountabilityDetailsVO"
+            DataControl="VigilanceAMDataControl" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKeyValue">
+      <NamedData NDName="rowKey" NDType="java.lang.String"/>
+    </action>
+    <action IterBinding="RiskFocussedDetailsVOIterator"
+            id="setRFIARow"
+            InstanceName="VigilanceAMDataControl.RiskFocussedDetailsVO"
             DataControl="VigilanceAMDataControl" RequiresUpdateModel="false"
             Action="setCurrentRowWithKeyValue">
       <NamedData NDName="rowKey" NDType="java.lang.String"/>

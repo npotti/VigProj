@@ -1,0 +1,146 @@
+body
+{
+  background-color: White;
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
+}
+h1
+{
+  color: navy;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: x-large;
+  font-weight: bolder;
+  text-transform: capitalize;
+}
+h2
+{
+  color: navy;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: large;
+  font-weight: bolder;
+  text-transform: capitalize;
+}
+h3
+{
+  color: navy;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: large;
+  font-weight: lighter;
+  text-transform: capitalize;
+}
+
+.AFDefaultFontFamily:alias {
+font-family:arial, sans-serif;
+}
+/**
+ * Default Font Size, e.g.
+ * font-size: 11px;
+ */
+.AFDefaultFont:alias {
+ font-size: 13px;
+}
+
+
+af|panelGroupLayout.footerRight
+{
+    padding-right:5px;
+    font-style: italic; 
+    font-size: 14px;
+}
+
+/* PORTLET HEADER SKINNING */
+.portlet-header af|showDetailHeader::title-start1 {
+   padding: 0px !important;
+font-size: 0px;
+width: 6px;
+min-width: 6px;
+/*border-left: solid 1px black;
+border-top: solid 1px black;
+ border-radius: 3px; */
+background-repeat: repeat-x;
+background-position: top left;
+border-top-left-radius: 10px;
+border-bottom: none;
+/*background-image: url(/faces/images/portlet_header_background.png);*/
+background: linear-gradient(to bottom, #1e5799 0%, #015579 0%, #0085ba 53%, #009fdb 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+
+.portlet-header af|showDetailHeader::title-end1{
+   padding: 0px !important;
+font-size: 0px;
+width: 6px;
+min-width: 6px;
+/* border-right: solid 1px black;
+border-top: solid 1px black;
+ border-radius: 3px; */
+background-repeat: repeat-x;
+background-position: top left;
+border-top-right-radius: 10px;
+border-bottom: none;
+/*background-image: url(/faces/images/portlet_header_background.png);*/
+background: linear-gradient(to bottom, #1e5799 0%, #015579 0%, #0085ba 53%, #009fdb 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+
+
+.portlet-header af|showDetailHeader::title1 {
+padding: 0px !important;
+    color: white  !important;
+   height: 33px !important;
+  background-repeat: repeat-x;
+ /* border-top: solid 1px black; */
+   /*background-image: url(/faces/images/portlet_header_background.png) !important;*/
+background: linear-gradient(to bottom, #1e5799 0%, #015579 0%, #0085ba 53%, #009fdb 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+
+.portlet-header af|showDetailHeader::title-text1 {
+color: white  !important;
+}
+
+.portlet-header af|showDetailHeader::title-table {
+   color: white  !important;
+ /*  border-left: solid 1px black;
+    border-top: solid 1px black;
+     border-right: solid 1px black; */
+   border-top-left-radius: 10px;
+border-top-right-radius: 10px;
+    background-image: none !important; 
+}
+
+.portlet-header af|showDetailHeader::title-text-cell{
+color: white  !important;
+   padding-top: 3px;
+      background-image: none !important;
+}
+
+.portlet-header af|showDetailHeader::title-text-cell > h1 {
+    color :white !important;
+    font: bold 18px arial, sans-serif !important;
+    padding:0px !important;
+    line-height:28px !important;
+}
+
+
+.portlet-header af|showDetailHeader::content1{
+    padding:0px !important;
+}
+
+.portlet-header af|showDetailHeader::disclosed-icon-style{
+    color:white !important;
+}
+
+.portlet-header af|showDetailHeader::undisclosed-icon-style{
+    color:white !important;
+}
+
+.portlet-header af|showDetailHeader::disclosure-link{
+    color:white !important;
+}
+
+af|showDetailHeader::disclosure-icon-container{
+    color:white !important;
+}
+
+.p_OraHideShowDisclosedSymbol{
+    color: white !important;
+    text-decoration: none;
+}

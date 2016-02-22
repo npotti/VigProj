@@ -36,6 +36,9 @@
     <iterator Binds="StaffAccountabilityDetailsVO" RangeSize="25"
               DataControl="VigilanceAMDataControl"
               id="StaffAccountabilityDetailsVOIterator"/>
+    <iterator Binds="RiskFocussedDetailsVO" RangeSize="25"
+              DataControl="VigilanceAMDataControl"
+              id="RiskFocussedDetailsVOIterator"/>
   </executables>
   <bindings>
     <listOfValues StaticList="false" IterBinding="CaseRegistrationVOIterator"
@@ -331,6 +334,66 @@
     </attributeValues>
     <attributeValues IterBinding="StaffAccountabilityDetailsVOIterator"
                      id="DateOfIrfCalled1">
+      <AttrNames>
+        <Item Value="DateOfIrfCalled"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="RiskFocussedDetailsVOIterator"
+                     id="Systemsernum4">
+      <AttrNames>
+        <Item Value="Systemsernum"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="RiskFocussedDetailsVOIterator"
+                     id="ReceivedFrom3">
+      <AttrNames>
+        <Item Value="ReceivedFrom"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="RiskFocussedDetailsVOIterator"
+                     id="LetterNumber2">
+      <AttrNames>
+        <Item Value="LetterNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="RiskFocussedDetailsVOIterator"
+                     id="LetterDate2">
+      <AttrNames>
+        <Item Value="LetterDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="RiskFocussedDetailsVOIterator"
+                     id="RfiaRelatingTo">
+      <AttrNames>
+        <Item Value="RfiaRelatingTo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="RiskFocussedDetailsVOIterator"
+                     id="AmountInvolved1">
+      <AttrNames>
+        <Item Value="AmountInvolved"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="RiskFocussedDetailsVOIterator"
+                     id="EstimatedLoss1">
+      <AttrNames>
+        <Item Value="EstimatedLoss"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="RiskFocussedDetailsVOIterator"
+                     id="DateOfRfiaReport">
+      <AttrNames>
+        <Item Value="DateOfRfiaReport"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="RiskFocussedDetailsVOIterator"
+                     id="DisposalStatus2">
+      <AttrNames>
+        <Item Value="DisposalStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="RiskFocussedDetailsVOIterator"
+                     id="DateOfIrfCalled2">
       <AttrNames>
         <Item Value="DateOfIrfCalled"/>
       </AttrNames>

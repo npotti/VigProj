@@ -5,7 +5,6 @@
          <Item path="../../../../../Oracle/SOA11g/11.1.1.7.0/Middleware/JDeveloper/jdeveloper/soa/lib/commonj.jar" jar-entry=""/>
          <Item path="../../../../../Oracle/SOA11g/11.1.1.7.0/Middleware/JDeveloper/jdeveloper/soa/modules/rulesComponents/adflibRuleDictionaryDC.jar" jar-entry=""/>
          <Item path="../../../../../Oracle/SOA11g/11.1.1.7.0/Middleware/JDeveloper/jdeveloper/soa/modules/composer/soaComposerTemplates.jar" jar-entry=""/>
-         <Item path="../../../../../Oracle/SOA11g/11.1.1.7.0/Middleware/JDeveloper/jdeveloper/soa/modules/jrf/jps-internal.jar" jar-entry=""/>
       </entries>
    </classPath>
    <docPath/>
