@@ -27,8 +27,7 @@
                       columns="#{bindings.Ccfilenumber.hints.displayWidth}"
                       maximumLength="#{bindings.Ccfilenumber.hints.precision}"
                       shortDesc="#{bindings.Ccfilenumber.hints.tooltip}"
-                      id="it4"
-                      disabled="#{bindings.TaskName.inputValue ne 'Verify Complaint'}">
+                      id="it4" disabled="true">
           <f:validator binding="#{bindings.Ccfilenumber.validator}"/>
         </af:inputText>
         <af:inputListOfValues id="branchcodeId"
@@ -94,16 +93,16 @@
         </af:inputText>
         <af:selectOneChoice value="#{bindings.Sourceofcase.inputValue}"
                             label="Source Of Case"
-                            required="#{bindings.Sourceofcase.hints.mandatory}"
                             shortDesc="#{bindings.Sourceofcase.hints.tooltip}"
                             id="soc1" readOnly="#{pageFlowScope.readOnly}"
                             autoSubmit="true"
-                            valueChangeListener="#{pageFlowScope.caseRegBean.sourceVC}">
+                            valueChangeListener="#{pageFlowScope.caseRegBean.sourceVC}"
+                            required="true">
           <f:selectItems value="#{bindings.Sourceofcase.items}" id="si1"/>
         </af:selectOneChoice>
         <af:selectOneRadio label="Signed" id="sor1"
                            value="#{bindings.Signed.inputValue}"
-                           readOnly="#{pageFlowScope.readOnly}">
+                           readOnly="#{pageFlowScope.readOnly}" required="true">
           <af:selectItem label="Yes" value="YES" id="si3"/>
           <af:selectItem label="No" value="NO" id="si2"/>
         </af:selectOneRadio>
@@ -162,7 +161,6 @@
         </af:selectOneChoice>
         <af:inputText value="#{bindings.NameOfComplaint.inputValue}"
                       label="Name of complaint"
-                      required="#{bindings.NameOfComplaint.hints.mandatory}"
                       columns="#{bindings.NameOfComplaint.hints.displayWidth}"
                       maximumLength="#{bindings.NameOfComplaint.hints.precision}"
                       shortDesc="#{bindings.NameOfComplaint.hints.tooltip}"
@@ -173,7 +171,8 @@
                       label="Date of complaint"
                       required="#{bindings.DateOfComplaint.hints.mandatory}"
                       shortDesc="#{bindings.DateOfComplaint.hints.tooltip}"
-                      id="id2" readOnly="#{pageFlowScope.readOnly}">
+                      id="id2" readOnly="#{pageFlowScope.readOnly}"
+                      maxValue="#{pageFlowScope.caseRegBean.maxDate}">
           <f:validator binding="#{bindings.DateOfComplaint.validator}"/>
           <af:convertDateTime pattern="dd/MM/yyyy"/>
         </af:inputDate>
@@ -181,7 +180,8 @@
                       label="Date Received"
                       required="#{bindings.DateReceived.hints.mandatory}"
                       shortDesc="#{bindings.DateReceived.hints.tooltip}"
-                      id="id3" readOnly="#{pageFlowScope.readOnly}">
+                      id="id3" readOnly="#{pageFlowScope.readOnly}"
+                      maxValue="#{pageFlowScope.caseRegBean.maxDate}">
           <f:validator binding="#{bindings.DateReceived.validator}"/>
           <af:convertDateTime pattern="dd/MM/yyyy"/>
         </af:inputDate>
@@ -235,7 +235,8 @@
                       label="Date of Receipt"
                       required="#{bindings.DateOfReceipt.hints.mandatory}"
                       shortDesc="#{bindings.DateOfReceipt.hints.tooltip}"
-                      id="id1" readOnly="#{pageFlowScope.readOnly}">
+                      id="id1" readOnly="#{pageFlowScope.readOnly}"
+                      maxValue="#{pageFlowScope.caseRegBean.maxDate}">
           <f:validator binding="#{bindings.DateOfReceipt.validator}"/>
           <af:convertDateTime pattern="dd/MM/yyyy"/>
         </af:inputDate>
@@ -249,7 +250,8 @@
                       label="Date of IRF Called/Closure"
                       required="#{bindings.DateOfIrfCalled.hints.mandatory}"
                       shortDesc="#{bindings.DateOfIrfCalled.hints.tooltip}"
-                      id="id4" readOnly="#{pageFlowScope.readOnly}">
+                      id="id4" readOnly="#{pageFlowScope.readOnly}"
+                      maxValue="#{pageFlowScope.caseRegBean.maxDate}">
           <f:validator binding="#{bindings.DateOfIrfCalled.validator}"/>
           <af:convertDateTime pattern="dd/MM/yyyy"/>
         </af:inputDate>
@@ -287,7 +289,6 @@
         </af:selectOneChoice>
         <af:inputText value="#{bindings.LetterNumber.inputValue}"
                       label="Letter Number"
-                      required="#{bindings.LetterNumber.hints.mandatory}"
                       columns="#{bindings.LetterNumber.hints.displayWidth}"
                       maximumLength="#{bindings.LetterNumber.hints.precision}"
                       shortDesc="#{bindings.LetterNumber.hints.tooltip}"
@@ -296,9 +297,9 @@
         </af:inputText>
         <af:inputDate value="#{bindings.LetterDate.inputValue}"
                       label="Letter Date"
-                      required="#{bindings.LetterDate.hints.mandatory}"
                       shortDesc="#{bindings.LetterDate.hints.tooltip}" id="id6"
-                      readOnly="#{pageFlowScope.readOnly}">
+                      readOnly="#{pageFlowScope.readOnly}"
+                      maxValue="#{pageFlowScope.caseRegBean.maxDate}">
           <f:validator binding="#{bindings.LetterDate.validator}"/>
           <af:convertDateTime pattern="dd/MM/yyyy"/>
         </af:inputDate>
@@ -317,9 +318,16 @@
                       columns="#{bindings.FolderAmount.hints.displayWidth}"
                       maximumLength="#{bindings.FolderAmount.hints.precision}"
                       shortDesc="#{bindings.FolderAmount.hints.tooltip}"
-                      id="it14" readOnly="#{pageFlowScope.readOnly}">
-          <f:validator binding="#{bindings.FolderAmount.validator}"/>
+                      id="it14" readOnly="#{pageFlowScope.readOnly}"
+                      autoSubmit="true"
+                      valueChangeListener="#{pageFlowScope.caseRegBean.fraudFolderAmtVC}">
+          <af:convertNumber locale="en_IN" type="currency" currencyCode="INR"/>
         </af:inputText>
+        <af:outputText id="ot1"
+                       inlineStyle="font-weight:bold;"
+                       binding="#{pageFlowScope.caseRegBean.fraudFolderAmountBinding}"
+                       value="#{pageFlowScope.caseRegBean.fraudFolderAmountValue}"
+                       partialTriggers="it14" visible="false"/>
         <af:selectOneChoice label="Amount Classification" id="soc7"
                             value="#{bindings.AmountClassification.inputValue}"
                             readOnly="#{pageFlowScope.readOnly}">
@@ -350,7 +358,8 @@
                       label="Date of occurence"
                       required="#{bindings.DateOfOccurence.hints.mandatory}"
                       shortDesc="#{bindings.DateOfOccurence.hints.tooltip}"
-                      id="id5" readOnly="#{pageFlowScope.readOnly}">
+                      id="id5" readOnly="#{pageFlowScope.readOnly}"
+                      maxValue="#{pageFlowScope.caseRegBean.maxDate}">
           <f:validator binding="#{bindings.DateOfOccurence.validator}"/>
           <af:convertDateTime pattern="dd/MM/yyyy"/>
         </af:inputDate>
@@ -358,7 +367,8 @@
                       label="Date of detection"
                       required="#{bindings.DateOfDetection.hints.mandatory}"
                       shortDesc="#{bindings.DateOfDetection.hints.tooltip}"
-                      id="id7" readOnly="#{pageFlowScope.readOnly}">
+                      id="id7" readOnly="#{pageFlowScope.readOnly}"
+                      maxValue="#{pageFlowScope.caseRegBean.maxDate}">
           <f:validator binding="#{bindings.DateOfDetection.validator}"/>
           <af:convertDateTime pattern="dd/MM/yyyy"/>
         </af:inputDate>
@@ -412,7 +422,6 @@
         </af:selectOneChoice>
         <af:inputText value="#{bindings.LetterNumber1.inputValue}"
                       label="Letter Number"
-                      required="#{bindings.LetterNumber1.hints.mandatory}"
                       columns="#{bindings.LetterNumber1.hints.displayWidth}"
                       maximumLength="#{bindings.LetterNumber1.hints.precision}"
                       shortDesc="#{bindings.LetterNumber1.hints.tooltip}"
@@ -421,9 +430,9 @@
         </af:inputText>
         <af:inputDate value="#{bindings.LetterDate1.inputValue}"
                       label="Letter Date"
-                      required="#{bindings.LetterDate1.hints.mandatory}"
                       shortDesc="#{bindings.LetterDate1.hints.tooltip}"
-                      id="id8" readOnly="#{pageFlowScope.readOnly}">
+                      id="id8" readOnly="#{pageFlowScope.readOnly}"
+                      maxValue="#{pageFlowScope.caseRegBean.maxDate}">
           <f:validator binding="#{bindings.LetterDate1.validator}"/>
           <af:convertDateTime pattern="dd/MM/yyyy"/>
         </af:inputDate>
@@ -450,23 +459,36 @@
                       columns="#{bindings.AmountInvolved.hints.displayWidth}"
                       maximumLength="#{bindings.AmountInvolved.hints.precision}"
                       shortDesc="#{bindings.AmountInvolved.hints.tooltip}"
-                      id="it23" readOnly="#{pageFlowScope.readOnly}">
-          <f:validator binding="#{bindings.AmountInvolved.validator}"/>
+                      id="it23" readOnly="#{pageFlowScope.readOnly}"
+                      autoSubmit="true"
+                      valueChangeListener="#{pageFlowScope.caseRegBean.saeAmountInvolvedVC}">
+          <af:convertNumber locale="en_IN" type="currency" currencyCode="INR"/>
         </af:inputText>
+        <af:outputText value="#{pageFlowScope.caseRegBean.saeAmountInvolvedValue}" id="ot2"
+                       visible="false"
+                       binding="#{pageFlowScope.caseRegBean.saeAmountInvolvedBinding}"
+                       inlineStyle="font-weight:bold;"/>
         <af:inputText value="#{bindings.EstimatedLoss.inputValue}"
                       label="Estimated Loss"
                       required="#{bindings.EstimatedLoss.hints.mandatory}"
                       columns="#{bindings.EstimatedLoss.hints.displayWidth}"
                       maximumLength="#{bindings.EstimatedLoss.hints.precision}"
                       shortDesc="#{bindings.EstimatedLoss.hints.tooltip}"
-                      id="it24" readOnly="#{pageFlowScope.readOnly}">
-          <f:validator binding="#{bindings.EstimatedLoss.validator}"/>
+                      id="it24" readOnly="#{pageFlowScope.readOnly}"
+                      autoSubmit="true"
+                      valueChangeListener="#{pageFlowScope.caseRegBean.saeEstimatedLossVC}">
+          <af:convertNumber locale="en_IN" type="currency" currencyCode="INR"/>
         </af:inputText>
+        <af:outputText value="#{pageFlowScope.caseRegBean.saeEstimatedLossValue}" id="ot3" partialTriggers="it24"
+                       visible="false"
+                       binding="#{pageFlowScope.caseRegBean.saeEstimatedLossBinding}"
+                       inlineStyle="font-weight:bold;"/>
         <af:inputDate value="#{bindings.DateOfNpa.inputValue}"
                       label="Date of NPA"
                       required="#{bindings.DateOfNpa.hints.mandatory}"
                       shortDesc="#{bindings.DateOfNpa.hints.tooltip}" id="id11"
-                      readOnly="#{pageFlowScope.readOnly}">
+                      readOnly="#{pageFlowScope.readOnly}"
+                      maxValue="#{pageFlowScope.caseRegBean.maxDate}">
           <f:validator binding="#{bindings.DateOfNpa.validator}"/>
           <af:convertDateTime pattern="dd/MM/yyyy"/>
         </af:inputDate>
@@ -474,7 +496,8 @@
                       label="Migrated to SAMB on"
                       required="#{bindings.MigrateToSambOn.hints.mandatory}"
                       shortDesc="#{bindings.MigrateToSambOn.hints.tooltip}"
-                      id="id13" readOnly="#{pageFlowScope.readOnly}">
+                      id="id13" readOnly="#{pageFlowScope.readOnly}"
+                      maxValue="#{pageFlowScope.caseRegBean.maxDate}">
           <f:validator binding="#{bindings.MigrateToSambOn.validator}"/>
           <af:convertDateTime pattern="dd/MM/yyyy"/>
         </af:inputDate>
@@ -491,7 +514,8 @@
                       label="Investigation assigned on"
                       required="#{bindings.InvestigationAssignedOn.hints.mandatory}"
                       shortDesc="#{bindings.InvestigationAssignedOn.hints.tooltip}"
-                      id="id9" readOnly="#{pageFlowScope.readOnly}">
+                      id="id9" readOnly="#{pageFlowScope.readOnly}"
+                      maxValue="#{pageFlowScope.caseRegBean.maxDate}">
           <f:validator binding="#{bindings.InvestigationAssignedOn.validator}"/>
           <af:convertDateTime pattern="dd/MM/yyyy"/>
         </af:inputDate>
@@ -499,7 +523,8 @@
                       label="Date of S.A.E report"
                       required="#{bindings.DateOfSaeReport.hints.mandatory}"
                       shortDesc="#{bindings.DateOfSaeReport.hints.tooltip}"
-                      id="id12" readOnly="#{pageFlowScope.readOnly}">
+                      id="id12" readOnly="#{pageFlowScope.readOnly}"
+                      maxValue="#{pageFlowScope.caseRegBean.maxDate}">
           <f:validator binding="#{bindings.DateOfSaeReport.validator}"/>
           <af:convertDateTime pattern="dd/MM/yyyy"/>
         </af:inputDate>
@@ -513,7 +538,8 @@
                       label="Date of IRF called/Dealt with"
                       required="#{bindings.DateOfIrfCalled1.hints.mandatory}"
                       shortDesc="#{bindings.DateOfIrfCalled1.hints.tooltip}"
-                      id="id10" readOnly="#{pageFlowScope.readOnly}">
+                      id="id10" readOnly="#{pageFlowScope.readOnly}"
+                      maxValue="#{pageFlowScope.caseRegBean.maxDate}">
           <f:validator binding="#{bindings.DateOfIrfCalled1.validator}"/>
           <af:convertDateTime pattern="dd/MM/yyyy"/>
         </af:inputDate>
@@ -562,7 +588,8 @@
                       label="Letter Date"
                       required="#{bindings.LetterDate2.hints.mandatory}"
                       shortDesc="#{bindings.LetterDate2.hints.tooltip}"
-                      id="id14" readOnly="#{pageFlowScope.readOnly}">
+                      id="id14" readOnly="#{pageFlowScope.readOnly}"
+                      maxValue="#{pageFlowScope.caseRegBean.maxDate}">
           <f:validator binding="#{bindings.LetterDate2.validator}"/>
           <af:convertDateTime pattern="dd/MM/yyyy"/>
         </af:inputDate>
@@ -582,23 +609,36 @@
                       columns="#{bindings.AmountInvolved1.hints.displayWidth}"
                       maximumLength="#{bindings.AmountInvolved1.hints.precision}"
                       shortDesc="#{bindings.AmountInvolved1.hints.tooltip}"
-                      id="it27" readOnly="#{pageFlowScope.readOnly}">
-          <f:validator binding="#{bindings.AmountInvolved1.validator}"/>
+                      id="it27" readOnly="#{pageFlowScope.readOnly}"
+                      autoSubmit="true"
+                      valueChangeListener="#{pageFlowScope.caseRegBean.rfiaAmountInvolvedVC}">
+          <af:convertNumber locale="en_IN" type="currency" currencyCode="INR"/>
         </af:inputText>
+        <af:outputText value="#{pageFlowScope.caseRegBean.rfiaAmountInvolvedValue}" id="ot4"
+                       inlineStyle="font-weight:bold;" visible="false"
+                       partialTriggers="it27"
+                       binding="#{pageFlowScope.caseRegBean.rfiaAmountInvolvedBinding}"/>
         <af:inputText value="#{bindings.EstimatedLoss1.inputValue}"
                       label="Estimated Loss"
                       required="#{bindings.EstimatedLoss1.hints.mandatory}"
                       columns="#{bindings.EstimatedLoss1.hints.displayWidth}"
                       maximumLength="#{bindings.EstimatedLoss1.hints.precision}"
                       shortDesc="#{bindings.EstimatedLoss1.hints.tooltip}"
-                      id="it26" readOnly="#{pageFlowScope.readOnly}">
-          <f:validator binding="#{bindings.EstimatedLoss1.validator}"/>
+                      id="it26" readOnly="#{pageFlowScope.readOnly}"
+                      autoSubmit="true"
+                      valueChangeListener="#{pageFlowScope.caseRegBean.rfiaEstimatedLossVC}">
+          <af:convertNumber locale="en_IN" type="currency" currencyCode="INR"/>
         </af:inputText>
+        <af:outputText value="#{pageFlowScope.caseRegBean.rfiaEstimatedLossValue}" id="ot5"
+                       inlineStyle="font-weight:bold;" visible="false"
+                       partialTriggers="it26"
+                       binding="#{pageFlowScope.caseRegBean.rfiaEstimatedLossBinding}"/>
         <af:inputDate value="#{bindings.DateOfRfiaReport.inputValue}"
                       label="Date of RFIA report"
                       required="#{bindings.DateOfRfiaReport.hints.mandatory}"
                       shortDesc="#{bindings.DateOfRfiaReport.hints.tooltip}"
-                      id="id16" readOnly="#{pageFlowScope.readOnly}">
+                      id="id16" readOnly="#{pageFlowScope.readOnly}"
+                      maxValue="#{pageFlowScope.caseRegBean.maxDate}">
           <f:validator binding="#{bindings.DateOfRfiaReport.validator}"/>
           <af:convertDateTime pattern="dd/MM/yyyy"/>
         </af:inputDate>
@@ -612,7 +652,8 @@
                       label="Date of IRF Called/Dealt With"
                       required="#{bindings.DateOfIrfCalled2.hints.mandatory}"
                       shortDesc="#{bindings.DateOfIrfCalled2.hints.tooltip}"
-                      id="id15" readOnly="#{pageFlowScope.readOnly}">
+                      id="id15" readOnly="#{pageFlowScope.readOnly}"
+                      maxValue="#{pageFlowScope.caseRegBean.maxDate}">
           <f:validator binding="#{bindings.DateOfIrfCalled2.validator}"/>
           <af:convertDateTime pattern="dd/MM/yyyy"/>
         </af:inputDate>

@@ -8,26 +8,6 @@
     <iterator Binds="CaseRegistrationVO" RangeSize="25"
               DataControl="VigilanceAMDataControl"
               id="CaseRegistrationVOIterator"/>
-    <methodIterator Binds="getTaskDetails.result"
-                    DataControl="VigilanceProcessUI_RegisterComplaintTask"
-                    RangeSize="25"
-                    BeanClass="VigilanceProcessUI_RegisterComplaintTask.getTaskDetails"
-                    id="getTaskDetailsIterator"/>
-    <accessorIterator MasterBinding="getTaskDetailsIterator" Binds="task"
-                      RangeSize="25"
-                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
-                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.task"
-                      id="taskIterator"/>
-    <accessorIterator MasterBinding="taskIterator" Binds="payload"
-                      RangeSize="25"
-                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
-                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.RegisterComplaintTaskPayloadType"
-                      id="payloadIterator"/>
-    <accessorIterator id="VigilanceProcessIterator"
-                      MasterBinding="payloadIterator" Binds="VigilanceProcess"
-                      RangeSize="25"
-                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
-                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.VigilanceProcessType"/>
     <iterator Binds="ComplaintDetailsVO" RangeSize="25"
               DataControl="VigilanceAMDataControl"
               id="ComplaintDetailsVOIterator"
@@ -99,11 +79,6 @@
       <NamedData NDName="bpmWorklistTaskId" NDType="java.lang.String"/>
       <NamedData NDName="bpmWorklistTaskVersion" NDType="java.lang.String"/>
     </methodAction>
-    <attributeValues IterBinding="VigilanceProcessIterator" id="TaskName">
-      <AttrNames>
-        <Item Value="TaskName"/>
-      </AttrNames>
-    </attributeValues>
     <attributeValues IterBinding="CaseRegistrationVOIterator" id="Circlecd">
       <AttrNames>
         <Item Value="Circlecd"/>

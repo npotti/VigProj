@@ -1,7 +1,11 @@
 package beans;
 
 
+import java.math.BigDecimal;
+
 import java.util.Calendar;
+
+import java.util.Date;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -15,6 +19,7 @@ import oracle.adf.model.DataControl;
 import oracle.adf.view.rich.component.rich.input.RichInputText;
 
 import oracle.adf.view.rich.component.rich.layout.RichShowDetailHeader;
+import oracle.adf.view.rich.component.rich.output.RichOutputText;
 import oracle.adf.view.rich.context.AdfFacesContext;
 
 import oracle.binding.BindingContainer;
@@ -30,6 +35,7 @@ import oracle.jbo.server.ApplicationModuleImpl;
 import oracle.jbo.server.SequenceImpl;
 
 import util.ADFUtil;
+import util.NumberToWords;
 
 public class CaseRegBean {
     private RichInputText sysSerNoBinding;
@@ -37,6 +43,17 @@ public class CaseRegBean {
     private RichShowDetailHeader fraudHdrBinding;
     private RichShowDetailHeader saeHdrBinding;
     private RichShowDetailHeader rfiaHdrBinding;
+    private RichOutputText fraudFolderAmountBinding;
+    private String fraudFolderAmountValue;
+    private String saeAmountInvolvedValue;
+    private String saeEstimatedLossValue;
+    private RichOutputText saeEstimatedLossBinding;
+    private RichOutputText saeAmountInvolvedBinding;
+    private String rfiaAmountInvolvedValue;
+    private String rfiaEstimatedLossValue;
+    private RichOutputText rfiaEstimatedLossBinding;
+    private RichOutputText rfiaAmountInvolvedBinding;
+    private Date maxDate;
 
     public CaseRegBean() {
     }
@@ -315,6 +332,21 @@ public class CaseRegBean {
         AdfFacesContext.getCurrentInstance().addPartialTarget(fraudHdrBinding);
         AdfFacesContext.getCurrentInstance().addPartialTarget(saeHdrBinding);
         AdfFacesContext.getCurrentInstance().addPartialTarget(rfiaHdrBinding);
+        if(fraudFolderAmountBinding != null){
+            fraudFolderAmountBinding.setVisible(Boolean.FALSE);
+        }
+        if(saeAmountInvolvedBinding != null){
+            saeAmountInvolvedBinding.setVisible(Boolean.FALSE);
+        }
+        if(saeEstimatedLossBinding != null){
+            saeEstimatedLossBinding.setVisible(Boolean.FALSE);
+        }
+        if(rfiaAmountInvolvedBinding != null){
+            rfiaAmountInvolvedBinding.setVisible(Boolean.FALSE);
+        }
+        if(rfiaEstimatedLossBinding != null){
+            rfiaEstimatedLossBinding.setVisible(Boolean.FALSE);
+        }
     }
 
     public void setRfiaHdrBinding(RichShowDetailHeader rfiaHdrBinding) {
@@ -323,5 +355,174 @@ public class CaseRegBean {
 
     public RichShowDetailHeader getRfiaHdrBinding() {
         return rfiaHdrBinding;
+    }
+
+    public void fraudFolderAmtVC(ValueChangeEvent valueChangeEvent) {
+        if (valueChangeEvent.getNewValue() != null &&
+            !"".equals(valueChangeEvent.getNewValue()) &&
+            valueChangeEvent.getOldValue() != valueChangeEvent.getNewValue()) {
+            String numberVariable =
+                (String)valueChangeEvent.getNewValue();
+            numberVariable = numberVariable.replaceAll("Rs.", "");
+            numberVariable = numberVariable.replaceAll(",", "");
+            String numberInWords =
+                NumberToWords.convertNumberToWords(new BigDecimal(numberVariable));
+            setFraudFolderAmountValue(numberInWords + " Rupees Only.");
+            fraudFolderAmountBinding.setVisible(Boolean.TRUE);
+            AdfFacesContext.getCurrentInstance().addPartialTarget(fraudFolderAmountBinding);
+        }
+    }
+
+    public void setFraudFolderAmountBinding(RichOutputText fraudFolderAmountBinding) {
+        this.fraudFolderAmountBinding = fraudFolderAmountBinding;
+    }
+
+    public RichOutputText getFraudFolderAmountBinding() {
+        return fraudFolderAmountBinding;
+    }
+
+    public void setFraudFolderAmountValue(String fraudFolderAmountValue) {
+        this.fraudFolderAmountValue = fraudFolderAmountValue;
+    }
+
+    public String getFraudFolderAmountValue() {
+        return fraudFolderAmountValue;
+    }
+
+    public void setSaeAmountInvolvedValue(String saeAmountInvolvedValue) {
+        this.saeAmountInvolvedValue = saeAmountInvolvedValue;
+    }
+
+    public String getSaeAmountInvolvedValue() {
+        return saeAmountInvolvedValue;
+    }
+
+    public void setSaeEstimatedLossValue(String saeEstimatedLossValue) {
+        this.saeEstimatedLossValue = saeEstimatedLossValue;
+    }
+
+    public String getSaeEstimatedLossValue() {
+        return saeEstimatedLossValue;
+    }
+
+    public void setSaeEstimatedLossBinding(RichOutputText saeEstimatedLossBinding) {
+        this.saeEstimatedLossBinding = saeEstimatedLossBinding;
+    }
+
+    public RichOutputText getSaeEstimatedLossBinding() {
+        return saeEstimatedLossBinding;
+    }
+
+    public void setSaeAmountInvolvedBinding(RichOutputText saeAmountInvolvedBinding) {
+        this.saeAmountInvolvedBinding = saeAmountInvolvedBinding;
+    }
+
+    public RichOutputText getSaeAmountInvolvedBinding() {
+        return saeAmountInvolvedBinding;
+    }
+
+    public void saeAmountInvolvedVC(ValueChangeEvent valueChangeEvent) {
+        if (valueChangeEvent.getNewValue() != null &&
+            !"".equals(valueChangeEvent.getNewValue()) &&
+            valueChangeEvent.getOldValue() != valueChangeEvent.getNewValue()) {
+            String numberVariable =
+                (String)valueChangeEvent.getNewValue();
+            numberVariable = numberVariable.replaceAll("Rs.", "");
+            numberVariable = numberVariable.replaceAll(",", "");
+            String numberInWords =
+                NumberToWords.convertNumberToWords(new BigDecimal(numberVariable));
+            setSaeAmountInvolvedValue(numberInWords + " Rupees Only.");
+            saeAmountInvolvedBinding.setVisible(Boolean.TRUE);
+            AdfFacesContext.getCurrentInstance().addPartialTarget(saeAmountInvolvedBinding);
+        }
+    }
+
+    public void saeEstimatedLossVC(ValueChangeEvent valueChangeEvent) {
+        if (valueChangeEvent.getNewValue() != null &&
+            !"".equals(valueChangeEvent.getNewValue()) &&
+            valueChangeEvent.getOldValue() != valueChangeEvent.getNewValue()) {
+            String numberVariable =
+                (String)valueChangeEvent.getNewValue();
+            numberVariable = numberVariable.replaceAll("Rs.", "");
+            numberVariable = numberVariable.replaceAll(",", "");
+            String numberInWords =
+                NumberToWords.convertNumberToWords(new BigDecimal(numberVariable));
+            setSaeEstimatedLossValue(numberInWords + " Rupees Only.");
+            saeEstimatedLossBinding.setVisible(Boolean.TRUE);
+            AdfFacesContext.getCurrentInstance().addPartialTarget(saeEstimatedLossBinding);
+        }
+    }
+
+    public void setRfiaAmountInvolvedValue(String rfiaAmountInvolvedValue) {
+        this.rfiaAmountInvolvedValue = rfiaAmountInvolvedValue;
+    }
+
+    public String getRfiaAmountInvolvedValue() {
+        return rfiaAmountInvolvedValue;
+    }
+
+    public void setRfiaEstimatedLossValue(String rfiaEstimatedLossValue) {
+        this.rfiaEstimatedLossValue = rfiaEstimatedLossValue;
+    }
+
+    public String getRfiaEstimatedLossValue() {
+        return rfiaEstimatedLossValue;
+    }
+
+    public void setRfiaEstimatedLossBinding(RichOutputText rfiaEstimatedLossBinding) {
+        this.rfiaEstimatedLossBinding = rfiaEstimatedLossBinding;
+    }
+
+    public RichOutputText getRfiaEstimatedLossBinding() {
+        return rfiaEstimatedLossBinding;
+    }
+
+    public void setRfiaAmountInvolvedBinding(RichOutputText rfiaAmountInvolvedBinding) {
+        this.rfiaAmountInvolvedBinding = rfiaAmountInvolvedBinding;
+    }
+
+    public RichOutputText getRfiaAmountInvolvedBinding() {
+        return rfiaAmountInvolvedBinding;
+    }
+
+    public void rfiaAmountInvolvedVC(ValueChangeEvent valueChangeEvent) {
+        if (valueChangeEvent.getNewValue() != null &&
+            !"".equals(valueChangeEvent.getNewValue()) &&
+            valueChangeEvent.getOldValue() != valueChangeEvent.getNewValue()) {
+            String numberVariable =
+                (String)valueChangeEvent.getNewValue();
+            numberVariable = numberVariable.replaceAll("Rs.", "");
+            numberVariable = numberVariable.replaceAll(",", "");
+            String numberInWords =
+                NumberToWords.convertNumberToWords(new BigDecimal(numberVariable));
+            setRfiaAmountInvolvedValue(numberInWords + " Rupees Only.");
+            rfiaAmountInvolvedBinding.setVisible(Boolean.TRUE);
+            AdfFacesContext.getCurrentInstance().addPartialTarget(rfiaAmountInvolvedBinding);
+        }
+    }
+
+    public void rfiaEstimatedLossVC(ValueChangeEvent valueChangeEvent) {
+        if (valueChangeEvent.getNewValue() != null &&
+            !"".equals(valueChangeEvent.getNewValue()) &&
+            valueChangeEvent.getOldValue() != valueChangeEvent.getNewValue()) {
+            String numberVariable =
+                (String)valueChangeEvent.getNewValue();
+            numberVariable = numberVariable.replaceAll("Rs.", "");
+            numberVariable = numberVariable.replaceAll(",", "");
+            String numberInWords =
+                NumberToWords.convertNumberToWords(new BigDecimal(numberVariable));
+            setRfiaEstimatedLossValue(numberInWords + " Rupees Only.");
+            rfiaEstimatedLossBinding.setVisible(Boolean.TRUE);
+            AdfFacesContext.getCurrentInstance().addPartialTarget(rfiaEstimatedLossBinding);
+        }
+    }
+    
+    public Date getMaxDate() {
+        maxDate = new Date();
+        return maxDate;
+    }
+
+    public void setMaxDate(Date maxDate) {
+        this.maxDate = maxDate;
     }
 }
