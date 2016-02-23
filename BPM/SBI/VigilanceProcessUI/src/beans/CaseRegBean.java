@@ -192,6 +192,7 @@ public class CaseRegBean {
             
             if ((Integer)valueChangeEvent.getNewValue() == 1) {
                 closeAllHeaders();
+                ADFUtil.setEL("#{viewScope.complaintRefresh}", Boolean.TRUE);
                 ViewObject complaintVO =
                     ADFUtil.findIterator("ComplaintDetailsVOIterator").getViewObject();
                 Row complaintRow = complaintVO.createRow();
@@ -207,6 +208,7 @@ public class CaseRegBean {
             
             else if ((Integer)valueChangeEvent.getNewValue() == 2) {
                 closeAllHeaders();
+                ADFUtil.setEL("#{viewScope.fraudRefresh}", Boolean.TRUE);
                 ViewObject fraudVO =
                     ADFUtil.findIterator("FraudDetailsVOIterator").getViewObject();
                 Row fraudRow = fraudVO.createRow();
@@ -222,6 +224,7 @@ public class CaseRegBean {
             
             else if ((Integer)valueChangeEvent.getNewValue() == 3) {
                 closeAllHeaders();
+                ADFUtil.setEL("#{viewScope.saeRefresh}", Boolean.TRUE);
                 ViewObject saeVO =
                     ADFUtil.findIterator("StaffAccountabilityDetailsVOIterator").getViewObject();
                 Row saeRow = saeVO.createRow();
@@ -237,6 +240,7 @@ public class CaseRegBean {
             
             else if ((Integer)valueChangeEvent.getNewValue() == 4) {
                 closeAllHeaders();
+                ADFUtil.setEL("#{viewScope.rfiaRefresh}", Boolean.TRUE);
                 ViewObject rfiaVO =
                     ADFUtil.findIterator("RiskFocussedDetailsVOIterator").getViewObject();
                 Row rfiaRow = rfiaVO.createRow();

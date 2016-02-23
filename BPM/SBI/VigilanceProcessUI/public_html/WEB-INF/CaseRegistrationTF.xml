@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="windows-1252" ?>
 <adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
   <task-flow-definition id="CaseRegistrationTF">
-    <default-activity id="__1">checkIfExistingTask</default-activity>
+    <default-activity id="__18">checkIfExistingTask</default-activity>
     <managed-bean id="__2">
       <managed-bean-name id="__4">caseRegBean</managed-bean-name>
       <managed-bean-class id="__3">beans.CaseRegBean</managed-bean-class>

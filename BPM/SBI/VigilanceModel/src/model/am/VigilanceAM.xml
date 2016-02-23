@@ -6,9 +6,13 @@
   Name="VigilanceAM"
   Version="11.1.1.64.93"
   InheritPersonalization="true"
-  ClearCacheOnRollback="true">
+  ClearCacheOnRollback="true"
+  ComponentClass="model.am.VigilanceAMImpl"
+  ComponentInterface="model.am.common.VigilanceAM"
+  ClientProxyName="model.am.client.VigilanceAMClient">
   <DesignTime>
     <Attr Name="_deployType" Value="0"/>
+    <Attr Name="_isCodegen" Value="true"/>
   </DesignTime>
   <ViewUsage
     Name="BrmastVO1"
@@ -49,4 +53,11 @@
   <ViewUsage
     Name="StaffAccountabilityDetailsVO"
     ViewObjectName="model.vo.updateable.StaffAccountabilityDetailsVO"/>
+  <ClientInterface>
+    <Method
+      Name="initPage">
+      <Return
+        Type="void"/>
+    </Method>
+  </ClientInterface>
 </AppModule>

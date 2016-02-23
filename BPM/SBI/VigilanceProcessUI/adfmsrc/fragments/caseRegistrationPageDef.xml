@@ -30,15 +30,19 @@
                       BeanClass="VigilanceProcessUI_RegisterComplaintTask.VigilanceProcessType"/>
     <iterator Binds="ComplaintDetailsVO" RangeSize="25"
               DataControl="VigilanceAMDataControl"
-              id="ComplaintDetailsVOIterator"/>
+              id="ComplaintDetailsVOIterator"
+              RefreshCondition="#{viewScope.complaintRefresh == true}"/>
     <iterator Binds="FraudDetailsVO" RangeSize="25"
-              DataControl="VigilanceAMDataControl" id="FraudDetailsVOIterator"/>
+              DataControl="VigilanceAMDataControl" id="FraudDetailsVOIterator"
+              RefreshCondition="#{viewScope.fraudRefresh == true}"/>
     <iterator Binds="StaffAccountabilityDetailsVO" RangeSize="25"
               DataControl="VigilanceAMDataControl"
-              id="StaffAccountabilityDetailsVOIterator"/>
+              id="StaffAccountabilityDetailsVOIterator"
+              RefreshCondition="#{viewScope.saeRefresh == true}"/>
     <iterator Binds="RiskFocussedDetailsVO" RangeSize="25"
               DataControl="VigilanceAMDataControl"
-              id="RiskFocussedDetailsVOIterator"/>
+              id="RiskFocussedDetailsVOIterator"
+              RefreshCondition="#{viewScope.rfiaRefresh == true}"/>
   </executables>
   <bindings>
     <listOfValues StaticList="false" IterBinding="CaseRegistrationVOIterator"
