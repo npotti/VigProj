@@ -47,7 +47,7 @@
                                              value="bindings.SUBMIT"/>
                               </af:commandToolbarButton>
                               <af:commandToolbarButton actionListener="#{invokeActionBean.setOperation}"
-                                                       text="#{wf:getResourceValue('APPROVE', 'bindings.customActions')}"
+                                                       text="#{bindings.TaskName.inputValue eq 'Verify Complaint Sustainable' ? 'Vigilance Case' : 'Approve'}"
                                                        disabled="#{!bindings.APPROVE.enabled}"
                                                        action="#{invokeActionBean.invokeOperation}"
                                                        partialSubmit="false"
@@ -58,7 +58,7 @@
                                              value="bindings.APPROVE"/>
                               </af:commandToolbarButton>
                               <af:commandToolbarButton actionListener="#{invokeActionBean.setOperation}"
-                                                       text="#{wf:getResourceValue('REJECT', 'bindings.customActions')}"
+                                                       text="#{bindings.TaskName.inputValue eq 'Verify Complaint Sustainable' ? 'Non-Vigilance Case' : 'Reject'}"
                                                        disabled="#{!bindings.REJECT.enabled}"
                                                        action="#{invokeActionBean.invokeOperation}"
                                                        partialSubmit="false"
