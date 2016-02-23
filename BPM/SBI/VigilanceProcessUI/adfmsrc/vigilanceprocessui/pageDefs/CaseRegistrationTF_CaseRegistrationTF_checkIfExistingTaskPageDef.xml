@@ -37,6 +37,8 @@
               DataControl="VigilanceAMDataControl" RangeSize="25"/>
     <iterator id="RiskFocussedDetailsVOIterator" Binds="RiskFocussedDetailsVO"
               DataControl="VigilanceAMDataControl" RangeSize="25"/>
+    <iterator id="CteDetailsVOIterator" Binds="CteDetailsVO"
+              DataControl="VigilanceAMDataControl" RangeSize="25"/>
   </executables>
   <bindings>
     <methodAction id="getTaskDetails" RequiresUpdateModel="true"
@@ -85,6 +87,12 @@
     <action IterBinding="RiskFocussedDetailsVOIterator"
             id="setRFIARow"
             InstanceName="VigilanceAMDataControl.RiskFocussedDetailsVO"
+            DataControl="VigilanceAMDataControl" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKeyValue">
+      <NamedData NDName="rowKey" NDType="java.lang.String"/>
+    </action>
+    <action IterBinding="CteDetailsVOIterator" id="setCTERow"
+            InstanceName="VigilanceAMDataControl.CteDetailsVO"
             DataControl="VigilanceAMDataControl" RequiresUpdateModel="false"
             Action="setCurrentRowWithKeyValue">
       <NamedData NDName="rowKey" NDType="java.lang.String"/>

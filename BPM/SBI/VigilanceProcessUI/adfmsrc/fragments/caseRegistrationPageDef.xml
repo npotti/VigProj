@@ -23,6 +23,9 @@
               DataControl="VigilanceAMDataControl"
               id="RiskFocussedDetailsVOIterator"
               RefreshCondition="#{viewScope.rfiaRefresh == true}"/>
+    <iterator Binds="CteDetailsVO" RangeSize="25"
+              DataControl="VigilanceAMDataControl" id="CteDetailsVOIterator"
+              RefreshCondition="#{viewScope.cteRefresh == true}"/>
   </executables>
   <bindings>
     <listOfValues StaticList="false" IterBinding="CaseRegistrationVOIterator"
@@ -373,6 +376,66 @@
     </attributeValues>
     <attributeValues IterBinding="RiskFocussedDetailsVOIterator"
                      id="DateOfIrfCalled2">
+      <AttrNames>
+        <Item Value="DateOfIrfCalled"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CteDetailsVOIterator" id="Systemsernum5">
+      <AttrNames>
+        <Item Value="Systemsernum"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CteDetailsVOIterator" id="OrderedBy">
+      <AttrNames>
+        <Item Value="OrderedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CteDetailsVOIterator" id="OrderedOn">
+      <AttrNames>
+        <Item Value="OrderedOn"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CteDetailsVOIterator" id="NameOfWork">
+      <AttrNames>
+        <Item Value="NameOfWork"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CteDetailsVOIterator" id="EstimatedCost">
+      <AttrNames>
+        <Item Value="EstimatedCost"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CteDetailsVOIterator" id="TenderedCost">
+      <AttrNames>
+        <Item Value="TenderedCost"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CteDetailsVOIterator" id="ContractRewardedTo">
+      <AttrNames>
+        <Item Value="ContractRewardedTo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CteDetailsVOIterator" id="CteAllottedTo">
+      <AttrNames>
+        <Item Value="CteAllottedTo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CteDetailsVOIterator" id="DateOfWork">
+      <AttrNames>
+        <Item Value="DateOfWork"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CteDetailsVOIterator" id="TimeOfCompletion">
+      <AttrNames>
+        <Item Value="TimeOfCompletion"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CteDetailsVOIterator" id="PresentPhysPos">
+      <AttrNames>
+        <Item Value="PresentPhysPos"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CteDetailsVOIterator" id="DateOfIrfCalled3">
       <AttrNames>
         <Item Value="DateOfIrfCalled"/>
       </AttrNames>

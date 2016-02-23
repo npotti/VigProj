@@ -659,5 +659,136 @@
         </af:inputDate>
       </af:panelFormLayout>
     </af:showDetailHeader>
+    <af:showDetailHeader text="Chief Technical Examiner Report" disclosed="true" id="sdh6"
+                         size="1" styleClass="portlet-header"
+                         visible="#{bindings.Sourceofcase.inputValue eq 5}"
+                         binding="#{pageFlowScope.caseRegBean.cteHdrBinding}">
+      <f:facet name="context"/>
+      <f:facet name="menuBar"/>
+      <f:facet name="toolbar"/>
+      <f:facet name="legend"/>
+      <f:facet name="info"/>
+      <af:panelFormLayout id="pfl6">
+        <af:inputText value="#{bindings.Systemsernum5.inputValue}"
+                      label="#{bindings.Systemsernum5.hints.label}"
+                      required="#{bindings.Systemsernum5.hints.mandatory}"
+                      columns="#{bindings.Systemsernum5.hints.displayWidth}"
+                      maximumLength="#{bindings.Systemsernum5.hints.precision}"
+                      shortDesc="#{bindings.Systemsernum5.hints.tooltip}"
+                      id="it29" rendered="false">
+          <f:validator binding="#{bindings.Systemsernum5.validator}"/>
+        </af:inputText>
+        <af:selectOneChoice label="Ordered by" id="soc18"
+                            value="#{bindings.OrderedBy.inputValue}"
+                            readOnly="#{pageFlowScope.readOnly}">
+          <af:selectItem label="Central Vigilance Commission"
+                         value="Central Vigilance Commission" id="si91"/>
+          <af:selectItem label="Chief Vigilance Officer"
+                         value="Chief Vigilance Officer" id="si92"/>
+        </af:selectOneChoice>
+        <af:inputDate value="#{bindings.OrderedOn.inputValue}"
+                      label="Ordered on"
+                      required="#{bindings.OrderedOn.hints.mandatory}"
+                      shortDesc="#{bindings.OrderedOn.hints.tooltip}" id="id17"
+                      maxValue="#{pageFlowScope.caseRegBean.maxDate}"
+                      readOnly="#{pageFlowScope.readOnly}">
+          <f:validator binding="#{bindings.OrderedOn.validator}"/>
+          <af:convertDateTime pattern="#{bindings.OrderedOn.format}"/>
+        </af:inputDate>
+        <af:inputText value="#{bindings.NameOfWork.inputValue}"
+                      label="Name of work"
+                      required="#{bindings.NameOfWork.hints.mandatory}"
+                      columns="#{bindings.NameOfWork.hints.displayWidth}"
+                      maximumLength="#{bindings.NameOfWork.hints.precision}"
+                      shortDesc="#{bindings.NameOfWork.hints.tooltip}"
+                      id="it30" readOnly="#{pageFlowScope.readOnly}">
+          <f:validator binding="#{bindings.NameOfWork.validator}"/>
+        </af:inputText>
+        <af:inputText value="#{bindings.EstimatedCost.inputValue}"
+                      label="Estimated Cost"
+                      required="#{bindings.EstimatedCost.hints.mandatory}"
+                      columns="#{bindings.EstimatedCost.hints.displayWidth}"
+                      maximumLength="#{bindings.EstimatedCost.hints.precision}"
+                      shortDesc="#{bindings.EstimatedCost.hints.tooltip}"
+                      id="it31" readOnly="#{pageFlowScope.readOnly}"
+                      autoSubmit="true"
+                      valueChangeListener="#{pageFlowScope.caseRegBean.cteEstimatedCostVC}">
+          <af:convertNumber locale="en_IN" type="currency" currencyCode="INR"/>
+        </af:inputText>
+        <af:outputText value="#{pageFlowScope.caseRegBean.cteEstimatedCostValue}" id="ot6"
+                       inlineStyle="font-weight:bold;" partialTriggers="it31"
+                       visible="false"
+                       binding="#{pageFlowScope.caseRegBean.cteEstimatedCostBinding}"/>
+        <af:inputText value="#{bindings.TenderedCost.inputValue}"
+                      label="Tendered Cost"
+                      required="#{bindings.TenderedCost.hints.mandatory}"
+                      columns="#{bindings.TenderedCost.hints.displayWidth}"
+                      maximumLength="#{bindings.TenderedCost.hints.precision}"
+                      shortDesc="#{bindings.TenderedCost.hints.tooltip}"
+                      id="it32" readOnly="#{pageFlowScope.readOnly}"
+                      autoSubmit="true"
+                      valueChangeListener="#{pageFlowScope.caseRegBean.cteTenderedCostVC}">
+          <af:convertNumber locale="en_IN" type="currency" currencyCode="INR"/>
+        </af:inputText>
+        <af:outputText value="#{pageFlowScope.caseRegBean.cteTenderedCostValue}" id="ot7"
+                       inlineStyle="font-weight:bold;" partialTriggers="it32"
+                       visible="false"
+                       binding="#{pageFlowScope.caseRegBean.cteTenderedCostBinding}"/>
+        <af:inputText value="#{bindings.ContractRewardedTo.inputValue}"
+                      label="Contract awarded to"
+                      required="#{bindings.ContractRewardedTo.hints.mandatory}"
+                      columns="#{bindings.ContractRewardedTo.hints.displayWidth}"
+                      maximumLength="#{bindings.ContractRewardedTo.hints.precision}"
+                      shortDesc="#{bindings.ContractRewardedTo.hints.tooltip}"
+                      id="it33" readOnly="#{pageFlowScope.readOnly}">
+          <f:validator binding="#{bindings.ContractRewardedTo.validator}"/>
+        </af:inputText>
+        <af:inputText value="#{bindings.CteAllottedTo.inputValue}"
+                      label="CTE allotted to"
+                      required="#{bindings.CteAllottedTo.hints.mandatory}"
+                      columns="#{bindings.CteAllottedTo.hints.displayWidth}"
+                      maximumLength="#{bindings.CteAllottedTo.hints.precision}"
+                      shortDesc="#{bindings.CteAllottedTo.hints.tooltip}"
+                      id="it16" readOnly="#{pageFlowScope.readOnly}">
+          <f:validator binding="#{bindings.CteAllottedTo.validator}"/>
+        </af:inputText>
+        <af:inputDate value="#{bindings.DateOfWork.inputValue}"
+                      label="Date of commencement of work"
+                      required="#{bindings.DateOfWork.hints.mandatory}"
+                      shortDesc="#{bindings.DateOfWork.hints.tooltip}"
+                      id="id19" maxValue="#{pageFlowScope.caseRegBean.maxDate}"
+                      readOnly="#{pageFlowScope.readOnly}">
+          <f:validator binding="#{bindings.DateOfWork.validator}"/>
+          <af:convertDateTime pattern="#{bindings.DateOfWork.format}"/>
+        </af:inputDate>
+        <af:inputDate value="#{bindings.TimeOfCompletion.inputValue}"
+                      label="Time of completion"
+                      required="#{bindings.TimeOfCompletion.hints.mandatory}"
+                      shortDesc="#{bindings.TimeOfCompletion.hints.tooltip}"
+                      id="id20" maxValue="#{pageFlowScope.caseRegBean.maxDate}"
+                      readOnly="#{pageFlowScope.readOnly}">
+          <f:validator binding="#{bindings.TimeOfCompletion.validator}"/>
+          <af:convertDateTime pattern="#{bindings.TimeOfCompletion.format}"/>
+        </af:inputDate>
+        <af:inputText value="#{bindings.PresentPhysPos.inputValue}"
+                      label="Present physical position"
+                      required="#{bindings.PresentPhysPos.hints.mandatory}"
+                      columns="#{bindings.PresentPhysPos.hints.displayWidth}"
+                      maximumLength="#{bindings.PresentPhysPos.hints.precision}"
+                      shortDesc="#{bindings.PresentPhysPos.hints.tooltip}"
+                      id="it22" readOnly="#{pageFlowScope.readOnly}">
+          <f:validator binding="#{bindings.PresentPhysPos.validator}"/>
+        </af:inputText>
+        <af:inputDate value="#{bindings.DateOfIrfCalled3.inputValue}"
+                      label="Date of IRF called/Dealt With"
+                      required="#{bindings.DateOfIrfCalled3.hints.mandatory}"
+                      shortDesc="#{bindings.DateOfIrfCalled3.hints.tooltip}"
+                      id="id18" maxValue="#{pageFlowScope.caseRegBean.maxDate}"
+                      readOnly="#{pageFlowScope.readOnly}">
+          <f:validator binding="#{bindings.DateOfIrfCalled3.validator}"/>
+          <af:convertDateTime pattern="#{bindings.DateOfIrfCalled3.format}"/>
+        </af:inputDate>
+      </af:panelFormLayout>
+    </af:showDetailHeader>
   </af:panelGroupLayout>
 </jsp:root>

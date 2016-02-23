@@ -54,6 +54,11 @@ public class CaseRegBean {
     private RichOutputText rfiaEstimatedLossBinding;
     private RichOutputText rfiaAmountInvolvedBinding;
     private Date maxDate;
+    private RichShowDetailHeader cteHdrBinding;
+    private String cteEstimatedCostValue;
+    private String cteTenderedCostValue;
+    private RichOutputText cteEstimatedCostBinding;
+    private RichOutputText cteTenderedCostBinding;
 
     public CaseRegBean() {
     }
@@ -99,6 +104,10 @@ public class CaseRegBean {
                 method.execute();
             } else if (source != null && "RFIA".equalsIgnoreCase(source)) {
                 method = bindings.getOperationBinding("setRFIARow");
+                method.getParamsMap().put("rowKey", sysSerNo);
+                method.execute();
+            } else if (source != null && "CTE".equalsIgnoreCase(source)) {
+                method = bindings.getOperationBinding("setCTERow");
                 method.getParamsMap().put("rowKey", sysSerNo);
                 method.execute();
             }
@@ -268,6 +277,22 @@ public class CaseRegBean {
                 rfiaHdrBinding.setVisible(Boolean.TRUE);
                 AdfFacesContext.getCurrentInstance().addPartialTarget(rfiaHdrBinding);
             }
+            
+            /**If CTE is selected*/
+            
+            else if ((Integer)valueChangeEvent.getNewValue() == 5) {
+                closeAllHeaders();
+                ADFUtil.setEL("#{viewScope.cteRefresh}", Boolean.TRUE);
+                ViewObject cteVO =
+                    ADFUtil.findIterator("CteDetailsVOIterator").getViewObject();
+                Row cteRow = cteVO.createRow();
+                cteRow.setAttribute("Systemsernum",
+                                     ADFUtil.evaluateEL("#{bindings.Systemsernum.inputValue}"));
+                cteVO.insertRow(cteRow);
+                cteVO.setCurrentRow(cteRow);
+                cteHdrBinding.setVisible(Boolean.TRUE);
+                AdfFacesContext.getCurrentInstance().addPartialTarget(cteHdrBinding);
+            }
         }
     }
 
@@ -324,14 +349,24 @@ public class CaseRegBean {
                         Row.REFRESH_WITH_DB_FORGET_CHANGES);
             row.refresh(Row.REFRESH_REMOVE_NEW_ROWS);
         }
+        ViewObject cteVO =
+            ADFUtil.findIterator("CteDetailsVOIterator").getViewObject();
+        row = cteVO.getCurrentRow();
+        if (row != null){
+            row.refresh(Row.REFRESH_UNDO_CHANGES |
+                        Row.REFRESH_WITH_DB_FORGET_CHANGES);
+            row.refresh(Row.REFRESH_REMOVE_NEW_ROWS);
+        }
         complaintHdrBinding.setVisible(Boolean.FALSE);
         fraudHdrBinding.setVisible(Boolean.FALSE);
         saeHdrBinding.setVisible(Boolean.FALSE);
         rfiaHdrBinding.setVisible(Boolean.FALSE);
+        cteHdrBinding.setVisible(Boolean.FALSE);
         AdfFacesContext.getCurrentInstance().addPartialTarget(complaintHdrBinding);
         AdfFacesContext.getCurrentInstance().addPartialTarget(fraudHdrBinding);
         AdfFacesContext.getCurrentInstance().addPartialTarget(saeHdrBinding);
         AdfFacesContext.getCurrentInstance().addPartialTarget(rfiaHdrBinding);
+        AdfFacesContext.getCurrentInstance().addPartialTarget(cteHdrBinding);
         if(fraudFolderAmountBinding != null){
             fraudFolderAmountBinding.setVisible(Boolean.FALSE);
         }
@@ -346,6 +381,12 @@ public class CaseRegBean {
         }
         if(rfiaEstimatedLossBinding != null){
             rfiaEstimatedLossBinding.setVisible(Boolean.FALSE);
+        }
+        if(cteEstimatedCostBinding != null){
+            cteEstimatedCostBinding.setVisible(Boolean.FALSE);
+        }
+        if(cteTenderedCostBinding != null){
+            cteTenderedCostBinding.setVisible(Boolean.FALSE);
         }
     }
 
@@ -524,5 +565,77 @@ public class CaseRegBean {
 
     public void setMaxDate(Date maxDate) {
         this.maxDate = maxDate;
+    }
+
+    public void setCteHdrBinding(RichShowDetailHeader cteHdrBinding) {
+        this.cteHdrBinding = cteHdrBinding;
+    }
+
+    public RichShowDetailHeader getCteHdrBinding() {
+        return cteHdrBinding;
+    }
+
+    public void setCteEstimatedCostValue(String cteEstimatedCostValue) {
+        this.cteEstimatedCostValue = cteEstimatedCostValue;
+    }
+
+    public String getCteEstimatedCostValue() {
+        return cteEstimatedCostValue;
+    }
+
+    public void setCteTenderedCostValue(String cteTenderedCostValue) {
+        this.cteTenderedCostValue = cteTenderedCostValue;
+    }
+
+    public String getCteTenderedCostValue() {
+        return cteTenderedCostValue;
+    }
+
+    public void setCteEstimatedCostBinding(RichOutputText cteEstimatedCostBinding) {
+        this.cteEstimatedCostBinding = cteEstimatedCostBinding;
+    }
+
+    public RichOutputText getCteEstimatedCostBinding() {
+        return cteEstimatedCostBinding;
+    }
+
+    public void setCteTenderedCostBinding(RichOutputText cteTenderedCostBinding) {
+        this.cteTenderedCostBinding = cteTenderedCostBinding;
+    }
+
+    public RichOutputText getCteTenderedCostBinding() {
+        return cteTenderedCostBinding;
+    }
+
+    public void cteEstimatedCostVC(ValueChangeEvent valueChangeEvent) {
+        if (valueChangeEvent.getNewValue() != null &&
+            !"".equals(valueChangeEvent.getNewValue()) &&
+            valueChangeEvent.getOldValue() != valueChangeEvent.getNewValue()) {
+            String numberVariable =
+                (String)valueChangeEvent.getNewValue();
+            numberVariable = numberVariable.replaceAll("Rs.", "");
+            numberVariable = numberVariable.replaceAll(",", "");
+            String numberInWords =
+                NumberToWords.convertNumberToWords(new BigDecimal(numberVariable));
+            setCteEstimatedCostValue(numberInWords + " Rupees Only.");
+            cteEstimatedCostBinding.setVisible(Boolean.TRUE);
+            AdfFacesContext.getCurrentInstance().addPartialTarget(cteEstimatedCostBinding);
+        }
+    }
+
+    public void cteTenderedCostVC(ValueChangeEvent valueChangeEvent) {
+        if (valueChangeEvent.getNewValue() != null &&
+            !"".equals(valueChangeEvent.getNewValue()) &&
+            valueChangeEvent.getOldValue() != valueChangeEvent.getNewValue()) {
+            String numberVariable =
+                (String)valueChangeEvent.getNewValue();
+            numberVariable = numberVariable.replaceAll("Rs.", "");
+            numberVariable = numberVariable.replaceAll(",", "");
+            String numberInWords =
+                NumberToWords.convertNumberToWords(new BigDecimal(numberVariable));
+            setCteTenderedCostValue(numberInWords + " Rupees Only.");
+            cteTenderedCostBinding.setVisible(Boolean.TRUE);
+            AdfFacesContext.getCurrentInstance().addPartialTarget(cteTenderedCostBinding);
+        }
     }
 }
