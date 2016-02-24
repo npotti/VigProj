@@ -1,9 +1,10 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<schema targetNamespace="http://xmlns.oracle.com/bpel/workflow/task" xmlns:tns="http://xmlns.oracle.com/bpel/workflow/task" attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns0="http://sbi.co.in/vigilance">
+<schema targetNamespace="http://xmlns.oracle.com/bpel/workflow/task" xmlns:tns="http://xmlns.oracle.com/bpel/workflow/task" attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns0="http://sbi.co.in/vigilance">
    <import namespace="http://sbi.co.in/vigilance" schemaLocation="VigilanceProcess.xsd"/>
    <complexType name="DetailedInvestigationTaskPayloadType">
       <sequence>
          <element ref="ns0:VigilanceProcess"/>
+         <element name="CaseNumber" type="xsd:string"/>
       </sequence>
    </complexType>
 </schema>

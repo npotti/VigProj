@@ -88,6 +88,13 @@
                 </ns5:OracleExtensions>
             </extensionElements>
             <ioSpecification>
+                <dataInput name="caseNumber" id="caseNumber">
+                    <extensionElements>
+                        <ns5:OracleExtensions>
+                            <ns5:TypeRef namespace="http://www.w3.org/2001/XMLSchema" type="string" isArray="false"/>
+                        </ns5:OracleExtensions>
+                    </extensionElements>
+                </dataInput>
                 <dataInput name="vigilanceProcess" id="vigilanceProcess">
                     <extensionElements>
                         <ns5:OracleExtensions>
@@ -124,6 +131,7 @@
                     </extensionElements>
                 </dataOutput>
                 <inputSet id="ACT15410791746854_uniqueInputSet">
+                    <dataInputRefs>caseNumber</dataInputRefs>
                     <dataInputRefs>vigilanceProcess</dataInputRefs>
                     <dataInputRefs>execData</dataInputRefs>
                 </inputSet>
@@ -160,6 +168,40 @@
                         </extensionElements>
                     </to>
                 </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <extensionElements>
+                    <ns5:OracleExtensions/>
+                </extensionElements>
+                <sourceRef>VigilanceProcessPO</sourceRef>
+                <targetRef>caseNumber</targetRef>
+                <assignment>
+                    <extensionElements>
+                        <ns5:OracleExtensions>
+                            <ns5:DataAssignment operation="copy"/>
+                        </ns5:OracleExtensions>
+                    </extensionElements>
+                    <from xsi:type="tFormalExpression" language="http://www.w3.org/1999/XPath" ns7:ns="http://sbi.co.in/vigilance" ns7:bpmn="http://www.omg.org/bpmn20" xmlns:ns7="http://xmlns.oracle.com/bpm/XPathNamespace">bpmn:getDataObject('VigilanceProcessPO')/ns:CaseNumber
+                        <extensionElements>
+                            <ns5:OracleExtensions>
+                                <ns5:Expression mode="simple"/>
+                            </ns5:OracleExtensions>
+                        </extensionElements>
+                    </from>
+                    <to xsi:type="tFormalExpression" language="http://www.w3.org/1999/XPath" ns7:bpmn="http://www.omg.org/bpmn20" xmlns:ns7="http://xmlns.oracle.com/bpm/XPathNamespace">bpmn:getDataInput('caseNumber')
+                        <extensionElements>
+                            <ns5:OracleExtensions>
+                                <ns5:Expression mode="simple"/>
+                            </ns5:OracleExtensions>
+                        </extensionElements>
+                    </to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <extensionElements>
+                    <ns5:OracleExtensions/>
+                </extensionElements>
+                <targetRef>vigilanceProcess</targetRef>
                 <assignment>
                     <extensionElements>
                         <ns5:OracleExtensions>

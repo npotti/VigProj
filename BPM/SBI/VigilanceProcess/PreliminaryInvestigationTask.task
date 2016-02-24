@@ -38,7 +38,8 @@
       </notification>
    </routingSlip>
    <workflowConfiguration features="ucm" xmlns:ns0="http://sbi.co.in/vigilance" xmlns="http://xmlns.oracle.com/bpel/workflow/configuration"
-                          xmlns:ns1="http://sbi.co.in/vigilance">
+                          xmlns:ns1="http://sbi.co.in/vigilance"
+                          xmlns:xsd="http://www.w3.org/2001/XMLSchema">
       <outcomes>
          <outcome>APPROVE</outcome>
          <outcome>REJECT</outcome>
@@ -49,6 +50,12 @@
                externalSchema="false">
          <messageAttribute name="VigilanceProcess" attributeType="ELEMENT"
                            type="ns1:VigilanceProcess" updatable="true"
+                           external="false"/>
+         <messageAttribute name="CaseNumber" attributeType="SIMPLE_TYPE"
+                           type="xsd:string" updatable="false"
+                           external="false"/>
+         <messageAttribute name="ComplaintNumber" attributeType="SIMPLE_TYPE"
+                           type="xsd:string" updatable="false"
                            external="false"/>
       </payload>
       <bpelEventListener>false</bpelEventListener>
