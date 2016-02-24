@@ -6,6 +6,7 @@
          <element ref="ns0:VigilanceProcess"/>
          <element name="CaseNumber" type="xsd:string"/>
          <element name="ComplaintNumber" type="xsd:string"/>
+         <element name="Circle" type="xsd:string"/>
       </sequence>
    </complexType>
 </schema>

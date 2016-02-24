@@ -54,6 +54,9 @@
          <messageAttribute name="ComplaintNumber" attributeType="SIMPLE_TYPE"
                            type="xsd:string" updatable="false"
                            external="false"/>
+         <messageAttribute name="Circle" attributeType="SIMPLE_TYPE"
+                           type="xsd:string" updatable="false"
+                           external="false"/>
       </payload>
       <bpelEventListener>false</bpelEventListener>
       <bpelNoCallbacks>false</bpelNoCallbacks>
