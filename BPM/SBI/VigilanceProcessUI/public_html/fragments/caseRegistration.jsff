@@ -21,7 +21,7 @@
                       disabled="true">
           <f:validator binding="#{bindings.Systemsernum.validator}"/>
         </af:inputText>
-        <af:inputText value="#{bindings.Ccfilenumber.inputValue}"
+        <af:inputText value="#{bindings.CaseNumber.inputValue}"
                       label="CC File Number"
                       required="#{bindings.Ccfilenumber.hints.mandatory}"
                       columns="#{bindings.Ccfilenumber.hints.displayWidth}"
@@ -114,7 +114,7 @@
     <af:showDetailHeader text="Complaint" disclosed="true" id="sdh2"
                          size="1"
                          binding="#{pageFlowScope.caseRegBean.complaintHdrBinding}"
-                         visible="#{bindings.Sourceofcase.inputValue eq 1}"
+                         visible="#{bindings.Sourceofcase.inputValue eq 0}"
                          styleClass="portlet-header">
       <f:facet name="context"/>
       <f:facet name="menuBar"/>
@@ -124,7 +124,8 @@
       <af:panelFormLayout id="pfl2">
         <af:selectOneChoice label="Received From" id="soc2"
                             value="#{bindings.ReceivedFrom.inputValue}"
-                            readOnly="#{pageFlowScope.readOnly}">
+                            readOnly="#{pageFlowScope.readOnly}"
+                            required="true">
           <af:selectItem label="Public" value="Public" id="si8"/>
           <af:selectItem label="DFS" value="DFS" id="si10"/>
           <af:selectItem label="CVC" value="CVC" id="si11"/>
@@ -138,7 +139,8 @@
         </af:selectOneChoice>
         <af:selectOneChoice label="Received At" id="soc14"
                             value="#{bindings.ReceivedAt.inputValue}"
-                            readOnly="#{pageFlowScope.readOnly}">
+                            readOnly="#{pageFlowScope.readOnly}"
+                            required="true">
           <af:selectItem label="Bengal" value="01" id="si72"/>
           <af:selectItem label="Mumbai" value="02" id="si62"/>
           <af:selectItem label="Chennai" value="03" id="si63"/>
@@ -164,24 +166,25 @@
                       columns="#{bindings.NameOfComplaint.hints.displayWidth}"
                       maximumLength="#{bindings.NameOfComplaint.hints.precision}"
                       shortDesc="#{bindings.NameOfComplaint.hints.tooltip}"
-                      id="it12" readOnly="#{pageFlowScope.readOnly}">
+                      id="it12" readOnly="#{pageFlowScope.readOnly}"
+                      required="true">
           <f:validator binding="#{bindings.NameOfComplaint.validator}"/>
         </af:inputText>
         <af:inputDate value="#{bindings.DateOfComplaint.inputValue}"
                       label="Date of complaint"
-                      required="#{bindings.DateOfComplaint.hints.mandatory}"
                       shortDesc="#{bindings.DateOfComplaint.hints.tooltip}"
                       id="id2" readOnly="#{pageFlowScope.readOnly}"
-                      maxValue="#{pageFlowScope.caseRegBean.maxDate}">
+                      maxValue="#{pageFlowScope.caseRegBean.maxDate}"
+                      required="true">
           <f:validator binding="#{bindings.DateOfComplaint.validator}"/>
           <af:convertDateTime pattern="dd/MM/yyyy"/>
         </af:inputDate>
         <af:inputDate value="#{bindings.DateReceived.inputValue}"
                       label="Date Received"
-                      required="#{bindings.DateReceived.hints.mandatory}"
                       shortDesc="#{bindings.DateReceived.hints.tooltip}"
                       id="id3" readOnly="#{pageFlowScope.readOnly}"
-                      maxValue="#{pageFlowScope.caseRegBean.maxDate}">
+                      maxValue="#{pageFlowScope.caseRegBean.maxDate}"
+                      required="true">
           <f:validator binding="#{bindings.DateReceived.validator}"/>
           <af:convertDateTime pattern="dd/MM/yyyy"/>
         </af:inputDate>
@@ -259,7 +262,7 @@
     </af:showDetailHeader>
     <af:showDetailHeader text="Fraud" disclosed="true" id="sdh3" size="1"
                          binding="#{pageFlowScope.caseRegBean.fraudHdrBinding}"
-                         visible="#{bindings.Sourceofcase.inputValue eq 2}"
+                         visible="#{bindings.Sourceofcase.inputValue eq 1}"
                          styleClass="portlet-header">
       <f:facet name="context"/>
       <f:facet name="menuBar"/>
@@ -278,7 +281,8 @@
         </af:inputText>
         <af:selectOneChoice label="Received From" id="soc6"
                             value="#{bindings.ReceivedFrom1.inputValue}"
-                            readOnly="#{pageFlowScope.readOnly}">
+                            readOnly="#{pageFlowScope.readOnly}"
+                            required="true">
           <af:selectItem label="BOD" value="BOD" id="si32"/>
           <af:selectItem label="MCG" value="MCG" id="si31"/>
           <af:selectItem label="CAG" value="CAG" id="si35"/>
@@ -292,35 +296,37 @@
                       columns="#{bindings.LetterNumber.hints.displayWidth}"
                       maximumLength="#{bindings.LetterNumber.hints.precision}"
                       shortDesc="#{bindings.LetterNumber.hints.tooltip}"
-                      id="it20" readOnly="#{pageFlowScope.readOnly}">
+                      id="it20" readOnly="#{pageFlowScope.readOnly}"
+                      required="true">
           <f:validator binding="#{bindings.LetterNumber.validator}"/>
         </af:inputText>
         <af:inputDate value="#{bindings.LetterDate.inputValue}"
                       label="Letter Date"
                       shortDesc="#{bindings.LetterDate.hints.tooltip}" id="id6"
                       readOnly="#{pageFlowScope.readOnly}"
-                      maxValue="#{pageFlowScope.caseRegBean.maxDate}">
+                      maxValue="#{pageFlowScope.caseRegBean.maxDate}"
+                      required="true">
           <f:validator binding="#{bindings.LetterDate.validator}"/>
           <af:convertDateTime pattern="dd/MM/yyyy"/>
         </af:inputDate>
         <af:inputText value="#{bindings.FraudFolderNumber.inputValue}"
                       label="Fraud Folder Number"
-                      required="#{bindings.FraudFolderNumber.hints.mandatory}"
                       columns="#{bindings.FraudFolderNumber.hints.displayWidth}"
                       maximumLength="#{bindings.FraudFolderNumber.hints.precision}"
                       shortDesc="#{bindings.FraudFolderNumber.hints.tooltip}"
-                      id="it11" readOnly="#{pageFlowScope.readOnly}">
+                      id="it11" readOnly="#{pageFlowScope.readOnly}"
+                      required="true">
           <f:validator binding="#{bindings.FraudFolderNumber.validator}"/>
         </af:inputText>
         <af:inputText value="#{bindings.FolderAmount.inputValue}"
                       label="Folder Amount"
-                      required="#{bindings.FolderAmount.hints.mandatory}"
                       columns="#{bindings.FolderAmount.hints.displayWidth}"
                       maximumLength="#{bindings.FolderAmount.hints.precision}"
                       shortDesc="#{bindings.FolderAmount.hints.tooltip}"
                       id="it14" readOnly="#{pageFlowScope.readOnly}"
                       autoSubmit="true"
-                      valueChangeListener="#{pageFlowScope.caseRegBean.fraudFolderAmtVC}">
+                      valueChangeListener="#{pageFlowScope.caseRegBean.fraudFolderAmtVC}"
+                      required="true">
           <af:convertNumber locale="en_IN" type="currency" currencyCode="INR"/>
         </af:inputText>
         <af:outputText id="ot1"
@@ -391,7 +397,7 @@
     </af:showDetailHeader>
     <af:showDetailHeader text="Staff Accountability Examination" disclosed="true" id="sdh4"
                          size="1"
-                         visible="#{bindings.Sourceofcase.inputValue eq 3}"
+                         visible="#{bindings.Sourceofcase.inputValue eq 2}"
                          binding="#{pageFlowScope.caseRegBean.saeHdrBinding}"
                          styleClass="portlet-header">
       <f:facet name="context"/>
@@ -411,7 +417,8 @@
         </af:inputText>
         <af:selectOneChoice label="Received From" id="soc11"
                             value="#{bindings.ReceivedFrom2.inputValue}"
-                            readOnly="#{pageFlowScope.readOnly}">
+                            readOnly="#{pageFlowScope.readOnly}"
+                            required="true">
           <af:selectItem label="NBG" value="NBG" id="si50"/>
           <af:selectItem label="MCG" value="MCG" id="si53"/>
           <af:selectItem label="CAG" value="CAG" id="si52"/>
@@ -425,29 +432,32 @@
                       columns="#{bindings.LetterNumber1.hints.displayWidth}"
                       maximumLength="#{bindings.LetterNumber1.hints.precision}"
                       shortDesc="#{bindings.LetterNumber1.hints.tooltip}"
-                      id="it19" readOnly="#{pageFlowScope.readOnly}">
+                      id="it19" readOnly="#{pageFlowScope.readOnly}"
+                      required="true">
           <f:validator binding="#{bindings.LetterNumber1.validator}"/>
         </af:inputText>
         <af:inputDate value="#{bindings.LetterDate1.inputValue}"
                       label="Letter Date"
                       shortDesc="#{bindings.LetterDate1.hints.tooltip}"
                       id="id8" readOnly="#{pageFlowScope.readOnly}"
-                      maxValue="#{pageFlowScope.caseRegBean.maxDate}">
+                      maxValue="#{pageFlowScope.caseRegBean.maxDate}"
+                      required="true">
           <f:validator binding="#{bindings.LetterDate1.validator}"/>
           <af:convertDateTime pattern="dd/MM/yyyy"/>
         </af:inputDate>
         <af:inputText value="#{bindings.NameOfAccount.inputValue}"
                       label="Name of Account"
-                      required="#{bindings.NameOfAccount.hints.mandatory}"
                       columns="#{bindings.NameOfAccount.hints.displayWidth}"
                       maximumLength="#{bindings.NameOfAccount.hints.precision}"
                       shortDesc="#{bindings.NameOfAccount.hints.tooltip}"
-                      id="it21" readOnly="#{pageFlowScope.readOnly}">
+                      id="it21" readOnly="#{pageFlowScope.readOnly}"
+                      required="true">
           <f:validator binding="#{bindings.NameOfAccount.validator}"/>
         </af:inputText>
         <af:selectOneChoice label="Amount-wise classification" id="soc12"
                             value="#{bindings.AmountWiseCalculation.inputValue}"
-                            readOnly="#{pageFlowScope.readOnly}">
+                            readOnly="#{pageFlowScope.readOnly}"
+                            required="true">
           <af:selectItem label="Below Rs.25 Crores" value="Below Rs.25 Crores"
                          id="si54"/>
           <af:selectItem label="Rs. 25 Crores &amp; above"
@@ -455,13 +465,13 @@
         </af:selectOneChoice>
         <af:inputText value="#{bindings.AmountInvolved.inputValue}"
                       label="Amount Involved"
-                      required="#{bindings.AmountInvolved.hints.mandatory}"
                       columns="#{bindings.AmountInvolved.hints.displayWidth}"
                       maximumLength="#{bindings.AmountInvolved.hints.precision}"
                       shortDesc="#{bindings.AmountInvolved.hints.tooltip}"
                       id="it23" readOnly="#{pageFlowScope.readOnly}"
                       autoSubmit="true"
-                      valueChangeListener="#{pageFlowScope.caseRegBean.saeAmountInvolvedVC}">
+                      valueChangeListener="#{pageFlowScope.caseRegBean.saeAmountInvolvedVC}"
+                      required="true">
           <af:convertNumber locale="en_IN" type="currency" currencyCode="INR"/>
         </af:inputText>
         <af:outputText value="#{pageFlowScope.caseRegBean.saeAmountInvolvedValue}" id="ot2"
@@ -547,7 +557,7 @@
     </af:showDetailHeader>
     <af:showDetailHeader text="Risk focussed internal audit / credit audit" disclosed="true" id="sdh5"
                          size="1" styleClass="portlet-header"
-                         visible="#{bindings.Sourceofcase.inputValue eq 4}"
+                         visible="#{bindings.Sourceofcase.inputValue eq 3}"
                          binding="#{pageFlowScope.caseRegBean.rfiaHdrBinding}">
       <f:facet name="context"/>
       <f:facet name="menuBar"/>
@@ -566,7 +576,8 @@
         </af:inputText>
         <af:selectOneChoice label="Received From" id="soc15"
                             value="#{bindings.ReceivedFrom3.inputValue}"
-                            readOnly="#{pageFlowScope.readOnly}">
+                            readOnly="#{pageFlowScope.readOnly}"
+                            required="true">
           <af:selectItem label="NBG" value="NBG" id="si80"/>
           <af:selectItem label="MCG" value="MCG" id="si82"/>
           <af:selectItem label="CAG" value="CAG" id="si79"/>
@@ -577,25 +588,26 @@
         </af:selectOneChoice>
         <af:inputText value="#{bindings.LetterNumber2.inputValue}"
                       label="Letter Number"
-                      required="#{bindings.LetterNumber2.hints.mandatory}"
                       columns="#{bindings.LetterNumber2.hints.displayWidth}"
                       maximumLength="#{bindings.LetterNumber2.hints.precision}"
                       shortDesc="#{bindings.LetterNumber2.hints.tooltip}"
-                      id="it28" readOnly="#{pageFlowScope.readOnly}">
+                      id="it28" readOnly="#{pageFlowScope.readOnly}"
+                      required="true">
           <f:validator binding="#{bindings.LetterNumber2.validator}"/>
         </af:inputText>
         <af:inputDate value="#{bindings.LetterDate2.inputValue}"
                       label="Letter Date"
-                      required="#{bindings.LetterDate2.hints.mandatory}"
                       shortDesc="#{bindings.LetterDate2.hints.tooltip}"
                       id="id14" readOnly="#{pageFlowScope.readOnly}"
-                      maxValue="#{pageFlowScope.caseRegBean.maxDate}">
+                      maxValue="#{pageFlowScope.caseRegBean.maxDate}"
+                      required="true">
           <f:validator binding="#{bindings.LetterDate2.validator}"/>
           <af:convertDateTime pattern="dd/MM/yyyy"/>
         </af:inputDate>
         <af:selectOneChoice label="RFIA relating to" id="soc16"
                             value="#{bindings.RfiaRelatingTo.inputValue}"
-                            readOnly="#{pageFlowScope.readOnly}">
+                            readOnly="#{pageFlowScope.readOnly}"
+                            required="true">
           <af:selectItem label="Deposit" value="Deposit" id="si83"/>
           <af:selectItem label="Advances" value="Advances" id="si88"/>
           <af:selectItem label="ATM" value="ATM" id="si85"/>
@@ -605,13 +617,13 @@
         </af:selectOneChoice>
         <af:inputText value="#{bindings.AmountInvolved1.inputValue}"
                       label="Amount Involved"
-                      required="#{bindings.AmountInvolved1.hints.mandatory}"
                       columns="#{bindings.AmountInvolved1.hints.displayWidth}"
                       maximumLength="#{bindings.AmountInvolved1.hints.precision}"
                       shortDesc="#{bindings.AmountInvolved1.hints.tooltip}"
                       id="it27" readOnly="#{pageFlowScope.readOnly}"
                       autoSubmit="true"
-                      valueChangeListener="#{pageFlowScope.caseRegBean.rfiaAmountInvolvedVC}">
+                      valueChangeListener="#{pageFlowScope.caseRegBean.rfiaAmountInvolvedVC}"
+                      required="true">
           <af:convertNumber locale="en_IN" type="currency" currencyCode="INR"/>
         </af:inputText>
         <af:outputText value="#{pageFlowScope.caseRegBean.rfiaAmountInvolvedValue}" id="ot4"
@@ -661,7 +673,7 @@
     </af:showDetailHeader>
     <af:showDetailHeader text="Chief Technical Examiner Report" disclosed="true" id="sdh6"
                          size="1" styleClass="portlet-header"
-                         visible="#{bindings.Sourceofcase.inputValue eq 5}"
+                         visible="#{bindings.Sourceofcase.inputValue eq 4}"
                          binding="#{pageFlowScope.caseRegBean.cteHdrBinding}">
       <f:facet name="context"/>
       <f:facet name="menuBar"/>
@@ -680,7 +692,8 @@
         </af:inputText>
         <af:selectOneChoice label="Ordered by" id="soc18"
                             value="#{bindings.OrderedBy.inputValue}"
-                            readOnly="#{pageFlowScope.readOnly}">
+                            readOnly="#{pageFlowScope.readOnly}"
+                            required="true">
           <af:selectItem label="Central Vigilance Commission"
                          value="Central Vigilance Commission" id="si91"/>
           <af:selectItem label="Chief Vigilance Officer"
@@ -688,31 +701,30 @@
         </af:selectOneChoice>
         <af:inputDate value="#{bindings.OrderedOn.inputValue}"
                       label="Ordered on"
-                      required="#{bindings.OrderedOn.hints.mandatory}"
                       shortDesc="#{bindings.OrderedOn.hints.tooltip}" id="id17"
                       maxValue="#{pageFlowScope.caseRegBean.maxDate}"
-                      readOnly="#{pageFlowScope.readOnly}">
+                      readOnly="#{pageFlowScope.readOnly}" required="true">
           <f:validator binding="#{bindings.OrderedOn.validator}"/>
           <af:convertDateTime pattern="#{bindings.OrderedOn.format}"/>
         </af:inputDate>
         <af:inputText value="#{bindings.NameOfWork.inputValue}"
                       label="Name of work"
-                      required="#{bindings.NameOfWork.hints.mandatory}"
                       columns="#{bindings.NameOfWork.hints.displayWidth}"
                       maximumLength="#{bindings.NameOfWork.hints.precision}"
                       shortDesc="#{bindings.NameOfWork.hints.tooltip}"
-                      id="it30" readOnly="#{pageFlowScope.readOnly}">
+                      id="it30" readOnly="#{pageFlowScope.readOnly}"
+                      required="true">
           <f:validator binding="#{bindings.NameOfWork.validator}"/>
         </af:inputText>
         <af:inputText value="#{bindings.EstimatedCost.inputValue}"
                       label="Estimated Cost"
-                      required="#{bindings.EstimatedCost.hints.mandatory}"
                       columns="#{bindings.EstimatedCost.hints.displayWidth}"
                       maximumLength="#{bindings.EstimatedCost.hints.precision}"
                       shortDesc="#{bindings.EstimatedCost.hints.tooltip}"
                       id="it31" readOnly="#{pageFlowScope.readOnly}"
                       autoSubmit="true"
-                      valueChangeListener="#{pageFlowScope.caseRegBean.cteEstimatedCostVC}">
+                      valueChangeListener="#{pageFlowScope.caseRegBean.cteEstimatedCostVC}"
+                      required="true">
           <af:convertNumber locale="en_IN" type="currency" currencyCode="INR"/>
         </af:inputText>
         <af:outputText value="#{pageFlowScope.caseRegBean.cteEstimatedCostValue}" id="ot6"

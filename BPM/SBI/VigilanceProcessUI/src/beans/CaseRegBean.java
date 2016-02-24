@@ -216,7 +216,7 @@ public class CaseRegBean {
             
             /**If complaint is selected*/
             
-            if ((Integer)valueChangeEvent.getNewValue() == 1) {
+            if ((Integer)valueChangeEvent.getNewValue() == 0) {
                 closeAllHeaders();
                 ADFUtil.setEL("#{viewScope.complaintRefresh}", Boolean.TRUE);
                 ViewObject complaintVO =
@@ -232,7 +232,7 @@ public class CaseRegBean {
             
             /**If fraud is selected*/
             
-            else if ((Integer)valueChangeEvent.getNewValue() == 2) {
+            else if ((Integer)valueChangeEvent.getNewValue() == 1) {
                 closeAllHeaders();
                 ADFUtil.setEL("#{viewScope.fraudRefresh}", Boolean.TRUE);
                 ViewObject fraudVO =
@@ -248,7 +248,7 @@ public class CaseRegBean {
             
             /**If SAE is selected*/
             
-            else if ((Integer)valueChangeEvent.getNewValue() == 3) {
+            else if ((Integer)valueChangeEvent.getNewValue() == 2) {
                 closeAllHeaders();
                 ADFUtil.setEL("#{viewScope.saeRefresh}", Boolean.TRUE);
                 ViewObject saeVO =
@@ -264,7 +264,7 @@ public class CaseRegBean {
             
             /**If RFIA is selected*/
             
-            else if ((Integer)valueChangeEvent.getNewValue() == 4) {
+            else if ((Integer)valueChangeEvent.getNewValue() == 3) {
                 closeAllHeaders();
                 ADFUtil.setEL("#{viewScope.rfiaRefresh}", Boolean.TRUE);
                 ViewObject rfiaVO =
@@ -280,7 +280,7 @@ public class CaseRegBean {
             
             /**If CTE is selected*/
             
-            else if ((Integer)valueChangeEvent.getNewValue() == 5) {
+            else if ((Integer)valueChangeEvent.getNewValue() == 4) {
                 closeAllHeaders();
                 ADFUtil.setEL("#{viewScope.cteRefresh}", Boolean.TRUE);
                 ViewObject cteVO =

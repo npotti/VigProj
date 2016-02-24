@@ -26,6 +26,26 @@
     <iterator Binds="CteDetailsVO" RangeSize="25"
               DataControl="VigilanceAMDataControl" id="CteDetailsVOIterator"
               RefreshCondition="#{viewScope.cteRefresh == true}"/>
+    <methodIterator Binds="getTaskDetails.result"
+                    DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                    RangeSize="25"
+                    BeanClass="VigilanceProcessUI_RegisterComplaintTask.getTaskDetails"
+                    id="getTaskDetailsIterator"/>
+    <accessorIterator MasterBinding="getTaskDetailsIterator" Binds="task"
+                      RangeSize="25"
+                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.task"
+                      id="taskIterator"/>
+    <accessorIterator MasterBinding="taskIterator" Binds="payload"
+                      RangeSize="25"
+                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.RegisterComplaintTaskPayloadType"
+                      id="payloadIterator"/>
+    <accessorIterator id="VigilanceProcessIterator"
+                      MasterBinding="payloadIterator" Binds="VigilanceProcess"
+                      RangeSize="25"
+                      DataControl="VigilanceProcessUI_RegisterComplaintTask"
+                      BeanClass="VigilanceProcessUI_RegisterComplaintTask.VigilanceProcessType"/>
   </executables>
   <bindings>
     <listOfValues StaticList="false" IterBinding="CaseRegistrationVOIterator"
@@ -438,6 +458,11 @@
     <attributeValues IterBinding="CteDetailsVOIterator" id="DateOfIrfCalled3">
       <AttrNames>
         <Item Value="DateOfIrfCalled"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VigilanceProcessIterator" id="CaseNumber">
+      <AttrNames>
+        <Item Value="CaseNumber"/>
       </AttrNames>
     </attributeValues>
   </bindings>

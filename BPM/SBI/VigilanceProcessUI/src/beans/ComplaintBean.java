@@ -18,6 +18,7 @@ public class ComplaintBean {
         ADFUtil.setEL("#{bindings.SourceOfCase.inputValue}", caseRow.getAttribute("Sourceofcase"));
         ADFUtil.setEL("#{bindings.Signed.inputValue}", caseRow.getAttribute("Signed"));
         ADFUtil.setEL("#{bindings.ComplaintNumber.inputValue}", caseRow.getAttribute("Systemsernum"));
+        ADFUtil.setEL("#{bindings.attribute1.inputValue}", caseRow.getAttribute("Circlenm"));
         
         ADFUtil.invokeEL("#{bindings.commit.execute}");
         
