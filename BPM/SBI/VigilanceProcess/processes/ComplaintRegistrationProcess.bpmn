@@ -24,10 +24,16 @@
                     </ns5:Conversation>
                 </ns5:Conversations>
                 <ns5:ApplicationInfo>
-                    <ns5:AppLinkName/>
-                    <ns5:Description/>
+                    <ns5:AppLinkName>
+                        <ns5:LocalizedContent language="en">Register New Complaint</ns5:LocalizedContent>
+                    </ns5:AppLinkName>
+                    <ns5:Description>
+                        <ns5:LocalizedContent language="en"></ns5:LocalizedContent>
+                    </ns5:Description>
                     <ns5:AppTags/>
-                    <ns5:AppCategory/>
+                    <ns5:AppCategory>
+                        <ns5:LocalizedContent language="en"></ns5:LocalizedContent>
+                    </ns5:AppCategory>
                     <ns5:AppExternalDocuments/>
                 </ns5:ApplicationInfo>
             </ns5:OracleExtensions>
@@ -87,6 +93,7 @@
                         <ns5:StringFeature value="USE_PROCESS_PERMISSION" name="sealType"/>
                         <ns5:StringFeature value="REUSE_PAYLOAD" name="reinitiatorPolicy"/>
                         <ns5:StringFeature value="INITIATOR" name="humanTaskType"/>
+                        <ns5:StringFeature value="" name="reinitiateSource"/>
                         <ns5:AttributeExpression attributeName="priorityExpressionFeature" language="http://www.w3.org/1999/XPath">3
                             <extensionElements>
                                 <ns5:OracleExtensions>
@@ -269,6 +276,7 @@
                         <ns5:StringFeature value="USE_PROCESS_PERMISSION" name="sealType"/>
                         <ns5:StringFeature value="REUSE_PAYLOAD" name="reinitiatorPolicy"/>
                         <ns5:StringFeature value="SIMPLE" name="humanTaskType"/>
+                        <ns5:StringFeature value="" name="reinitiateSource"/>
                         <ns5:AttributeExpression attributeName="subjectExpressionFeature" language="http://www.w3.org/1999/XPath" ns7:ns="http://sbi.co.in/vigilance" ns7:bpmn="http://www.omg.org/bpmn20" xmlns:ns7="http://xmlns.oracle.com/bpm/XPathNamespace">concat("Complaint Number ",bpmn:getDataObject('VigilanceProcessPO')/ns:ComplaintNumber," received from ",bpmn:getDataObject('VigilanceProcessPO')/ns:SourceOfCase)
                             <extensionElements>
                                 <ns5:OracleExtensions>
